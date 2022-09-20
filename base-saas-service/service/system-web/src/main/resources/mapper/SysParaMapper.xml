@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.saas.system.mapper.SysParaMapper">
+    <select id="getSysPara" resultType="map">
+        select para_name paraName,para_value paraValue,company_code companyCode from sys_para
+    </select>
+
+
+    <select id="getSysParaByCompanyCode" resultType="Map" parameterType="String">
+        select t.para_name paraName,t.para_value paraValue,t.company_code companyCode,t.other_id otherId,t.remark,t.conf_id confId
+        from sys_para t,sys_other_columns_conf f where t.conf_id=f.id and t.company_code = #{companyCode} order by f.sortting asc
+    </select>
+
+
+    <insert id="batchSave" parameterType="list">
+        insert into sys_para(para_name,
+        para_value,
+        remark,
+        company_code,
+        other_id,conf_id)
+        VALUES
+        <foreach collection ="list" item="detail" separator =",">
+            (#{detail.paraName}, #{detail.paraValue}, #{detail.remark},#{detail.companyCode},#{detail.otherId},#{detail.confId})
+        </foreach >
+    </insert>
+
+    <update id="deleteByCompanyCodeAndOtherId" parameterType="map">
+        delete from sys_para where company_code = #{companyCode} and other_id = #{otherId}
+    </update>
+
+
+    <select id="findList" parameterType="Map" resultType="com.base.saas.system.model.SysPara">
+        select para_name paraName,
+        para_value paraValue,
+        remark,
+        company_code companyCode,
+        other_id otherId from sys_para where company_code = #{companyCode} and para_name=#{paraName}
+    </select>
+
+
+    <select id="getParaValueByParaName" parameterType="map" resultType="String">
+        select para_value from sys_para where company_code =#{companyCode} and para_name =#{paraName}
+    </select>
+</mapper>

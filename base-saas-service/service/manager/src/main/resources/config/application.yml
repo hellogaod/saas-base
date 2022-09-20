@@ -31,7 +31,7 @@ hystrix:
 quartz:
   enabled: true
 mybatis:
-  type-aliases-package: cn.fintecher.entity
+  type-aliases-package: com.base.saas.entity
   mapper-locations: classpath:mapper/*.xml
 
 # 是否允許重複登錄 1 表示允許  0 表示不允許

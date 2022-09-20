@@ -3,7 +3,7 @@ package com.base.saas.common.upload.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.base.saas.common.log.TraceLogUtil;
 import com.base.saas.common.upload.UploadFileService;
-import com.base.saas.util.util.UploadFileToOssUtil;
+import com.base.saas.util.uploadfile.util.UploadFileToOssUtil;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

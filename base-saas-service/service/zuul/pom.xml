@@ -201,7 +201,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.fintecher.BaseZuulServerApplication</mainClass>
+                    <mainClass>com.base.saas.BaseZuulServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

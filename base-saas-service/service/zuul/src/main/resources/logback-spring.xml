@@ -21,7 +21,7 @@
         </encoder>
     </appender>
 
-    <logger name="cn.fintecher" level="#logback.loglevel#"/>
+    <logger name="com.base.saas" level="#logback.loglevel#"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>

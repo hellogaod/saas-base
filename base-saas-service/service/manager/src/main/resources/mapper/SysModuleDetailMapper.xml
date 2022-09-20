@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manager.mapper.SysModuleDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manager.model.SysModuleDetail" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="menu_type" property="menuType" jdbcType="TINYINT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="auth_status" property="authStatus" jdbcType="SMALLINT" />
+    <result column="desensitize_status" property="desensitizeStatus" jdbcType="SMALLINT" />
+    <result column="sys_code" property="sysCode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menu_name, url, sequence, icon, menu_type, parent_id, parent_name, create_user, 
+    create_time, update_user, update_time, status, auth_status, desensitize_status, sys_code, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_module_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_module_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.manager.model.SysModuleDetail" >
+    insert into sys_module_detail (id, menu_name, url, 
+      sequence, icon, menu_type, 
+      parent_id, parent_name, create_user, 
+      create_time, update_user, update_time, 
+      status, auth_status, desensitize_status, 
+      sys_code, remark)
+    values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{sequence,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT}, 
+      #{parentId,jdbcType=VARCHAR}, #{parentName,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=SMALLINT}, #{authStatus,jdbcType=SMALLINT}, #{desensitizeStatus,jdbcType=SMALLINT}, 
+      #{sysCode,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.manager.model.SysModuleDetail" >
+    insert into sys_module_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="menuType != null" >
+        menu_type,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="parentName != null" >
+        parent_name,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="authStatus != null" >
+        auth_status,
+      </if>
+      <if test="desensitizeStatus != null" >
+        desensitize_status,
+      </if>
+      <if test="sysCode != null" >
+        sys_code,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null" >
+        #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="authStatus != null" >
+        #{authStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desensitizeStatus != null" >
+        #{desensitizeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="sysCode != null" >
+        #{sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manager.model.SysModuleDetail" >
+    update sys_module_detail
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        menu_type = #{menuType,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null" >
+        parent_name = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="authStatus != null" >
+        auth_status = #{authStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desensitizeStatus != null" >
+        desensitize_status = #{desensitizeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="sysCode != null" >
+        sys_code = #{sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.base.saas.manager.model.SysModuleDetail" >
+    update sys_module_detail
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=TINYINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      parent_name = #{parentName,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      auth_status = #{authStatus,jdbcType=SMALLINT},
+      desensitize_status = #{desensitizeStatus,jdbcType=SMALLINT},
+      sys_code = #{sysCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.manager.model.SysModuleDetail" >
+    update sys_module_detail
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=TINYINT},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      parent_name = #{parentName,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      auth_status = #{authStatus,jdbcType=SMALLINT},
+      desensitize_status = #{desensitizeStatus,jdbcType=SMALLINT},
+      sys_code = #{sysCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 根据sys_code查询平台系统模块对应的菜单权限 -->
+  <select id="getDetailAndModelListBySysCode" parameterType="string" resultType="map">
+    SELECT
+        sm.sys_name AS sysName,
+        sm. STATUS AS moduleStatus,
+        sm.remark AS moduleRemark,
+        smd.id ,
+        smd.menu_name,
+        smd.url,
+        smd.sequence,
+        smd.icon,
+        smd.menu_type,
+        smd.parent_id,
+        smd.parent_name,
+        smd.create_user,
+        smd.create_time,
+        smd.update_user,
+        smd.update_time,
+        smd.status,
+        smd.auth_status,
+        smd.desensitize_status,
+        smd.sys_code,
+        smd.remark
+    FROM
+        sys_module sm
+    LEFT JOIN sys_module_detail smd ON sm.sys_code = smd.sys_code
+    WHERE
+        sm.sys_code = #{sysCode}
+  </select>
+
+
+  <select id="getDetailMenuListBySysCode" parameterType="String" resultType="map">
+    SELECT
+      mm.sys_menu_code as menuId,
+      mm.menu_name as menuName,
+      mm.parent_id as parentId,
+      mm.parent_name as parentName,
+      mm.menu_type as menuType from sys_module_detail mm where mm.sys_code = #{sysCode}  and mm.status = 1
+  </select>
+
+
+  <insert id="batchSaveDetail" parameterType="list">
+    insert into sys_module_detail( id, menu_name, url, sequence, icon, menu_type, parent_id, parent_name, create_user,
+    create_time, status, auth_status, desensitize_status, sys_code, remark)
+    VALUES
+    <foreach collection ="list" item="detail" separator =",">
+      (#{detail.id}, #{detail.menuName}, #{detail.url},#{detail.sequence},#{detail.icon},#{detail.menuType},#{detail.parentId},
+      #{detail.parentName},#{detail.createUser},#{detail.createTime},#{detail.status},#{detail.authStatus},
+      #{detail.desensitizeStatus},#{detail.sysCode},#{detail.remark})
+    </foreach >
+  </insert>
+
+  <update id="updateModuleDetailBySysMenu" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    update sys_module_detail
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        menu_type = #{menuType,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null" >
+        parent_name = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="authStatus != null" >
+        auth_status = #{authStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desensitizeStatus != null" >
+        desensitize_status = #{desensitizeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sys_menu_code = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <!--根据sysCode获取全部菜单树-->
+  <select id="getAllMenuTreeBySysCode" resultType="Map" parameterType="String">
+    select
+    t1.id as id,
+    t1.parent_id as parentId,
+    t1.menu_name as menuName,
+    t1.status,
+    t1.url,
+    t1.icon,
+    t1.parent_name as parentName,
+    t1.menu_type as menuType,
+    t1.auth_status as authStatus,
+    t1.desensitize_status as desensitizeStatus,
+    t2.status as parentStatus
+    from sys_module_detail t1 left join sys_module_detail t2 on t1.parent_id = t2.id where 1=1 and t1.sys_code = #{sysCode}  order by t1.sequence
+  </select>
+
+
+  <!--获取全部的父子类数据-->
+  <select id="getAllMenuDetailList" resultMap="BaseResultMap" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_module_detail
+    where 1=1 and sys_code = #{sysCode}
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        and (id = #{id} or parent_id =#{id})
+      </if>
+      <if test="parentId != null and parentId != ''">
+        and parent_id = #{parentId}
+      </if>
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=SMALLINT}
+      </if>
+    </trim>
+    order by sequence
+  </select>
+
+
+  <!--获取父级所有的菜单-->
+  <select id="getOneMenu" resultMap="BaseResultMap" parameterType="String">
+    SELECT
+    t1.id AS id,
+    t1.parent_id AS parentId,
+    t1.menu_name AS menuName,
+    t1.parent_name AS parentName,
+    t1.auth_status as authStatus,
+    t1.desensitize_status as desensitizeStatus
+    FROM
+    sys_module_detail t1
+    LEFT JOIN sys_module_detail t2 ON t1.parent_id = t2.id
+    WHERE 1 = 1 and t1.parent_id = '#' and t1.menu_type !=2 and t1.sys_code = #{sysCode}
+    ORDER BY t1.sequence
+  </select>
+  <!--获取二级所有的菜单getTwoMenu-->
+  <select id="getTwoMenu" resultMap="BaseResultMap" parameterType="String">
+    SELECT DISTINCT
+    t1.id AS id,
+    t1.parent_id AS parentId,
+    t1.menu_name AS menuName,
+    t1.parent_name AS parentName,
+    t1.auth_status as authStatus,
+    t1.desensitize_status as desensitizeStatus
+    FROM
+    sys_module_detail t1
+    LEFT JOIN sys_module_detail t2 ON t1.parent_id = t2.id
+    WHERE 1 = 1 and t1.menu_type !=2 and t1.parent_id != '#' and t1.sys_code=#{sysCode}
+    ORDER BY t1.sequence
+  </select>
+
+  <select id="getMenuByParentId" resultMap="BaseResultMap" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_module_detail
+    where 1=1  and status = #{status}
+    <trim suffixOverrides=",">
+      <if test="parentId != null and parentId != ''">
+        and parent_id = #{parentId}
+      </if>
+      <if test="menuType != null and menuType != ''">
+        and menu_type = #{menuType}
+      </if>
+    </trim>
+    order by sequence
+  </select>
+
+
+  <!--判断菜单路径是否存在-->
+  <select id="selectMenuByMenuUrl" resultMap="BaseResultMap" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    select
+    id
+    from sys_module_detail
+    where 1=1 and sys_code =#{sysCode}
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        and id != #{id}
+      </if>
+      <if test="url != null and url != ''">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    order by sequence
+  </select>
+
+
+  <!--启用,并且下面的子菜单全部启用-->
+  <update id="updateStatusEnable" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    update sys_module_detail
+    set update_user = #{updateUser,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    status = #{status,jdbcType=SMALLINT}
+    where (id = #{id,jdbcType=VARCHAR} or parent_id = #{id,jdbcType=VARCHAR})
+  </update>
+  <!--停用,,停用本身和下面的按钮,子菜单不停用-->
+  <update id="updateStatusDisable" parameterType="com.base.saas.manager.model.SysModuleDetail">
+    update sys_module_detail
+    set update_user = #{updateUser,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    status = #{status,jdbcType=SMALLINT}
+    where parent_id = #{id,jdbcType=VARCHAR} and menu_type !=1
+  </update>
+
+</mapper>

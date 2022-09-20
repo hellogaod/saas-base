@@ -198,13 +198,7 @@
             <artifactId>xmlworker</artifactId>
             <version>5.5.11</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>cn.fintecher</groupId>-->
-        <!--            <artifactId>base-db-rw</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <type>jar</type>-->
-        <!--        </dependency>-->
-        <!-- itext5 end -->
+
 
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
@@ -242,7 +236,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.fintecher.BaseSystemWebApplication</mainClass>
+                    <mainClass>com.base.saas.BaseSystemWebApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

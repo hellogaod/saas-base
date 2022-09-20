@@ -263,14 +263,6 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>cn.fintecher</groupId>-->
-        <!--            <artifactId>base-db-rw</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <type>jar</type>-->
-        <!--        </dependency>-->
-
-
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
@@ -353,7 +345,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.fintecher.BaseManagerApplication</mainClass>
+                    <mainClass>com.base.saas.BaseManagerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

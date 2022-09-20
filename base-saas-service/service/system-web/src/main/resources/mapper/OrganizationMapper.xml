@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.system.mapper.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.system.model.Organization" >
+    <id column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="parent_org_id" property="parentOrgId" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="org_path" property="orgPath" jdbcType="LONGVARCHAR" />
+    <result column="org_manager" property="orgManager" jdbcType="VARCHAR" />
+    <result column="org_tel" property="orgTel" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="SMALLINT" />
+    <result column="org_short_tel" property="orgShortTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    org_id, parent_org_id, company_code, org_name, org_code, status, org_type,create_user, create_time,
+    update_user, update_time, org_path,org_manager,org_tel,org_short_tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ent_organization
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ent_organization
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.system.model.Organization" >
+    insert into ent_organization (org_id, parent_org_id, company_code, 
+      org_name, org_code, status,org_type,
+      create_user, create_time, update_user, 
+      update_time, org_path,org_manager,org_tel,org_short_tel)
+    values (#{orgId,jdbcType=VARCHAR}, #{parentOrgId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR},
+      #{orgName,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{orgType,jdbcType=SMALLINT},
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{orgPath,jdbcType=LONGVARCHAR},#{orgManager,jdbcType=VARCHAR},#{orgTel,jdbcType=VARCHAR},#{orgShortTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.system.model.Organization" >
+    insert into ent_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="parentOrgId != null" >
+        parent_org_id,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgCode != null" >
+        org_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="orgPath != null" >
+        org_path,
+      </if>
+      <if test="orgManager != null" >
+        org_manager,
+      </if>
+      <if test="orgTel != null" >
+        org_tel,
+      </if>
+      <if test="orgShortTel != null" >
+        org_short_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgId != null" >
+        #{parentOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgPath != null" >
+        #{orgPath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orgManager != null" >
+        #{orgManager, jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+        #{orgTel, jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortTel != null" >
+        #{orgShortTel, jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.system.model.Organization" >
+    update ent_organization
+    <set >
+      <if test="parentOrgId != null" >
+        parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgPath != null" >
+        org_path = #{orgPath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orgManager != null" >
+        org_manager = #{orgManager, jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+       org_tel =  #{orgTel, jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortTel != null" >
+        org_short_tel =  #{orgShortTel, jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.base.saas.system.model.Organization" >
+    update ent_organization
+    set parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      org_type = #{orgType,jdbcType=SMALLINT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      org_path = #{orgPath,jdbcType=LONGVARCHAR},
+      org_manager = #{orgManager,jdbcType=VARCHAR},
+      org_tel = #{orgTel,jdbcType=VARCHAR},
+      org_short_tel = #{orgShortTel,jdbcType=VARCHAR}
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.system.model.Organization" >
+    update ent_organization
+    set parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      org_type = #{orgType,jdbcType=SMALLINT},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      org_path = #{orgPath,jdbcType=LONGVARCHAR},
+      org_manager = #{orgManager,jdbcType=VARCHAR},
+      org_tel = #{orgTel,jdbcType=VARCHAR},
+      org_short_tel = #{orgShortTel,jdbcType=VARCHAR}
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="findList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ent_organization
+    where 1= 1
+    <if test="null!=companyCode and ''!=companyCode">
+      and company_code=#{companyCode}
+    </if>
+    <if test="null!=orgName and ''!=orgName">
+      and org_name=#{orgName}
+    </if>
+    <if test="null!=orgCode and ''!=orgCode">
+      and org_code=#{orgCode}
+    </if>
+    <if test="null!=parentOrgId and ''!=parentOrgId">
+      and parent_org_id=#{parentOrgId}
+    </if>
+    <if test="null!=orgType and ''!=orgType">
+      and org_type=#{orgType}
+    </if>
+    <if test="null!=orgPath and ''!=orgPath">
+      and org_path like CONCAT('%',#{orgPath},'%' )
+    </if>
+    <if test="null!=status and ''!=status">
+        and status = #{status}
+    </if>
+    order by create_time desc
+  </select>
+
+
+  <select id="findById" parameterType="String" resultType="Map">
+      select t.org_id orgId, t.parent_org_id parentOrgId, t.company_code companyCode,
+      t.org_manager orgManager,t.org_tel orgTel,t.org_short_tel orgShortTel,
+       t.org_name orgName, t.org_code orgCode,t.status,
+       t.create_user createUser, t.create_time createTime,
+      t.update_user updateUser,t.update_time updateTime,t.org_path orgPath,t.org_type orgType,t.org_manager orgManager,t.org_tel orgTel,
+       f.org_name parentOrgName from ent_organization t LEFT JOIN ent_organization f
+      on t.parent_org_id = f.org_id where t.org_id = #{orgId}
+  </select>
+
+  <select id="getOrgListByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM ent_organization
+    where (org_path like '%${orgId}%' or org_id = #{orgId}) and status = 1 and company_code = #{companyCode}
+  </select>
+
+ <!-- <select id="getOrgIsCompanyList" parameterType="Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM ent_organization t where t.
+
+  </select>-->
+
+  <update id="batchUpdate" parameterType="java.util.List">
+    update ent_organization
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="org_path =case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          when org_id=#{item.orgId} then #{item.orgPath}
+        </foreach>
+      </trim>
+    </trim>
+    where org_id in
+    <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+      #{item.orgId,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+
+  <select id="getOrgListByMap" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM ent_organization
+    where  status = 1 and company_code = #{companyCode} and org_type = 0
+  </select>
+
+</mapper>

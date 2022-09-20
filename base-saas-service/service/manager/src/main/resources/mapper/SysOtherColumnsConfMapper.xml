@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manager.mapper.SysOtherColumnsConfMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manager.model.SysOtherColumnsConf" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="other_id" property="otherId" jdbcType="VARCHAR" />
+    <result column="sortting" property="sortting" jdbcType="INTEGER" />
+    <result column="para_code" property="paraCode" jdbcType="VARCHAR" />
+    <result column="para_name" property="paraName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, other_id, sortting, para_code, para_name, remark, status, create_user, create_time, 
+    update_user, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_other_columns_conf
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_other_columns_conf
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.manager.model.SysOtherColumnsConf" >
+    insert into sys_other_columns_conf (id, other_id, sortting, 
+      para_code, para_name, remark, 
+      status, create_user, create_time, 
+      update_user, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{otherId,jdbcType=VARCHAR}, #{sortting,jdbcType=INTEGER}, 
+      #{paraCode,jdbcType=VARCHAR}, #{paraName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.manager.model.SysOtherColumnsConf" >
+    insert into sys_other_columns_conf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="otherId != null" >
+        other_id,
+      </if>
+      <if test="sortting != null" >
+        sortting,
+      </if>
+      <if test="paraCode != null" >
+        para_code,
+      </if>
+      <if test="paraName != null" >
+        para_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="otherId != null" >
+        #{otherId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortting != null" >
+        #{sortting,jdbcType=INTEGER},
+      </if>
+      <if test="paraCode != null" >
+        #{paraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paraName != null" >
+        #{paraName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manager.model.SysOtherColumnsConf" >
+    update sys_other_columns_conf
+    <set >
+      <if test="otherId != null" >
+        other_id = #{otherId,jdbcType=VARCHAR},
+      </if>
+      <if test="sortting != null" >
+        sortting = #{sortting,jdbcType=INTEGER},
+      </if>
+      <if test="paraCode != null" >
+        para_code = #{paraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paraName != null" >
+        para_name = #{paraName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.manager.model.SysOtherColumnsConf" >
+    update sys_other_columns_conf
+    set other_id = #{otherId,jdbcType=VARCHAR},
+      sortting = #{sortting,jdbcType=INTEGER},
+      para_code = #{paraCode,jdbcType=VARCHAR},
+      para_name = #{paraName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="batchSave" parameterType="list">
+    insert into sys_other_columns_conf(id, other_id, sortting,
+      para_code, para_name, remark,
+      status, create_user, create_time)
+    VALUES
+    <foreach collection ="list" item="detail" separator =",">
+      (#{detail.id}, #{detail.otherId}, #{detail.sortting},
+      #{detail.paraCode},#{detail.paraName},#{detail.remark},#{detail.status},
+      #{detail.createUser},#{detail.createTime})
+    </foreach >
+
+  </insert>
+
+
+  <select id="findList" resultMap="BaseResultMap" parameterType="Map">
+    select <include refid="Base_Column_List"/>
+    from sys_other_columns_conf where 1=1
+    <if test="null!=otherId and ''!=otherId">
+      and other_id = #{otherId}
+    </if>
+    <if test="null!=paraCode and ''!=paraCode">
+      and para_code = #{paraCode}
+    </if>
+    <if test="null!=paraName and ''!=paraName">
+      and para_name =#{paraName}
+    </if>
+    order by sortting asc
+  </select>
+
+
+
+  <!--批量删除不在参数列表中的数据-->
+  <update id="batchDelNotInParamList" parameterType="Map" >
+    delete from sys_other_columns_conf where other_id = #{otherId}
+    and id not in
+    <foreach item="item" index="index" collection="detailList" open="("
+             separator="," close=")">
+      #{item.confId}
+    </foreach>
+  </update>
+
+  <!--批量修改-->
+  <update id="batchUpdate" parameterType="list">
+    update sys_other_columns_conf
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="sortting =case" suffix="end,">
+        <foreach collection="list" item="i" index="index">
+          <if test="i.sortting!=null">
+            when id=#{i.id} then #{i.sortting}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix=" para_code =case" suffix="end,">
+        <foreach collection="list" item="i" index="index">
+          <if test="i.paraCode!=null">
+            when id=#{i.id} then #{i.paraCode}
+          </if>
+        </foreach>
+      </trim>
+
+      <trim prefix="para_name =case" suffix="end," >
+        <foreach collection="list" item="i" index="index">
+          <if test="i.paraName!=null">
+            when id=#{i.id} then #{i.paraName}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark =case" suffix="end," >
+        <foreach collection="list" item="i" index="index">
+          <if test="i.remark!=null">
+            when id=#{i.id} then #{i.remark}
+          </if>
+        </foreach>
+      </trim>
+
+      <trim prefix="update_user =case" suffix="end," >
+        <foreach collection="list" item="i" index="index">
+          <if test="i.updateUser!=null">
+            when id=#{i.id} then #{i.updateUser}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time =case" suffix="end," >
+        <foreach collection="list" item="i" index="index">
+          <if test="i.updateTime!=null">
+            when id=#{i.id} then #{i.updateTime}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="i" index="index" >
+      id=#{i.id}
+    </foreach>
+
+  </update>
+
+  <select id="findExitsWithParaCode" parameterType="list" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_other_columns_conf where
+    para_code in
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item.paraCode}
+    </foreach>
+  </select>
+
+
+</mapper>

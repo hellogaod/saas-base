@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manager.mapper.EntRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manager.model.EntRoleMenu" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, org_id, menu_id, company_code, create_user, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ent_role_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ent_role_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.manager.model.EntRoleMenu" >
+    insert into ent_role_menu (id, role_id, org_id, 
+      menu_id, company_code, create_user, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{menuId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.manager.model.EntRoleMenu" >
+    insert into ent_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manager.model.EntRoleMenu" >
+    update ent_role_menu
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.manager.model.EntRoleMenu" >
+    update ent_role_menu
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      menu_id = #{menuId,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 批量插入企业角色菜单 -->
+  <insert id="addEntRoleMenuList" parameterType="list">
+    insert into ent_role_menu (id, role_id, org_id,
+    menu_id, company_code,
+    create_time)
+    VALUES
+    <foreach collection ="list" item="detail" separator =",">
+      (#{detail.id,jdbcType=VARCHAR}, #{detail.roleId,jdbcType=VARCHAR}, #{detail.orgId,jdbcType=VARCHAR},
+      #{detail.menuId,jdbcType=VARCHAR}, #{detail.companyCode,jdbcType=VARCHAR},
+      #{detail.createTime,jdbcType=TIMESTAMP})
+    </foreach >
+  </insert>
+
+  <!-- 删除企业角色菜单信息 -->
+  <delete id="deleteEntRoleMenu" parameterType="string">
+    delete from ent_role_menu where role_id = #{roleId}
+  </delete>
+
+  <!--删除ent_menu中不在sys_module_detail中的关联关系数据-->
+  <update id="delEntMenuNotInModelDetail" parameterType="Map">
+   delete from ent_role_menu where menu_id in (select sys_menu_code from ent_menu  where sys_code = #{sysCode} and sys_menu_code
+     not in(select c.sys_menu_code from sys_module_detail c where c.sys_code = #{sysModuleCode}))
+  </update>
+</mapper>
