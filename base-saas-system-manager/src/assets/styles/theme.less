@@ -1,0 +1,81 @@
+.generateTheme(@theme) {
+  .el-button.el-button--default {
+    background-color: @COLOR8;
+    color: @COLOR5;
+    border-color: @COLOR8;
+  }
+  .el-button.el-button--default.is-disabled{
+    background-color: lightgray;
+    border-color: lightgray;
+  }
+  .data-form {
+    .search-button,
+    .reset-button {
+      background-color: @COLOR5;
+      color: @COLOR9;
+    }
+  } // work-header样式
+  .component.work-header,
+  .acc-center-header {
+    background-color: @COLOR1;
+  } // work-menu样式
+  .component.work-menu {
+    background-color: @COLOR2;
+    .el-menu {
+      background-color: @COLOR2;
+    }
+    .collapse-icon {
+      color: @COLOR4;
+      border-bottom-color: @COLOR7;
+    } // work-menu-item样式
+    .component.work-menu-item {
+      // 一级菜单
+      .submenu {
+        &.is-active {
+          .submenu-icon {
+            background-color: @COLOR6;
+          }
+        }
+        .submenu-icon,
+        .menu-icon {
+          border-right-color: @COLOR7;
+        }
+        .el-submenu__title {
+          background-color: @COLOR2;
+          color: @COLOR4;
+          &:hover {
+            background-color: @COLOR3;
+          }
+        }
+      } // 二级菜单样式
+      .menu-item {
+        color: @COLOR4;
+        background-color: @COLOR3;
+        &.is-active {
+          color: @COLOR5;
+        }
+      }
+    }
+  }
+  // 自定义组件样式
+  .component,.page{
+    .data-selection{
+      .icon-color{
+        background-color: @COLOR10;
+      }
+    }
+    a{
+      color:@COLOR8;
+    }
+  }
+}
+
+// 主题列表
+body {
+  // 默认主题
+  &.theme-default {
+    @theme: default;
+    @import "./themes/@{theme}.less";
+    .generateTheme(@theme)
+  }
+}

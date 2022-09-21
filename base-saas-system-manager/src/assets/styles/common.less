@@ -1,0 +1,91 @@
+.full{
+  height:100%;
+  width:100%;
+}
+
+.full-absolute{
+  position: absolute!important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.text-right{
+  text-align: right
+}
+
+.text-left{
+  text-align: left
+}
+
+.text-center{
+  text-align: center
+}
+
+
+.form-title{
+  font-size:16px;
+  font-weight: bold;
+}
+
+.no-padding{
+  padding: 0!important;
+}
+
+.no-margin{
+  margin: 0!important;
+}
+
+/*
+* 报表中用到的样式，使用flex布局
+*/
+.base-item {
+  height: 40px;
+  border-bottom: 1px solid rgb(223, 230, 236);
+  line-height: 20px;
+  align-items: center;
+  display: flex;
+}
+.item {
+  .base-item;
+  justify-content: center;
+}
+.item-right{
+  .base-item;
+  justify-content:center;
+ 
+}
+.item-sum{
+  .item-right;
+  font-weight:bold;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+  width: 6px;
+  height: 6px;
+  background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+    background-color: #555;
+}
+.el-date-editor .el-range-separator{
+  margin-bottom: 22px!important;
+}

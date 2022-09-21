@@ -1,0 +1,347 @@
+//容器全局样式
+body,
+html,
+#app {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: 0;
+  margin: 0;
+  min-width: 1280px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+// 页面主题样式
+.page {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.el-dialog__header {
+  text-align: center;
+}
+
+.el-message {
+  min-width: 150px!important;
+}
+
+
+/*-----el-picker type="datetime" 去掉“此刻”按钮-----*/
+
+.el-picker-panel.el-date-picker.has-time .el-picker-panel__footer .el-picker-panel__link-btn:first-child {
+  display: none;
+}
+
+
+/*-----DataGrid-----*/
+
+.data-grid {
+  font-size: 12px;
+
+  .data-grid-item__label{
+    margin:0!important;
+    min-height: 34px;
+  }
+}
+
+.data-grid-title {
+  line-height: 30px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+  >span:first-of-type {
+    color: #00BBCA;
+    margin: 0 5px;
+  }
+}
+
+// form样式
+.form-style() {
+  .el-form {
+    // 表单项高度设置
+    .el-form-item {
+      .el-form-item__label {
+        font-size: 12px;
+        text-align: right;
+        min-width: 60px;
+        .setHeight
+      }
+      .el-form-item__content {
+        .setHeight
+      }
+    } // 表单行间距设置
+    .el-button,
+    .el-form-item {
+      margin-bottom: 20px;
+    }
+    .el-radio-group {
+      margin-top: 5px;
+      .el-radio{
+        min-width: 50px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.date-style() {
+  .el-date-editor--daterange {
+    .el-range-input {
+      width: 80px;
+    }
+    .el-input__icon {
+      line-height: 20px;
+    }
+    .el-range-separator {
+      line-height: unset;
+    }
+    height:26px;
+    width:250px;
+  }
+  .el-date-editor--datetimerange {
+    .el-range-input {
+      width: 130px;
+    }
+    .el-input__icon {
+      line-height: 20px;
+    }
+    .el-range-separator {
+      line-height: unset;
+    }
+    height:26px;
+    width:355px;
+  }
+}
+
+//input样式
+.input-style() {
+  // 基础input样式
+  .el-input {
+    height: @default-height;
+    font-size: 12px;
+    .el-input__inner {
+      height: @default-height;
+      .setHeight;
+      // padding-left:6px;
+    }
+    .el-input__icon {
+      .setHeight;
+    }
+  } // 级联选择器样式
+  .el-cascader {
+    .setHeight; // 默认宽度
+    font-size: 12px;
+    .el-cascader__label {
+      .setHeight; // 默认宽度
+    }
+    .el-input__icon {
+      .setHeight;
+    }
+  } // form下input样式
+  .el-form .el-form-item {
+    .el-input {
+      // 表单内宽度
+      width: 180px;
+    }
+  } // data-form下input样式
+  .data-form .el-form .el-form-item {
+    .el-input {
+      // 表单内宽度
+      width: 120px;
+    }
+  } // 日期控件input样式
+  .date-style();
+}
+
+// table样式
+.table-style() {
+  .el-table {
+    .el-table__header {
+      thead th {
+        height: 26px;
+        line-height: 26px;
+        background-color: #f5f5f5;
+        color: #8c8c8c;
+        font-size: 12px;
+        padding: 0;
+        text-align: center;
+      }
+      .caret-wrapper {
+        height: 23px;
+        .sort-caret {
+          &.ascending {
+            top: 0px;
+          }
+          &.descending {
+            bottom: 1px;
+          }
+        }
+      }
+    }
+    .el-table__body {
+      .el-table__row.current-row td {
+        background-color: #b2e5ff;
+      }
+      td {
+        .cell {
+          line-height: 28px;
+          padding: 0;
+          &>*:only-child {
+            padding: 0 4px;
+          }
+        }
+        &:not(.is-right):not(.is-left) {
+          text-align: center;
+        }
+        padding: 0;
+        font-size: 12px!important;
+        .el-button.el-button--text {
+          padding: 0 4px;
+          font-size: 12px!important;
+        }
+      }
+    }
+  }
+}
+
+//input样式
+.button-style() {
+  .el-button {
+    &.el-button--default {
+      .setHeight;
+      padding: 0 20px;
+      min-width: 100px;
+      font-size: 12px;
+      font-weight: 400;
+    }
+    &.el-button--default:hover {
+      background: #0092dc;
+      color:#ffffff
+    }
+    &.el-button--text {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}
+
+.radio-style() {
+  .el-radio-group {
+    .setHeight;
+    .el-radio__label {
+      font-size: 12px;
+    }
+  }
+}
+
+.select-style() {
+  // .el-select-dropdown {
+  //   .el-select-dropdown__item span{
+  //         font-size: 12px!important;
+  //     }
+  // }
+}
+
+// el-step样式调整
+.case-flow-follow {
+  .el-steps {
+    .el-step {
+      height: 85px;
+      text-align: left;
+    }
+    .el-step__main {
+      white-space: nowrap;
+    }
+  }
+}
+
+.fixed-style() {
+  // 全局弹出框样式修正
+  .el-dialog {
+    .el-dialog__body {
+      max-height: 600px;
+      overflow: auto
+    }
+    &.is-fullscreen .el-dialog__body {
+      max-height: unset;
+      overflow: unset
+    }
+  } // 修正表格样式
+  .el-table__header-wrapper,
+  .el-table__body-wrapper {
+    padding-right: 1px
+  }
+}
+
+.card-style() {
+  .el-card {
+    .el-card__header {
+      padding: 10px!important;
+    }
+    .el-card__body {
+      padding: 10px!important;
+    }
+  }
+}
+
+@default-height: 26px;
+.setHeight() {
+  // height: @default-height;
+  line-height: @default-height;
+}
+
+.setHeight(@additional) {
+  // height: @default-height + @additional;
+  line-height: @default-height + @additional;
+}
+
+// 标色
+.red-row>td {
+  background: #f8d0d1!important;
+}
+
+.green-row>td {
+  background: #d0edd8!important;
+}
+
+.blue-row>td {
+  background: #cedfee!important;
+}
+
+.white-row>td {
+  background: #ffffff!important;
+}
+
+#app,
+.el-dialog {
+  .page,
+  .component {
+    .form-style();
+    .input-style();
+    .button-style();
+    .table-style();
+    .select-style();
+    .radio-style();
+    .card-style();
+    .fixed-style();
+  }
+}
+// 地图窗体样式
+.amap-info-content .prompt {
+  line-height: 30px;
+  text-align: left;
+  height: auto;
+  width: 300px;
+}
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content{
+  background-color: #b2e5ff!important;
+}
+// 加载层
+.el-loading-mask{
+  background-color: rgba(0,0,0,0)!important;
+}
+// 底部页码跳转样式
+.el-pagination__jump{
+  cursor: pointer;
+}
