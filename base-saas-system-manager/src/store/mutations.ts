@@ -1,4 +1,4 @@
-import { StorageService } from '~/utils/storage.services'
+import { StorageService } from '~/utils/storage.service'
 
 export default {
   /**

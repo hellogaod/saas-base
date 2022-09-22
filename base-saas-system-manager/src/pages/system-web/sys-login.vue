@@ -78,7 +78,7 @@
   import {Dependencies} from "~/core/decorator";
   import {Action} from "vuex-class";
   import {StorageService} from '~/utils/storage.service';
-  import {webLoginService} from "~/services/systemweb-service/syswebLogin.service";
+  import {webLoginService} from "~/services/systemweb-services/syswebLogin.service";
   import {FindValueSubscriber} from "rxjs/operators/find";
   import {ReminderService} from '~/utils/reminder.service'
 

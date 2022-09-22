@@ -7,7 +7,7 @@ import DashboardRoute from './dashboard.route'//根页面
 import systemManage from './system-manage.route'//系统管理
 
 import { Message } from "element-ui"
-const manLogin = () => import('~/pages/manager/man-login.vue')//管理台登录
+const manLogin = () => import('~/pages/manage/man-login.vue')//管理台登录
 const sysLogin = () => import('~/pages/system-web/sys-login.vue')//企业端登录
 const NotFound = () => import('~/pages/not-found.vue')
 
@@ -21,7 +21,7 @@ const routes = [
         component: sysLogin
     },
     {
-        path: '/manager',
+        path: '/manage',
         name: 'managerLogin',
         component: manLogin
     },
@@ -41,8 +41,8 @@ const routes = [
 
 // 生成路由实体
 const router = new Router({
-    // mode: 'history',
-    mode: 'hash',
+    mode: 'history',
+    // mode: 'hash',
     routes
 })
 
@@ -51,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
         await store.dispatch("clearUserLoginData")
     }
 
-    if (store.state.tokenExpire && to.path !== "/" && to.path !== "/system-web"&& to.path !== "/system-web/" && to.path !== "/manager"  ) {
+    if (store.state.tokenExpire && to.path !== "/" && to.path !== "/system-web"&& to.path !== "/system-web/" && to.path !== "/manage"  ) {
         // 重置用户过期状态
         store.commit('updateTokenExpire', false)
         Message.info("用户登录过期,请重新登录")

@@ -1,12 +1,12 @@
 /*
-*manager 系统登录controller
+*manage 系统登录controller
 */
 import {requestType, servicePreName} from '~/config/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manager' //本地
-// const SERVICE = 'system-manager' //測試
+const SERVICE = servicePreName +'manage' //本地
+// const SERVICE = 'system-manage' //測試
 const CONTROLLER = 'syslogin'
 /*
 * 前端服务名称

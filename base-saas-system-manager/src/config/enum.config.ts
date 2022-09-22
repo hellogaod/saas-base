@@ -1,5 +1,5 @@
 //服务名称前缀
-export const servicePreName = "ran-fenqi-"
+export const servicePreName = "saas-"
 
 /**
  * 请求类型
