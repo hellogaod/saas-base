@@ -76,7 +76,7 @@ public class AccessFilter extends ZuulFilter {
                 || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "/api/upload")
                 || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "/api/zr")
 
-                || StringUtils.contains(request.getRequestURL().toString(), "/ran-fenqi-app-service")
+                || StringUtils.contains(request.getRequestURL().toString(), "/saas-app-service")
                 //|| StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "/api/third/sms/sendCode")
                 //|| StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "/api/third/login/doCodeLogin")
                 //|| StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "/api/third/login/hasRegister")

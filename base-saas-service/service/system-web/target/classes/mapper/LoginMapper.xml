@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.saas.system.mapper.LoginMapper">
+    <select id="getComUser" resultType="map" parameterType="string">
+        select u.user_id,u.org_id,u.account,u.password,u.real_name,u.status,u.error_count,u.company_code,e.company_name,
+        o.`status` o_status,u.role_id,r.role_name,r.`status` r_status,e.`status` e_status
+        from ent_user u
+        INNER JOIN ent_organization o on u.org_id=o.org_id
+        INNER JOIN sys_enterprise e on e.company_code=u.company_code
+        LEFT JOIN ent_role r on r.role_id=u.role_id
+        where u.account=#{account} AND u.company_code=#{companyCode}
+    </select>
+
+    <update id="lockComUser">
+        update ent_user
+        <set>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            error_count=error_count+1,
+            <if test="status != null">
+                lock_time = now(),
+            </if>
+        </set>
+        where user_id=#{userId} and  <![CDATA[ status<>2 ]]>
+    </update>
+
+    <update id="clearComErrCount">
+        update ent_user set status =1, error_count=0, lock_time = NULL
+        where user_id=#{userId} AND company_code = #{companyCode}
+    </update>
+
+    <update id="updateComPwd">
+        update ent_user set password =#{newPwd}
+        where user_id=#{userId} AND company_code=#{companyCode}
+    </update>
+
+    <select id="getComPermissions" parameterType="string" resultType="map">
+        SELECT m.id,m.sys_menu_code as sysMenuCode,m.icon,m.menu_name,m.menu_type,m.parent_id,IFNULL(m.url,'') url,IFNULL(dp.org_path,'') org_path,
+        IFNULL(dp.is_desensite,0) is_desensite
+        from ent_user u
+        INNER JOIN ent_role r on r.role_id=u.role_id
+        INNER JOIN ent_role_menu rm on u.role_id=rm.role_id
+        INNER JOIN ent_menu m on m.id=rm.menu_id
+        LEFT JOIN ent_user_data_permission dp on dp.menu_id=m.id and u.user_id=dp.user_id
+        where u.user_id=#{userId} and r.`status`=1 and m.`status`=1 AND u.company_code = #{companyCode}
+        and m.sys_code = #{sysCode}
+        ORDER BY m.sequence ASC
+    </select>
+
+
+    <update id="updateComLoginInfo" parameterType="java.lang.String">
+        update ent_user set latest_ip=#{remoteAddr},latest_time= now()  where user_id=#{userId} AND company_code=#{companyCode}
+    </update>
+</mapper>

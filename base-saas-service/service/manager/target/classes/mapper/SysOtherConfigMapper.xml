@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manager.mapper.SysOtherConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manager.model.SysOtherConfig" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="other_name" property="otherName" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.base.saas.manager.model.SysOtherConfig" extends="BaseResultMap" >
+    <result column="config_column" property="configColumn" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, other_name, create_user, create_time, update_user, update_time, status,type
+  </sql>
+  <sql id="Blob_Column_List" >
+    config_column
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_other_config
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_other_config
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.base.saas.manager.model.SysOtherConfig" >
+    insert into sys_other_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="otherName != null" >
+        other_name,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="configColumn != null" >
+        config_column,
+      </if>
+      <if test="type !=null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="otherName != null" >
+        #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="configColumn != null" >
+        #{configColumn,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manager.model.SysOtherConfig" >
+    update sys_other_config
+    <set >
+      <if test="otherName != null" >
+        other_name = #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="configColumn != null" >
+        config_column = #{configColumn,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询所有三方列表-->
+  <select id="findList"  resultMap="BaseResultMap" parameterType="Map">
+    select  <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_other_config where 1=1
+    <if test="null!=status and -1!=status">
+      and status = #{status}
+    </if>
+    <if test="null!=type and -1!=type">
+      and type=#{type}
+    </if>
+    <if test="null!=otherName and ''!=otherName">
+      and other_name like CONCAT('%',#{otherName},'%' )
+    </if>
+    <if test="null!=realName and ''!=realName">
+      and other_name = #{realName}
+    </if>
+    order by if(isnull(update_time),create_time,update_time)  desc
+  </select>
+
+
+  <select id="getConfListByCompanyCode" resultType="com.base.saas.manager.model.SysOtherConfig" parameterType="String">
+    select t.id id,t.other_name otherName,t.config_column configColumn,t.type
+    from sys_other_config t,sys_ent_other_config f where t.status = 1
+    and t.id=f.other_id and f.company_code = #{companyCode}
+  </select>
+
+</mapper>

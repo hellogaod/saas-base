@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.system.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.system.model.Company" >
+    <id column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="company_manager" property="companyManager" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="org_img" property="orgImg" jdbcType="VARCHAR" />
+    <result column="org_owner_img" property="orgOwnerImg" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_code, company_name, email, tel,company_manager, org_img, org_owner_img, status, create_user,
+    create_time, update_user, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_enterprise
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_enterprise
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.system.model.Company" >
+    insert into sys_enterprise (company_code, company_name, email,
+      tel,company_manager, org_img, org_owner_img,
+      status, create_user, create_time, 
+      update_user, update_time)
+    values (#{companyCode,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{companyManager,jdbcType=VARCHAR}, #{orgImg,jdbcType=VARCHAR}, #{orgOwnerImg,jdbcType=VARCHAR},
+      #{status,jdbcType=SMALLINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.system.model.Company" >
+    insert into sys_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="companyManager != null" >
+        company_manager,
+      </if>
+      <if test="orgImg != null" >
+        org_img,
+      </if>
+      <if test="orgOwnerImg != null" >
+        org_owner_img,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyManager != null" >
+        #{companyManager,jdbcType=VARCHAR},
+      </if>
+      <if test="orgImg != null" >
+        #{orgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgOwnerImg != null" >
+        #{orgOwnerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.system.model.Company" >
+    update sys_enterprise
+    <set>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyManager != null" >
+        company_manager = #{companyManager,jdbcType=VARCHAR},
+      </if>
+      <if test="orgImg != null" >
+        org_img = #{orgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgOwnerImg != null" >
+        org_owner_img = #{orgOwnerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.system.model.Company" >
+    update sys_enterprise
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      company_manager = #{companyManager,jdbcType=VARCHAR},
+      org_img = #{orgImg,jdbcType=VARCHAR},
+      org_owner_img = #{orgOwnerImg,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+  </update>
+  <select id="getCompanyList" parameterType="com.base.saas.system.model.Company" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_enterprise
+    <where> 1=1
+      <if test="companyName != null and companyName != ''" >
+       and company_name like '%${companyName}%'
+      </if>
+    </where>
+    ORDER BY create_time DESC
+  </select>
+  <select id="getAllCompanyList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_enterprise
+      where status = 1
+    ORDER BY create_time DESC
+  </select>
+</mapper>

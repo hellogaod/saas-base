@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manager.mapper.EntRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manager.model.EntRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_id, company_code, org_id, role_name, status, create_user, create_time, update_user, 
+    update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ent_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ent_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.base.saas.manager.model.EntRole" >
+    insert into ent_role (role_id, company_code, org_id, 
+      role_name, status, create_user, 
+      create_time, update_user, update_time, 
+      remark)
+    values (#{roleId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{roleName,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.saas.manager.model.EntRole" >
+    insert into ent_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manager.model.EntRole" >
+    update ent_role
+    <set >
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.manager.model.EntRole" >
+    update ent_role
+    set company_code = #{companyCode,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <select id="getRoleList" resultMap="BaseResultMap">
+    SELECT
+	  <include refid="Base_Column_List"/>
+    FROM
+	  ent_role
+    WHERE
+	  status = 1
+    AND (
+      company_code = ''
+	  OR company_code IS NULL
+    )
+  </select>
+
+  <select id="getRoleAllList" resultMap="BaseResultMap" parameterType="com.base.saas.manager.model.EntRole" >
+    select
+    <include refid="Base_Column_List" />
+    from ent_role
+    <where>
+      1=1
+      <if test="roleName!=null and roleName!=''">
+        and role_name like CONCAT('%',#{roleName},'%') ESCAPE '/'
+      </if>
+      and (company_code = ''
+      OR company_code IS NULL)
+    </where>
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="getAllRole" resultType="map" parameterType="java.lang.String">
+    select role_id as roleId, role_name as roleName from ent_role where status = 1 and company_code = #{companyCode}
+  </select>
+
+  <select id="getRoleByRoleName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from ent_role
+    where role_name = #{roleName,jdbcType=VARCHAR} and (company_code = ''
+    OR company_code IS NULL)
+  </select>
+
+  <select id="getRoleByUpdate" parameterType="com.base.saas.manager.model.EntRole" resultType="java.lang.String">
+    select role_id from ent_role where role_name = #{roleName} and company_code = and (company_code = ''
+    OR company_code IS NULL) and role_id != #{roleId}
+  </select>
+</mapper>

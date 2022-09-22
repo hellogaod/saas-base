@@ -9,14 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
+import org.springframework.boot.autoconfigure.web.MultipartProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.unit.DataSize;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -25,7 +24,7 @@ import org.springframework.web.filter.CorsFilter;
 import javax.servlet.MultipartConfigElement;
 
 @EnableZuulProxy
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 public class BaseZuulServerApplication {
@@ -34,7 +33,7 @@ public class BaseZuulServerApplication {
     private MultipartProperties multipartProperties;
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(BaseZuulServerApplication.class)/**.web(true)**/.run(args);
+        new SpringApplicationBuilder(BaseZuulServerApplication.class).web(true).run(args);
     }
 
     @Bean
@@ -67,8 +66,8 @@ public class BaseZuulServerApplication {
     @Bean
     @ConditionalOnMissingBean
     public MultipartConfigElement multipartConfigElement() {
-        this.multipartProperties.setMaxFileSize(DataSize.parse("1024MB"));
-        this.multipartProperties.setMaxRequestSize(DataSize.parse("1024MB"));
+        this.multipartProperties.setMaxFileSize("1024MB");
+        this.multipartProperties.setMaxRequestSize("1024MB");
         return this.multipartProperties.createMultipartConfig();
     }
 
@@ -76,9 +75,8 @@ public class BaseZuulServerApplication {
     public AccessFilter accessFilter() {
         return new AccessFilter();
     }
-
     @Bean
-    public PostFilter postFilter() {
+    public PostFilter postFilter(){
         return new PostFilter();
     }
 }

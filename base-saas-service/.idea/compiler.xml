@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -20,7 +21,7 @@
       <module name="manager" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\manager/lib" />
       <module name="system-web" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\system-web/lib" />
       <module name="utils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\utils/lib" />
-      <module name="zuul" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\zuul/lib" />
+      <module name="zuul" options="" />
     </option>
   </component>
 </project>
