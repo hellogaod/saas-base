@@ -1,9 +1,9 @@
-const NetService = () => require('~/utils/net.services')
-const PageService = () => require('~/utils/page.services')
+const NetService = () => require('~/utils/net.service')
+const PageService = () => require('~/utils/page.service')
 
-// const DataDictSerivce = () => require('~/services/business-services/data-dict.services')
-// const ResourceSerivce = () => require('~/services/business-services/resource.services')
-// const LoginSerivce = () => require('~/services/business-services/login.services')
+// const DataDictSerivce = () => require('~/services/business-services/data-dict.service')
+// const ResourceSerivce = () => require('~/services/business-services/resource.service')
+// const LoginSerivce = () => require('~/services/business-services/login.service')
 
 export default function () {
   return {

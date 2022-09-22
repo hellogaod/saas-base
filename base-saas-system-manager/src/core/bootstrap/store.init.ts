@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
-// const creatDataDictService = () => import('~/services/business-services/data-dict.services')
-// const createLoginService = () => import('~/services/business-services/login.services')
-// const createCompanyService = () => import('~/services/business-services/company.services')
-// import { MessageService } from '~/utils/message.services'
+// const creatDataDictService = () => import('~/services/business-services/data-dict.service')
+// const createLoginService = () => import('~/services/business-services/login.service')
+// const createCompanyService = () => import('~/services/business-services/company.service')
+// import { MessageService } from '~/utils/message.service'
 
 export default async function ({ store, router }) {
   // let { DataDictService } = await creatDataDictService()

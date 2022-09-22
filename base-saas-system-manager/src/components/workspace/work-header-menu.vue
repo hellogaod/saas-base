@@ -10,7 +10,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { State, Mutation, Action, namespace } from "vuex-class";
-import { entMenuService } from "~/services/systemweb-service/entMenu.service";
+import { entMenuService } from "~/services/systemweb-services/entMenu.service";
 import { Dependencies } from "~/core/decorator";
 const workspaceModule = namespace("workspace");
 @Component({

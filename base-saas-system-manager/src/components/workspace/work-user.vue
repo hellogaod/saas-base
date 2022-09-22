@@ -23,8 +23,8 @@ import Component from "vue-class-component";
 import { State, Mutation } from "vuex-class";
 import { Dependencies } from "~/core/decorator";
 import WorkPassword from "~/components/workspace/work-password.vue";
-import { webLoginService } from "~/services/systemweb-services/syswebLogin.services";
-import { LoginService } from "~/services/manager-services/sysLogin.services";
+import { webLoginService } from "~/services/systemweb-services/syswebLogin.service";
+import { LoginService } from "~/services/manager-services/sysLogin.service";
 @Component({
   components: {
     WorkPassword

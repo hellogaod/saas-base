@@ -1,8 +1,8 @@
 // 平台
-const systemModular = () => import('~/pages/manager/system-manage/system-modular.vue')//系统模块管理
-const systemOther = () => import('~/pages/manager/system-manage/system-other.vue')//参数维护
-const bussManage = () => import('~/pages/manager/system-manage/business-manage.vue')//企业管理
-const modularPermission = () => import('~/pages/manager/system-manage/module-permission.vue')//业务功能
+const systemModular = () => import('~/pages/manage/system-manage/system-modular.vue')//系统模块管理
+const systemOther = () => import('~/pages/manage/system-manage/system-other.vue')//参数维护
+const bussManage = () => import('~/pages/manage/system-manage/business-manage.vue')//企业管理
+const modularPermission = () => import('~/pages/manage/system-manage/module-permission.vue')//业务功能
 //企业
 const RoleManage = () => import('~/pages/system-web/system-manage/role-manage.vue')//角色管理
 const UserManage = () => import('~/pages/system-web/system-manage/user-manage.vue')//用户管理

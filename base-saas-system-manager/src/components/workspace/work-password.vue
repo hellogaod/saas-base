@@ -22,8 +22,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Dependencies } from "~/core/decorator";
-import { webLoginService } from "~/services/systemweb-services/syswebLogin.services";
-import { LoginService } from "~/services/manager-services/sysLogin.services";
+import { webLoginService } from "~/services/systemweb-services/syswebLogin.service";
+import { LoginService } from "~/services/manager-services/sysLogin.service";
 import { Emit } from "vue-property-decorator";
 import { Form } from "element-ui";
 // import md5 from "md5";

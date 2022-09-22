@@ -21,7 +21,7 @@ import Component from "vue-class-component";
 import DataForm from "~/components/common/data-form.vue";
 import DataBox from "~/components/common/data-box.vue";
 import { Dependencies } from "~/core/decorator";
-import { webOrganizationService } from "~/services/systemweb-service/organization.service";
+import { webOrganizationService } from "~/services/systemweb-services/organization.service";
 import { Prop, Emit, Watch } from "vue-property-decorator";
 import { Getter } from "vuex-class";
 import { CommonService } from "~/utils/common.service";

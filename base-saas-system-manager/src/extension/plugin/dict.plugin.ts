@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { DictService } from '~/utils/dict.services'
+import { DictService } from '~/utils/dict.service'
 
 export default {
   install() {

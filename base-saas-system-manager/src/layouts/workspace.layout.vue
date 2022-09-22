@@ -25,7 +25,7 @@ import WorkMenu from "~/components/workspace/work-menu.vue";
 import WorkTab from "~/components/workspace/work-tab.vue";
 import WorkReminder from "~/components/workspace/work-reminder.vue";
 const workspaceModule = namespace("workspace");
-import { ReminderService } from '~/utils/reminder.services'
+import { ReminderService } from '~/utils/reminder.service'
 
 @Component({
   components: {
