@@ -42,6 +42,7 @@ saas基础版本，前后端分离技术
 
 7. [SpringBoot 通过Filter与AOP实现请求加密解密功能](https://blog.csdn.net/afgasdg/article/details/120572937)
 
+8. rabbitmq、mongodb两个用法；
 
 # 开发工具及版本
 
