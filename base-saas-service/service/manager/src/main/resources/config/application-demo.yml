@@ -32,10 +32,12 @@ spring:
         jcache:
             config: ehcache.xml
     redis:
-        database: 0
-        host: 192.168.3.75
-        port: 6379
-        expireTime: 3600
+      database: 5
+      #        host: 192.168.102.109
+      host: 127.0.0.1
+      port: 6379
+      expireTime: 3600
+      password: GAO2651qiang
 eureka:
   instance:
     hostname: manager-service

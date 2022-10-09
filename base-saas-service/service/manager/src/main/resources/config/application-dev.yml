@@ -40,11 +40,11 @@ spring:
       config: ehcache.xml
   redis:
     database: 5
-    host: 192.168.102.109
-    #host: 127.0.0.1
+    #        host: 192.168.102.109
+    host: 127.0.0.1
     port: 6379
     expireTime: 3600
-    password: 123456
+    password: GAO2651qiang
 
   cloud:
     nacos:
@@ -84,14 +84,5 @@ mysql:
       password: 1qaz@WSX
       username: root
 
-
-fdfs:
-  thumb-image:
-    height: 60
-    width: 60
-  tracker-list:
-    - 192.168.102.188:22122 #fastdfs的tracker服务地址,是一个列表可以配置多个
-  so-timeout: 1501 #读取时间
-  connect-timeout: 1601 #连接超时时间
 data:
   isChangeDataSource: 0

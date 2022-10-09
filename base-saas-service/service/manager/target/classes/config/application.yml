@@ -2,7 +2,7 @@ spring:
     application:
         name: saas-manage
     profiles:
-#        active: @spring.profiles.active@
+#        active: dev
       active: dev
     jackson:
         serialization.write_dates_as_timestamps: true
@@ -42,15 +42,6 @@ loginErrorLimit: 99
 
 
 localelist: zh_CN,en
-
-fdfs:
-  thumb-image:
-    height: 60
-    width: 60
-  tracker-list:
-    - 192.168.102.188:22122 #fastdfs的tracker服务地址,是一个列表可以配置多个
-  so-timeout: 1501 #读取时间
-  connect-timeout: 1601 #连接超时时间
 
 data:
   isChangeDataSource: 0
