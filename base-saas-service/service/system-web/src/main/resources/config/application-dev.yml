@@ -48,10 +48,11 @@ spring:
       config: ehcache.xml
   redis:
     database: 5
-    host: 192.168.102.109
+    #        host: 192.168.102.109
+    host: 127.0.0.1
     port: 6379
     expireTime: 3600
-    password: 123456
+    password: GAO2651qiang
 
 #cuibei:
 #  baiduMap:
@@ -78,18 +79,10 @@ mysql:
     read:
       driver-class-name: com.mysql.jdbc.Driver
       type: com.zaxxer.hikari.HikariDataSource
-      url: jdbc:mysql://192.168.102.188:3306/zr_fenqi?useUnicode=true&characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://localhost:3306/saas-base?useUnicode=true&characterEncoding=utf8&useSSL=false
       password: zwjkhf123
       username: zwjkhf
 
-fdfs:
-  thumb-image:
-    height: 60
-    width: 60
-  tracker-list:
-    - 192.168.102.188:22122 #fastdfs的tracker服务地址,是一个列表可以配置多个
-  so-timeout: 1501 #读取时间
-  connect-timeout: 1601 #连接超时时间
 
 data:
   isChangeDataSource: 0

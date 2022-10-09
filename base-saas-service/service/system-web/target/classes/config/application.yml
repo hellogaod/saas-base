@@ -50,8 +50,13 @@ fdfs:
     height: 60
     width: 60
   tracker-list:
-    - 192.168.102.188:22122 #fastdfs的tracker服务地址,是一个列表可以配置多个
-  so-timeout: 1501 #读取时间
-  connect-timeout: 1601 #连接超时时间
+    - 192.168.33.100:22122 #fastdfs的tracker服务地址,是一个列表可以配置多个
+  so-timeout: 6000 #读取时间
+  connect-timeout: 6000 #连接超时时间
+  pool:
+    max-total: 200 # 连接池最大数量
+    max-total-per-key: 50 # 单个tracker最大连接数
+    max-wait-millis: 5000 # 连接耗尽最大等待时间 毫秒
+
 data:
   isChangeDataSource: 0

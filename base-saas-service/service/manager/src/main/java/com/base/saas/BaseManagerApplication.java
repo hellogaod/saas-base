@@ -1,12 +1,12 @@
 package com.base.saas;
 
 
-import com.base.saas.common.constant.AppConstant;
+//import com.base.saas.common.constant.AppConstant;
 import com.github.pagehelper.PageHelper;
 import com.github.tobato.fastdfs.FdfsClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Queue;
+//import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -54,10 +54,10 @@ public class BaseManagerApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    @Bean
-    public Queue unReduceSuccessQueue() {
-        return new Queue(AppConstant.DATAINFO_CONFIRM_QE);
-    }
+//    @Bean
+//    public Queue unReduceSuccessQueue() {
+//        return new Queue(AppConstant.DATAINFO_CONFIRM_QE);
+//    }
 
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(BaseManagerApplication.class);

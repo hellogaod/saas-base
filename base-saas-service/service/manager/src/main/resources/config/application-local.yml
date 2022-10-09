@@ -39,11 +39,11 @@ spring:
             config: ehcache.xml
     redis:
         database: 5
-        host: 192.168.102.109
-        #host: 127.0.0.1
+#        host: 192.168.102.109
+        host: 127.0.0.1
         port: 6379
         expireTime: 3600
-        password: 123456
+        password: GAO2651qiang
 
 
 eureka:
