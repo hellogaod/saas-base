@@ -43,7 +43,7 @@ export function Inject(target?): PropertyDecorator {
 }
 
 /**
- * 函数去抖动
+ * 函数去抖动，就是我们在点击请求或者点击加载等过程中，只需要点击一次，但由于请求慢，点击了好多次，导致多次请求，防抖就是在点击了好多次之后的最后一次才会请求。
  * @param time
  */
 export function Debounce(time: number = 500) {

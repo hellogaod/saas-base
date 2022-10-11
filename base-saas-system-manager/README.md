@@ -35,3 +35,15 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# 管理端访问路径
+
+## 系统管理端
+
+http://localhost:8080/sys-manage
+
+## 企业管理端
+
+默认：http://localhost:8080/
+
+或：http://localhost:8080/ent-manager

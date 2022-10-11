@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue'
-//必须引入typings中的文件，否则./App.vue报错
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -17,7 +16,7 @@ import 'kindeditor/themes/default/default.css'
 
 async function startUp() {
   // 启动主体业务逻辑
-  await bootstrap({ store, router })
+  await bootstrap({store, router})
 
   // 生成提示信息
   Vue.config.productionTip = false
@@ -33,7 +32,7 @@ async function startUp() {
     el: '#app',
     router,
     template: '<App/>',
-    components: { App }
+    components: {App}
   })
 }
 

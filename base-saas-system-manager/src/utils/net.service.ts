@@ -3,8 +3,8 @@ import Qs from 'qs'
 import app from '~/config/app.config'
 import store from '~/store'
 import {Observable} from "rxjs";
-import {StorageService} from '~/utils/storage.service'
-import {SortService} from '~/utils/sort.service'
+import {StorageUtil} from '~/utils/storage.util'
+import {SortUtil} from '~/utils/sort.util'
 import {Message, MessageBox, Loading} from 'element-ui'
 import router from "~/router"
 
@@ -18,8 +18,6 @@ const errorMessage = {
 export class NetService {
   // 使用GET请求类型
   private axiosInstance
-  private userToken
-  private store
   private loading: any = {};
 
   constructor() {
@@ -48,7 +46,7 @@ export class NetService {
 
       // 开启排序
       if (sort) {
-        targetUrl += `?${SortService.stringify(sort)}`
+        targetUrl += `?${SortUtil.stringify(sort)}`
       }
 
       return targetUrl
@@ -57,22 +55,8 @@ export class NetService {
     }
   }
 
-  /**
-   * 生成头部信息
-   */
-  // private generateRequestHeader(headers): Object {
-  //   let token = StorageService.getStorage('session').getItem('userToken') || ''
-  //   if (token) {
-  //     return Object.assign({
-  //       'X-UserToken': token
-  //     }, headers)
-  //   } else {
-  //     return headers || {}
-  //   }
-  // }
-
   private generateRequestHeader(headers): Object {
-    let token = StorageService.getStorage('session').getItem('userToken') || ''
+    let token = StorageUtil.getStorage('session').getItem('userToken') || ''
     let tempHeaders = headers
     if (token) {
       tempHeaders = Object.assign({
@@ -174,9 +158,9 @@ export class NetService {
                 callback: () => {
                   router.push("/")
                   if (sessionStorage.getItem("loginType") === "sys") {//system-web
-                    router.push("/system-web")
+                    router.push("/ent-manage")
                   } else {
-                    router.push("/manage")
+                    router.push("/sys-manage")
                   }
                 }
               });
@@ -254,8 +238,7 @@ export class NetService {
 
 
           if (headers['x-saas-server-alert'] != undefined && ((msg.indexOf("成功") == -1 && msg.indexOf("success") == -1))) {
-            // Message.error(msg)
-            console.log("msg：", msg)
+
             var data: any = {
               exceptionStackMsg: msg
             }

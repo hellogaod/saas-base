@@ -1,6 +1,5 @@
 'use strict'
 const merge = require('webpack-merge')
-const prodEnv = require('./prod.env')
 const devEnv = require('../environment/dev.env')
 
 let targetServer = process.env.server

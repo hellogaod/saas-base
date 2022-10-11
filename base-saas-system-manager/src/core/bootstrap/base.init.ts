@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import injector from 'vue-inject';
 import createProvide from '~/core/provide'
-import createFilters from '~/extension/filter'
-import createDirectives from '~/extension/directive'
 import createPlugins from '~/extension/plugin'
 
-export default async function ({ store }) {
-  // 创建提供器
+export default async function ({store}) {
+  // 创建提供器，提供netService和pageUtil
   if (createProvide) {
     Vue.use(injector)
     Object.entries(createProvide()).forEach(([key, value]) => {
@@ -25,23 +23,9 @@ export default async function ({ store }) {
     })
   }
 
-  // 安装过滤器
-  if (createFilters) {
-    Object.entries(createFilters({ store })).forEach(([key, fun]) => {
-      Vue.filter(key, fun)
-    })
-  }
-
-  // 安装指令
-  if (createDirectives) {
-    Object.entries(createDirectives({ store })).forEach(([key, fun]) => {
-      Vue.directive(key, fun)
-    })
-  }
-
-  // 安装插件
+  // 安装插件:$help和$filter两个属性就可以使用了，可自行在/extension/plugin中扩展其他属性
   if (createPlugins) {
-    Object.entries(createPlugins({ store })).forEach(([key, plugin]: [string, any]) => {
+    Object.entries(createPlugins({store})).forEach(([key, plugin]: [string, any]) => {
       Vue.use(plugin)
     })
   }

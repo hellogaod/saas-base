@@ -21,10 +21,9 @@ import Component from "vue-class-component";
 import DataForm from "~/components/common/data-form.vue";
 import DataBox from "~/components/common/data-box.vue";
 import { Dependencies } from "~/core/decorator";
-import { webOrganizationService } from "~/services/systemweb-services/organization.service";
+import { webOrganizationService } from "~/server/services/enterprise-manage-services/organization.service";
 import { Prop, Emit, Watch } from "vue-property-decorator";
-import { Getter } from "vuex-class";
-import { CommonService } from "~/utils/common.service";
+import {DataTransferUtil} from "~/utils/datatransfer.util";
 
 @Component({
   components: {
@@ -104,7 +103,7 @@ export default class ModulePermission extends Vue {
         type: v.orgType
       };
     });
-    this.treeResource = CommonService.generateTreeData(tmpTreeResource);
+    this.treeResource = DataTransferUtil.generateTreeData(tmpTreeResource);
   }
   /**
    * 取消操作

@@ -1,16 +1,9 @@
 const NetService = () => require('~/utils/net.service')
-const PageService = () => require('~/utils/page.service')
-
-// const DataDictSerivce = () => require('~/services/business-services/data-dict.service')
-// const ResourceSerivce = () => require('~/services/business-services/resource.service')
-// const LoginSerivce = () => require('~/services/business-services/login.service')
-
+const PageUtil = () => require('~/utils/page.util')
+//通过base.init.ts初始化，这样通过就可以通过@Inject使用乐乐
 export default function () {
   return {
     'netService': [NetService, 'none'],
-    'pageService': [PageService, 'none'],
-    // 'dataDictSerivce': DataDictSerivce,
-    // 'resourceSerivce': ResourceSerivce,
-    // 'loginSerivce': LoginSerivce
+    'pageUtil': [PageUtil, 'none'],
   }
 }

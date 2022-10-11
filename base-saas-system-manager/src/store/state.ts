@@ -1,11 +1,10 @@
 export default {
   //启动状态
   ready: false,
-  // 页面布局
+  // 页面布局:只有default和workspace两个布局；default目前用于notfund，workspace用于各个菜单管理页面
   layout: 'default',
-  // 字典数据
-  dictData: '',
-  // 用户token
+  // 用户token:在用户登录会设置userToken；用户退出会清理用户token
+  //还会通过StorageService本地缓存
   userToken: '',
   // token是否过期
   tokenExpire: false,
@@ -14,25 +13,14 @@ export default {
   // 公司编号
   companyCode: '',
   //公司名称
-  companyName: '',
+  // companyName: '',
   // 菜单资源
   menuResource: [],
-  // 控件资源
-  controlResource: [],
   // 菜单折叠状态
   menuCollapse: false,
   // 当前主题样式
   theme: 'theme-default',
-  // 公司列表
-  companyList: [],
-  // 门店列表
-  storeList: [],
-  // 受托方列表
-  outSourceList: [],
-  // 委托方列表
-  principalList: [],
-  // 部门列表
-  departmentList: [],
+
   //模块资源-
   updateUsermoduleListResource: [],
   //模块资源-选中的

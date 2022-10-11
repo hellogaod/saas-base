@@ -1,8 +1,9 @@
+<!--头部布局-头像和昵称-->
 <template>
   <section class="component work-user">
     <el-dropdown @command="dropdownClickHandle" trigger="click">
       <div class="row middle-span">
-        <img class="user-photo" src="@/assets/images/common/user-photo.png" />
+        <img class="user-photo" src="@/assets/images/common/user-photo.png"/>
         <span class="user-name">欢迎您, {{userData.realName}}</span>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </div>
@@ -18,74 +19,76 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { State, Mutation } from "vuex-class";
-import { Dependencies } from "~/core/decorator";
-import WorkPassword from "~/components/workspace/work-password.vue";
-import { webLoginService } from "~/services/systemweb-services/syswebLogin.service";
-import { LoginService } from "~/services/manager-services/sysLogin.service";
-@Component({
-  components: {
-    WorkPassword
-  }
-})
-export default class WorkUser extends Vue {
-  @Dependencies(webLoginService) private webLoginService: webLoginService;
-  @Dependencies(LoginService) private loginService: LoginService;
-  @State userData;
-  
-  private dialog = {
-    workPassword: false
-  };
+  import Vue from "vue";
+  import Component from "vue-class-component";
+  import {State, Mutation} from "vuex-class";
+  import {Dependencies} from "~/core/decorator";
+  import WorkPassword from "~/components/workspace/work-password.vue";
+  import {entLoginService} from "~/server/services/enterprise-manage-services/entLogin.service";
+  import {LoginService} from "~/server/services/system-manage-services/sysLogin.service";
 
-  /**
-   *  用户操作处理
-   */
-  dropdownClickHandle(command) {
-    switch (command) {
-      case "exit": 
-        this.loginOut()
-        break;
-      case "password": 
-        this.dialog.workPassword = true
-        break;      
+  @Component({
+    components: {
+      WorkPassword
     }
-  }
-  /*
-   * 退出
-   * */ 
-  loginOut() {
-    if(sessionStorage.getItem("loginType")==="sys"){//system-web
-      this.webLoginService.logout().subscribe(
+  })
+  export default class WorkUser extends Vue {
+    @Dependencies(entLoginService) private entLoginService: entLoginService;
+    @Dependencies(LoginService) private loginService: LoginService;
+    @State userData: any;
+
+    private dialog = {
+      workPassword: false
+    };
+
+    /**
+     *  用户操作处理
+     */
+    dropdownClickHandle(command) {
+      switch (command) {
+        case "exit":
+          this.loginOut()
+          break;
+        case "password":
+          this.dialog.workPassword = true
+          break;
+      }
+    }
+
+    /*
+     * 退出
+     * */
+    loginOut() {
+      if (sessionStorage.getItem("loginType") === "sys") {//system-web
+        this.entLoginService.logout().subscribe(
           data => {
-            this.$router.push("/system-web");
-            sessionStorage.setItem("loginType","");
+            this.$router.push("/ent-manage");
+            sessionStorage.setItem("loginType", "");
           },
-          ({ msg }) => {
+          ({msg}) => {
             this.$message.error(msg);
           }
         );
-    }else{
-      this.loginService.logout().subscribe(
+      } else {
+        this.loginService.logout().subscribe(
           data => {
-            this.$router.push("/");
-            sessionStorage.setItem("loginType","");
+            this.$router.push("/sys-manage")
+            sessionStorage.setItem("loginType", "");
           },
-          ({ msg }) => {
+          ({msg}) => {
             this.$message.error(msg);
           }
         );
+      }
     }
   }
-}
 </script>
 
 <style lang="less" scoped>
-.work-user.component {
-  * {
-    padding: 0 10px;
-    color: white;
+  .work-user.component {
+    * {
+      padding: 0 10px;
+      color: white;
+    }
   }
-}
 </style>

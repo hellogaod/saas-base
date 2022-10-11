@@ -27,7 +27,7 @@
   import Component from "vue-class-component";
   import {Prop, Watch, Emit} from "vue-property-decorator";
   import {NetService} from "~/utils/net.service";
-  import {fileService} from "~/config/server";
+  import {fileService} from "~/server/controller";
   import app from "~/config/app.config";
   import hljs from 'highlight.js';
   import {State} from "vuex-class";
@@ -117,13 +117,13 @@
     }
 
     // 图片上传成功回调   插入到编辑器中
-    uploadSuccess(res,file) {
+    uploadSuccess(res, file) {
       this.fullscreenLoading = false;
       let vm = this;
       let quill = (this.$refs.myTextEditor as any).quill;
       // console.log("上传成功回调地址：" + JSON.stringify(res));
 
-      if (res != undefined && res.responseBody != undefined &&  res.responseBody.fileList.length > 0 && res.responseBody.fileList[0].Name) {  // 将文件上传后的URL地址插入到编辑器文本中
+      if (res != undefined && res.responseBody != undefined && res.responseBody.fileList.length > 0 && res.responseBody.fileList[0].Name) {  // 将文件上传后的URL地址插入到编辑器文本中
         let value = res.responseBody.fileList[0].Name;
         // 获取光标所在位置
         let selection = quill.getSelection(true).index;
