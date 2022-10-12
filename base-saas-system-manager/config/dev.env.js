@@ -1,19 +1,8 @@
-'use strict'
-const merge = require('webpack-merge')
-const devEnv = require('../environment/dev.env')
-
-let targetServer = process.env.server
-let tempEnv
-
-// 是否使用临时地址
-if (targetServer) {
-  tempEnv = {
-    URL: {
-      SERVER: JSON.stringify("http://" + targetServer)
-    }
-  }
-}
-
-module.exports = merge({
+// 首先引入的是webpack的merge插件，该插件是用来合并对象，也就是配置文件用的，相同的选项会被后者覆盖，至于这里为什么多次一举，可能另有他图吧
+var merge = require('webpack-merge')
+// 导入prod.env.js配置文件
+var prodEnv = require('./prod.env')
+// 将两个配置对象合并，最终结果是 NODE_ENV: '"development"'
+module.exports = merge(prodEnv, {
   NODE_ENV: '"development"'
-}, devEnv, tempEnv)
+})

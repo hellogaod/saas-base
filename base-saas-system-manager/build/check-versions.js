@@ -1,13 +1,21 @@
+//版本检查，npm 等
+
 'use strict'
+// chalk 插件，用来在命令行中显示彩色文字
 const chalk = require('chalk')
+// semver 插件，是用来判断特定的版本号
 const semver = require('semver')
+// 导入 package.json 文件，要使用里面的 engines
+// 要注意 require 是直接可以导入 json 文件的，并且 requrie 返回的就是 json 对象
 const packageConfig = require('../package.json')
+// shelljs 插件，作用是用来执行 Unix 系统命令
 const shell = require('shelljs')
 
 function exec (cmd) {
   return require('child_process').execSync(cmd).toString().trim()
 }
 
+// 检查 node 版本信息
 const versionRequirements = [
   {
     name: 'node',
@@ -16,6 +24,7 @@ const versionRequirements = [
   }
 ]
 
+// 检查 npm 版本信息
 if (shell.which('npm')) {
   versionRequirements.push({
     name: 'npm',
@@ -24,6 +33,7 @@ if (shell.which('npm')) {
   })
 }
 
+// 输出提示
 module.exports = function () {
   const warnings = []
 

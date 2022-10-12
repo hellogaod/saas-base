@@ -8,9 +8,7 @@
                   @change="onEditorChange($event)"
                   @blur="onEditorBlur($event)" @focus="onEditorFocus($event)">
     </quill-editor>
-    <!-- <div class="quill-code">
-      <code class="hljs xml" v-html="contentCode"></code>
-    </div> -->
+
     <!-- 文件上传input 将它隐藏-->
     <el-upload class="upload-demo" :action="uploadUrl" :before-upload='beforeUpload' :data="uploadData"
                :on-success='uploadSuccess' :headers="headers"
@@ -28,7 +26,7 @@
   import {Prop, Watch, Emit} from "vue-property-decorator";
   import {NetService} from "~/utils/net.service";
   import {fileService} from "~/server/controller";
-  import app from "~/config/app.config";
+  import AppConfig from "~/config/app.config";
   import hljs from 'highlight.js';
   import {State} from "vuex-class";
 
@@ -85,13 +83,10 @@
       return (this.$refs.myTextEditor as any).quill
     }
 
-    get contentCode() {
-      return hljs.highlightAuto(this.content).value
-    }
 
     get uploadUrl() {
       return [
-        app.url.server,
+        AppConfig.url.server,
         NetService.generateRequestUrl(
           fileService.fileUploadController.upload
         )

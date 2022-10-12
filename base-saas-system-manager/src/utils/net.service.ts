@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Qs from 'qs'
-import app from '~/config/app.config'
+import AppConfig from '~/config/app.config'
 import store from '~/store'
 import {Observable} from "rxjs";
 import {StorageUtil} from '~/utils/storage.util'
@@ -22,8 +22,8 @@ export class NetService {
 
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: app.url.server,
-      timeout: app.timeout,
+      baseURL: AppConfig.url.server,
+      timeout: AppConfig.timeout,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
