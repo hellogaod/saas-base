@@ -1,8 +1,9 @@
 {
+
   "name": "base-saas-system-manager",
   "version": "1.0.0",
   "description": "saas基础版",
-  "author": "gaoqiang <1105107264@qq.com>",
+  "author": "gq <1105107264@qq.com>",
   "private": true,
   "scripts": {
     "dev": "cross-env ENV=dev webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

@@ -1,3 +1,5 @@
+#基于该Dockerfile构建vue应用镜像
+
 FROM zct1989/nginx-node:latest
 
 COPY . /usr/local/code/
