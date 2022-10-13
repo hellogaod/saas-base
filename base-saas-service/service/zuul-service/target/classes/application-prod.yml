@@ -1,0 +1,16 @@
+spring:
+
+  profiles:
+    active: prod
+
+  redis:
+    database: 5
+    host: 192.168.0.1
+    port: 6379 #端口
+    password: xxx
+    timeout: 30000 # 连接超时时间（毫秒）
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.1:8848

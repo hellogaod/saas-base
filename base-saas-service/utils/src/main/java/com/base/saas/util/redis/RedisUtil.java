@@ -69,7 +69,7 @@ public class RedisUtil {
 
 
     /**
-     * 指定缓存失效时间
+     * 指定缓存失效时间:相当于两个请求之间的间隙时间
      *
      * @param key  键
      * @param time 时间(秒)

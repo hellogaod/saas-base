@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="system-web" />
         <module name="manager" />
-        <module name="zuul" />
+        <module name="zuul-service" />
         <module name="common" />
         <module name="utils" />
       </profile>
@@ -21,7 +21,7 @@
       <module name="manager" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\manager/lib" />
       <module name="system-web" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\system-web/lib" />
       <module name="utils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\utils/lib" />
-      <module name="zuul" options="" />
+      <module name="zuul-service" options="" />
     </option>
   </component>
 </project>

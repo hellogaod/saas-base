@@ -8,4 +8,7 @@ public class ServerConstans {
     public static final String SYSTEM_WEB = API_PRE + "system-web";
     public static final String ZUUL = API_PRE + "zuul-gateway";
     public static final String SCHEDULER = API_PRE + "scheduler-service";
+
+    //上面的都要删除
+    public static final String MANAGE = API_PRE + "manage";
 }

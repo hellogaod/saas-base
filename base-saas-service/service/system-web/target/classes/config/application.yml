@@ -2,7 +2,7 @@ spring:
     application:
         name: saas-system-web
     profiles:
-#        active: @spring.profiles.active@
+#        active: dev
       active: dev
     jackson:
         serialization.write_dates_as_timestamps: true

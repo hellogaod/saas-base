@@ -6,7 +6,7 @@
     <file url="file://$PROJECT_DIR$/service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/manager" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/system-web" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/service/zuul" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/zuul-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils" charset="UTF-8" />
   </component>
 </project>

@@ -1,0 +1,16 @@
+spring:
+
+  profiles:
+    active: dev
+
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379 #端口
+    password: GAO2651qiang
+    timeout: 30000 # 连接超时时间（毫秒）
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

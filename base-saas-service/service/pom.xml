@@ -12,9 +12,10 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>zuul-service</module>
+
         <module>system-web</module>
         <module>manager</module>
-        <module>zuul</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
