@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="system-web" />
-        <module name="manager" />
-        <module name="zuul-service" />
         <module name="common" />
+        <module name="zuul-service" />
+        <module name="manager" />
         <module name="utils" />
       </profile>
     </annotationProcessing>

@@ -5,7 +5,10 @@ spring:
   application:
     name: saas-zuul-gateway
   profiles:
-    active: @spring.profiles.active@
+    active: dev
+
+  redis:
+    expireTime: 3600
 
 sessionTimeout: 600
 
