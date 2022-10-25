@@ -7,18 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="system-web" />
+        <module name="manage-service" />
         <module name="common" />
         <module name="zuul-service" />
-        <module name="manager" />
+        <module name="common-service" />
         <module name="utils" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiFilterUtils" target="1.8" />
+      <module name="system-web" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="apiFilterUtils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\api-filter-utils/lib" />
       <module name="common" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\common/lib" />
-      <module name="manager" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\manager/lib" />
+      <module name="common-service" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\common-service/lib" />
+      <module name="manage-service" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\manager-service/lib" />
       <module name="system-web" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\system-web/lib" />
       <module name="utils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\utils/lib" />
       <module name="zuul-service" options="" />

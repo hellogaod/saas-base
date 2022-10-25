@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.EntModuleMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntModule">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+        <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="Integer"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id,module_id, module_name, create_user, create_time, update_user, update_time, remark, status,company_code
+  </sql>
+
+    <select id="getModuleByCompanyCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        e.id,
+        e.module_id,
+        s.module_name,
+        e.create_user,
+        e.create_time,
+        e.update_user,
+        e.update_time,
+        e.remark,
+        s.status,
+        e.company_code
+        from ent_module e ,sys_module s
+        where
+        e.module_id = s.module_id
+        and e.company_code = #{companyCode}
+    </select>
+
+
+    <select id="getModuleIdsByCompanyCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT module_id
+        from ent_module
+        where  e.company_code = #{companyCode}
+    </select>
+
+
+    <insert id="addEntModuleList" parameterType="list">
+        insert into ent_module (
+        id,
+        create_user,
+        create_time,
+        update_user,
+        update_time,
+        company_code,
+        module_id,
+        )
+        VALUES
+        <foreach collection="list" item="detail" separator=",">
+            (#{detail.id,jdbcType=VARCHAR},
+            #{detail.createUser,jdbcType=VARCHAR},
+            #{detail.createTime,jdbcType=TIMESTAMP},
+            #{detail.updateUser,jdbcType=VARCHAR},
+            #{detail.updateTime,jdbcType=TIMESTAMP},
+            #{detail.companyCode,jdbcType=VARCHAR},
+            #{detail.moduleId,jdbcType=VARCHAR},
+            )
+        </foreach>
+    </insert>
+
+    <update id="deleteEntModuleByCompanyCode" parameterType="string">
+    delete from ent_module where company_code = #{companyCode}
+  </update>
+
+    <select id="selectEntModleInfoByModuleId" resultType="String" parameterType="String">
+    select t.company_code companyCode from ent_module t where t.module_id = #{moduleId}
+  </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ent_module
+        where sys_code = #{sysCode,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ent_module
+    where sys_code = #{sysCode,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    insert into ent_module (sys_code, sys_name, create_user, 
+      create_time, update_user, update_time, 
+      remark, status, company_code, sys_module_code, sequence
+      )
+    values (#{sysCode,jdbcType=VARCHAR}, #{sysName,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{companyCode,jdbcType=VARCHAR},
+      #{sysModuleCode,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+        insert into ent_module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysCode != null">
+                sys_code,
+            </if>
+            <if test="sysName != null">
+                sys_name,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="companyCode != null">
+                company_code,
+            </if>
+            <if test="sysModuleCode != null">
+                sys_module_code,
+            </if>
+            <if test="sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysCode != null">
+                #{sysCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sysName != null">
+                #{sysName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="companyCode != null">
+                #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sysModuleCode != null">
+                #{sysModuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+        update ent_module
+        <set>
+            <if test="sysName != null">
+                sys_name = #{sysName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="companyCode != null">
+                company_code = #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sysModuleCode != null">
+                sys_module_code = #{sysModuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
+            </if>
+        </set>
+        where sys_code = #{sysCode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    update ent_module
+    set sys_name = #{sysName,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      sys_module_code = #{sysModuleCode,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER}
+    where sys_code = #{sysCode,jdbcType=VARCHAR}
+  </update>
+
+
+    <!-- 获取企业模块信息 根据企业code-->
+    <select id="getCompanyModule" parameterType="string" resultType="map">
+        select
+          sys_code as sysCode, sys_name as sysName, status,company_code as companyCode
+        from ent_module
+        where company_code = #{companyCode,jdbcType=VARCHAR} and status = 1 ORDER BY sequence
+    </select>
+
+    <!--查询企业所有菜单id -->
+    <select id="getAllBtnIds" parameterType="map" resultType="String">
+       select replace(m.sys_menu_code,'-','') as id from ent_menu m
+       where m.company_code=#{companyCode}and m.sys_code=#{sysCode} and m.status=1 and m.menu_type=2
+    </select>
+</mapper>

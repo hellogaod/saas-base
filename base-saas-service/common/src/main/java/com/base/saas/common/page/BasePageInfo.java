@@ -1,7 +1,7 @@
 package com.base.saas.common.page;
 
 
-import com.base.saas.common.constant.AppConstant;
+import com.base.saas.common.AppConstant;
 
 import java.io.Serializable;
 

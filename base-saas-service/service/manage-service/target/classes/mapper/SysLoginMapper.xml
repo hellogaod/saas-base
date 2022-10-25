@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.saas.manager.mapper.SysLoginMapper">
+    <select id="getUser" resultType="map" parameterType="string">
+        select u.user_id,u.org_id,u.account,u.password,u.real_name,u.status,u.error_count
+        from sys_user u
+        where account=#{account}
+    </select>
+
+    <update id="lockUser">
+        update sys_user
+        <set>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            error_count=error_count+1,
+            <if test="status != null">
+                lock_time = now(),
+            </if>
+        </set>
+        where user_id=#{userId} and  <![CDATA[ status<>2 ]]>
+    </update>
+
+    <update id="clearErrCount">
+        update sys_user set status =1, error_count=0, lock_time = NULL
+        where user_id=#{userId}
+    </update>
+
+    <update id="updatePwd">
+        update sys_user set password =#{newPwd}
+        where user_id=#{userId}
+    </update>
+
+    <select id="getPermissions" parameterType="java.lang.String" resultType="map">
+        SELECT m.id,m.icon,m.menu_name,m.menu_type,m.parent_id,IFNULL(m.url,'') url,IFNULL(dp.org_path,'') org_path,IFNULL(dp.is_desensite,0) is_desensite
+        from sys_user u
+        INNER JOIN ent_role r on r.role_id=u.role_id
+        INNER JOIN ent_role_menu rm on u.role_id=rm.role_id
+        INNER JOIN sys_menu m on m.id=rm.menu_id
+        LEFT JOIN ent_user_data_permission dp on dp.menu_id=m.id and u.user_id=dp.user_id
+        where u.user_id=#{userId} and r.`status`=1 and m.`status`=1
+        ORDER BY m.sequence ASC
+    </select>
+
+    <select id="getUserRoleInfo" parameterType="java.lang.String" resultType="Map">
+      select   t.role_id roleId,t.role_name roleName, t.status from ent_role t where t.role_id = (select f.role_id from sys_user f where f.user_id=#{userId})
+    </select>
+
+    <update id="updateLoginInfo" parameterType="java.lang.String">
+        update sys_user set latest_ip=#{remoteAddr},latest_time= now()  where user_id=#{userId}
+    </update>
+</mapper>

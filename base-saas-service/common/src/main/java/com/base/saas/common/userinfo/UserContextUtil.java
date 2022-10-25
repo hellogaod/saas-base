@@ -1,6 +1,6 @@
 package com.base.saas.common.userinfo;
 
-import com.base.saas.common.constant.AppConstant;
+import com.base.saas.common.AppConstant;
 import com.base.saas.util.StringUtil;
 import com.base.saas.util.redis.RedisUtil;
 
@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class UserContextUtil {
-
 
 
     private static ThreadLocal<HashMap<String, Object>> threadLocal = new ThreadLocal<HashMap<String, Object>>() {
@@ -47,27 +46,31 @@ public abstract class UserContextUtil {
     }
 
     public static UserInfo getUserInfo() {
-        return RedisUtil.get(AppConstant.APP_USER_INFO+getUserTokenId());
-//        return getAttribute(AppConstant.APP_USER_INFO);
+        return RedisUtil.get(AppConstant.APP_USER_INFO + getUserTokenId());
+    }
+
+    public static UserInfo getUserInfo(String tokenId) {
+        return RedisUtil.get(AppConstant.APP_USER_INFO + tokenId);
     }
 
     public static UserInfo getUserInfoByTokenId(String tokenId) {
-        return RedisUtil.get(AppConstant.APP_USER_INFO+tokenId);
+        return RedisUtil.get(AppConstant.APP_USER_INFO + tokenId);
     }
 
     public static void setUserInfo(UserInfo userInfo) {
-        RedisUtil.set(AppConstant.APP_USER_INFO+getUserTokenId(),userInfo);
+        RedisUtil.set(AppConstant.APP_USER_INFO + getUserTokenId(), userInfo);
     }
-    public static void setUserInfo(String tokenId,UserInfo userInfo) {
-        RedisUtil.set(AppConstant.APP_USER_INFO+tokenId,userInfo);
+
+    public static void setUserInfo(String tokenId, UserInfo userInfo) {
+        RedisUtil.set(AppConstant.APP_USER_INFO + tokenId, userInfo);
     }
 
 
-    public static String getUserTokenId(){
+    public static String getUserTokenId() {
         String accessToken = getHttpServletRequest().getHeader("X-UserToken");
-        if (accessToken!=null&& StringUtil.isNotEmpty(accessToken)){
+        if (accessToken != null && StringUtil.isNotEmpty(accessToken)) {
             return accessToken;
-        }else{
+        } else {
             return getSession().getId();
         }
     }
@@ -91,19 +94,20 @@ public abstract class UserContextUtil {
             return "";
         }
     }
+
     /**
-    *@Description 获取system-web用户数据权限使用
-    *@Param
-    *@return
-    *@Author coder_bao
-    *@Date
-    **/
+     * @return
+     * @Description 获取system-web用户数据权限使用
+     * @Param
+     * @Author coder_bao
+     * @Date
+     **/
     public static String getDataPermissions(String serverName) {
         String uri = getHttpServletRequest().getRequestURI();
-        if (uri!=null&&!"".equals(uri)&&uri.contains("api/")){
-            uri = uri.replace("api/","");
+        if (uri != null && !"".equals(uri) && uri.contains("api/")) {
+            uri = uri.replace("api/", "");
         }
-        Map<String, String> map = getUserInfo().getDataPermission().get("/"+serverName+""+uri);
+        Map<String, String> map = getUserInfo().getDataPermission().get("/" + serverName + "" + uri);
         if (map != null) {
             return map.get("org_path");
         } else {

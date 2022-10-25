@@ -1,0 +1,20 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: saas-common-service
+  profiles:
+    active: dev
+
+  # 热部署
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: false # we use gulp + BrowserSync for livereload
+
+
+
+
+

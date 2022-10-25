@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntOtherConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="other_id" property="otherId" jdbcType="VARCHAR"/>
+        <result column="other_name" property="otherName" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_code, other_id, other_name, create_user, create_time, update_user, update_time
+  </sql>
+
+    <select id="findList" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ent_other_config where 1=1
+        <if test="null!=companyCode and ''!=companyCode">
+            and company_code = #{companyCode}
+        </if>
+        <if test="null!=otherId and ''!=otherId">
+            and other_id = #{otherId}
+        </if>
+    </select>
+
+    <select id="findOtherIds" parameterType="String" resultType="string">
+        select
+        other_id
+        from ent_other_config where 1=1
+        <if test="null!=companyCode and ''!=companyCode">
+            and company_code = #{companyCode}
+        </if>
+
+    </select>
+
+    <update id="deleteByCompanyCode" parameterType="String">
+    delete from ent_other_config where company_code = #{companyCode}
+  </update>
+
+
+    <insert id="batchSave" parameterType="list">
+        insert into ent_other_config(
+        id,
+        company_code,
+        other_id,
+        create_time,
+        create_user,
+        update_user,
+        update_time
+        )
+        VALUES
+        <foreach collection="list" item="detail" separator=",">
+            (#{detail.id},
+            #{detail.companyCode},
+            #{detail.otherId},
+            #{detail.createTime},
+            #{detail.createUser},
+            #{detail.updateUser},
+            #{detail.updateTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

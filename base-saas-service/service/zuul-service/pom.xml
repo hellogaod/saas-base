@@ -137,7 +137,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.base.saas.BaseZuulServerApplication</mainClass>
+                    <mainClass>com.base.saas.gateway.BaseZuulServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

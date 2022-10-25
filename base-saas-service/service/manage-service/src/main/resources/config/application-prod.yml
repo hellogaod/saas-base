@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: prod
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://172.19.28.133:3306/pangolin_business?useUnicode=true&characterEncoding=utf8&useSSL=false
+    name:
+    username: cuidaren
+    password: CuiDaRen!23456
+    hikari:
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+      maximumPoolSize: 50
+
+  cache:
+    jcache:
+      config: ehcache.xml
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379
+    expireTime: 3600
+    password: GAO2651qiang
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.102.135:8848
+
+
+threadPool:
+  corePoolSize: 10
+  maxPoolSize: 200
+  keepAliveSeconds: 60
+  queueCapacity: 500
+  allowCoreThreadTimeout: false
+  threadNamePrefix: pangolin-

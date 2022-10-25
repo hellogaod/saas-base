@@ -14,8 +14,8 @@
     <modules>
         <module>zuul-service</module>
 
-        <module>system-web</module>
-        <module>manager</module>
+        <module>manage-service</module>
+        <module>common-service</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
