@@ -1,7 +1,7 @@
 package com.base.saas.manage.controller.system;
 
 import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.SysEnterprise;
+import com.base.saas.manage.model.system.SysEnterprise;
 import com.base.saas.common.language.LocaleMessage;
 import com.base.saas.common.logger.LoggerCommon;
 import com.base.saas.manage.model.system.SysOtherConfig;

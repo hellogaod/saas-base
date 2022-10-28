@@ -12,11 +12,16 @@ public class EntUser implements Serializable {
     //企业编号
     private String companyCode;
 
+    private String companyName;//所在企业名称
+
+    private int companyStatus;//所在企业状态
     //组织编号
     private String orgId;
 
+    private int orgStatus;//组织架构状态
+
     //员工编号
-    private String employeeId;
+    private String employeeNo;
 
     //登录账号
     private String account;
@@ -48,6 +53,10 @@ public class EntUser implements Serializable {
     //角色id
     private String roleId;
 
+    private String roleName;//角色名称
+
+    private int roleStatus;//角色状态
+
     //锁定时间
     private Date lockTime;
 
@@ -71,6 +80,46 @@ public class EntUser implements Serializable {
 
     //修改时间
     private Date updateTime;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public int getCompanyStatus() {
+        return companyStatus;
+    }
+
+    public void setCompanyStatus(int companyStatus) {
+        this.companyStatus = companyStatus;
+    }
+
+    public int getOrgStatus() {
+        return orgStatus;
+    }
+
+    public void setOrgStatus(int orgStatus) {
+        this.orgStatus = orgStatus;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public int getRoleStatus() {
+        return roleStatus;
+    }
+
+    public void setRoleStatus(int roleStatus) {
+        this.roleStatus = roleStatus;
+    }
 
     public String getUserId() {
         return userId;
@@ -96,12 +145,12 @@ public class EntUser implements Serializable {
         this.orgId = orgId == null ? null : orgId.trim();
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getEmployeeNo() {
+        return employeeNo;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId == null ? null : employeeId.trim();
+    public void setEmployeeNo(String employeeNo) {
+        this.employeeNo = employeeNo;
     }
 
     public String getAccount() {

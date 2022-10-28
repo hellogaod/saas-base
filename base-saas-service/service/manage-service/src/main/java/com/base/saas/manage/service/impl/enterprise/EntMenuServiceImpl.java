@@ -1,10 +1,9 @@
 package com.base.saas.manage.service.impl.enterprise;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import com.base.saas.common.userinfo.UserContextUtil;
 import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.EntMenuMapper;
-import com.base.saas.manage.mapper.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
 import com.base.saas.manage.model.ReturnMap;
 import com.base.saas.manage.model.enterprise.EntMenu;
@@ -13,7 +12,6 @@ import com.base.saas.manage.model.system.SysMenu;
 import com.base.saas.manage.service.enterprise.EntMenuService;
 import com.base.saas.common.exception.TransactionRollBackException;
 import com.base.saas.util.CreateIDUtil;
-import com.base.saas.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ import java.util.*;
  * Title :
  * Description : @企业菜单@
  * Create on : 2018年06月08日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:chengrui
@@ -210,7 +208,7 @@ public class EntMenuServiceImpl implements EntMenuService {
             }
         });
         //获取企业模块,根据company_code查询ent_module
-        moduleList = entModuleMapper.getCompanyModule(companyCode);
+        moduleList = entModuleMapper.getModuleByCompanyCode(companyCode);
         returnMap.put("menuList", menuList);
         returnMap.put("moduleList", moduleList);
         returnMap.put("permissionList", permissionList);

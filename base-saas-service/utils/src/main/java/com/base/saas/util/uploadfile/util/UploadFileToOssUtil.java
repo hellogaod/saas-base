@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @Author: wangtao
+ * @Author:
  * @Date: 2018/05/15 09:31
  * @Description: 文件上传到oss
  */
@@ -281,7 +281,7 @@ public class UploadFileToOssUtil {
      * app上传图片至OSS
      */
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 19:04
      * @Params: srcMap 图片base64
      * @Params: path 项目根路径
@@ -377,7 +377,7 @@ public class UploadFileToOssUtil {
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 10:51
      * @Params: srcMap(图片的map)
      * @Params: imgPath(保存图片路径)
@@ -479,7 +479,7 @@ public class UploadFileToOssUtil {
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 10:51
      * @Params: srcMap(图片的map)
      * @Params: imgPath(保存图片路径)
@@ -531,7 +531,7 @@ public class UploadFileToOssUtil {
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 17:18
      * @Params: file 上传文件
      * @Params: sign 签名

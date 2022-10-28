@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntLoginMapper">
+
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntUser">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+
+        <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
+        <result column="employee_no" property="employeeNo" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="SMALLINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="lock_time" property="lockTime" jdbcType="TIMESTAMP"/>
+        <result column="latest_time" property="latestTime" jdbcType="TIMESTAMP"/>
+        <result column="latest_ip" property="latestIp" jdbcType="VARCHAR"/>
+        <result column="error_count" property="errorCount" jdbcType="Integer"/>
+
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="company_status" property="companyStatus" jdbcType="Integer"/>
+        <result column="org_status" property="orgStatus" jdbcType="Integer"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_status" property="roleStatus" jdbcType="Integer"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+      user_id,
+      company_code,
+      org_id,
+      employee_no,
+      account,
+      password,
+      real_name,
+      sex,
+      email,
+      tel,
+      qq,
+      role_id,
+      lock_time,
+      latest_time,
+      latest_ip,
+      error_count,
+      status,
+      remark,
+      create_user,
+      create_time,
+      update_user,
+      update_time
+     </sql>
+
+    <resultMap id="PermissionResultMap" type="com.base.saas.manage.model.enterprise.EntMenu">
+        <result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="is_desensite" property="isDesensite" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="getUserPermissions" parameterType="string" resultMap="PermissionResultMap">
+        SELECT
+            m.module_id,
+            m.menu_id,
+            m.icon,
+            m.menu_name,
+            m.parent_id,
+            IFNULL(m.url,'') url,
+            IFNULL(dp.is_desensite,0) is_desensite
+        from ent_user u
+        INNER JOIN ent_role r on r.role_id=u.role_id
+        INNER JOIN ent_role_menu rm on u.role_id=rm.role_id
+        INNER JOIN sys_menu m on m.menu_id=rm.menu_id
+        LEFT JOIN ent_user_menu_desensite dp on dp.menu_id=m.module_id and u.user_id=dp.user_id
+        where u.user_id=#{userId} and r.`status`=1 and m.`status`=1 AND u.company_code = #{companyCode}
+        and m.module_id = #{moduleId}
+        ORDER BY m.sequence ASC
+    </select>
+
+    <select id="getEntUser" resultMap="BaseResultMap" parameterType="map">
+        select
+        u.user_id,
+        u.org_id,
+        u.account,
+        u.password,
+        u.real_name,
+        u.status,
+        u.error_count,
+        u.company_code,
+        e.company_name,
+        o.`status` org_status,
+        u.role_id,
+        r.role_name,
+        r.`status` role_status,
+        e.`status` company_status
+        from ent_user u
+        INNER JOIN ent_organization o on u.org_id=o.org_id
+        INNER JOIN sys_enterprise e on e.company_code=u.company_code
+        LEFT JOIN ent_role r on r.role_id=u.role_id
+        where u.account=#{account} AND u.company_code=#{companyCode}
+    </select>
+
+    <update id="updateEntUserIpInfo" parameterType="map">
+        update ent_user set latest_ip=#{remoteAddr},latest_time= now()  where user_id=#{userId} AND company_code=#{companyCode}
+    </update>
+
+    <update id="lockComUser">
+        update ent_user
+        <set>
+            <if test="status != -1">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            error_count=error_count+1,
+            <if test="status == 2">
+                lock_time = now(),
+            </if>
+        </set>
+        where user_id=#{userId} and  <![CDATA[ status<>2 ]]>
+    </update>
+
+    <update id="clearEntUserErrCount">
+        update ent_user set status =1, error_count=0, lock_time = NULL
+        where user_id=#{userId} AND company_code = #{companyCode}
+    </update>
+
+    <update id="updateEntUserPwd" parameterType="map">
+        update ent_user set password =#{newPwd}
+        where user_id=#{userId} AND company_code=#{companyCode}
+    </update>
+
+
+</mapper>

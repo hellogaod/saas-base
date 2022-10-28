@@ -6,7 +6,6 @@ import java.io.StringWriter;
 /**
  * @ClassName ExceptionStackMessage
  * @Description 收集异常堆栈信息
- * @Author coder_bao
  * @Date 2018/9/3 13:44
  */
 public class ExceptionStackMessage {

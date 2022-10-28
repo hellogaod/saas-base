@@ -2,10 +2,9 @@ package com.base.saas.manage.service.system;
 
 
 import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.SysEnterprise;
+import com.base.saas.manage.model.system.SysEnterprise;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Title :

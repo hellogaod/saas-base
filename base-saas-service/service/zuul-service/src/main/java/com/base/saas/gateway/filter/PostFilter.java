@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.base.saas.common.constant.ServerConstans;
-import com.base.saas.common.logger.SysWebLog;
+import com.base.saas.common.logger.EntLog;
 import com.base.saas.common.response.ResponseInfo;
 import com.base.saas.common.userinfo.UserContextUtil;
 import com.base.saas.common.userinfo.UserInfo;
@@ -76,7 +76,7 @@ public class PostFilter extends ZuulFilter {
         UserContextUtil.setHttpServletResponse(response);
 
         //处理日志信息
-        SysWebLog sysWebLog = new SysWebLog();
+        EntLog sysWebLog = new EntLog();
         try {
             //1.处理具体请求结果返回值
             // 获取返回值内容，加以处理
@@ -99,7 +99,7 @@ public class PostFilter extends ZuulFilter {
                     //调用新增日志服务
                     HttpHeaders requestHeaders = new HttpHeaders();
                     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-                    HttpEntity<SysWebLog> requestEntity = new HttpEntity<SysWebLog>(sysWebLog, requestHeaders);
+                    HttpEntity<EntLog> requestEntity = new HttpEntity<EntLog>(sysWebLog, requestHeaders);
                     ResponseEntity<ResponseInfo> entity = restTemplate.postForEntity("http://" + ServerConstans.MANAGER + "/api/weblog/addweblog", requestEntity, ResponseInfo.class);
                     if (jsonObject.containsKey("responseBody")) {
                         Object obj = jsonObject.get("responseBody");
@@ -129,7 +129,7 @@ public class PostFilter extends ZuulFilter {
         return null;
     }
 
-    private SysWebLog createLogAddInitData(RequestContext context, SysWebLog sysWebLog, JSONObject jsonObject) throws Exception {
+    private EntLog createLogAddInitData(RequestContext context, EntLog sysWebLog, JSONObject jsonObject) throws Exception {
         HttpServletRequest request = context.getRequest();
         if (StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/syslogin/syslogin")
                 || StringUtils.contains(request.getRequestURL().toString(), "api/login/doLogin")) {
@@ -201,8 +201,6 @@ public class PostFilter extends ZuulFilter {
     /**
      * @return
      * @Description 判断请求来源客户端类型
-     * @Param
-     * @Author coder_bao
      * @Date
      **/
     private String getRequestSource(HttpServletRequest request) {

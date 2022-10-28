@@ -10,11 +10,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @Author: wangtao
- * @Date: 2018/05/14 17:42
- * @Description: 字符串工具类
- */
+
 public class StringUtil extends org.apache.commons.lang3.StringUtils{
     private static final char[] newLine = new char[2];
     static {
@@ -38,7 +34,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     private StringUtil() {}
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 17:52
      * @Params: str（需要处理的字符串）
      * @Description: 如果是null字符串, 则返回""字符串
@@ -70,7 +65,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 17:54
      * @Params: obj(需要处理的对象)
      * @Description: 如果是null对象, 则返回""字符串
@@ -86,7 +80,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 17:57
      * @Params: original(源字符串)，oldString（需要替换的字符串），newString（新字符串）
      * @Description: 把源字符串中的字符串（oldString）替换成新串（newString）
@@ -97,7 +90,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 17:57
      * @Params: original(源字符串)，oldString（需要替换的字符串），newString（新字符串），counts（替换次数）
      * @Description: 把源字符串中的字符串（oldString）替换成新串（newString） 多处替换
@@ -132,7 +124,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 18:03
      * @Params: str(需要替换的字符串)
      * @Description: 将一个字符串中带有的HTML特殊字符转换为HTML的转义字符。 例如： & --> "amp;" > --> "gt;"
@@ -143,7 +134,6 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
      * @Date: 2018/05/14 18:04
      * @Params: str(需要替换的字符串)
      * @Description: 将一个字符串中带有的JS特殊字符转换为JS的转义字符。 例如： \ --> "\\" ' --> "\'" " --> "\""
@@ -154,7 +144,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:04
      * @Params: str(需要替换的字符串)
      * @Description: 将一个字符串中带有的SQL特殊字符转换为转义字符。 例如： ' --> "''"
@@ -165,7 +155,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:05
      * @Params: str(需要替换的字符串)，maxByteLength（截取长度），more（代替字符串）
      * @Description: 获得截取到指定字节长度后的字符串，多出部分用指定字符串代替。
@@ -198,7 +188,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:06
      * @Params: sourceString（源字符串），delim（分隔符）
      * @Description: 把由delim分割的字符串分裂并形成字符串数组。
@@ -216,7 +206,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:08
      * @Params: number(替换的数字)
      * @Description: 整数到字节数组的转换
@@ -233,7 +223,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:09
      * @Params: b(替换的字节数组)
      * @Description: 字节数组到整数的转换
@@ -262,7 +252,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:10
      * @Params: ch（替换的字符）
      * @Description: 字符到字节转换
@@ -279,7 +269,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:10
      * @Params: b(替换的字节数组)
      * @Description: 字节到字符转换
@@ -305,7 +295,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:10
      * @Params: d(替换的double)
      * @Description: double到字节转换
@@ -323,7 +313,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:11
      * @Params: b(替换的字节数组)
      * @Description: 字节到double转换
@@ -416,7 +406,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:12
      * @Params: s（base64）
      * @Description: base64转字节数组
@@ -457,7 +447,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:12
      * @Params: abyte0[](字节数组)
      * @Description: 字节数组转base64
@@ -494,7 +484,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:15
      * @Params: str（需处理字符串）
      * @Description: 首字母小写
@@ -509,7 +499,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:15
      * @Params: str（需处理字符串）
      * @Description: 首字母大写
@@ -524,7 +514,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:17
      * @Params: html(需处理的字符串)
      * @Description: 替换掉HTML标签方法
@@ -542,7 +532,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:17
      * @Params: str(目标字符串),length(截取长度)
      * @Description: 缩略字符串（不区分中英文字符）
@@ -572,7 +562,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:17
      * @Params: str(目标字符串),length(截取长度)
      * @Description: 缩略字符串（替换html）
@@ -583,7 +573,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:21
      * @Params: val(需要转型的对象)
      * @Description: 对象转换为Double类型
@@ -601,7 +591,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:21
      * @Params: val(需要转型的对象)
      * @Description: 对象转换为Float类型
@@ -612,7 +602,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:21
      * @Params: val(需要转型的对象)
      * @Description: 对象转换为Long类型
@@ -623,7 +613,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/14 18:21
      * @Params: val(需要转型的对象)
      * @Description: 对象转换为Integer类型
@@ -634,7 +624,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: tel(需加密的手机号)
      * @Description: 加密手机号
@@ -650,7 +640,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: tel(需解密的手机号)
      * @Description: 解密手机号
@@ -666,7 +656,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: customerName(需加密的用户名)
      * @Description: 加密用户名
@@ -682,7 +672,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: customerName(需解密的用户名)
      * @Description: 解密用户名
@@ -698,7 +688,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: idCard(需加密的身份证)
      * @Description: 加密身份证
@@ -714,7 +704,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: idCard(需解密的身份证)
      * @Description: 解密身份证
@@ -730,7 +720,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: card(需加密的银行卡号)
      * @Description: 加密银行卡号
@@ -746,7 +736,7 @@ public class StringUtil extends org.apache.commons.lang3.StringUtils{
     }
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 09:03
      * @Params: card(需解密的银行卡号)
      * @Description: 解密银行卡号

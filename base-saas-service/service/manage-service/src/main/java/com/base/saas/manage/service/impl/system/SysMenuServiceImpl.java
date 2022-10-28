@@ -1,11 +1,9 @@
-package com.base.saas.manage.service.impl.system;/**
- * Created by win7 on 2018/6/11.
- */
+package com.base.saas.manage.service.impl.system;
 
 import com.base.saas.common.userinfo.UserContextUtil;
 import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.EntMenuMapper;
-import com.base.saas.manage.mapper.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
 import com.base.saas.manage.model.ReturnMap;
 import com.base.saas.manage.model.enterprise.EntMenu;

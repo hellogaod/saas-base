@@ -9,9 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="manage-service" />
         <module name="common" />
-        <module name="zuul-service" />
-        <module name="common-service" />
         <module name="utils" />
+        <module name="common-service" />
+        <module name="zuul-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

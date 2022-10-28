@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年05月16日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc

@@ -8,7 +8,6 @@
         <result column="sequence" property="sequence" jdbcType="INTEGER"/>
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
-        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
@@ -21,7 +20,7 @@
         <result column="parent_url" property="parentUrl" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    menu_id, menu_name, url, sequence, icon,  parent_id, parent_name, create_user,
+    menu_id, menu_name, url, sequence, icon,  parent_id,  create_user,
     create_time, update_user, update_time, status,  desensitize_status, module_id, remark
   </sql>
 
@@ -55,9 +54,7 @@
             <if test="parentId != null">
                 parent_id,
             </if>
-            <if test="parentName != null">
-                parent_name,
-            </if>
+
             <if test="createUser != null">
                 create_user,
             </if>
@@ -105,9 +102,7 @@
             <if test="parentId != null">
                 #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="parentName != null">
-                #{parentName,jdbcType=VARCHAR},
-            </if>
+
             <if test="createUser != null">
                 #{createUser,jdbcType=VARCHAR},
             </if>
@@ -156,9 +151,7 @@
             <if test="parentId != null">
                 parent_id = #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="parentName != null">
-                parent_name = #{parentName,jdbcType=VARCHAR},
-            </if>
+
             <if test="createUser != null">
                 create_user = #{createUser,jdbcType=VARCHAR},
             </if>
@@ -216,7 +209,6 @@
         t1.status,
         t1.url,
         t1.icon,
-        t1.parent_name ,
         t1.desensitize_status ,
         t2.status as parent_status,
         t2.url as parent_url

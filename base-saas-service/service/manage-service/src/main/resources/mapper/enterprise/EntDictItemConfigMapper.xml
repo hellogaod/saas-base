@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntDictItemConfigMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="detail_code" property="detailCode" jdbcType="VARCHAR"/>
+        <result column="detail_name" property="detailName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, company_code, item_code, detail_code, detail_name, status, remark, create_user, 
+    create_time, update_user, update_time
+  </sql>
+
+
+    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+        insert into ent_dict_item_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="companyCode != null">
+                company_code,
+            </if>
+            <if test="itemCode != null">
+                item_code,
+            </if>
+            <if test="detailCode != null">
+                detail_code,
+            </if>
+            <if test="detailName != null">
+                detail_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="detailCode != null">
+                #{detailCode,jdbcType=VARCHAR},
+            </if>
+            <if test="detailName != null">
+                #{detailName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+        update ent_dict_item_config
+        <set>
+            <if test="companyCode != null">
+                company_code = #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                item_code = #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="detailCode != null">
+                detail_code = #{detailCode,jdbcType=VARCHAR},
+            </if>
+            <if test="detailName != null">
+                detail_name = #{detailName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findList" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        from ent_dict_item_config
+        where company_code =#{companyCode}
+        <if test="-1 !=status">
+            and status=1
+        </if>
+        <if test="null!=itemCode and ''!=itemCode">
+            and item_code = #{itemCode}
+        </if>
+        <if test="null!=companyCode and ''!=companyCode">
+            and company_code = #{companyCode}
+        </if>
+        <if test="null!=detailCode  and ''!=detailCode">
+            and detail_code = #{detailCode}
+        </if>
+        <if test="null!=detailName and ''!=detailName">
+            and detail_name like CONCAT('%',#{detailName},'%' )
+        </if>
+
+        order by if(isnull(update_time),create_time,update_time) desc
+    </select>
+
+    <select id="findDictConfigById" parameterType="String"
+            resultType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+      SELECT
+       t.id,
+       t.company_code companyCode,
+       t.item_code itemCode,
+       f.item_name itemName,
+       t.detail_code detailCode,
+       t.detail_name detailName,
+       t.status,
+       t.remark,
+       t.create_user createUser,
+       t.create_time createTime,
+       t.update_user updateUser,
+       t.update_time updateTime
+       from ent_dict_item_config t,ent_dict_config f
+       where t.item_code=f.item_code and  t.id = #{id}
+    </select>
+
+    <select id="getDictDetailByItemCodeAndCode" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        from ent_dict_item_config
+        where 1 =1
+        <if test="null!=itemCode and ''!=itemCode">
+            and item_code = #{itemCode}
+        </if>
+        <if test="null!=companyCode and ''!=companyCode">
+            and company_code = #{companyCode}
+        </if>
+        <if test="null!=detailCode  and ''!=detailCode">
+            and detail_code = #{detailCode}
+        </if>
+    </select>
+
+</mapper>

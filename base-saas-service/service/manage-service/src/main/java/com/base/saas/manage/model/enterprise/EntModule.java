@@ -2,6 +2,7 @@ package com.base.saas.manage.model.enterprise;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class EntModule implements Serializable {
     private static final long serialVersionUID = -4231663552157478115L;
@@ -34,6 +35,17 @@ public class EntModule implements Serializable {
 
     //状态
     private int status;
+
+    //当前模块下配置的菜单信息
+    private List<EntMenu> menuList;
+
+    public List<EntMenu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<EntMenu> menuList) {
+        this.menuList = menuList;
+    }
 
     public String getId() {
         return id;

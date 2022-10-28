@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 /**
  * @ClassName LoggerCommon
  * @Description TODO
- * @Author coder_bao
- * @Date 2018/8/30 10:15
  */
 public class LoggerCommon {
     private static Logger logger ;

@@ -16,12 +16,12 @@ import java.util.*;
 /**
  * @ClassName GenerateJsLocale
  * @Description 加载系统支持的多语言资源文件
- * @Author coder_bao
- * @Date 2018/8/31 13:28
  */
 @Component
 public class GenerateJsLocale implements ServletContextListener {
+
     private Logger logger = LoggerFactory.getLogger(GenerateJsLocale.class);
+
     @Value("${localelist}")
     private String localelist;
 

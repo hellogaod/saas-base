@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.saas.manage.mapper.EntModuleMapper">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntModuleMapper">
     <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntModule">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
@@ -220,14 +220,6 @@
     where sys_code = #{sysCode,jdbcType=VARCHAR}
   </update>
 
-
-    <!-- 获取企业模块信息 根据企业code-->
-    <select id="getCompanyModule" parameterType="string" resultType="map">
-        select
-          sys_code as sysCode, sys_name as sysName, status,company_code as companyCode
-        from ent_module
-        where company_code = #{companyCode,jdbcType=VARCHAR} and status = 1 ORDER BY sequence
-    </select>
 
     <!--查询企业所有菜单id -->
     <select id="getAllBtnIds" parameterType="map" resultType="String">

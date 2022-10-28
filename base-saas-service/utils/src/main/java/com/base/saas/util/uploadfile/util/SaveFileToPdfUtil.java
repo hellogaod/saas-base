@@ -12,13 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: wangtao
+ * @Author:
  * @Date: 2018/05/15 09:24
  * @Description: 文本内容转换为pdf
  */
 public class SaveFileToPdfUtil {
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 10:57
      * @Params: map（包括 file（文件路径），context（替换的文本内容））
      * @Description: 把文件内容转换为pdf

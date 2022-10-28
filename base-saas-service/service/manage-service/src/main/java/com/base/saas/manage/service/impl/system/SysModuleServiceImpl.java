@@ -1,6 +1,6 @@
 package com.base.saas.manage.service.impl.system;
 
-import com.base.saas.manage.mapper.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
 import com.base.saas.manage.mapper.system.SysModuleMapper;
 import com.base.saas.manage.model.ReturnMap;

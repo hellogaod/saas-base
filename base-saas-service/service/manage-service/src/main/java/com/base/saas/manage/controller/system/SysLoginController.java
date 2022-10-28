@@ -37,7 +37,7 @@ import java.util.Map;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年05月22日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc
@@ -63,7 +63,7 @@ public class SysLoginController {
     @Resource
     private RedisUtil redisUtil;
 
-    @PostMapping("/syslogin")
+    @PostMapping("/dologin")
     @ApiOperation(value = "系统用户登陆", notes = "系统用户登陆")
     public ResponseEntity sysLogin(@RequestBody UserLoginRequest loginRequest, HttpServletRequest request) {
 

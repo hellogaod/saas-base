@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.saas.manage.mapper.EntRoleMenuMapper">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntRoleMenuMapper">
     <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntRoleMenu">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
@@ -35,6 +35,13 @@
             #{detail.createTime,jdbcType=TIMESTAMP})
         </foreach>
     </insert>
+
+    <select id="selectMenuIdsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        menu_id
+        from ent_role_menu
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
