@@ -21,15 +21,10 @@ saas基础版本，前后端分离技术
  - （4）ts下面的js删掉
 
 2. web service整合,同样的每个文件都应该理解的基础上在进行整合
-
- - （1）zuul是否需要整理，并且把resources中改成local、dev、prod三种：理解一下yml文件
- - （2）重点：把 manager和sysem-web 两个模块整合成一个，叫manage-service；
- - （3）把util和common整合成一个，具体如何整合自行去理解
- - （4）整理出来一个common-service服务，用于管理一些通用的服务：common-service中不需要处理日志，记得过滤一下；
  - （5）看下fastdfs是否可用，如果不可用就算了，改成一般服务即可，否则直接使用fastdfs即可；
- - （6）不要出现jar冲突情况；并且如何查看哪些jar实际并没有被用到；
- - （7）没有什么选中半选中状态了
 
+ 
+ 
 ## 细节整合
 
 主要是细节处的整合
