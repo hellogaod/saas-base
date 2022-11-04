@@ -1,64 +1,54 @@
 spring:
   profiles:
+    #当前环境
     active: dev
-    include: swagger
-  devtools:
-    restart:
-      enabled: true
-    livereload:
-      enabled: false # we use gulp + BrowserSync for livereload
-  jackson:
-    serialization.indent_output: true
+
+  #mysql连接
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/saas-base?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-    name: writesource
     username: root
     password: root
-    hikari:
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
-      idle-timeout: 60000
-      connection-timeout: 60000
-      validation-timeout: 4000
-      ogin-timeout: 5
-      max-lifetime: 6000
-      maximum-pool-size: 5
-  rabbitmq:
-    username: guest
-    password: guest
-    host: 192.168.102.126
-    virtual-host: server
-    port: 5672
 
-  cache:
-    jcache:
-      config: ehcache.xml
+  #redis配置
   redis:
     database: 5
-    #        host: 192.168.102.109
     host: 127.0.0.1
     port: 6379
     expireTime: 3600
     password: GAO2651qiang
 
+  #nacos服务地址
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
 
-server:
-  port: 9001
+# PageHelper 分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 
-cuibei:
-  baiduMap:
-    webUrl: http://api.map.baidu.com/cloudgc/v1?city=全国&ak=
-    webAk: lHaYCXlRADlhW0fnv8tpIhCfqD85pTSr
+mybatis:
+  #实体类所在的包
+  type-aliases-package: com.base.saas.entity
+  #标注待解析的mapper的xml文件位置
+  mapper-locations: classpath:mapper/*.xml
 
+# 是否允許重複登錄 1 表示允許  0 表示不允許
+duplicateLogin: 0
+# 相当于两次请求间隔时间为600秒
+sessionTimeout: 600
+
+#允许用户密码错误次数
+loginErrorLimit: 9
+
+# 语言切换
+localelist: zh_CN,en
+
+# threadPooolConfig类上的配置参数
 threadPool:
   corePoolSize: 200
   maxPoolSize: 500
@@ -66,23 +56,4 @@ threadPool:
   keepAliveTime: 20
   queueCapacity: 500
   allowCoreThreadTimeout: false
-  threadNamePrefix: zwfin-
-
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql
-#read 数据源
-mysql:
-  datasource:
-    names: read
-    read:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.zaxxer.hikari.HikariDataSource
-      url: jdbc:mysql://192.168.102.222:3306/zr_fenqi?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-      password: 1qaz@WSX
-      username: root
-
-data:
-  isChangeDataSource: 0
+  threadNamePrefix: base-

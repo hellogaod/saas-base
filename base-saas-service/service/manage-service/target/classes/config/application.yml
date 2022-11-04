@@ -1,47 +1,13 @@
+server:
+  #服务端口
+  port: 9001
+
 spring:
   application:
+    #服务名称
     name: saas-manage-service
   profiles:
+    #配置开发环境
     active: dev
-  jackson:
-    serialization.write_dates_as_timestamps: true
-  mvc:
-    favicon:
-      enabled: false
-  messages:
-    basename: i18n/messages
-    cache-duration: 3600
-server:
-  session:
 
-  servlet:
-    session:
-      cookie:
-        http-only: true
-      timeout: 36000
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-
-mybatis:
-  #实体类所在的包
-  type-aliases-package: com.base.saas.entity
-  #标注待解析的mapper的xml文件位置
-  mapper-locations: classpath:mapper/*.xml
-
-# 是否允許重複登錄 1 表示允許  0 表示不允許
-duplicateLogin: 1
-# 相当于两次请求间隔时间为600秒
-sessionTimeout: 600
-
-#允许用户密码错误次数
-loginErrorLimit: 99
-
-# 语言切换
-localelist: zh_CN,en
 

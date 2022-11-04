@@ -5,17 +5,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-<<<<<<< HEAD
 import com.base.saas.AppConstant;
 import com.base.saas.userinfo.UserContextUtil;
+
 import com.base.saas.userinfo.UserInfo;
-=======
-import com.base.saas.common.constant.ServerConstans;
-import com.base.saas.common.logger.EntLog;
-import com.base.saas.common.response.ResponseInfo;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang3.StringUtils;
@@ -89,11 +82,7 @@ public class PostFilter extends ZuulFilter {
         UserContextUtil.setHttpServletResponse(response);
 
         //处理日志信息
-<<<<<<< HEAD
         Map sysWebLog = new HashMap<>();
-=======
-        EntLog sysWebLog = new EntLog();
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         try {
             //1.处理具体请求结果返回值
             // 获取返回值内容，加以处理
@@ -116,14 +105,10 @@ public class PostFilter extends ZuulFilter {
                     //调用新增日志服务
                     HttpHeaders requestHeaders = new HttpHeaders();
                     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-<<<<<<< HEAD
                     HttpEntity<Map> requestEntity = new HttpEntity<Map>(sysWebLog, requestHeaders);
 
                     ResponseEntity entity = restTemplate.postForEntity("http://" + AppConstant.MANAGE_ADDLOG_API, requestEntity, Object.class);
-=======
-                    HttpEntity<EntLog> requestEntity = new HttpEntity<EntLog>(sysWebLog, requestHeaders);
-                    ResponseEntity<ResponseInfo> entity = restTemplate.postForEntity("http://" + ServerConstans.MANAGER + "/api/weblog/addweblog", requestEntity, ResponseInfo.class);
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
                     if (jsonObject.containsKey("responseBody")) {
                         Object obj = jsonObject.get("responseBody");
                         if (obj == null) {
@@ -151,11 +136,7 @@ public class PostFilter extends ZuulFilter {
         return null;
     }
 
-<<<<<<< HEAD
     private Map createLogAddInitData(RequestContext context, Map sysWebLog, JSONObject jsonObject) throws Exception {
-=======
-    private EntLog createLogAddInitData(RequestContext context, EntLog sysWebLog, JSONObject jsonObject) throws Exception {
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         HttpServletRequest request = context.getRequest();
         if (StringUtils.contains(request.getRequestURL().toString(), AppConstant.MANAGE_LOGIN_API_CONTAIN)) {
             //记录登录日志
@@ -228,29 +209,4 @@ public class PostFilter extends ZuulFilter {
         return sysWebLog;
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * @return
-     * @Description 判断请求来源客户端类型
-     * @Date
-     **/
-    private String getRequestSource(HttpServletRequest request) {
-        String userAgent = request.getHeader("user-agent").toLowerCase();
-        ;
-        if (userAgent.indexOf("micromessenger") != -1) {
-            //微信
-            return "3";
-        } else if (userAgent.indexOf("android") != -1) {
-            //安卓
-            return "1";
-        } else if (userAgent.indexOf("iphone") != -1 || userAgent.indexOf("ipad") != -1 || userAgent.indexOf("ipod") != -1) {
-            //苹果
-            return "2";
-        } else {
-            //电脑
-            return "0";
-        }
-    }
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 }

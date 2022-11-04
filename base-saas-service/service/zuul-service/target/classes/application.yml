@@ -1,14 +1,12 @@
 server:
+  #服务端口
   port: 9000
 
 spring:
   application:
+    #服务名称
     name: saas-zuul-gateway
   profiles:
+    #配置开发环境
     active: dev
-
-  redis:
-    expireTime: 3600
-
-sessionTimeout: 600
 

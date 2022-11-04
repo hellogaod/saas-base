@@ -3,7 +3,28 @@ spring:
   profiles:
     active: prod
 
+
+  # 热部署
+  devtools:
+    restart:
+      #设置开启热部署
+      enabled: true
+
+    livereload:
+      #是否支持livereload
+      enabled: false # we use gulp + BrowserSync for livereload
+
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+    #加载的资源包文件缓存持续时间。 如果没有设置，捆绑包将被永久缓存。 如果没有指定持续时间后缀，将使用秒
+    cache-duration: 3600
+
+
   redis:
+    #redis过期时间
+    expireTime: 3600
     database: 5
     host: 192.168.0.1
     port: 6379 #端口
@@ -14,3 +35,26 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.0.1:8848
+
+
+# session间隔时间
+sessionTimeout: 600
+
+# 服务器负载均衡
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 60000
+  #请求连接的超时时间
+  ConnectTimeout: 60000
+
+#服务器断融
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            #目前有两个容器实例，单个请求超时5s,+重试>10s，超15s则熔断
+            timeoutInMilliseconds: 15000
