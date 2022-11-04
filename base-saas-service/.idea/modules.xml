@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/service/manage-service/manage-service.iml" filepath="$PROJECT_DIR$/service/manage-service/manage-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base-utils/base-utils.iml" filepath="$PROJECT_DIR$/base-utils/base-utils.iml" />
     </modules>
   </component>
 </project>
