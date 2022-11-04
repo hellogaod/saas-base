@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntOtherConfig">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntOtherConfig">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="other_id" property="otherId" jdbcType="VARCHAR"/>

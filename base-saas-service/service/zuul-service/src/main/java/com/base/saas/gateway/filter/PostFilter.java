@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.base.saas.common.constant.ServerConstans;
-import com.base.saas.common.logger.SysWebLog;
-import com.base.saas.common.response.ResponseInfo;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.AppConstant;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 对某些api请求的返回需要生成日志并且存储于数据库日志表中
@@ -62,6 +62,11 @@ public class PostFilter extends ZuulFilter {
             return false;
         }
 
+        //如果不是管理端后台api，不需要下面操作
+        String serviceId = String.valueOf(ctx.get("serviceId"));
+        if (!serviceId.equals(AppConstant.MANAGE_NAME)) {
+            return false;
+        }
 
         return true;
     }
@@ -76,7 +81,7 @@ public class PostFilter extends ZuulFilter {
         UserContextUtil.setHttpServletResponse(response);
 
         //处理日志信息
-        SysWebLog sysWebLog = new SysWebLog();
+        Map sysWebLog = new HashMap<>();
         try {
             //1.处理具体请求结果返回值
             // 获取返回值内容，加以处理
@@ -99,8 +104,9 @@ public class PostFilter extends ZuulFilter {
                     //调用新增日志服务
                     HttpHeaders requestHeaders = new HttpHeaders();
                     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-                    HttpEntity<SysWebLog> requestEntity = new HttpEntity<SysWebLog>(sysWebLog, requestHeaders);
-                    ResponseEntity<ResponseInfo> entity = restTemplate.postForEntity("http://" + ServerConstans.MANAGER + "/api/weblog/addweblog", requestEntity, ResponseInfo.class);
+                    HttpEntity<Map> requestEntity = new HttpEntity<Map>(sysWebLog, requestHeaders);
+
+                    ResponseEntity entity = restTemplate.postForEntity("http://" + AppConstant.MANAGE_ADDLOG_API, requestEntity, Object.class);
                     if (jsonObject.containsKey("responseBody")) {
                         Object obj = jsonObject.get("responseBody");
                         if (obj == null) {
@@ -108,7 +114,6 @@ public class PostFilter extends ZuulFilter {
                         } else {
                             context.setResponseBody(JSONObject.toJSONString(obj, SerializerFeature.WriteMapNullValue));
                         }
-
 
                     } else {
                         context.setResponseBody(body);
@@ -129,28 +134,29 @@ public class PostFilter extends ZuulFilter {
         return null;
     }
 
-    private SysWebLog createLogAddInitData(RequestContext context, SysWebLog sysWebLog, JSONObject jsonObject) throws Exception {
+    private Map createLogAddInitData(RequestContext context, Map sysWebLog, JSONObject jsonObject) throws Exception {
         HttpServletRequest request = context.getRequest();
-        if (StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/syslogin/syslogin")
-                || StringUtils.contains(request.getRequestURL().toString(), "api/login/doLogin")) {
+        if (StringUtils.contains(request.getRequestURL().toString(), AppConstant.MANAGE_LOGIN_API_CONTAIN)) {
             //记录登录日志
-            sysWebLog.setOperateType("0");
+            sysWebLog.put("operateType", "0");
         } else {
             //记录操作日志
-            sysWebLog.setOperateType("1");
+            sysWebLog.put("operateType", "1");
         }
         //判断访问来源
-        sysWebLog.setTerminalType(getRequestSource(request));
-        sysWebLog.setOperateIp(request.getLocalAddr());
+        sysWebLog.put("terminalType", "0");
+        sysWebLog.put("operateIp", request.getLocalAddr());
+
         String method = request.getMethod();
         if ("POST".equals(method)) {
             InputStream in = request.getInputStream();
             String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
-            sysWebLog.setMethodArgs(body);
+            sysWebLog.put("methodArgs", body);
+
         } else {
-            sysWebLog.setMethodArgs(request.getQueryString());
+            sysWebLog.put("methodArgs", request.getQueryString());
         }
-        sysWebLog.setMethod(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")));
+        sysWebLog.put("method", request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")));
 
         Object userInfoObject = jsonObject.get("userInfo");
         UserInfo userInfo = null;
@@ -163,63 +169,42 @@ public class PostFilter extends ZuulFilter {
             userInfo = JSONObject.toJavaObject(JSON.parseObject(jsonObject.get("userInfo").toString()), UserInfo.class);
         }
         if (userInfo != null) {
-            sysWebLog.setLoginAccount(userInfo.getAccount());
-            sysWebLog.setCreateBy(userInfo.getAccount());
-            sysWebLog.setCompanyCode(userInfo.getCompanyCode());
-            sysWebLog.setCompanyName(userInfo.getCompanyName());
+            sysWebLog.put("loginAccount",userInfo.getAccount());
+            sysWebLog.put("createBy",userInfo.getAccount());
+            sysWebLog.put("companyCode",userInfo.getCompanyCode());
+            sysWebLog.put("companyName",userInfo.getCompanyName());
         }
         int statusCode = 400;
         if (jsonObject.containsKey("statusCode")) {
             statusCode = jsonObject.getInteger("statusCode");
         }
-        sysWebLog.setStatusCode(statusCode + "");
+        sysWebLog.put("statusCode",statusCode + "");
+
         if (statusCode == 200) {
             //请求成功
-            sysWebLog.setStatus("0");
+            sysWebLog.put("status","0");
         } else {
-            sysWebLog.setStatus("1");
+            sysWebLog.put("status","1");
             //设置异常信息
-            sysWebLog.setExceptionCode(jsonObject.get("exceptionCode") == null ? null : jsonObject.get("exceptionCode").toString());
-            sysWebLog.setExceptionDescription(jsonObject.get("exceptionDescription") == null ? null : jsonObject.get("exceptionDescription").toString());
+            sysWebLog.put("exceptionCode",jsonObject.get("exceptionCode") == null ? null : jsonObject.get("exceptionCode").toString());
+            sysWebLog.put("exceptionDescription",jsonObject.get("exceptionDescription") == null ? null : jsonObject.get("exceptionDescription").toString());
+
             String exceptionStackMsg = jsonObject.get("exceptionStackMsg") == null ? null : jsonObject.get("exceptionStackMsg").toString();
             if (exceptionStackMsg != null && !"".equals(exceptionStackMsg) && exceptionStackMsg.length() > 4000) {
                 exceptionStackMsg = exceptionStackMsg.substring(0, 3999);
-                sysWebLog.setExceptionStackMsg(exceptionStackMsg);
+                sysWebLog.put("exceptionStackMsg",exceptionStackMsg);
+
             }
         }
         List<com.netflix.util.Pair<String, String>> listPair = context.getZuulResponseHeaders();
         for (com.netflix.util.Pair<String, String> info : listPair) {
-            if (info.first().equals("X-saas-server-alert")) {
+            if (info.first().equals("saas-error-message")) {
                 String message = URLDecoder.decode(info.second(), "UTF-8");
-                sysWebLog.setMessages(message);
+                sysWebLog.put("messages",message);
                 break;
             }
         }
         return sysWebLog;
     }
 
-    /**
-     * @return
-     * @Description 判断请求来源客户端类型
-     * @Param
-     * @Author coder_bao
-     * @Date
-     **/
-    private String getRequestSource(HttpServletRequest request) {
-        String userAgent = request.getHeader("user-agent").toLowerCase();
-        ;
-        if (userAgent.indexOf("micromessenger") != -1) {
-            //微信
-            return "3";
-        } else if (userAgent.indexOf("android") != -1) {
-            //安卓
-            return "1";
-        } else if (userAgent.indexOf("iphone") != -1 || userAgent.indexOf("ipad") != -1 || userAgent.indexOf("ipod") != -1) {
-            //苹果
-            return "2";
-        } else {
-            //电脑
-            return "0";
-        }
-    }
 }

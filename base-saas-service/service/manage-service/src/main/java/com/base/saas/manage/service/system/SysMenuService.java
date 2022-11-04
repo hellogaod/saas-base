@@ -2,11 +2,10 @@ package com.base.saas.manage.service.system;/**
  * Created by win7 on 2018/6/11.
  */
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysMenu;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysMenu;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Title :

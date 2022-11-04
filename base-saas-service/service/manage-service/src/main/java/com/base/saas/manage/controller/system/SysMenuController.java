@@ -1,11 +1,11 @@
 package com.base.saas.manage.controller.system;
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysMenu;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysMenu;
 import com.base.saas.manage.service.system.SysMenuService;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.language.LocaleMessage;
+import com.base.saas.logger.LoggerCommon;
+import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.util.HeaderUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/sysMenu")
-@Api(value = "/api/sysMenu", description = "系统模块菜单管理")
+@Api(tags = "系统模块菜单管理")
 public class SysMenuController {
 
     @Resource
@@ -39,7 +39,7 @@ public class SysMenuController {
             return ResponseEntity.ok().body(list);
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "获取菜单列表详情异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "获取菜单列表详情异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }
@@ -55,7 +55,7 @@ public class SysMenuController {
             return ResponseEntity.ok().body(moduleDetail);
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "获取菜单列表详情异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "获取菜单列表详情异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 
@@ -73,7 +73,7 @@ public class SysMenuController {
             return ResponseEntity.ok().body(list);
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "获取菜单树的集合异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "获取菜单树的集合异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }
@@ -100,7 +100,7 @@ public class SysMenuController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.save.fail");
-            LoggerCommon.info(this.getClass(), "增加菜单异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "增加菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 
@@ -128,7 +128,7 @@ public class SysMenuController {
             return ResponseEntity.ok().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.update.fail");
-            LoggerCommon.info(this.getClass(), "编辑菜单异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "编辑菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }
@@ -155,7 +155,7 @@ public class SysMenuController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.update.fail");
-            LoggerCommon.info(this.getClass(), "启用,停用菜单异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "启用,停用菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }

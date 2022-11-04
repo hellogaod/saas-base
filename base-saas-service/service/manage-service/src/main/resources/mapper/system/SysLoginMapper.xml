@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.base.saas.manage.mapper.system.SysLoginMapper">
 
-    <resultMap id="UserResultMap" type="com.base.saas.manage.model.system.SysUser">
+    <resultMap id="UserResultMap" type="com.base.saas.manage.domain.entity.system.SysUser">
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="employee_no" property="employeeNo" jdbcType="VARCHAR"/>
@@ -32,7 +32,7 @@
     create_user, create_time, update_user, update_time
   </sql>
 
-    <resultMap id="MenuResultMap" type="com.base.saas.manage.model.enterprise.EntMenu">
+    <resultMap id="MenuResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntMenu">
         <id column="menu_id" property="menuId" jdbcType="VARCHAR"/>
         <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>

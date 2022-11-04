@@ -1,7 +1,7 @@
 package com.base.saas.manage.mapper.system;
 
-import com.base.saas.manage.model.enterprise.EntMenu;
-import com.base.saas.manage.model.system.SysUser;
+import com.base.saas.manage.domain.entity.enterprise.EntMenu;
+import com.base.saas.manage.domain.entity.system.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年05月24日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc

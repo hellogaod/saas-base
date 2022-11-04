@@ -1,7 +1,8 @@
 package com.base.saas.gateway.filter;
 
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.AppConstant;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
 import com.base.saas.util.redis.RedisKeyConstants;
 import com.base.saas.util.redis.RedisUtil;
 import com.netflix.zuul.ZuulFilter;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 
 /**
- * 校验用户登录是否失效：token失效状态码401
+ * 校验管理端后台用户登录是否失效：token失效状态码401
  */
 public class AccessFilter extends ZuulFilter {
 
@@ -58,37 +59,38 @@ public class AccessFilter extends ZuulFilter {
         HttpServletResponse response = ctx.getResponse();
         log.debug(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
-        if (StringUtils.contains(request.getRequestURL().toString(), "api/login/doLogin")
+        //1.如果不是管理端后台api，不需要下面的验证
+        String serviceId = String.valueOf(ctx.get("serviceId"));
+        if (!serviceId.equals(AppConstant.MANAGE_NAME)) {
+            return null;
+        }
+
+        //2. 管理端后台的登录api不需要走下面的校验
+        if (StringUtils.contains(request.getRequestURL().toString(), AppConstant.MANAGE_LOGIN_API_CONTAIN)
                 || StringUtils.contains(request.getRequestURL().toString(), "swagger")
                 || StringUtils.contains(request.getRequestURL().toString(), "api-docs")
                 || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "HashCode")
-                || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/syslogin/syslogin")
-                || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/validate/code/get")
-                || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/validate/code/check")
-                || StringUtils.containsIgnoreCase(request.getRequestURL().toString(), "api/syslogin/loadindex")
         ) {
             return null;
         }
 
+        //管理端除了登录接口，其他必须确保用户信息存在
         UserContextUtil.setHttpServletRequest(request);
         UserContextUtil.setHttpServletResponse(response);
         UserInfo userInfo = UserContextUtil.getUserInfo();
 
         System.out.println(request.getRequestURI() + ": " + UserContextUtil.getUserTokenId());
+
         if (userInfo != null) {
             if (userInfo.getUserType() == 1 && !StringUtils.isEmpty(userInfo.getAccount())) {
                 //系统管理员
                 RedisUtil.expire(RedisKeyConstants.LOGIN_PREFIX + userInfo.getAccount(), Integer.parseInt(sessionTimeout));
-                return null;
+
             } else if (userInfo.getUserType() == 2 && !"".equalsIgnoreCase(userInfo.getCompanyCode())) {
                 //企业用户
                 RedisUtil.expire(RedisKeyConstants.LOGIN_PREFIX + userInfo.getCompanyCode() + "-" + userInfo.getAccount(), Integer.parseInt(sessionTimeout));
-            } else if (userInfo.getUserType() == 3 && !"".equalsIgnoreCase(userInfo.getCompanyCode())) {
-                //app用户，每个app请求，都会将app客户端的ip地址赋值给redis
-                String loginIp = request.getRemoteAddr();
-                RedisUtil.set(RedisKeyConstants.LOGIN_PREFIX + userInfo.getCompanyCode() + "-" + userInfo.getUserId(), loginIp, Integer.parseInt(sessionTimeout));
-                return null;
             }
+
 
         } else {
             log.debug("Invalid user login information");

@@ -1,0 +1,5 @@
+//忽略这个target目录
+base-saas-service/service/common-service/target/
+base-saas-service/service/manage-service/target/
+base-saas-service/service/zuul-service/target/
+

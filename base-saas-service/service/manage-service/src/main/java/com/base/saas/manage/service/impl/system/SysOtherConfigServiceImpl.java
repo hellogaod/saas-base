@@ -1,16 +1,15 @@
 package com.base.saas.manage.service.impl.system;
 
-import cn.jiguang.common.utils.StringUtils;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper;
 import com.base.saas.manage.mapper.system.SysOtherColumnsConfMapper;
 import com.base.saas.manage.mapper.system.SysOtherConfigMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntOtherConfig;
-import com.base.saas.manage.model.system.SysOtherColumnsConf;
-import com.base.saas.manage.model.system.SysOtherConfig;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.enterprise.EntOtherConfig;
+import com.base.saas.manage.domain.entity.system.SysOtherColumnsConf;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import com.base.saas.manage.service.system.SysOtherConfigService;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
+import com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper;
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,7 +171,7 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
     @Transactional
     public ReturnMap updateOtherConfig(SysOtherConfig sysOtherConfig) throws Exception {
         ReturnMap respMap = new ReturnMap();
-        if (StringUtils.isEmpty(sysOtherConfig.getOtherId())) {
+        if (StringUtil.isEmpty(sysOtherConfig.getOtherId())) {
             respMap.setMsg("message.system.request.param.exception");
             return respMap;
         }

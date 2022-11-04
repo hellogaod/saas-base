@@ -1,6 +1,6 @@
 package com.base.saas.manage.shiro;
 
-import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserContextUtil;
 import com.google.common.collect.Sets;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -19,7 +19,7 @@ import java.util.Set;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年05月22日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc

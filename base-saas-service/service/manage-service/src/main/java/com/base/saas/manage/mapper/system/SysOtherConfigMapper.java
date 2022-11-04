@@ -1,6 +1,6 @@
 package com.base.saas.manage.mapper.system;
 
-import com.base.saas.manage.model.system.SysOtherConfig;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

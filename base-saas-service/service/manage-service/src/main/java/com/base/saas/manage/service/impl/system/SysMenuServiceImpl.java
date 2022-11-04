@@ -1,16 +1,14 @@
-package com.base.saas.manage.service.impl.system;/**
- * Created by win7 on 2018/6/11.
- */
+package com.base.saas.manage.service.impl.system;
 
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.EntMenuMapper;
-import com.base.saas.manage.mapper.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntMenu;
-import com.base.saas.manage.model.system.SysMenu;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.enterprise.EntMenu;
+import com.base.saas.manage.domain.entity.system.SysMenu;
 import com.base.saas.manage.service.system.SysMenuService;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
+import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

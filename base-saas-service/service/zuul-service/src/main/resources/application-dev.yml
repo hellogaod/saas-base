@@ -4,6 +4,8 @@ spring:
     active: dev
 
   redis:
+    #redis过期时间
+    expireTime: 3600
     database: 5
     host: 127.0.0.1
     port: 6379 #端口
@@ -14,3 +16,25 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+
+# session间隔时间
+sessionTimeout: 600
+
+# 服务器负载均衡
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 60000
+  #请求连接的超时时间
+  ConnectTimeout: 60000
+
+#服务器断融
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            #目前有两个容器实例，单个请求超时5s,+重试>10s，超15s则熔断
+            timeoutInMilliseconds: 15000

@@ -1,0 +1,28 @@
+package cn.fintecher.pangolin;
+import cn.fintecher.pangolin.business.model.ScoreRuleModel;
+dialect  "mvel"
+
+
+rule "59439649bc104e5a5c42e10b-0"
+ activation-group "59439649bc104e5a5c42e10b"
+// salience 0
+ no-loop true            //只检查一次
+ when
+    $c : ScoreRuleModel(age<45.0)
+ then
+    System.err.println("加分1");
+    $c.setCupoScore($c.getCupoScore()+10*0.1);
+//    update($c);
+ end
+
+rule "59439649bc104e5a5c42e10b-1"
+ activation-group "59439649bc104e5a5c42e10b"
+// salience 1
+ no-loop true            //只检查一次
+ when
+    $c : ScoreRuleModel(age>16.0)
+ then
+    System.err.println("加分2");
+    $c.setCupoScore($c.getCupoScore()+20*0.1);
+//    update($c);
+ end

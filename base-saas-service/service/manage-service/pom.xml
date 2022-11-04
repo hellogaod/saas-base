@@ -12,13 +12,14 @@
     <artifactId>manager</artifactId>
     <description>管理端api接口管理：系统管理端 和 企业管理端</description>
 
-    <packaging>jar</packaging>
+    <!--    <packaging>jar</packaging>-->
     <properties>
         <drools.version>7.0.0.CR3</drools.version>
     </properties>
     <name>base-service-manager</name>
-    <description>管理端服务</description>
+
     <dependencies>
+        <!--基于 Spring Cloud 的编程模型，接入 Nacos 作为注册中心，实现服务的注册与发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -41,6 +42,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--apache提供的json-lib小工具，它可以方便的使用Java语言来创建JSON字符串。也可以把JavaBean转换成JSON字符串-->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
@@ -61,46 +64,62 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--ModelMapper 是一个 Object To Object 的工具，类似于 MapStruct又不同于 MapStruct。
+        主要原因是 ModelMapper 是利用反射的原理实现的 Object To Object。-->
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-amqp</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-eureka</artifactId>-->
-        <!--        </dependency>-->
+
+        <!--数据库连接池负责分配、管理和释放数据库的连接-->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>${hikaricp.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--JPA（Java Persistence API）资源库来实现对数据库的操作-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!--springboot技术提供有内置的缓存解决方案，可以帮助开发者快速开启缓存技术，并使用缓存技术进行数据的快速操作，
+        例如读取缓存数据和写入数据到缓存-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
+
+        <!--Spring提供的Redis Client，用于操作Redis的依赖库-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+        <!--Jedis是redis的java版本的客户端实现-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+
+        <!--为我们提供了嵌入的 Servlet 容器以及 SpringMVC 的依赖，并为 Spring MVC 提供了大量自动配置，
+        可以适用于大多数 Web 开发场景-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- 安全框架 Spring Security -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
+
+        <!--热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -111,11 +130,14 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -142,6 +164,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--QueryDSL是一个库，可使用类型明确的Java API轻松构建查询。 它的强大之处在于基于您的实体类自动生成的帮助器类-->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>
@@ -163,21 +187,22 @@
             <artifactId>querydsl-sql</artifactId>
             <version>${querydsl.version}</version>
         </dependency>
+
+        <!--新出的一些日期类型等的标准-->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>net.minidev</groupId>-->
-        <!--            <artifactId>json-smart</artifactId>-->
-        <!--            <version>RELEASE</version>-->
-        <!--        </dependency>-->
+
+        <!--用来帮助开发IO功能-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
+
+        <!--是ServiceWorker 的一种新的应用缓存机制，它提供了可编程的缓存操作方式， 能实现各种缓存策略，可以非常细粒度的操控资源缓存-->
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -187,7 +212,8 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
-        <!-- quartz -->
+
+        <!-- quartz定时任务 -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -198,15 +224,21 @@
             <artifactId>quartz-jobs</artifactId>
             <version>${org.quartz-scheduler}</version>
         </dependency>
+
+        <!--kie在drools jbpm uberfire里广泛被使用-->
         <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-api</artifactId>
             <version>${drools.version}</version>
         </dependency>
+
+        <!--一个用Java语言编写的模板引擎，它基于模板来生成文本输出-->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
+
+        <!--Java 编写的一款开源规则引擎。Drools 的核心算法基于 Rete-->
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
@@ -222,6 +254,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--shiro是apache的一个开源框架，是一个权限管理的框架，实现 用户认证、用户授权-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
@@ -233,11 +267,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${org.apache.log4j.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -253,20 +283,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--一个日志框架,-->
         <dependency>
-            <groupId>com.base.saas</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${org.apache.log4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.base.saas</groupId>
-            <artifactId>utils</artifactId>
+            <artifactId>base-common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <!--处理各种文件格式-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -291,21 +324,28 @@
         </dependency>
         <!-- itext5 end -->
 
+        <!--支付宝sdk-->
         <dependency>
             <groupId>cn.featherfly</groupId>
             <artifactId>alipay-sdk</artifactId>
             <version>1.1.3</version>
         </dependency>
+
+        <!--它可以自动插入到编辑器和构建工具中，增强java的性能。不需要再写getter、setter或equals方法-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <!--解析sql-->
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
             <artifactId>jsqlparser</artifactId>
             <version>0.9.4</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--mybatis 提供的分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
@@ -317,6 +357,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -328,11 +370,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--mysql-->
         <dependency>
             <artifactId>mysql-connector-java</artifactId>
             <groupId>mysql</groupId>
             <version>8.0.22</version>
         </dependency>
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -340,14 +385,13 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.base.saas.common.BaseCommonApplication</mainClass>
+                    <mainClass>BaseCommonApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

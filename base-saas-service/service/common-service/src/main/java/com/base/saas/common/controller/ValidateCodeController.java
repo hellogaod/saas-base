@@ -23,10 +23,6 @@ public class ValidateCodeController {
 
     /**
      * 获取图片验证码
-     *
-     * @return CommonResult
-     * @author Mr.Zhang
-     * @since 2020-04-16
      */
     @ApiOperation(value = "获取验证码")
     @GetMapping(value = "/get")
@@ -37,10 +33,6 @@ public class ValidateCodeController {
 
     /**
      * 检测验证码
-     *
-     * @return CommonResult
-     * @author Mr.Zhang
-     * @since 2020-04-16
      */
     @ApiOperation(value = "检测验证码")
     @GetMapping(value = "/check")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.base.saas.manage.model.User" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntUser" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
     <result column="org_id" property="orgId" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
     delete from ent_user
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.base.saas.manage.model.User" >
+  <insert id="insert" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" >
     insert into ent_user (user_id, company_code, org_id,
       employee_id, account, password, 
       real_name, sex, email, 
@@ -86,7 +86,7 @@
       #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP},#{lockTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.base.saas.manage.model.User" >
+  <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" >
     insert into ent_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -225,7 +225,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" >
     update ent_user
     <set >
       <if test="companyCode != null" >
@@ -294,7 +294,7 @@
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" >
     update ent_user
     set company_code = #{companyCode,jdbcType=VARCHAR},
       org_id = #{orgId,jdbcType=VARCHAR},
@@ -358,7 +358,7 @@
 	  u.user_id = #{userId}
     AND r.status = 1
   </select>
-  <select id="getUserByUpdate" parameterType="com.base.saas.manage.model.User" resultType="String">
+  <select id="getUserByUpdate" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" resultType="String">
     select user_id from ent_user where account = #{account} and company_code = #{companyCode} and user_id != #{userId}
   </select>
 </mapper>

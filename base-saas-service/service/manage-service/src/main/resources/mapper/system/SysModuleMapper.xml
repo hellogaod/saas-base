@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.system.SysModuleMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.system.SysModule">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysModule">
         <id column="module_id" property="moduleId" jdbcType="VARCHAR"/>
         <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
@@ -22,7 +22,7 @@
         where module_id = #{menuId,jdbcType=VARCHAR}
     </select>
 
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.system.SysModule">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysModule">
         insert into sys_module
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="moduleId != null">
@@ -78,7 +78,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.system.SysModule">
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.system.SysModule">
         update sys_module
         <set>
             <if test="moduleName != null">

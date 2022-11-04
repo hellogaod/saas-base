@@ -1,16 +1,16 @@
 package com.base.saas.manage.controller.system;
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.UserLoginRequest;
-import com.base.saas.manage.model.enterprise.EntMenu;
-import com.base.saas.manage.model.system.SysUser;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.model.UserLoginRequest;
+import com.base.saas.manage.domain.entity.enterprise.EntMenu;
+import com.base.saas.manage.domain.entity.system.SysUser;
 import com.base.saas.manage.service.system.SysLoginService;
-import com.base.saas.common.AppConstant;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.util.response.ExceptionStackMessage;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.AppConstant;
+import com.base.saas.language.LocaleMessage;
+import com.base.saas.logger.LoggerCommon;
+import com.base.saas.util.ExceptionStackUtils;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.StringUtil;
 import com.base.saas.util.redis.RedisKeyConstants;
@@ -37,7 +37,7 @@ import java.util.Map;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年05月22日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc
@@ -47,7 +47,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/syslogin")
-@Api(value = "系统管理端登录相关操作")
+@Api(tags = "系统管理端登录相关操作")
 public class SysLoginController {
     private static final String ENTITY_NAME = "syslogin";
 
@@ -63,7 +63,7 @@ public class SysLoginController {
     @Resource
     private RedisUtil redisUtil;
 
-    @PostMapping("/syslogin")
+    @PostMapping("/doLogin")
     @ApiOperation(value = "系统用户登陆", notes = "系统用户登陆")
     public ResponseEntity sysLogin(@RequestBody UserLoginRequest loginRequest, HttpServletRequest request) {
 
@@ -84,7 +84,7 @@ public class SysLoginController {
             returnMap = loginService.login(username.trim(), password.trim());
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("system.server.exception");
-            LoggerCommon.info(this.getClass(), "系统用户登陆异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "系统用户登陆异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 
@@ -113,9 +113,6 @@ public class SysLoginController {
             userInfo.setUserId(returnMap.getT().getUserId());
             userInfo.setUserType(1);
 
-            //数据根据sessionId作为key存储在redis里面
-            UserContextUtil.setUserInfo(session.getId(), userInfo);
-
             System.out.println("set user key:" + session.getId());
 
             //查询用户角色
@@ -124,7 +121,7 @@ public class SysLoginController {
                 roleInfo = loginService.getUserRoleInfo(userInfo.getUserId());
             } catch (Exception e) {
                 localeTipMsg = LocaleMessage.get("system.server.exception");
-                LoggerCommon.info(this.getClass(), "系统用户登陆查询用户角色异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+                LoggerCommon.info(this.getClass(), "系统用户登陆查询用户角色异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
                 return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
             }
 
@@ -146,6 +143,10 @@ public class SysLoginController {
 
             LocaleMessage.setLocale(session.getId());
             LoggerCommon.info(this.getClass(), "登录成功");
+
+
+            //数据根据sessionId作为key存储在redis里面
+            UserContextUtil.setUserInfo(session.getId(), userInfo);
 
             //sessionid作为token存储在header中
             return ResponseEntity.ok().headers(HeaderUtil.createToken(session.getId())).body(userInfo);
@@ -169,7 +170,7 @@ public class SysLoginController {
             loginService.updateLoginInfo(userId, UserContextUtil.getHttpServletRequest().getRemoteAddr());
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "加载系统菜单异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "加载系统菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -233,7 +234,7 @@ public class SysLoginController {
             }
         } catch (Exception e) {
             localMsg = LocaleMessage.get("message.system.update.fail");
-            LoggerCommon.info(this.getClass(), "修改密码异常信息：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改密码异常信息：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localMsg)).body(null);
         }
     }

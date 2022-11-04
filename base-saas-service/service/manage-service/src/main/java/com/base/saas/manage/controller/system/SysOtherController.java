@@ -1,11 +1,11 @@
 package com.base.saas.manage.controller.system;
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysOtherConfig;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import com.base.saas.manage.service.system.SysOtherConfigService;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.language.LocaleMessage;
+import com.base.saas.logger.LoggerCommon;
+import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.util.HeaderUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/sysOther")
-@Api(value = "系统参数配置")
+@Api(tags = "系统参数配置")
 public class SysOtherController {
 
     @Autowired
@@ -57,7 +57,7 @@ public class SysOtherController {
             return ResponseEntity.ok().body(pageInfo);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "查询配置列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "查询配置列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -79,7 +79,7 @@ public class SysOtherController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
-            LoggerCommon.info(this.getClass(), "保存参数配置异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "保存参数配置异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -109,7 +109,7 @@ public class SysOtherController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.operation.fail");
-            LoggerCommon.info(this.getClass(), "修改状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -132,7 +132,7 @@ public class SysOtherController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
-            LoggerCommon.info(this.getClass(), "修改参数配置异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改参数配置异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -148,7 +148,7 @@ public class SysOtherController {
             return ResponseEntity.ok().body(sysOtherConfig);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "查询参数配置异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "查询参数配置异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }

@@ -1,11 +1,10 @@
 package com.base.saas.manage.service.system;
 
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysModule;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysModule;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Title :

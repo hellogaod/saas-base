@@ -1,20 +1,14 @@
 server:
+  #服务端口
   port: 9100
 
 spring:
   application:
+    #服务名称
     name: saas-common-service
   profiles:
+    #配置开发环境
     active: dev
-
-  # 热部署
-  devtools:
-    restart:
-      enabled: true
-    livereload:
-      enabled: false # we use gulp + BrowserSync for livereload
-
-
 
 
 

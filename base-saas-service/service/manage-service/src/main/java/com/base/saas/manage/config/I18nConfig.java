@@ -15,8 +15,6 @@ import java.util.Locale;
 /**
  * @ClassName I18nConfig
  * @Description 多语言初始化文件
- * @Author coder_bao
- * @Date 2018/8/30 15:21
  */
 @Configuration
 public class I18nConfig extends WebMvcConfigurerAdapter {

@@ -1,7 +1,7 @@
 package com.base.saas.manage.mapper.enterprise;
 
 
-import com.base.saas.manage.model.enterprise.EntOtherConfig;
+import com.base.saas.manage.domain.entity.enterprise.EntOtherConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

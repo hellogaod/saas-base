@@ -1,0 +1,6 @@
+com\base\saas\common\AppConstant.class
+com\base\saas\common\userinfo\UserContextUtil.class
+com\base\saas\common\language\LocaleMessage.class
+com\base\saas\common\logger\EntLog.class
+com\base\saas\common\logger\LoggerCommon.class
+com\base\saas\common\userinfo\UserInfo.class

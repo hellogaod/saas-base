@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.system.SysOtherColumnsConfMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.system.SysOtherColumnsConf">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysOtherColumnsConf">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="other_id" property="otherId" jdbcType="VARCHAR"/>
         <result column="sortting" property="sortting" jdbcType="INTEGER"/>
@@ -35,7 +35,7 @@
         order by sortting asc
     </select>
 
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.system.SysOtherColumnsConf">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysOtherColumnsConf">
         insert into sys_other_columns_conf
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -142,7 +142,7 @@
 
     </insert>
 
-    <update id="batchDelNotInParamList" parameterType="com.base.saas.manage.model.system.SysOtherConfig">
+    <update id="batchDelNotInParamList" parameterType="com.base.saas.manage.domain.entity.system.SysOtherConfig">
         delete from sys_other_columns_conf where other_id = #{otherId}
         and id not in
         <foreach item="item" index="index" collection="detailList" open="("

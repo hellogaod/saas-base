@@ -1,14 +1,15 @@
 package com.base.saas.manage.service.impl.system;
 
-import com.base.saas.common.exception.TransactionRollBackException;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.*;
-import com.base.saas.manage.model.*;
-import com.base.saas.manage.model.enterprise.EntOrganization;
-import com.base.saas.manage.model.enterprise.EntRole;
-import com.base.saas.manage.model.enterprise.EntRoleMenu;
-import com.base.saas.manage.model.enterprise.EntUser;
+import com.base.saas.manage.mapper.enterprise.*;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
+import com.base.saas.manage.mapper.system.SysEnterpriseMapper;
+import com.base.saas.manage.domain.entity.enterprise.EntOrganization;
+import com.base.saas.manage.domain.entity.enterprise.EntRole;
+import com.base.saas.manage.domain.entity.enterprise.EntRoleMenu;
+import com.base.saas.manage.domain.entity.enterprise.EntUser;
+import com.base.saas.manage.domain.entity.system.SysEnterprise;
 import com.base.saas.manage.service.enterprise.EntMenuService;
 import com.base.saas.manage.service.system.SysEnterpriseService;
 import com.base.saas.util.*;
@@ -22,10 +23,10 @@ import java.util.*;
  * Title :
  * Description :
  * Create on : 2018年06月08日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
- * username: wangtao
+ * username:
  * @version 修改历史:
  * 修改人 修改日期 修改描述
  * -------------------------------------------<
@@ -89,7 +90,7 @@ public class SysEnterpriseServiceImpl implements SysEnterpriseService {
             firstCode = firstCode.substring(0, 4);
         }
         String time = DateConversionUtil.getCurrentTime(DateConversionUtil.STYLE_3);
-        String code = new GUIDUtil().toString();
+        String code =  CreateIDUtil.getId();
         String lastCode = code.substring(code.length() - 4, code.length());
         String companyCode = firstCode + time + lastCode;
 
@@ -234,7 +235,7 @@ public class SysEnterpriseServiceImpl implements SysEnterpriseService {
      * @return:
      */
     @Override
-    @Transactional(rollbackFor = TransactionRollBackException.class)
+    @Transactional
     public ReturnMap updateSysEnterprise(SysEnterprise sysEnterprise) throws Exception {
         UserInfo userInfo = UserContextUtil.getUserInfo();
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntLogMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntLog">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="login_account" property="loginAccount" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="method_desc" property="methodDesc" jdbcType="VARCHAR"/>
+        <result column="method_args" property="methodArgs" jdbcType="VARCHAR"/>
+        <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP"/>
+        <result column="operate_ip" property="operateIp" jdbcType="VARCHAR"/>
+        <result column="operate_type" property="operateType" jdbcType="VARCHAR"/>
+        <result column="terminal_type" property="terminalType" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="status_code" property="statusCode" jdbcType="VARCHAR"/>
+        <result column="messages" property="messages" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="exception_code" property="exceptionCode" jdbcType="VARCHAR"/>
+        <result column="exception_description" property="exceptionDescription" jdbcType="VARCHAR"/>
+        <result column="exception_stack_msg" property="exceptionStackMsg" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, login_account, company_code, company_name, method, method_desc, method_args, operate_time,
+    operate_ip, operate_type, terminal_type,status,status_code,messages,is_delete,exception_code,exception_description,exception_stack_msg,
+    create_time,create_by,update_time,update_by
+  </sql>
+
+    <insert id="addEntLog" parameterType="com.base.saas.manage.domain.entity.enterprise.EntLog">
+    insert into ent_log (
+        id,
+        login_account,
+        company_code,
+        company_name,
+        method,
+        method_desc,
+        method_args,
+        operate_time,
+        operate_ip,
+        operate_type,
+        terminal_type,
+        status,
+        status_code,
+        messages,
+        is_delete,
+        exception_code,
+        exception_description,
+        exception_stack_msg,
+        create_time,create_by)
+    values (
+        #{id,jdbcType=VARCHAR},
+        #{loginAccount,jdbcType=VARCHAR},
+        #{companyCode,jdbcType=VARCHAR},
+        #{companyName,jdbcType=VARCHAR},
+        #{method,jdbcType=VARCHAR},
+        #{methodDesc,jdbcType=VARCHAR},
+        #{methodArgs,jdbcType=VARCHAR},
+        #{operateTime,jdbcType=TIMESTAMP},
+        #{operateIp,jdbcType=VARCHAR},
+        #{operateType,jdbcType=VARCHAR},
+        #{terminalType,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{statusCode,jdbcType=VARCHAR},
+        #{messages,jdbcType=VARCHAR},
+        #{isDelete,jdbcType=INTEGER},
+        #{exceptionCode,jdbcType=VARCHAR},
+        #{exceptionDescription,jdbcType=VARCHAR},
+        #{exceptionStackMsg,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR})
+  </insert>
+
+    <select id="getEntLogList" parameterType="com.base.saas.manage.domain.model.EntLogRequest" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ent_log
+        where 1=1
+        <if test="null!=loginAccount and ''!=loginAccount">
+            and login_account LIKE CONCAT('%',#{loginAccount},'%' )
+        </if>
+        <if test="null!=companyCode and ''!=companyCode">
+            and company_code=#{companyCode}
+        </if>
+        <if test="null!=method and ''!=method">
+            and method LIKE CONCAT(#{method},'%' )
+        </if>
+        <if test="null!=status and ''!=status">
+            and status=#{status}
+        </if>
+        <if test="null!=exceptionCode and ''!=exceptionCode">
+            and exception_code=#{exceptionCode}
+        </if>
+        <if test="null!=terminalType and ''!=terminalType">
+            and terminal_type=#{terminalType}
+        </if>
+        <if test="null!=operateType and ''!=operateType">
+            and operate_type=#{operateType}
+        </if>
+        <if test="null!=startTime and ''!=startTime">
+            AND <![CDATA[DATE_FORMAT(create_time,'%Y-%m-%d') >= DATE_FORMAT(#{startTime},'%Y-%m-%d')]]>
+        </if>
+        <if test="null!=endTime and ''!=endTime">
+            AND <![CDATA[DATE_FORMAT(create_time,'%Y-%m-%d') <= DATE_FORMAT(#{endTime},'%Y-%m-%d')]]>
+        </if>
+        order by create_time desc
+    </select>
+
+
+</mapper>

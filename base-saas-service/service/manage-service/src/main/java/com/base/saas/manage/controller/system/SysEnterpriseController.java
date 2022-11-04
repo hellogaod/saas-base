@@ -1,11 +1,11 @@
 package com.base.saas.manage.controller.system;
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.SysEnterprise;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.manage.model.system.SysOtherConfig;
-import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysEnterprise;
+import com.base.saas.language.LocaleMessage;
+import com.base.saas.logger.LoggerCommon;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
+import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.manage.service.enterprise.EntOtherConfigService;
 import com.base.saas.manage.service.system.SysEnterpriseService;
 import com.base.saas.util.HeaderUtil;
@@ -24,7 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/sysEnterprise")
-@Api(value = "企业信息管理")
+@Api(tags = "企业信息管理")
 public class SysEnterpriseController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class SysEnterpriseController {
             return ResponseEntity.ok().body(pageInfo);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "查询已启用的模块列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "查询已启用的模块列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -75,7 +75,7 @@ public class SysEnterpriseController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
-            LoggerCommon.info(this.getClass(), "添加企业信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "添加企业信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -96,7 +96,7 @@ public class SysEnterpriseController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.operation.fail");
-            LoggerCommon.info(this.getClass(), "修改状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -115,7 +115,7 @@ public class SysEnterpriseController {
             return ResponseEntity.ok().body(sysEnterprise);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "根据企业编码查询企业信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "根据企业编码查询企业信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -139,7 +139,7 @@ public class SysEnterpriseController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
-            LoggerCommon.info(this.getClass(), "修改企业信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改企业信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -156,7 +156,7 @@ public class SysEnterpriseController {
             allOthers = sysEntOtherConfigService.getConfigList(companyCode);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
-            LoggerCommon.info(this.getClass(), "查询企业三方关联列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "查询企业三方关联列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -180,7 +180,7 @@ public class SysEnterpriseController {
             return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.operation.fail");
-            LoggerCommon.info(this.getClass(), "修改企业关联三方列表：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+            LoggerCommon.info(this.getClass(), "修改企业关联三方列表：" + ExceptionStackUtils.collectExceptionStackMsg(e));
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 

@@ -1,13 +1,13 @@
 package com.base.saas.manage.service.impl.enterprise;
 
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper;
 import com.base.saas.manage.mapper.system.SysOtherConfigMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntOtherConfig;
-import com.base.saas.manage.model.system.SysOtherConfig;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.enterprise.EntOtherConfig;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import com.base.saas.manage.service.enterprise.EntOtherConfigService;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
+import com.base.saas.manage.mapper.enterprise.EntOtherConfigMapper;
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.*;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年07月16日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:hanxiaoxue

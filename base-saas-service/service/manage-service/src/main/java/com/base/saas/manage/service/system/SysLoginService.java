@@ -1,8 +1,8 @@
 package com.base.saas.manage.service.system;
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntMenu;
-import com.base.saas.manage.model.system.SysUser;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.enterprise.EntMenu;
+import com.base.saas.manage.domain.entity.system.SysUser;
 
 import java.util.List;
 import java.util.Map;

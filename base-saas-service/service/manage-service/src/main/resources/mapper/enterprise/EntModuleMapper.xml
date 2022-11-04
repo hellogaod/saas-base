@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.saas.manage.mapper.EntModuleMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntModule">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntModuleMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntModule">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
@@ -11,7 +11,7 @@
         <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="Integer"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -85,7 +85,7 @@
     delete from ent_module
     where sys_code = #{sysCode,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    <insert id="insert" parameterType="com.base.saas.manage.domain.entity.enterprise.EntModule">
     insert into ent_module (sys_code, sys_name, create_user, 
       create_time, update_user, update_time, 
       remark, status, company_code, sys_module_code, sequence
@@ -96,7 +96,7 @@
       #{sysModuleCode,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntModule">
         insert into ent_module
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sysCode != null">
@@ -169,7 +169,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntModule">
         update ent_module
         <set>
             <if test="sysName != null">
@@ -205,7 +205,7 @@
         </set>
         where sys_code = #{sysCode,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.model.enterprise.EntModule">
+    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.domain.entity.enterprise.EntModule">
     update ent_module
     set sys_name = #{sysName,jdbcType=VARCHAR},
       create_user = #{createUser,jdbcType=VARCHAR},
@@ -220,14 +220,6 @@
     where sys_code = #{sysCode,jdbcType=VARCHAR}
   </update>
 
-
-    <!-- 获取企业模块信息 根据企业code-->
-    <select id="getCompanyModule" parameterType="string" resultType="map">
-        select
-          sys_code as sysCode, sys_name as sysName, status,company_code as companyCode
-        from ent_module
-        where company_code = #{companyCode,jdbcType=VARCHAR} and status = 1 ORDER BY sequence
-    </select>
 
     <!--查询企业所有菜单id -->
     <select id="getAllBtnIds" parameterType="map" resultType="String">

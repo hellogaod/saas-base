@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntUserMenuDesensiteMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_desensite" property="isDesensite" jdbcType="SMALLINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_code, user_id, org_id, menu_id, create_user, create_time, update_user, 
+    update_time, org_path, is_desensite
+  </sql>
+
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
+        insert into ent_user_menu_desensite
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="companyCode != null">
+                company_code,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="menuId != null">
+                menu_id,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="orgPath != null">
+                org_path,
+            </if>
+            <if test="isDesensite != null">
+                is_desensite,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="menuId != null">
+                #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orgPath != null">
+                #{orgPath,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isDesensite != null">
+                #{isDesensite,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
+        update ent_user_menu_desensite
+        <set>
+            <if test="companyCode != null">
+                company_code = #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="menuId != null">
+                menu_id = #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orgPath != null and orgPath != ''">
+                org_path = #{orgPath,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isDesensite != null">
+                is_desensite = #{isDesensite,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getIdByUserIdAndMenuId" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite"
+            resultType="java.lang.String">
+    SELECT
+	  id
+    FROM
+	  ent_user_menu_desensite
+    WHERE
+	  user_id = #{userId}
+    AND menu_id = #{menuId}
+  </select>
+
+</mapper>

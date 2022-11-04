@@ -1,8 +1,8 @@
 package com.base.saas.manage.service.system;
 
 
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysOtherConfig;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Title :
  * Description : @类注释说明写在此处@
  * Create on : 2018年07月16日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:hanxiaoxue

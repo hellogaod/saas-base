@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.saas.manage.mapper.EntOrganizationMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntOrganization">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntOrganizationMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntOrganization">
         <id column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="parent_org_id" property="parentOrgId" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
@@ -22,7 +22,7 @@
     update_user, update_time, org_manager,org_tel,org_short_tel
   </sql>
 
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntOrganization">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntOrganization">
         insert into ent_organization
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="orgId != null">
@@ -116,28 +116,7 @@
         </trim>
     </insert>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from ent_organization
-        where org_id = #{orgId,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from ent_organization
-    where org_id = #{orgId,jdbcType=VARCHAR}
-  </delete>
-    <insert id="insert" parameterType="com.base.saas.manage.model.enterprise.EntOrganization">
-    insert into ent_organization (org_id, parent_org_id, company_code, 
-      org_name, org_code, status,org_type,
-      create_user, create_time, update_user, 
-      update_time, org_manager,org_tel,org_short_tel)
-    values (#{orgId,jdbcType=VARCHAR}, #{parentOrgId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR},
-      #{orgName,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{orgType,jdbcType=SMALLINT},
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP},#{orgManager,jdbcType=VARCHAR},#{orgTel,jdbcType=VARCHAR},#{orgShortTel,jdbcType=VARCHAR})
-  </insert>
-
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntOrganization">
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntOrganization">
         update ent_organization
         <set>
             <if test="parentOrgId != null">
@@ -183,40 +162,6 @@
         </set>
         where org_id = #{orgId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.base.saas.manage.model.enterprise.EntOrganization">
-    update ent_organization
-    set parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
-      company_code = #{companyCode,jdbcType=VARCHAR},
-      org_name = #{orgName,jdbcType=VARCHAR},
-      org_code = #{orgCode,jdbcType=VARCHAR},
-      status = #{status,jdbcType=SMALLINT},
-      org_type = #{orgType,jdbcType=SMALLINT},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      org_manager = #{orgManager,jdbcType=VARCHAR},
-      org_tel = #{orgTel,jdbcType=VARCHAR},
-      org_short_tel = #{orgShortTel,jdbcType=VARCHAR}
-    where org_id = #{orgId,jdbcType=VARCHAR}
-  </update>
-
-    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.model.enterprise.EntOrganization">
-    update ent_organization
-    set parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
-      company_code = #{companyCode,jdbcType=VARCHAR},
-      org_name = #{orgName,jdbcType=VARCHAR},
-      org_code = #{orgCode,jdbcType=VARCHAR},
-      status = #{status,jdbcType=SMALLINT},
-      org_type = #{orgType,jdbcType=SMALLINT},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      org_manager = #{orgManager,jdbcType=VARCHAR},
-      org_tel = #{orgTel,jdbcType=VARCHAR},
-      org_short_tel = #{orgShortTel,jdbcType=VARCHAR}
-    where org_id = #{orgId,jdbcType=VARCHAR}
-  </update>
-
 
     <select id="findList" parameterType="Map" resultMap="BaseResultMap">
         select
@@ -235,61 +180,38 @@
         <if test="null!=parentOrgId and ''!=parentOrgId">
             and parent_org_id=#{parentOrgId}
         </if>
-        <if test="null!=orgType and ''!=orgType">
+        <if test="-1 != orgType">
             and org_type=#{orgType}
         </if>
 
-        <if test="null!=status and ''!=status">
+        <if test="-1 != status">
             and status = #{status}
         </if>
         order by create_time desc
     </select>
 
 
-    <select id="findById" parameterType="String" resultType="Map">
-      select t.org_id orgId, t.parent_org_id parentOrgId, t.company_code companyCode,
-      t.org_manager orgManager,t.org_tel orgTel,t.org_short_tel orgShortTel,
-       t.org_name orgName, t.org_code orgCode,t.status,
-       t.create_user createUser, t.create_time createTime,
-      t.update_user updateUser,t.update_time updateTime,t.org_type orgType,t.org_manager orgManager,t.org_tel orgTel,
-       f.org_name parentOrgName from ent_organization t LEFT JOIN ent_organization f
-      on t.parent_org_id = f.org_id where t.org_id = #{orgId}
+    <select id="findById" parameterType="String" resultType="com.base.saas.manage.domain.entity.enterprise.EntOrganization">
+      select
+      t.org_id orgId,
+      t.parent_org_id parentOrgId,
+      t.company_code companyCode,
+      t.org_manager orgManager,
+      t.org_tel orgTel,
+      t.org_short_tel orgShortTel,
+      t.org_name orgName,
+      t.org_code orgCode,t.status,
+      t.create_user createUser,
+      t.create_time createTime,
+      t.update_user updateUser,
+      t.update_time updateTime,
+      t.org_type orgType,
+      t.org_manager orgManager,
+      t.org_tel orgTel,
+      f.org_name parentOrgName
+      from ent_organization t LEFT JOIN ent_organization f
+      on t.parent_org_id = f.org_id
+      where t.org_id = #{orgId}
   </select>
-
-    <select id="getOrgListByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM ent_organization
-        where status = 1 and company_code = #{companyCode}
-    </select>
-
-    <!-- <select id="getOrgIsCompanyList" parameterType="Map" resultMap="BaseResultMap">
-       SELECT
-       <include refid="Base_Column_List"/>
-       FROM ent_organization t where t.
-
-     </select>-->
-
-    <!--  <update id="batchUpdate" parameterType="java.util.List">-->
-    <!--    update ent_organization-->
-    <!--    <trim prefix="set" suffixOverrides=",">-->
-    <!--      <trim prefix="org_path =case" suffix="end,">-->
-    <!--        <foreach collection="list" item="item" index="index">-->
-    <!--          when org_id=#{item.orgId} then #{item.orgPath}-->
-    <!--        </foreach>-->
-    <!--      </trim>-->
-    <!--    </trim>-->
-    <!--    where org_id in-->
-    <!--    <foreach collection="list" index="index" item="item" separator="," open="(" close=")">-->
-    <!--      #{item.orgId,jdbcType=VARCHAR}-->
-    <!--    </foreach>-->
-    <!--  </update>-->
-
-    <select id="getOrgListByMap" resultMap="BaseResultMap" parameterType="map">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM ent_organization
-        where status = 1 and company_code = #{companyCode} and org_type = 0
-    </select>
 
 </mapper>

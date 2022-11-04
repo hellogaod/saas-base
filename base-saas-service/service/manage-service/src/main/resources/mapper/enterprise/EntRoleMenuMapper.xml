@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.base.saas.manage.mapper.EntRoleMenuMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntRoleMenu">
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntRoleMenu">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
         <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
@@ -36,6 +36,13 @@
         </foreach>
     </insert>
 
+    <select id="selectMenuIdsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        menu_id
+        from ent_role_menu
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -46,7 +53,7 @@
     delete from ent_role_menu
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.base.saas.manage.model.enterprise.EntRoleMenu">
+    <insert id="insert" parameterType="com.base.saas.manage.domain.entity.enterprise.EntRoleMenu">
     insert into ent_role_menu (id, role_id,
       menu_id, company_code, create_user, 
       create_time)
@@ -54,7 +61,7 @@
       #{menuId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntRoleMenu">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntRoleMenu">
         insert into ent_role_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -99,7 +106,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntRoleMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntRoleMenu">
         update ent_role_menu
         <set>
             <if test="roleId != null">
@@ -121,7 +128,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.model.enterprise.EntRoleMenu">
+    <update id="updateByPrimaryKey" parameterType="com.base.saas.manage.domain.entity.enterprise.EntRoleMenu">
     update ent_role_menu
     set role_id = #{roleId,jdbcType=VARCHAR},
       menu_id = #{menuId,jdbcType=VARCHAR},

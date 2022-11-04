@@ -1,11 +1,10 @@
 package com.base.saas.manage.mapper.system;
 
-import com.base.saas.manage.model.system.SysModule;
+import com.base.saas.manage.domain.entity.system.SysModule;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface SysModuleMapper {

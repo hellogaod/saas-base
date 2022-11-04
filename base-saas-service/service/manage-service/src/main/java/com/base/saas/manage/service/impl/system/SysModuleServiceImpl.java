@@ -1,11 +1,11 @@
 package com.base.saas.manage.service.impl.system;
 
-import com.base.saas.manage.mapper.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
 import com.base.saas.manage.mapper.system.SysModuleMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysModule;
-import com.base.saas.manage.model.system.SysMenu;
+import com.base.saas.manage.domain.model.ReturnMap;
+import com.base.saas.manage.domain.entity.system.SysModule;
+import com.base.saas.manage.domain.entity.system.SysMenu;
 import com.base.saas.manage.service.system.SysModuleService;
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.system.SysOtherConfigMapper">
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.system.SysOtherConfig">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysOtherConfig">
         <id column="other_id" property="otherId" jdbcType="VARCHAR"/>
         <result column="other_name" property="otherName" jdbcType="VARCHAR"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
@@ -43,7 +43,7 @@
         where other_id = #{otherId,jdbcType=VARCHAR}
     </select>
 
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.system.SysOtherConfig">
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysOtherConfig">
         insert into sys_other_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="otherId != null">
@@ -101,7 +101,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.system.SysOtherConfig">
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.system.SysOtherConfig">
         update sys_other_config
         <set>
             <if test="otherName != null">
@@ -129,7 +129,7 @@
         where other_id = #{otherId,jdbcType=VARCHAR}
     </update>
 
-    <select id="getConfListByCompanyCode" resultType="com.base.saas.manage.model.system.SysOtherConfig"
+    <select id="getConfListByCompanyCode" resultType="com.base.saas.manage.domain.entity.system.SysOtherConfig"
             parameterType="String">
     select t.other_id,t.other_name,t.type
     from sys_other_config t,ent_other_config f where t.other_id=f.other_id and f.company_code = #{companyCode}
