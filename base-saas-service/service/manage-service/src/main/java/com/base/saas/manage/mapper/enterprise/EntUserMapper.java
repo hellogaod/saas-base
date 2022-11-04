@@ -1,6 +1,10 @@
 package com.base.saas.manage.mapper.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.manage.domain.entity.enterprise.EntUser;
+=======
+import com.base.saas.manage.model.enterprise.EntUser;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

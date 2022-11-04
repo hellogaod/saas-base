@@ -99,7 +99,6 @@ public abstract class UserContextUtil {
      * @return
      * @Description 获取system-web用户数据权限使用
      * @Param
-     * @Author coder_bao
      * @Date
      **/
     public static String getDataPermissions(String serverName) {

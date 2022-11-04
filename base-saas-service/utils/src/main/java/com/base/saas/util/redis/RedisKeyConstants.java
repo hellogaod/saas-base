@@ -4,7 +4,7 @@ package com.base.saas.util.redis;
  * Title :
  * Description : redis key常量类
  * Create on : 2018年05月16日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc

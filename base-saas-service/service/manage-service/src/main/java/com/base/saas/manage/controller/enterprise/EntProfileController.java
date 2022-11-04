@@ -1,5 +1,6 @@
 package com.base.saas.manage.controller.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
@@ -7,6 +8,15 @@ import com.base.saas.manage.domain.entity.enterprise.EntProfile;
 import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
+=======
+import com.base.saas.common.language.LocaleMessage;
+import com.base.saas.common.logger.LoggerCommon;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.manage.model.enterprise.EntProfile;
+import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.manage.service.enterprise.EntProfileService;
 import com.base.saas.util.HeaderUtil;
 import io.swagger.annotations.Api;
@@ -17,7 +27,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/entProfile")
+<<<<<<< HEAD
 @Api(tags = "公司简介配置")
+=======
+@Api(value = "公司简介配置")
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntProfileController {
 
     private static final String ENTITY_NAME = "companyProfile";
@@ -37,7 +51,11 @@ public class EntProfileController {
             companyProfile = companyProfileService.getInfo(companyCode);
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "获取公司简介异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "获取公司简介异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
         LoggerCommon.info(this.getClass(), "获取公司简介成功");
@@ -64,7 +82,11 @@ public class EntProfileController {
             }
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.save.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "保存公司简介异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "保存公司简介异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 

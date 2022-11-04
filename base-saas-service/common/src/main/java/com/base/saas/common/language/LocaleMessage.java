@@ -15,8 +15,6 @@ import java.util.Locale;
 /**
  * @ClassName LocaleMessage
  * @Description 获取当前语言版本的资源
- * @Author coder_bao
- * @Date 2018/8/30 15:29
  */
 @Component
 public class LocaleMessage {

@@ -19,7 +19,7 @@ import java.util.Map;
  * Title :
  * Description : @阿里云上传下载@
  * Create on : 2018年06月04日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  *         username:chengrui

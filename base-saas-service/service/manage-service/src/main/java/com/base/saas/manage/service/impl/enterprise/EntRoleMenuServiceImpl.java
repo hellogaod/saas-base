@@ -1,5 +1,6 @@
 package com.base.saas.manage.service.impl.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntMenu;
@@ -12,6 +13,20 @@ import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.mapper.enterprise.EntRoleMapper;
 import com.base.saas.manage.mapper.enterprise.EntRoleMenuMapper;
 import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
+=======
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
+import com.base.saas.manage.mapper.enterprise.EntRoleMapper;
+import com.base.saas.manage.mapper.enterprise.EntRoleMenuMapper;
+import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.manage.model.enterprise.EntMenu;
+import com.base.saas.manage.model.enterprise.EntModule;
+import com.base.saas.manage.model.enterprise.EntRole;
+import com.base.saas.manage.model.enterprise.EntRoleMenu;
+import com.base.saas.manage.service.enterprise.EntRoleMenuService;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

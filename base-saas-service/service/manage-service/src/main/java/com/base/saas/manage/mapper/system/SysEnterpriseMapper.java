@@ -1,7 +1,7 @@
 package com.base.saas.manage.mapper.system;
 
 
-import com.base.saas.manage.domain.entity.system.SysEnterprise;
+import com.base.saas.manage.model.system.SysEnterprise;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

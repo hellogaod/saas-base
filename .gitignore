@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 //忽略这个target目录
+=======
+target          //忽略这个target目录
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 base-saas-service/service/common-service/target/
 base-saas-service/service/manage-service/target/
 base-saas-service/service/zuul-service/target/
 
+<<<<<<< HEAD
+=======
+node_modules
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d

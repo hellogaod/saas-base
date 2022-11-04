@@ -1,5 +1,6 @@
 package com.base.saas.manage.controller.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
@@ -11,6 +12,19 @@ import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.service.enterprise.EntDictItemConfigService;
 import com.base.saas.manage.service.enterprise.EntDictConfigService;
+=======
+import com.base.saas.common.language.LocaleMessage;
+import com.base.saas.common.logger.LoggerCommon;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.manage.model.enterprise.EntDictItemConfig;
+import com.base.saas.manage.model.enterprise.EntDictConfig;
+import com.base.saas.manage.service.enterprise.EntDictItemConfigService;
+import com.base.saas.manage.service.enterprise.EntDictConfigService;
+import com.base.saas.manage.start.EntDictCacheLoader;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.util.HeaderUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,6 +38,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
+=======
+import javax.annotation.Resource;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +49,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/entDict")
+<<<<<<< HEAD
 @Api(tags = "数据字典管理")
 public class EntDictConfigController {
 
@@ -38,6 +57,15 @@ public class EntDictConfigController {
     private EntDictItemConfigService dictItemConfigService;
 
     @Autowired
+=======
+@Api(value = "数据字典管理")
+public class EntDictConfigController {
+
+    @Resource
+    private EntDictItemConfigService dictItemConfigService;
+
+    @Resource
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
     private EntDictConfigService dictConfigService;
 
     @Autowired
@@ -78,7 +106,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(pageInfo);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "查询大类数据列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "查询大类数据列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -103,7 +135,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(pageInfo);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "查询明细数据列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "查询明细数据列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -129,7 +165,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "保存字典大类异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "保存字典大类异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -155,7 +195,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.operation.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改字典大类状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改字典大类状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -172,7 +216,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(entDictConfig);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "根据id获取字典大类信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "根据id获取字典大类信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -203,7 +251,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改字典大类异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改字典大类异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -234,7 +286,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "保存字典明细异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "保存字典明细异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -262,7 +318,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改字典明细状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改字典明细状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -279,7 +339,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(dictDetail);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "根据id查询字典明细异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "根据id查询字典明细异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -305,7 +369,11 @@ public class EntDictConfigController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改字典明细异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改字典明细异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -322,7 +390,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(detailList);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "根据字典编码查询字典明细异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "根据字典编码查询字典明细异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -350,7 +422,11 @@ public class EntDictConfigController {
             return ResponseEntity.ok().body(map);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "查询多个字典明细异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "查询多个字典明细异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }

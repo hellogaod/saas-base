@@ -7,7 +7,7 @@ import com.aliyun.oss.common.auth.CredentialsProvider;
 import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 
 /**
- * @Author: wangtao
+ * @Author:
  * @Date: 2018/05/15 09:35
  * @Description:
  */

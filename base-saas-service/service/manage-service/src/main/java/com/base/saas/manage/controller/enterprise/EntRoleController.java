@@ -1,5 +1,6 @@
 package com.base.saas.manage.controller.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
@@ -7,6 +8,15 @@ import com.base.saas.manage.domain.entity.enterprise.EntRole;
 import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
+=======
+import com.base.saas.common.language.LocaleMessage;
+import com.base.saas.common.logger.LoggerCommon;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.manage.model.enterprise.EntRole;
+import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.manage.service.enterprise.EntRoleService;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.StringUtil;
@@ -24,7 +34,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/entRole")
+<<<<<<< HEAD
 @Api(tags = "角色管理")
+=======
+@Api(value = "角色管理")
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntRoleController {
 
     @Autowired
@@ -48,7 +62,11 @@ public class EntRoleController {
             return ResponseEntity.ok().body(pageInfo);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "获取角色列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "获取角色列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -69,7 +87,11 @@ public class EntRoleController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "添加角色异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "添加角色异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -95,7 +117,11 @@ public class EntRoleController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改角色状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改角色状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -111,7 +137,11 @@ public class EntRoleController {
             return ResponseEntity.ok().body(role);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "查询单个角色异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "查询单个角色异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }
@@ -135,7 +165,11 @@ public class EntRoleController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.update.fail");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "修改角色信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "修改角色信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }

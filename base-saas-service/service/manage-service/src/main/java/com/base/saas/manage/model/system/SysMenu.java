@@ -25,9 +25,6 @@ public class SysMenu implements Serializable {
     //父级菜单id
     private String parentId;
 
-    //父级菜单名称
-    private String parentName;
-
     //创建人
     private String createUser;
 
@@ -107,14 +104,6 @@ public class SysMenu implements Serializable {
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
     }
 
     public String getCreateUser() {

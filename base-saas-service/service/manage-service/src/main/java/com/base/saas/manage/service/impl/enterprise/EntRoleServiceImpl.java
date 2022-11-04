@@ -1,12 +1,21 @@
 package com.base.saas.manage.service.impl.enterprise;
 
 
+<<<<<<< HEAD
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntRole;
 import com.base.saas.manage.service.enterprise.EntRoleService;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.mapper.enterprise.EntRoleMapper;
+=======
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.manage.mapper.enterprise.EntRoleMapper;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.manage.model.enterprise.EntRole;
+import com.base.saas.manage.service.enterprise.EntRoleService;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

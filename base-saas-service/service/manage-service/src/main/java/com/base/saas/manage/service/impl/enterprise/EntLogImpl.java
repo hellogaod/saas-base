@@ -1,9 +1,15 @@
 package com.base.saas.manage.service.impl.enterprise;
 
 import com.base.saas.manage.mapper.enterprise.EntLogMapper;
+<<<<<<< HEAD
 import com.base.saas.manage.domain.model.EntLogRequest;
 import com.base.saas.manage.service.enterprise.EntLogService;
 import com.base.saas.manage.domain.entity.enterprise.EntLog;
+=======
+import com.base.saas.manage.model.EntLogRequest;
+import com.base.saas.manage.service.enterprise.EntLogService;
+import com.base.saas.common.logger.EntLog;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

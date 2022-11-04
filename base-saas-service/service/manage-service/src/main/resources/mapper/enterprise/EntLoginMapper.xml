@@ -3,7 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntLoginMapper">
 
+<<<<<<< HEAD
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntUser">
+=======
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntUser">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
 
@@ -20,7 +24,11 @@
         <result column="lock_time" property="lockTime" jdbcType="TIMESTAMP"/>
         <result column="latest_time" property="latestTime" jdbcType="TIMESTAMP"/>
         <result column="latest_ip" property="latestIp" jdbcType="VARCHAR"/>
+<<<<<<< HEAD
         <result column="error_count" property="errorCount" jdbcType="INTEGER"/>
+=======
+        <result column="error_count" property="errorCount" jdbcType="Integer"/>
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 
         <result column="status" property="status" jdbcType="SMALLINT"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
@@ -30,10 +38,17 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
         <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+<<<<<<< HEAD
         <result column="company_status" property="companyStatus" jdbcType="INTEGER"/>
         <result column="org_status" property="orgStatus" jdbcType="INTEGER"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
         <result column="role_status" property="roleStatus" jdbcType="INTEGER"/>
+=======
+        <result column="company_status" property="companyStatus" jdbcType="Integer"/>
+        <result column="org_status" property="orgStatus" jdbcType="Integer"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_status" property="roleStatus" jdbcType="Integer"/>
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
     </resultMap>
     <sql id="Base_Column_List">
       user_id,
@@ -60,7 +75,11 @@
       update_time
      </sql>
 
+<<<<<<< HEAD
     <resultMap id="PermissionResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntMenu">
+=======
+    <resultMap id="PermissionResultMap" type="com.base.saas.manage.model.enterprise.EntMenu">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
         <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
         <result column="icon" property="icon" jdbcType="VARCHAR"/>

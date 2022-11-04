@@ -2,6 +2,7 @@ package com.base.saas.manage.model.enterprise;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class EntMenu implements Serializable {
     private static final long serialVersionUID = 3024510722251124710L;
@@ -13,6 +14,8 @@ public class EntMenu implements Serializable {
 
     //关联sysModule主键id
     private String moduleId;
+
+    private int isDesensite;//是否脱敏
 
     //所属企业
     private String companyCode;
@@ -51,6 +54,45 @@ public class EntMenu implements Serializable {
 
     //状态   0：停用, 1：启用
     private int status;
+
+    private boolean isChecked;//当前菜单是否被选中
+
+    private boolean isHalfChecked;//是否半选中，当前菜单的子菜单没有全部选中情况下，该字段为true
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean isHalfChecked() {
+        return isHalfChecked;
+    }
+
+    public void setHalfChecked(boolean halfChecked) {
+        isHalfChecked = halfChecked;
+    }
+
+    //当前菜单的子菜单
+    private List<EntMenu> subMenus;
+
+    public int getIsDesensite() {
+        return isDesensite;
+    }
+
+    public void setIsDesensite(int isDesensite) {
+        this.isDesensite = isDesensite;
+    }
+
+    public List<EntMenu> getSubMenus() {
+        return subMenus;
+    }
+
+    public void setSubMenus(List<EntMenu> subMenus) {
+        this.subMenus = subMenus;
+    }
 
     //备注
     private String remark;

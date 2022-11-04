@@ -1,6 +1,7 @@
 package com.base.saas.manage.controller.enterprise;
 
 import com.alibaba.fastjson.JSON;
+<<<<<<< HEAD
 import com.base.saas.AppConstant;
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
@@ -17,6 +18,24 @@ import com.base.saas.manage.service.enterprise.EntLoginService;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.IPUtil;
 import com.base.saas.util.RSAUtils;
+=======
+import com.base.saas.common.AppConstant;
+import com.base.saas.common.language.LocaleMessage;
+import com.base.saas.common.logger.LoggerCommon;
+import com.base.saas.manage.model.ReturnMap;
+import com.base.saas.manage.model.enterprise.EntModule;
+import com.base.saas.manage.model.enterprise.EntUser;
+import com.base.saas.util.response.ExceptionStackMessage;
+import com.base.saas.common.userinfo.UserContextUtil;
+import com.base.saas.common.userinfo.UserInfo;
+import com.base.saas.manage.model.EntUserLoginRequest;
+import com.base.saas.manage.model.EntUserLoginResponse;
+import com.base.saas.manage.model.KeyScriptRequest;
+import com.base.saas.manage.service.enterprise.EntLoginService;
+import com.base.saas.util.HeaderUtil;
+import com.base.saas.util.IPUtil;
+import com.base.saas.util.RsaUtils;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.util.redis.RedisKeyConstants;
 import com.base.saas.util.redis.RedisUtil;
 import com.base.saas.util.validatecode.ValidateCodeOperationUtils;
@@ -36,7 +55,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/entlogin")
+<<<<<<< HEAD
 @Api(tags = "企业管理端登录")
+=======
+@Api(value = "企业管理端登录")
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntLoginController {
 
     @Autowired
@@ -55,10 +78,17 @@ public class EntLoginController {
         String result = null;
         String localeTipMsg = null;
         try {
+<<<<<<< HEAD
             result = RSAUtils.privateDecrypt(keyScriptRequest.getKeyScript());
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.screte.key.error");
             LoggerCommon.info(this.getClass(), "企业用户登录异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            result = RsaUtils.privateDecrypt(keyScriptRequest.getKeyScript());
+        } catch (Exception e) {
+            localeTipMsg = LocaleMessage.get("message.screte.key.error");
+            LoggerCommon.info(this.getClass(), "企业用户登录异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest()
                     .headers(HeaderUtil.createErrorMsg(localeTipMsg))
                     .body(null);
@@ -82,7 +112,11 @@ public class EntLoginController {
             returnMap = companyLoginService.entLogin(username, password, companyCode);
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("system.server.exception");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "企业用户登录异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "企业用户登录异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg))
                     .body(null);
         }
@@ -132,7 +166,11 @@ public class EntLoginController {
             companyLoginService.updateEntLoginIpInfo(userId, companyCode, ip);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
+<<<<<<< HEAD
             LoggerCommon.info(this.getClass(), "加载系统菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+=======
+            LoggerCommon.info(this.getClass(), "加载系统菜单异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
         return ResponseEntity.ok().body(entModules);

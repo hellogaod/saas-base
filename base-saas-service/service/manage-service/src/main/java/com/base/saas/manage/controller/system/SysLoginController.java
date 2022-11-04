@@ -63,7 +63,11 @@ public class SysLoginController {
     @Resource
     private RedisUtil redisUtil;
 
+<<<<<<< HEAD
     @PostMapping("/doLogin")
+=======
+    @PostMapping("/dologin")
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
     @ApiOperation(value = "系统用户登陆", notes = "系统用户登陆")
     public ResponseEntity sysLogin(@RequestBody UserLoginRequest loginRequest, HttpServletRequest request) {
 

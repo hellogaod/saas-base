@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntDictConfigMapper" >
-  <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntDictConfig" >
+  <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntDictConfig" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
     <result column="item_code" property="itemCode" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
 
-  <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntDictConfig" >
+  <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntDictConfig" >
     insert into ent_dict_config
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -94,7 +94,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntDictConfig" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntDictConfig" >
     update ent_dict_config
     <set >
       <if test="companyCode != null" >

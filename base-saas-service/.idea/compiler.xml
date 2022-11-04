@@ -3,31 +3,9 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="manage-service" />
-        <module name="zuul-service" />
-        <module name="base-common" />
-        <module name="common-service" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="apiFilterUtils" target="1.8" />
       <module name="base-utils" target="1.8" />
-      <module name="system-web" target="1.8" />
     </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="apiFilterUtils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\api-filter-utils/lib" />
-      <module name="base-common" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\base-common/lib" />
-      <module name="base-utils" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\base-utils/lib" />
-      <module name="common-service" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\common-service/lib" />
-      <module name="manage-service" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\manage-service/lib" />
-      <module name="system-web" options="-parameters -extdirs F:\future_project\saas-base\base-saas-service\service\system-web/lib" />
-      <module name="zuul-service" options="" />
-    </option>
   </component>
 </project>

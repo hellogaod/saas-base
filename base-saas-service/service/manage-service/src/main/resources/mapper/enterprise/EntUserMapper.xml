@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntUserMapper">
+<<<<<<< HEAD
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntUser">
+=======
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntUser">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
@@ -284,7 +288,11 @@
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
 
+<<<<<<< HEAD
     <select id="getUserByUpdate" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" resultType="String">
+=======
+    <select id="getUserByUpdate" parameterType="com.base.saas.manage.model.enterprise.EntUser" resultType="String">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
     select user_id from ent_user where account = #{account} and company_code = #{companyCode} and user_id != #{userId}
   </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.base.saas.manage.model.enterprise;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 //组织架构
 public class EntOrganization implements Serializable {
@@ -12,6 +13,8 @@ public class EntOrganization implements Serializable {
 
     //父级编号
     private String parentOrgId;
+
+    private String parentOrgName;//父级组织名称
 
     //企业编号
     private String companyCode;
@@ -48,6 +51,24 @@ public class EntOrganization implements Serializable {
 
     //修改时间
     private Date updateTime;
+
+    private List<EntOrganization> children;
+
+    public List<EntOrganization> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<EntOrganization> children) {
+        this.children = children;
+    }
+
+    public String getParentOrgName() {
+        return parentOrgName;
+    }
+
+    public void setParentOrgName(String parentOrgName) {
+        this.parentOrgName = parentOrgName;
+    }
 
     public String getOrgId() {
         return orgId;

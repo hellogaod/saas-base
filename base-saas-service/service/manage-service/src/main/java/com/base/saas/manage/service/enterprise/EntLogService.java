@@ -1,7 +1,12 @@
 package com.base.saas.manage.service.enterprise;
 
+<<<<<<< HEAD
 import com.base.saas.manage.domain.entity.enterprise.EntLog;
 import com.base.saas.manage.domain.model.EntLogRequest;
+=======
+import com.base.saas.common.logger.EntLog;
+import com.base.saas.manage.model.EntLogRequest;
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 
 import java.util.List;
 

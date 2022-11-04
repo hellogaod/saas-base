@@ -3,7 +3,7 @@ package com.base.saas.util;
 import java.net.InetAddress;
 
 /**
- * @Author: wangtao
+ * @Author:
  * @Date: 2018/05/15 11:19
  * @Description: id生成器
  */
@@ -12,7 +12,7 @@ public class GUIDUtil {
     byte[] guts;
 
     /**
-     * @Author: wangtao
+     * @Author:
      * @Date: 2018/05/15 11:22
      * @Params:
      * @Description: 生成GUID

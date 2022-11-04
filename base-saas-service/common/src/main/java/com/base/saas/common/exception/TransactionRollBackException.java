@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Title :
  * Description :自定义事务回滚异常
  * Create on : 2018年05月15日
- * Copyright (C) zw.FinTec
+ * Copyright (C)
  *
  * @author department:研发部
  * username:zh-pc

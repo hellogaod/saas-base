@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntDictItemConfigMapper">
+<<<<<<< HEAD
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntDictItemConfig">
+=======
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
@@ -21,7 +25,11 @@
   </sql>
 
 
+<<<<<<< HEAD
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntDictItemConfig">
+=======
+    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         insert into ent_dict_item_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -95,7 +103,11 @@
         </trim>
     </insert>
 
+<<<<<<< HEAD
     <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntDictItemConfig">
+=======
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         update ent_dict_item_config
         <set>
             <if test="companyCode != null">
@@ -157,7 +169,11 @@
     </select>
 
     <select id="findDictConfigById" parameterType="String"
+<<<<<<< HEAD
             resultType="com.base.saas.manage.domain.entity.enterprise.EntDictItemConfig">
+=======
+            resultType="com.base.saas.manage.model.enterprise.EntDictItemConfig">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
       SELECT
        t.id,
        t.company_code companyCode,

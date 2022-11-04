@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntProfileMapper">
+<<<<<<< HEAD
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntProfile">
+=======
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntProfile">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="SMALLINT"/>
     </resultMap>
+<<<<<<< HEAD
     <resultMap id="ResultMapWithBLOBs" type="com.base.saas.manage.domain.entity.enterprise.EntProfile" extends="BaseResultMap">
+=======
+    <resultMap id="ResultMapWithBLOBs" type="com.base.saas.manage.model.enterprise.EntProfile" extends="BaseResultMap">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -16,20 +24,32 @@
         content
     </sql>
 
+<<<<<<< HEAD
     <select id="getInfo" parameterType="java.lang.String" resultType="com.base.saas.manage.domain.entity.enterprise.EntProfile">
+=======
+    <select id="getInfo" parameterType="java.lang.String" resultType="com.base.saas.manage.model.enterprise.EntProfile">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         select company_code AS companyCode,content
         from ent_profile
         where company_code = #{companyCode} and delete_flag = 0
     </select>
 
+<<<<<<< HEAD
     <insert id="insert" parameterType="com.base.saas.manage.domain.entity.enterprise.EntProfile">
+=======
+    <insert id="insert" parameterType="com.base.saas.manage.model.enterprise.EntProfile">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         insert into ent_profile (id, company_code, delete_flag,
         content)
         values (#{id,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=SMALLINT},
         #{content,jdbcType=LONGVARCHAR})
     </insert>
 
+<<<<<<< HEAD
     <update id="update" parameterType="com.base.saas.manage.domain.entity.enterprise.EntProfile">
+=======
+    <update id="update" parameterType="com.base.saas.manage.model.enterprise.EntProfile">
+>>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         update ent_profile
         set content = #{content},
         delete_flag = #{deleteFlag}

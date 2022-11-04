@@ -3,6 +3,7 @@ package com.base.saas.manage.model.enterprise;
 import java.io.Serializable;
 import java.util.Date;
 
+//角色实体
 public class EntRole implements Serializable {
     private static final long serialVersionUID = 7069779715268716689L;
 

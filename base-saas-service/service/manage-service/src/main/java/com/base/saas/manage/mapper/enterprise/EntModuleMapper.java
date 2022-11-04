@@ -1,11 +1,12 @@
 package com.base.saas.manage.mapper.enterprise;
 
 
-import com.base.saas.manage.domain.entity.enterprise.EntModule;
+import com.base.saas.manage.model.enterprise.EntModule;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EntModuleMapper {
