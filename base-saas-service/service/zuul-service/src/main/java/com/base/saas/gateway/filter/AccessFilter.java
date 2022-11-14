@@ -76,7 +76,6 @@ public class AccessFilter extends ZuulFilter {
 
         //管理端除了登录接口，其他必须确保用户信息存在
         UserContextUtil.setHttpServletRequest(request);
-        UserContextUtil.setHttpServletResponse(response);
         UserInfo userInfo = UserContextUtil.getUserInfo();
 
         System.out.println(request.getRequestURI() + ": " + UserContextUtil.getUserTokenId());

@@ -107,23 +107,23 @@ public class EntLoginController {
             userInfo.setRealName(entUser.getRealName());
             userInfo.setUserId(entUser.getUserId());
             userInfo.setUserType(2);
-            UserContextUtil.setUserInfo(UserContextUtil.getSession().getId(), userInfo);
+            UserContextUtil.setUserInfo(request.getSession().getId(), userInfo);
 
-            String session = UserContextUtil.getSession().getId();
+            String sessionId = request.getSession().getId();
 
             EntUserLoginResponse response = new EntUserLoginResponse();
-            response.setToken(session);
+            response.setToken(sessionId);
             response.setUserInfo(userInfo);
             LocaleMessage.setLocale(response.getToken());
             RedisUtil.set(RedisKeyConstants.LOGIN_PREFIX + companyCode + "-" + username, loginIp, Integer.parseInt(sessionTimeout));
-            return ResponseEntity.ok().headers(HeaderUtil.createToken(session)).body(response);
+            return ResponseEntity.ok().headers(HeaderUtil.createToken(sessionId)).body(response);
         }
     }
 
 
     @ApiOperation(value = "加载系统菜单", notes = "加载系统菜单")
     @GetMapping("/index")
-    public ResponseEntity index() {
+    public ResponseEntity index(HttpServletRequest request) {
         UserInfo userInfo = UserContextUtil.getUserInfo();
         String userId = userInfo.getUserId();
         String companyCode = userInfo.getCompanyCode();
@@ -131,7 +131,7 @@ public class EntLoginController {
         try {
             entModules = companyLoginService.getModuleAndMenuList(userId, companyCode);
             //获取当前登录用户的ip
-            String ip = IPUtil.getIpAddr(UserContextUtil.getHttpServletRequest());
+            String ip = IPUtil.getIpAddr(request);
             companyLoginService.updateEntLoginIpInfo(userId, companyCode, ip);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");

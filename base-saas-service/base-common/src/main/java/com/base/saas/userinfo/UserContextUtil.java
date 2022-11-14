@@ -4,52 +4,41 @@ import com.base.saas.AppConstant;
 import com.base.saas.util.redis.RedisUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 /**
- * 用户信息存取
+ * 用户信息存取:通过key:sessionId，value：userInfo存储在redis中
+ * 1. 如果是登录，将登录request中的session.getId()作为sessionId；
+ * 2.将sessionId作为request头部header的x-userToken参数，之后的每次获取都是通过该参数获取；
  */
 public abstract class UserContextUtil {
 
-    private static ThreadLocal<HashMap<String, Object>> threadLocal = ThreadLocal.withInitial(() -> new HashMap());
+    private static HttpServletRequest httpServletRequest = null;
 
-    private static ThreadLocal<HashMap<String, Object>> getThreadLocal() {
-        return threadLocal;
+    //传递当前Request对象
+    public static void setHttpServletRequest(HttpServletRequest request) {
+        httpServletRequest = request;
     }
 
-    public static void setHttpServletRequest(HttpServletRequest httpServletRequest) {
-        threadLocal.get().put("httpServletRequest", httpServletRequest);
-    }
 
-    public static void setHttpServletResponse(HttpServletResponse httpServletResponse) {
-        threadLocal.get().put("httpServletResponse", httpServletResponse);
-    }
-
-    public static HttpSession getSession() {
-        HttpServletRequest request = getHttpServletRequest();
-        return request.getSession();
-    }
-
-    public static HttpServletRequest getHttpServletRequest() {
-        return (HttpServletRequest) threadLocal.get().get("httpServletRequest");
-    }
-
-    public static HttpServletResponse getHttpServletResponse() {
-        return (HttpServletResponse) threadLocal.get().get("httpServletResponse");
-    }
-
+    //通过header获取sessionId
     public static String getUserTokenId() {
-
-        return getSession().getId();
+        if (httpServletRequest != null)
+            return httpServletRequest.getHeader("X-UserToken");
+        return null;
     }
 
+    //通过request获取sessionid作为key，再在redis中获取userInfo
     public static UserInfo getUserInfo() {
+        if (httpServletRequest == null)
+            return null;
         return RedisUtil.get(AppConstant.APP_USER_INFO + getUserTokenId());
     }
 
+    //如果是登录情况下，将登录request中国的sessionId作为tokenId
     public static UserInfo getUserInfo(String tokenId) {
+        if (tokenId == null) {
+            return null;
+        }
         return RedisUtil.get(AppConstant.APP_USER_INFO + tokenId);
     }
 
@@ -61,8 +50,4 @@ public abstract class UserContextUtil {
         RedisUtil.set(AppConstant.APP_USER_INFO + tokenId, userInfo);
     }
 
-    public static void localClear() {
-        getThreadLocal().get().clear();
-        getThreadLocal().remove();
-    }
 }

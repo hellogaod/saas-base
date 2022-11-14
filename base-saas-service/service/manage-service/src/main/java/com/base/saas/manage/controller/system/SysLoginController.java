@@ -12,6 +12,7 @@ import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.util.HeaderUtil;
+import com.base.saas.util.IPUtil;
 import com.base.saas.util.StringUtil;
 import com.base.saas.util.redis.RedisKeyConstants;
 import com.base.saas.util.redis.RedisUtil;
@@ -167,7 +168,8 @@ public class SysLoginController {
             returnMap = loginService.getMenuList(userId);
 
             //更新用户最后一次登录ip地址
-            loginService.updateLoginInfo(userId, UserContextUtil.getHttpServletRequest().getRemoteAddr());
+            String ip = IPUtil.getIpAddr(request);
+            loginService.updateLoginInfo(userId, ip);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
             LoggerCommon.info(this.getClass(), "加载系统菜单异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
