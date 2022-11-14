@@ -6,21 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.core.env.Environment;
-import org.springframework.jmx.support.RegistrationPolicy;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-@EnableSwagger2
 //将微服务注册到服务发现组件
 @EnableDiscoveryClient
 //自动查找 application.yml
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-//解决jmx重复注册bean的问题
-@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 public class BaseCommonApplication {
     private static final Logger log = LoggerFactory.getLogger(BaseCommonApplication.class);
 
