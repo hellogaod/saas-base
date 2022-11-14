@@ -1,6 +1,5 @@
 package com.base.saas.manage.controller.enterprise;
 
-
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
@@ -33,10 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/api/entDict")
-
 @Api(tags = "数据字典管理")
 public class EntDictConfigController {
 
