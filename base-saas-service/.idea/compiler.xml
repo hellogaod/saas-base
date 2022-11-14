@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="manage-service" />
         <module name="zuul-service" />
         <module name="base-common" />
-        <module name="manage-service" />
         <module name="common-service" />
       </profile>
     </annotationProcessing>
