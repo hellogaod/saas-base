@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.enterprise.EntMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntMenu">
+
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="is_desensite" property="isDesensite" jdbcType="INTEGER"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+        <result column="desensitize_status" property="desensitizeStatus" jdbcType="SMALLINT"/>
+        <result column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    menu_id, menu_name, url, sequence, icon,  parent_id,  company_code,
+    create_user, create_time, update_user, update_time, status,  desensitize_status,
+    module_id, remark
+  </sql>
+
+    <insert id="addEntMenuList" parameterType="list">
+        insert into ent_menu (
+        id,
+        menu_id,
+        module_id,
+        create_time,
+        create_user,
+        remark,
+        company_code)
+        VALUES
+        <foreach collection="list" item="detail" separator=",">
+            (#{detail.id,jdbcType=VARCHAR},
+            #{detail.menuId,jdbcType=VARCHAR},
+            #{detail.moduleId,jdbcType=VARCHAR},
+            #{detail.createTime,jdbcType=TIMESTAMP},
+            #{detail.create_user,jdbcType=VARCHAR},
+            #{detail.remark,jdbcType=LONGVARCHAR},
+            #{detail.companyCode,jdbcType=VARCHAR})
+        </foreach>
+
+    </insert>
+
+    <select id="getMenuIdsByCompanyCode" parameterType="string" resultType="string">
+    select menu_id from ent_menu where company_code = #{companyCode}
+  </select>
+
+
+    <select id="getMenusByModuleId" parameterType="string" resultMap="BaseResultMap">
+    select
+        s.menu_id,
+        s.menu_name,
+        s.url,
+        s.sequence,
+        s.icon,
+        s.parent_id,
+        s.company_code,
+        s.create_user,
+        s.create_time,
+        s.update_user,
+        s.update_time,
+        s.status,
+        s.desensitize_status,
+        s.module_id,
+        s.remark
+     from ent_menu e
+     left join sys_menu s on e.menu_id = s.menu_id
+     where e.module_id = #{moduelId} and s.status = 1
+  </select>
+
+    <select id="getMenusByRoleId" parameterType="string" resultMap="BaseResultMap">
+    select
+        s.menu_id,
+        s.menu_name,
+        s.url,
+        s.sequence,
+        s.icon,
+        s.parent_id,
+        s.company_code,
+        s.create_user,
+        s.create_time,
+        s.update_user,
+        s.update_time,
+        s.status,
+        s.desensitize_status,
+        s.module_id,
+        s.remark,
+        d.is_desensite
+     from ent_menu e
+     left join sys_menu s on e.menu_id = s.menu_id
+     left join ent_role_menu  r on r.menu_id = e.menu_id
+     left join ent_user_menu_desensite d on d.menu_id = s.menu_id
+     where r.role_id = #{roleId} and s.status = 1 and d.user_id = #{userId}
+  </select>
+
+
+    <update id="deleteEntMenuByCompanyCode" parameterType="string">
+    delete from ent_menu where company_code = #{companyCode}
+  </update>
+
+    <select id="getAllMenuUrl" resultType="map">
+    select url,company_code from ent_menu where status = 1 and url is not NULL  and url!=''
+  </select>
+
+    <update id="updateEntMenuByEntMenu" parameterType="com.base.saas.manage.domain.entity.enterprise.EntMenu">
+        update ent_menu
+        <set>
+
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where menu_id = #{menuId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 根据entModule,companyCode查询企业菜单信息 -->
+    <select id="getEntMenuByEntCode" parameterType="string" resultType="map">
+    SELECT m.id,m.sys_menu_code as sysMenuCode,m.icon,m.menu_name,m.menu_type,m.parent_id,IFNULL(m.url,'') url,IFNULL(dp.org_path,'') org_path,IFNULL(dp.is_desensite,0) is_desensite
+        from ent_user u
+        INNER JOIN ent_role r on r.role_id=u.role_id
+        INNER JOIN ent_role_menu rm on u.role_id=rm.role_id
+        INNER JOIN ent_menu m on m.id=rm.menu_id
+        LEFT JOIN ent_user_menu_desensite dp on dp.menu_id=m.id and u.user_id=dp.user_id
+        where u.user_id=#{userId} and r.`status`=1 and m.`status`=1 AND u.company_code = #{companyCode}
+        AND m.sys_code = #{entModuleCode}
+        ORDER BY m.sequence ASC
+  </select>
+
+    <select id="getAllMenuTree" resultType="Map" parameterType="String">
+    SELECT
+      t1.status,
+      t1.id as entMenuId,
+      t1.sys_menu_code AS id,
+      t1.parent_id AS parentId,
+      t1.menu_name AS menuName,
+      t1.status,
+      t1.url,
+      t1.icon,
+      t1.parent_name AS parentName,
+      t1.menu_type AS menuType,
+      t1.auth_status AS authStatus,
+      t1.desensitize_status AS desensitizeStatus,
+      t2.status AS parentStatus
+    FROM
+	  ent_menu t1
+    LEFT JOIN ent_menu t2 ON t1.parent_id = t2.id
+    WHERE
+	  1 = 1 and t1.sys_code = #{sysCode} and t1.status = 1
+    ORDER BY
+	  t1.sequence
+  </select>
+
+    <select id="getMenuDetail" resultType="map" parameterType="map">
+        SELECT DISTINCT
+        rm.menu_id AS entMenuId,
+        m.sys_menu_code as id,
+        m.menu_name AS menuName,
+        m.url AS url,
+        m.sequence AS sequence,
+        m.icon AS icon,
+        m.menu_type AS menuType,
+        m.parent_id AS parentId,
+        m.parent_name AS parentName,
+        m.create_user AS createUser,
+        m.create_time AS createTime,
+        m.update_user AS updateUser,
+        m.update_time AS updateTime,
+        m.remark,
+        m.status,
+        m.auth_status as authStatus,
+        m.desensitize_status as desensitizeStatus
+        <if test="userId != null and userId != ''">
+            ,udp.is_desensite AS desensite
+        </if>
+        FROM
+        ent_role_menu rm
+        LEFT JOIN ent_menu m ON rm.menu_id = m.id
+        LEFT JOIN ent_user_menu_desensite udp ON m.id = udp.menu_id
+        WHERE
+        rm.role_id = #{roleId}
+        <if test="userId != null and userId != ''">
+            And udp.user_id = #{userId}
+        </if>
+        AND m.sys_code = #{sysCode}
+        AND (m.sys_menu_code = #{menuId} OR m.parent_id = #{menuId})
+        AND m.menu_type != 2
+        AND m.url != ''
+        AND m.url is not null
+        AND m.status = 1
+        ORDER BY
+        m.create_time ASC
+    </select>
+
+    <select id="getSubMenuList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from ent_menu where parent_id = #{parentId} and sys_code = #{sysCode} and status = 1
+    </select>
+</mapper>

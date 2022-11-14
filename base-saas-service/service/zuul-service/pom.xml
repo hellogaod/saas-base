@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>zuul</artifactId>
+    <description>API网关</description>
+
+    <dependencies>
+        <!--基于 Spring Cloud 的编程模型，接入 Nacos 作为注册中心，实现服务的注册与发现-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>1.5.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+
+                <exclusion>
+                    <artifactId>spring-cloud-starter</artifactId>
+                    <groupId>org.springframework.cloud</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ribbon-core</artifactId>
+                    <groupId>com.netflix.ribbon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ribbon-loadbalancer</artifactId>
+                    <groupId>com.netflix.ribbon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ribbon-httpclient</artifactId>
+                    <groupId>com.netflix.ribbon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-cloud-netflix-core</artifactId>
+                    <groupId>org.springframework.cloud</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ribbon</artifactId>
+                    <groupId>com.netflix.ribbon</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--它自身就包含了对 spring-cloud-starter-hystrix 和 spring-cloud-starter­-ribbon模块的依赖，
+       所以 Zuul天生就拥有线程隔离和断路器的自我保护功能，以及 对服务调用的客户端负载均衡功能-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
+            <version>1.3.1.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-lang3</artifactId>
+                    <groupId>org.apache.commons</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.netflix.servo</groupId>
+                    <artifactId>servo-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.reactivex</groupId>
+                    <artifactId>rxjava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.netflix.hystrix</groupId>
+                    <artifactId>hystrix-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-cloud-context</artifactId>
+                    <groupId>org.springframework.cloud</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>archaius-core</artifactId>
+                    <groupId>com.netflix.archaius</groupId>
+                </exclusion>
+
+                <exclusion>
+                    <artifactId>spring-cloud-commons</artifactId>
+                    <groupId>org.springframework.cloud</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--netflix 程序内部数据监控-->
+        <dependency>
+            <artifactId>servo-core</artifactId>
+            <groupId>com.netflix.servo</groupId>
+            <version>0.7.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--springboot内置jetty-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+
+        <!--hystrix是Netlifx开源的一款容错框架，防雪崩利器，具备服务降级，服务熔断，依赖隔离，监控(Hystrix Dashboard)等功能-->
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-core</artifactId>
+            <version>1.5.12</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.netflix.archaius</groupId>
+                    <artifactId>archaius-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.netflix-commons</groupId>
+            <artifactId>netflix-commons-util</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+
+        <!--Spring提供的Redis Client，用于操作Redis的依赖库-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.base.saas</groupId>
+            <artifactId>base-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+
+        <!--是一套来自Google的核心Java库，其中包括新的集合类型（如multimap和multiset）、不可变的集合、图库，
+                以及并发、I/O、散列、缓存、基元、字符串等实用工具-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.base.saas.BaseZuulServerApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/classes</outputDirectory>
+                            <useDefaultDelimiters>false</useDefaultDelimiters>
+                            <delimiters>
+                                <delimiter>#</delimiter>
+                            </delimiters>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.xml</include>
+                                        <include>**/*.yml</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/resources/</directory>
+                                    <filtering>false</filtering>
+                                    <excludes>
+                                        <exclude>**/*.xml</exclude>
+                                        <exclude>**/*.yml</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--开启过滤，用指定的参数替换directory下的文件中的参数-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+    </build>
+
+</project>

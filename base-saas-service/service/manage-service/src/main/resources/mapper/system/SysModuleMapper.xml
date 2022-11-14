@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.saas.manage.mapper.system.SysModuleMapper">
+    <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysModule">
+        <id column="module_id" property="moduleId" jdbcType="VARCHAR"/>
+        <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    module_id, module_name, create_user, create_time, update_user, update_time, remark, status
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_module
+        where module_id = #{menuId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysModule">
+        insert into sys_module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                module_id,
+            </if>
+            <if test="moduleName != null">
+                module_name,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="moduleId != null">
+                #{moduleId,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleName != null">
+                #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.system.SysModule">
+        update sys_module
+        <set>
+            <if test="moduleName != null">
+                module_name = #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where module_id = #{moduleId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_module where 1=1
+        <if test="null!=moduleName and ''!=moduleName">
+            and module_name LIKE CONCAT('%',#{moduleName},'%' ) ESCAPE '/'
+        </if>
+        <if test="-1 !=status">
+            and status=#{status}
+        </if>
+
+        order by create_time desc
+    </select>
+
+
+</mapper>

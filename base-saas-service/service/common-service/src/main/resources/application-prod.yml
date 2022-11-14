@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    #当前环境
+    active: prod
+
+  #nacos服务地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.102.135:8848
+
+  #redis配置
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379
+    expireTime: 3600
+    password: xxx
+
+  # 热部署
+  devtools:
+    restart:
+      #设置开启热部署
+      enabled: true
+    livereload:
+      #是否支持livereload
+      enabled: false # we use gulp + BrowserSync for livereload
+
+  servlet:
+    multipart:
+      max-file-size: 100MB  #单个文件大小
+      max-request-size: 1024MB #总文件大小
+
+file:
+  ###静态资源对外暴露的访问路径
+  staticAccessPath: /api/file/**
+  ###静态资源实际存储路径
+  uploadFolder: D:/staticResource/upload/
+
+
+
+
