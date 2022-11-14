@@ -78,6 +78,7 @@
   import {Action} from "vuex-class";
   import {StorageUtil} from '~/utils/storage.util';
   import {entLoginService} from "~/server/services/enterprise-manage-services/entLogin.service";
+  import {ComValidateService} from '~/server/services/common-service/comValidate.service'
 
   import {RsaUtil} from '~/utils/rsa.util';
 
@@ -88,6 +89,8 @@
   })
   export default class Login extends Vue {
     @Dependencies(entLoginService) private authService: entLoginService;
+    @Dependencies(ComValidateService) private comValidateService: ComValidateService;
+
     @Action("updateUserLoginData") updateUserLoginData;
 
     private loginRule: any = {
@@ -118,7 +121,7 @@
     }
 
     getCaptcha() {
-      this.authService.captchaApi().subscribe(data => {
+      this.comValidateService.captchaApi().subscribe(data => {
         this.captchatImg = data.code
         this.loginModel.key = data.key
       }, ({msg}) => {

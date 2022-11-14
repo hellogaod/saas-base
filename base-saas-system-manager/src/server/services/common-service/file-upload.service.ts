@@ -1,4 +1,4 @@
-import {fileService} from '~/server/controller'
+import {commonService} from '~/server/controller'
 import {NetService} from '~/utils/net.service'
 import {Inject, Debounce} from "~/core/decorator";
 import {Service} from '~/server/service'
@@ -12,7 +12,7 @@ export class FileUploadService extends Service {
    */
   view() {
     return this.netService.send({
-      server: fileService.fileUploadController.view
+      server: commonService.fileUploadController.view
     })
   }
 
@@ -21,7 +21,7 @@ export class FileUploadService extends Service {
    */
   unZipCaseFile(data) {
     return this.netService.send({
-      server: fileService.fileUploadController.unZipCaseFile,
+      server: commonService.fileUploadController.unZipCaseFile,
       data
     })
   }

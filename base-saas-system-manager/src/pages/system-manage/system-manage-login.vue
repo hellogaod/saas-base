@@ -69,6 +69,7 @@
   import {Action} from "vuex-class";
   import {StorageUtil} from '~/utils/storage.util';
   import {LoginService} from "~/server/services/system-manage-services/sysLogin.service";
+  import {ComValidateService} from '~/server/services/common-service/comValidate.service'
 
   @Component({
     components: {
@@ -78,6 +79,8 @@
   })
   export default class Login extends Vue {
     @Dependencies(LoginService) private authService: LoginService;
+    @Dependencies(ComValidateService) private comValidateService: ComValidateService;
+
     @Action("updateUserLoginData") updateUserLoginData;
 
     private loginRule: any = {
@@ -106,7 +109,7 @@
     }
 
     getCaptcha() {
-      this.authService.captchaApi().subscribe(data => {
+      this.comValidateService.captchaApi().subscribe(data => {
         this.captchatImg = data.code
         this.loginModel.key = data.key
       }, ({msg}) => {
@@ -124,20 +127,6 @@
           return;
         }
 
-        // let verifyForm: any = this.$refs['verify-code']
-
-        // // 校验验证码
-        // if (verifyForm.getVerifyValue().trim() === '') {
-        //   this.$message.error('请输入验证码')
-        //   verifyForm.reset()
-        //   return
-        // }
-        // if (!verifyForm.validate()) {
-        //   this.$message.error('验证码错误')
-        //   verifyForm.reset()
-        //   return
-        // }
-
         if (this.remember) {
           StorageUtil.setItem('remember', this.loginModel)
         } else {
@@ -154,13 +143,15 @@
           .subscribe(
             ({token, userInfo}) => {
               this.updateUserLoginData({token, userInfo});
-              this.authService.getMenu({userId: userInfo.userId}).subscribe(({
-                                                                               null: any, data
-                                                                             }) => {
-                this.updateUserLoginData({null: any, userInfo, data});
-                this.$router.push("/sys-manage/business");
-                sessionStorage.setItem("loginType", "manage");
-              })
+              this.authService.getMenu({userId: userInfo.userId})
+                .subscribe(
+                  ({
+                     null: any, data
+                   }) => {
+                    this.updateUserLoginData({null: any, userInfo, data});
+                    this.$router.push("/sys-manage/business");
+                    sessionStorage.setItem("loginType", "manage");
+                  })
             },
             ({msg}) => {
               this.$message.error(msg);

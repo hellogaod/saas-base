@@ -5,8 +5,8 @@ import {requestType, servicePreName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manage' //本地
-// const SERVICE = 'system-manage' //測試
+const SERVICE = servicePreName +'manage-service' //本地
+
 const CONTROLLER = 'syslogin'
 /*
 * 前端服务名称
@@ -18,7 +18,7 @@ export default {
   login: {
     service: SERVICE,
     controller: CONTROLLER,
-    action: 'syslogin',
+    action: 'doLogin',
     type: requestType.Post
   },
   /**

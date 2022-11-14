@@ -191,14 +191,7 @@ export class NetService {
    */
   public send(options: any): Observable<any> {
     let jsonData = {};
-    // if(!options.hasOwnProperty('data')) options.data = {}
-    // if(JSON.stringify(options.data).indexOf("%")!=-1){
-    //   jsonData=JSON.parse(JSON.stringify(options.data).replace("%","%\/"));
-    // }else if(JSON.stringify(options.data).indexOf("_")!=-1){
-    //   jsonData=JSON.parse(JSON.stringify(options.data).replace("_","_\/"));
-    // }else{
     jsonData = options.data
-    // }
     let data = Object.assign({}, jsonData)
     let postData
     let getData
@@ -228,34 +221,6 @@ export class NetService {
     // 创建待观察对象
     var observable = Observable.create((observer) => {
 
-      // 添加响应拦截器
-      this.axiosInstance.interceptors.response.use(res => {
-        // res 响应结果
-        // 响应拦成功拦截
-        if (res.headers != undefined) {
-          var headers = res.headers
-          var msg = decodeURIComponent(headers['x-saas-server-alert'])
-
-
-          if (headers['x-saas-server-alert'] != undefined && ((msg.indexOf("成功") == -1 && msg.indexOf("success") == -1))) {
-
-            var data: any = {
-              exceptionStackMsg: msg
-            }
-            res.data = data
-
-            console.log("响应数据", res)
-          }
-
-
-        }
-
-        return res
-      }, err => {
-        // 响应拦失败拦截
-        return observer.error(err)
-      })
-
       this.axiosInstance.request({
         method,
         url,
@@ -270,10 +235,11 @@ export class NetService {
           })
       }).then(({data}) => {
 
+        console.log("响应数据：" + JSON.stringify(data))
+
         // 分页数据处理
         if (options.page && data) {
-          options.page.update(data.responseBody === undefined ? data : data.responseBody)
-          data = data
+          options.page.update(data)
         }
         // 关闭等待
         if (options.loading) {
@@ -288,7 +254,7 @@ export class NetService {
           Message.error(data.exceptionStackMsg)
           // observer.error(error)
         } else {
-          observer.next(data.responseBody === undefined ? data : data.responseBody)
+          observer.next(data)
         }
 
 

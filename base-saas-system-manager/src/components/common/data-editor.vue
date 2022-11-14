@@ -25,7 +25,7 @@
   import Component from "vue-class-component";
   import {Prop, Watch, Emit} from "vue-property-decorator";
   import {NetService} from "~/utils/net.service";
-  import {fileService} from "~/server/controller";
+  import {commonService} from "~/server/controller";
   import AppConfig from "~/config/app.config";
   import hljs from 'highlight.js';
   import {State} from "vuex-class";
@@ -88,7 +88,7 @@
       return [
         AppConfig.url.server,
         NetService.generateRequestUrl(
-          fileService.fileUploadController.upload
+          commonService.fileUploadController.upload
         )
       ].join("/");
     }
