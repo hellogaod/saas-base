@@ -1,6 +1,6 @@
 package com.base.saas.manage.service.impl.system;
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.mapper.enterprise.*;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.userinfo.UserContextUtil;
@@ -11,19 +11,7 @@ import com.base.saas.manage.domain.entity.enterprise.EntRole;
 import com.base.saas.manage.domain.entity.enterprise.EntRoleMenu;
 import com.base.saas.manage.domain.entity.enterprise.EntUser;
 import com.base.saas.manage.domain.entity.system.SysEnterprise;
-=======
-import com.base.saas.common.exception.TransactionRollBackException;
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.*;
-import com.base.saas.manage.mapper.system.SysEnterpriseMapper;
-import com.base.saas.manage.model.*;
-import com.base.saas.manage.model.enterprise.EntOrganization;
-import com.base.saas.manage.model.enterprise.EntRole;
-import com.base.saas.manage.model.enterprise.EntRoleMenu;
-import com.base.saas.manage.model.enterprise.EntUser;
-import com.base.saas.manage.model.system.SysEnterprise;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.manage.service.enterprise.EntMenuService;
 import com.base.saas.manage.service.system.SysEnterpriseService;
 import com.base.saas.util.*;

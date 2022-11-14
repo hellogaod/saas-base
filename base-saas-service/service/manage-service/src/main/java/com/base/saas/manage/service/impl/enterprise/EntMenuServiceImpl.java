@@ -1,11 +1,5 @@
 package com.base.saas.manage.service.impl.enterprise;
 
-<<<<<<< HEAD
-=======
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.system.SysMenuMapper;
 import com.base.saas.manage.domain.model.ReturnMap;

@@ -1,18 +1,12 @@
 package com.base.saas.manage.controller.enterprise;
 
-<<<<<<< HEAD
+
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntModule;
 import com.base.saas.util.ExceptionStackUtils;
-=======
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntModule;
-import com.base.saas.util.response.ExceptionStackMessage;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.manage.service.enterprise.EntRoleMenuService;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.StringUtil;
@@ -28,11 +22,8 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/entRoleMenu")
-<<<<<<< HEAD
+
 @Api(tags = "角色权限管理")
-=======
-@Api(value = "角色权限管理")
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntRoleMenuController {
 
     @Autowired
@@ -55,11 +46,9 @@ public class EntRoleMenuController {
             return ResponseEntity.ok().body(menuList);
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.query.errorMessage");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "根据角色编号查询已有的菜单编号异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "根据角色编号查询已有的菜单编号异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
@@ -81,11 +70,9 @@ public class EntRoleMenuController {
             }
         } catch (Exception e) {
             logmsg = LocaleMessage.get("message.system.save.fail");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "添加角色权限异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "添加角色权限异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
     }

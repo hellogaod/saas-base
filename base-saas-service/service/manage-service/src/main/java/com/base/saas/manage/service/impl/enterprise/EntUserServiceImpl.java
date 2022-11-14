@@ -1,20 +1,13 @@
 package com.base.saas.manage.service.impl.enterprise;
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.mapper.enterprise.EntUserMapper;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntUser;
 import com.base.saas.manage.service.enterprise.EntUserService;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
-=======
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntUserMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntUser;
-import com.base.saas.manage.service.enterprise.EntUserService;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.MD5Util;
 import com.base.saas.util.StringUtil;

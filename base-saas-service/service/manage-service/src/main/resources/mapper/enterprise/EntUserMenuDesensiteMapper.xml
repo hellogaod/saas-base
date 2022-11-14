@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntUserMenuDesensiteMapper">
-<<<<<<< HEAD
+
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
-=======
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.enterprise.EntUserMenuDesensite">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
@@ -21,11 +19,9 @@
     update_time, org_path, is_desensite
   </sql>
 
-<<<<<<< HEAD
+
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
-=======
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.enterprise.EntUserMenuDesensite">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         insert into ent_user_menu_desensite
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -99,11 +95,9 @@
         </trim>
     </insert>
 
-<<<<<<< HEAD
+
     <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite">
-=======
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.enterprise.EntUserMenuDesensite">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         update ent_user_menu_desensite
         <set>
             <if test="companyCode != null">
@@ -140,11 +134,9 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
-<<<<<<< HEAD
+
     <select id="getIdByUserIdAndMenuId" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite"
-=======
-    <select id="getIdByUserIdAndMenuId" parameterType="com.base.saas.manage.model.enterprise.EntUserMenuDesensite"
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             resultType="java.lang.String">
     SELECT
 	  id

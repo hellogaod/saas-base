@@ -1,20 +1,13 @@
 package com.base.saas.manage.controller.enterprise;
 
-<<<<<<< HEAD
+
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntOrganization;
 import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.userinfo.UserContextUtil;
-=======
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntOrganization;
-import com.base.saas.util.response.ExceptionStackMessage;
-import com.base.saas.common.userinfo.UserContextUtil;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.manage.service.enterprise.EntOrganizationService;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.StringUtil;
@@ -31,11 +24,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/entOrganization")
-<<<<<<< HEAD
 @Api(tags = "组织架构管理")
-=======
-@Api(value = "组织架构管理")
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntOrganizationController {
     private static final String ENTITY_NAME = "organization";
 
@@ -52,11 +41,9 @@ public class EntOrganizationController {
             return ResponseEntity.ok().body(orgList);
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "查询组织机构数据列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "查询组织机构数据列表异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }
@@ -82,11 +69,9 @@ public class EntOrganizationController {
             }
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.save.fail");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "组织机构保存异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "组织机构保存异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 
@@ -102,11 +87,9 @@ public class EntOrganizationController {
             return ResponseEntity.ok().body(organizationService.getOrgById(orgId));
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "根据id查询信息异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "根据id查询信息异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
 
@@ -133,11 +116,9 @@ public class EntOrganizationController {
             }
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.update.fail");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "修改组织异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "修改组织异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }
@@ -163,11 +144,9 @@ public class EntOrganizationController {
             }
         } catch (Exception e) {
             localeTipMsg = LocaleMessage.get("message.system.operation.fail");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "修改组织状态异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "修改组织状态异常：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
         }
     }

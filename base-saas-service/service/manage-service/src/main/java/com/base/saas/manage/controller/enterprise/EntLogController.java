@@ -1,6 +1,6 @@
 package com.base.saas.manage.controller.enterprise;
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.domain.entity.enterprise.EntLog;
 import com.base.saas.manage.domain.model.EntLogRequest;
 import com.base.saas.manage.service.enterprise.EntLogService;
@@ -9,16 +9,7 @@ import com.base.saas.logger.LoggerCommon;
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.HeaderUtil;
 import com.base.saas.util.ExceptionStackUtils;
-=======
-import com.base.saas.common.logger.EntLog;
-import com.base.saas.manage.model.EntLogRequest;
-import com.base.saas.manage.service.enterprise.EntLogService;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.util.CreateIDUtil;
-import com.base.saas.util.HeaderUtil;
-import com.base.saas.util.response.ExceptionStackMessage;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -29,18 +20,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-<<<<<<< HEAD
+
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/entLog")
 @Api(tags = "企业日志")
-=======
-
-@RestController
-@RequestMapping("/api/entLog")
-@Api(value = "企业日志")
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 public class EntLogController {
 
     @Autowired
@@ -48,7 +33,7 @@ public class EntLogController {
 
     @PostMapping(value = "/addLog")
     @ApiOperation(value = "新增系统日志", notes = "新增系统日志")
-<<<<<<< HEAD
+
     public ResponseEntity addLog(@RequestBody Map map) {
 
         EntLog sysWebLog = new EntLog();
@@ -72,9 +57,6 @@ public class EntLogController {
             e.getMessage();
         }
 
-=======
-    public ResponseEntity addLog(@RequestBody EntLog sysWebLog) {
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
         LoggerCommon.info(this.getClass(), "新增系统日志" + sysWebLog.getMethod());
         if (StringUtils.isNotEmpty(sysWebLog.getMethod()) && !sysWebLog.getMethod().contains("file")) {
             sysWebLog.setId(CreateIDUtil.getId());
@@ -82,11 +64,9 @@ public class EntLogController {
                 sysWebLogService.addEntLogInfo(sysWebLog);
             } catch (Exception e) {
                 String localeMsg = LocaleMessage.get("message.system.errorMessage");
-<<<<<<< HEAD
+
                 LoggerCommon.info(this.getClass(), "新增系统日志异常信息：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-                LoggerCommon.info(this.getClass(), "新增系统日志异常信息：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
                 return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeMsg)).body(null);
             }
             LoggerCommon.info(this.getClass(), "新增系统日志成功");
@@ -118,11 +98,9 @@ public class EntLogController {
             pageInfo = new PageInfo(sysWebLogList);
         } catch (Exception e) {
             String localeMsg = LocaleMessage.get("message.system.errorMessage");
-<<<<<<< HEAD
+
             LoggerCommon.info(this.getClass(), "查询日志列表异常信息：" + ExceptionStackUtils.collectExceptionStackMsg(e));
-=======
-            LoggerCommon.info(this.getClass(), "查询日志列表异常信息：" + ExceptionStackMessage.collectExceptionStackMsg(e));
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeMsg)).body(null);
         }
         LoggerCommon.info(this.getClass(), "成功查询日志列表数据");

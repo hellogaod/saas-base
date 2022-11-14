@@ -2,11 +2,11 @@ package com.base.saas;
 
 
 import com.github.pagehelper.PageHelper;
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -16,24 +16,17 @@ import org.springframework.jmx.support.RegistrationPolicy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-//开启异步线程,自己定义线程池，用多线程的方式去消费
-@EnableAsync//ThreadPoolConfig类上启动了异步线程
-//将微服务注册到服务发现组件
+@EnableAsync
 @EnableDiscoveryClient
-@MapperScan("com.base.saas.manage.mapper")
-//自动查找 application.yml
 @SpringBootApplication
-//解决jmx重复注册bean的问题
+@EntityScan("com.base.saas.manage")
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
-//开启事务支持
 @EnableTransactionManagement
-@EnableSwagger2
 public class BaseManagerApplication {
     private static final Logger log = LoggerFactory.getLogger(BaseManagerApplication.class);
 
@@ -55,6 +48,10 @@ public class BaseManagerApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+//    @Bean
+//    public Queue unReduceSuccessQueue() {
+//        return new Queue(AppConstant.DATAINFO_CONFIRM_QE);
+//    }
 
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(BaseManagerApplication.class);

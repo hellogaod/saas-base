@@ -1,13 +1,10 @@
 package com.base.saas.manage.service.impl.enterprise;
 
 import com.base.saas.manage.mapper.enterprise.EntProfileMapper;
-<<<<<<< HEAD
+
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntProfile;
-=======
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntProfile;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.manage.service.enterprise.EntProfileService;
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;

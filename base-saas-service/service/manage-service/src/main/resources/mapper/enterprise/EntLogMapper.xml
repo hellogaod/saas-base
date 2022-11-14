@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.enterprise.EntLogMapper">
-<<<<<<< HEAD
+
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.enterprise.EntLog">
-=======
-    <resultMap id="BaseResultMap" type="com.base.saas.common.logger.EntLog">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="login_account" property="loginAccount" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
@@ -35,11 +33,9 @@
     create_time,create_by,update_time,update_by
   </sql>
 
-<<<<<<< HEAD
+
     <insert id="addEntLog" parameterType="com.base.saas.manage.domain.entity.enterprise.EntLog">
-=======
-    <insert id="addEntLog" parameterType="com.base.saas.common.logger.EntLog">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
     insert into ent_log (
         id,
         login_account,
@@ -83,11 +79,9 @@
         #{createBy,jdbcType=VARCHAR})
   </insert>
 
-<<<<<<< HEAD
+
     <select id="getEntLogList" parameterType="com.base.saas.manage.domain.model.EntLogRequest" resultMap="BaseResultMap">
-=======
-    <select id="getEntLogList" parameterType="com.base.saas.manage.model.EntLogRequest" resultMap="BaseResultMap">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         select
         <include refid="Base_Column_List"/>
         from ent_log

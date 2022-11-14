@@ -1,7 +1,7 @@
 package com.base.saas.manage.service.impl.enterprise;
 
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntMenu;
@@ -12,18 +12,7 @@ import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
 import com.base.saas.manage.mapper.enterprise.EntUserMenuDesensiteMapper;
-=======
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
-import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
-import com.base.saas.manage.mapper.enterprise.EntUserMenuDesensiteMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntMenu;
-import com.base.saas.manage.model.enterprise.EntModule;
-import com.base.saas.manage.model.enterprise.EntUserMenuDesensite;
-import com.base.saas.manage.service.enterprise.EntMenuDesensiteService;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +34,9 @@ public class EntUserMenuDesensiteServiceImpl implements EntMenuDesensiteService 
 
 
     @Override
-<<<<<<< HEAD
+
     public List<EntModule> getUserDataPermisson(String roleId, String userId) throws Exception {
-=======
-    public List<EntModule> getUserDataPermisson(String roleId,String userId) throws Exception {
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         UserInfo userInfo = UserContextUtil.getUserInfo();
 
         //当前企业拥有的模块

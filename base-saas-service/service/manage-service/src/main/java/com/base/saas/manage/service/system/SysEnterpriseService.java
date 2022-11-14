@@ -1,13 +1,8 @@
 package com.base.saas.manage.service.system;
 
 
-<<<<<<< HEAD
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.system.SysEnterprise;
-=======
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysEnterprise;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
 
 import java.util.List;
 

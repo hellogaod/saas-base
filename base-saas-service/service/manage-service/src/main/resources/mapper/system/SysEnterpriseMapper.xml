@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.base.saas.manage.mapper.system.SysEnterpriseMapper">
-<<<<<<< HEAD
+
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysEnterprise">
-=======
-    <resultMap id="BaseResultMap" type="com.base.saas.manage.model.system.SysEnterprise">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         <id column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
@@ -38,11 +36,9 @@
         order by create_time desc
     </select>
 
-<<<<<<< HEAD
+
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysEnterprise">
-=======
-    <insert id="insertSelective" parameterType="com.base.saas.manage.model.system.SysEnterprise">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         insert into sys_enterprise
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="companyCode != null">
@@ -141,11 +137,9 @@
         where company_code = #{companyCode,jdbcType=VARCHAR}
     </select>
 
-<<<<<<< HEAD
+
     <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.system.SysEnterprise">
-=======
-    <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.model.system.SysEnterprise">
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
         update sys_enterprise
         <set>
             <if test="companyName != null">

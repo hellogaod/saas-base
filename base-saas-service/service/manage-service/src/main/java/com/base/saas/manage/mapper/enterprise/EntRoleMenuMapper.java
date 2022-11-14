@@ -1,7 +1,7 @@
 package com.base.saas.manage.mapper.enterprise;
 
 
-import com.base.saas.manage.model.enterprise.EntRoleMenu;
+import com.base.saas.manage.domain.entity.enterprise.EntRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

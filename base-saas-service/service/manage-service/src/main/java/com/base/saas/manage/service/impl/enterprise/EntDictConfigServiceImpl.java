@@ -2,21 +2,14 @@ package com.base.saas.manage.service.impl.enterprise;/**
  * Created by win7 on 2018/5/21.
  */
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntDictConfig;
 import com.base.saas.manage.service.enterprise.EntDictConfigService;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.mapper.enterprise.EntDictConfigMapper;
-=======
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntDictConfigMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntDictConfig;
-import com.base.saas.manage.service.enterprise.EntDictConfigService;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.stereotype.Service;
 

@@ -1,20 +1,13 @@
 package com.base.saas.manage.controller.system;
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.system.SysEnterprise;
 import com.base.saas.language.LocaleMessage;
 import com.base.saas.logger.LoggerCommon;
 import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import com.base.saas.util.ExceptionStackUtils;
-=======
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.system.SysEnterprise;
-import com.base.saas.common.language.LocaleMessage;
-import com.base.saas.common.logger.LoggerCommon;
-import com.base.saas.manage.model.system.SysOtherConfig;
-import com.base.saas.util.response.ExceptionStackMessage;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.manage.service.enterprise.EntOtherConfigService;
 import com.base.saas.manage.service.system.SysEnterpriseService;
 import com.base.saas.util.HeaderUtil;

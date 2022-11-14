@@ -1,6 +1,6 @@
 package com.base.saas.manage.mapper.enterprise;
 
-import com.base.saas.manage.model.enterprise.EntMenu;
+import com.base.saas.manage.domain.entity.enterprise.EntMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,20 +1,13 @@
 package com.base.saas.manage.service.impl.enterprise;
 
-<<<<<<< HEAD
+
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntDictItemConfig;
 import com.base.saas.manage.service.enterprise.EntDictItemConfigService;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
 import com.base.saas.manage.mapper.enterprise.EntDictItemConfigMapper;
-=======
-import com.base.saas.common.userinfo.UserContextUtil;
-import com.base.saas.common.userinfo.UserInfo;
-import com.base.saas.manage.mapper.enterprise.EntDictItemConfigMapper;
-import com.base.saas.manage.model.ReturnMap;
-import com.base.saas.manage.model.enterprise.EntDictItemConfig;
-import com.base.saas.manage.service.enterprise.EntDictItemConfigService;
->>>>>>> eb9a8c64842da76f204da857145ba23ff1c1240d
+
 import com.base.saas.util.CreateIDUtil;
 import com.base.saas.util.StringUtil;
 import com.base.saas.util.redis.RedisKeyConstants;
