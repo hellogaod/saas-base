@@ -113,9 +113,7 @@ public class SysLoginController {
             userInfo.setRealName(returnMap.getT().getRealName());
             userInfo.setUserId(returnMap.getT().getUserId());
             userInfo.setUserType(1);
-
-            System.out.println("set user key:" + session.getId());
-
+            
             //查询用户角色
             Map<String, Object> roleInfo = null;
             try {

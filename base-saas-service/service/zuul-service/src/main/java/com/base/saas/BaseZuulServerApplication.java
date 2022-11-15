@@ -54,11 +54,10 @@ public class BaseZuulServerApplication {
         // * 表示对所有的地址都可以访问
         corsConfig.addAllowedOrigin("*");
 
-        //跨域的请求头
+        //跨域的请求头:表示允许自定义header输出
         corsConfig.addAllowedHeader("*");
-        corsConfig.addExposedHeader("X-saas-server-error");
-        corsConfig.addExposedHeader("X-saas-server-alert");
-        corsConfig.addExposedHeader("X-saas-server-params");
+        corsConfig.addExposedHeader("saas-error-message");
+        corsConfig.addExposedHeader("saas-token");
 
         //跨域的请求方法
         corsConfig.addAllowedMethod("OPTIONS");
