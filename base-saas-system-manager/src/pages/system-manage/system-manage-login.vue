@@ -142,6 +142,7 @@
           })
           .subscribe(
             ({token, userInfo}) => {
+
               this.updateUserLoginData({token, userInfo});
               this.authService.getMenu({userId: userInfo.userId})
                 .subscribe(

@@ -7,13 +7,9 @@ import {StorageUtil} from '~/utils/storage.util'
 import {SortUtil} from '~/utils/sort.util'
 import {Message, MessageBox, Loading} from 'element-ui'
 import router from "~/router"
+import {error} from "util";
 
 const getType = ['GET', 'DELETE'] // 使用GET请求类型
-const errorMessage = {
-  systemError: '系统异常，请稍后重试.',
-  serverError: "服务端异常,请稍后重试.",
-  netError: '服务端连接异常，请检查服务端状态.'
-}
 
 export class NetService {
   // 使用GET请求类型
@@ -21,6 +17,7 @@ export class NetService {
   private loading: any = {};
 
   constructor() {
+
     this.axiosInstance = axios.create({
       baseURL: AppConfig.url.server,
       timeout: AppConfig.timeout,
@@ -32,6 +29,7 @@ export class NetService {
   }
 
 
+  //请求url拼接 "api" 字符串
   public static generateRequestUrl({service, controller, action, url}: { service: string, controller: string, action: string, url?: string }, append = [], sort?): String {
     // 自定义url优先级最高
     if (url) return url
@@ -55,6 +53,7 @@ export class NetService {
     }
   }
 
+  //请求header拼接X-UserGToken
   private generateRequestHeader(headers): Object {
     let token = StorageUtil.getStorage('session').getItem('userToken') || ''
     let tempHeaders = headers
@@ -94,98 +93,6 @@ export class NetService {
   }
 
   /**
-   * 异常处理
-   */
-  private catchHandle(options, observer) {
-    return (ex) => {
-
-      if (options.loading) {
-        setTimeout(() => {
-          this.loading.close()
-        }, 500);
-      }
-      let error: any = {}
-
-      try {
-        console.log(ex)
-        if (ex) {
-          // 错误信息
-          error.msg = "";
-          error.params = "";
-          // error.data = ex.response.data
-        } else {
-          return false;
-        }
-      } catch (err) {
-        console.log(err)
-      }
-      // 逻辑异常检测
-      if (!ex.response && !ex.request) {
-        error.msg = ex.message
-        error.params = ex.stack
-        console.log(ex.stack)
-        Message.error(errorMessage.systemError)
-        return Observable.empty()
-      }
-
-      // 网络异常检测
-      if (!ex.response && ex.request) {
-        error.msg = errorMessage.netError
-      }
-
-
-      if (ex.response) {
-        error.msg = errorMessage.netError
-        // 错误类型检测
-        switch (ex.response.status) {
-          case 400: {
-            error.msg = decodeURIComponent(ex.response.headers['x-saas-server-alert'] || errorMessage.serverError)
-            error.params = ex.response.headers['x-saas-server-params'] || ""
-
-            break;
-          }
-          case 401: {
-            if (!store.state.tokenExpire) {
-              store.commit("updateTokenExpire", true)
-            } else {
-              break;
-            }
-
-            if (!options.skipAuth) {
-              alert(222)
-              MessageBox.alert('用户登录过期,请重新登录', '提示', {
-                confirmButtonText: '确定',
-                callback: () => {
-                  router.push("/")
-                  if (sessionStorage.getItem("loginType") === "sys") {//system-web
-                    router.push("/ent-manage")
-                  } else {
-                    router.push("/sys-manage")
-                  }
-                }
-              });
-              return
-            }
-          }
-          case 403: {
-            if (!store.state.tokenExpire) {
-              store.commit("updateTokenExpire", true)
-            } else {
-              break;
-            }
-          }
-          case 500: {
-            error.msg = errorMessage.serverError
-            break;
-          }
-        }
-      }
-
-      observer.error(error)
-    }
-  }
-
-  /**
    * 发送网络请求信息
    * @param param0
    */
@@ -221,6 +128,17 @@ export class NetService {
     // 创建待观察对象
     var observable = Observable.create((observer) => {
 
+      // 添加响应拦截器
+      this.axiosInstance.interceptors.response.use(
+        res => {
+          return res
+        },
+        error => {//请求失败处理
+          return error.response
+        }
+      )
+
+      //请求成功处理
       this.axiosInstance.request({
         method,
         url,
@@ -233,14 +151,10 @@ export class NetService {
             skipNulls: true,
             allowDots: true
           })
-      }).then(({data}) => {
+      }).then((res) => {
 
-        console.log("响应数据：" + JSON.stringify(data))
+        console.log("响应数据" + JSON.stringify(res));
 
-        // 分页数据处理
-        if (options.page && data) {
-          options.page.update(data)
-        }
         // 关闭等待
         if (options.loading) {
           setTimeout(() => {
@@ -248,17 +162,30 @@ export class NetService {
           }, 500);
         }
 
-        if (data.exceptionStackMsg != undefined) {
-          // let error: any = {}
-          // error.msg = data.exceptionStackMsg
-          Message.error(data.exceptionStackMsg)
-          // observer.error(error)
-        } else {
-          observer.next(data)
+        if (res.status != 200) {
+          let err: any = {}
+          let msg = decodeURIComponent(res.headers['saas-error-message'])
+          if (msg === undefined) {
+            msg = "服务端异常,请稍后重试."
+          }
+          err.msg = msg;
+          observer.error(err)
+          return
         }
 
+        let data = res.data
 
-      }).catch(this.catchHandle(options, observer))
+        // 分页数据处理
+        if (options.page && data) {
+          options.page.update(data)
+        }
+        let token = res.headers['saas-token'];
+        if (token != undefined) {
+          data = {token: token, userInfo: data}
+        }
+        observer.next(data)
+
+      })
     })
 
     return observable
