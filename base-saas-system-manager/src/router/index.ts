@@ -7,8 +7,8 @@ import {Message} from "element-ui"
 import SystemManage from './system-manage.route'//系统管理
 import EnterpraiseManage from './enterprise-manage.route'//企业管理
 
-const systemManageLogin = () => import('~/pages/system-manage/system-manage-login.vue')//系统管理台登录
-const enterpriseManageLogin = () => import('~/pages/enterprise-manage/base/enterprise-manage-login.vue')//企业管理端登录
+const systemManageLogin = () => import('~/pages/system-manage/sys-login.vue')//系统管理台登录
+const enterpriseManageLogin = () => import('~/pages/enterprise-manage/base/ent-login.vue')//企业管理端登录
 const NotFound = () => import('~/pages/not-found.vue')//页面丢失
 
 Vue.use(Router)

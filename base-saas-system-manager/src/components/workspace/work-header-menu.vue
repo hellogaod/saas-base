@@ -12,7 +12,7 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {State, Mutation, Action, namespace} from "vuex-class";
-  import {entMenuService} from "~/server/services/enterprise-manage-services/entMenu.service";
+  import {entMenuService} from "~/server/services/enterprise-manage-services/ent-menu.service";
   import {Dependencies} from "~/core/decorator";
 
   @Component({

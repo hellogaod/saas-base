@@ -24,8 +24,8 @@
   import {State, Mutation} from "vuex-class";
   import {Dependencies} from "~/core/decorator";
   import WorkPassword from "~/components/workspace/work-password.vue";
-  import {entLoginService} from "~/server/services/enterprise-manage-services/entLogin.service";
-  import {LoginService} from "~/server/services/system-manage-services/sysLogin.service";
+  import {entLoginService} from "~/server/services/enterprise-manage-services/ent-login.service";
+  import {LoginService} from "~/server/services/system-manage-services/sys-login.service";
 
   @Component({
     components: {

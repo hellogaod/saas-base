@@ -1,19 +1,16 @@
-import entLoginController from './ent-login-controller.controller'
-import entValidateController from './ent-validate-controller.controller'
-import entDictController from './ent-dict-controller.controller'
-import entOrganizationController from './ent-organization-controller.controller'
-import entEntmenuController from './ent-ent-menu-controller.controller'
-import entRoleController from './ent-role-controller.controller'
-import entParamsController from './ent-params-controller.controller'
-import entRoleMenuController from './ent-role-menu-controller.controller'
-import entUserController from './ent-user-controller.controller'
-import entUserDataPermissionController from './ent-user-data-permission-controller.controller'
-import entCompanyProfileController from './ent-company-profile-controller.controller'
-import entLogController from './ent-log-controller.controller'
-import entRichController from './ent-rich-controller.controller'
+import entLoginController from './ent-login.controller'
+import entDictController from './ent-dict.controller'
+import entOrganizationController from './ent-organization.controller'
+import entEntmenuController from './ent-menu.controller'
+import entRoleController from './ent-role.controller'
+import entParamsController from './ent-params.controller'
+import entRoleMenuController from './ent-role-menu.controller'
+import entUserController from './ent-user.controller'
+import entUserDataPermissionController from './ent-user-menu-desensite.controller'
+import entCompanyProfileController from './ent-profile.controller'
+import entLogController from './ent-log.controller'
 
 export const systemwebService = {
-  entValidateController,
   entLoginController,
   entDictController,
   entOrganizationController,
@@ -25,5 +22,4 @@ export const systemwebService = {
   entUserDataPermissionController,
   entCompanyProfileController,
   entLogController,
-  entRichController,
 }

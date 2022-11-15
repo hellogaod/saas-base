@@ -90,11 +90,11 @@
   import DataBox from "~/components/common/data-box.vue";
   import {Dependencies} from "~/core/decorator";
   import {PageUtil} from "~/utils/page.util";
-  import {sysRoleMenuService} from "~/server/services/enterprise-manage-services/sysRoleMenu.service";
-  import {sysRoleService} from "~/server/services/enterprise-manage-services/sysRole.service";
-  import {entMenuService} from "~/server/services/enterprise-manage-services/entMenu.service";
-  import {sysUserPermissionService} from "~/server/services/enterprise-manage-services/sysUserDataPermission.service";
-  import {sysUserService} from "~/server/services/enterprise-manage-services/sysUser.service";
+  import {entRoleMenuService} from "~/server/services/enterprise-manage-services/ent-role-menu.service";
+  import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
+  import {entMenuService} from "~/server/services/enterprise-manage-services/ent-menu.service";
+  import {sysUserPermissionService} from "~/server/services/enterprise-manage-services/ent-user-menu-desensite.service";
+  import {entUserService} from "~/server/services/enterprise-manage-services/ent-user.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
   import {Getter, State} from "vuex-class";
   import {DataTransferUtil} from "~/utils/datatransfer.util";
@@ -108,11 +108,11 @@
   })
   export default class ModulePermission extends Vue {
     @Dependencies(PageUtil) private pageUtil: PageUtil;
-    @Dependencies(sysRoleMenuService) private sysRoleMenuService: sysRoleMenuService;
-    @Dependencies(sysRoleService) private sysRoleService: sysRoleService;
+    @Dependencies(entRoleMenuService) private entRoleMenuService: entRoleMenuService;
+    @Dependencies(entRoleService) private entRoleService: entRoleService;
     @Dependencies(entMenuService) private entMenuService: entMenuService;
     @Dependencies(sysUserPermissionService) private sysUserPermissionService: sysUserPermissionService;
-    @Dependencies(sysUserService) private sysUserService: sysUserService;
+    @Dependencies(entUserService) private entUserService: entUserService;
 
     @Emit("refreshList")
     refreshList() {

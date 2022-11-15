@@ -92,7 +92,7 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {sysUserService} from "~/server/services/enterprise-manage-services/sysUser.service";
+  import {entUserService} from "~/server/services/enterprise-manage-services/ent-user.service";
   import {Emit, Prop} from "vue-property-decorator";
   import DepartmentTree from "~/components/common/department-tree.vue"; // 新增用户
 
@@ -102,7 +102,7 @@
     }
   })
   export default class AddUser extends Vue {
-    @Dependencies(sysUserService) private sysUserService: sysUserService;
+    @Dependencies(entUserService) private entUserService: entUserService;
     @Prop() deptId: any;
 
     @Emit("close")

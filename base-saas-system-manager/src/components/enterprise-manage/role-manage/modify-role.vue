@@ -29,14 +29,14 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {sysRoleService} from "~/server/services/enterprise-manage-services/sysRole.service";
+  import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({
     components: {}
   })
   export default class ModifyRole extends Vue {
-    @Dependencies(sysRoleService) private sysRoleService: sysRoleService;
+    @Dependencies(entRoleService) private entRoleService: entRoleService;
 
     @Emit("refreshList")
     refreshList() {

@@ -46,15 +46,15 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {ModuleService} from "~/server/services/system-manage-services/module.service";
-  import {EnterpiseService} from "~/server/services/system-manage-services/enterprise.service";
+  import {SysModuleService} from "~/server/services/system-manage-services/sys-module.service";
+  import {EnterpiseService} from "~/server/services/system-manage-services/sys-enterprise.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({
     components: {}
   })
   export default class AddBussiness extends Vue {
-    @Dependencies(ModuleService) private moduleService: ModuleService;
+    @Dependencies(SysModuleService) private moduleService: SysModuleService;
     @Dependencies(EnterpiseService) private enterpiseService: EnterpiseService;
 
     @Emit("refreshList")

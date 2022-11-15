@@ -35,7 +35,7 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {webDictService} from "~/server/services/enterprise-manage-services/dict.service";
+  import {webDictService} from "~/server/services/enterprise-manage-services/ent-dict.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({

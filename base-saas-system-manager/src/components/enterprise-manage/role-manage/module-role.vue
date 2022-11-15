@@ -23,8 +23,8 @@
   import DataForm from "~/components/common/data-form.vue";
   import DataBox from "~/components/common/data-box.vue";
   import {Dependencies} from "~/core/decorator";
-  import {sysRoleService} from "~/server/services/enterprise-manage-services/sysRole.service";
-  import {sysRoleMenuService} from "~/server/services/enterprise-manage-services/sysRoleMenu.service";
+  import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
+  import {entRoleMenuService} from "~/server/services/enterprise-manage-services/ent-role-menu.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
   import {DataTransferUtil} from "~/utils/datatransfer.util";
 
@@ -35,8 +35,8 @@
     }
   })
   export default class ModulePermission extends Vue {
-    @Dependencies(sysRoleService) private sysRoleService: sysRoleService;
-    @Dependencies(sysRoleMenuService) private sysRoleMenuService: sysRoleMenuService;
+    @Dependencies(entRoleService) private entRoleService: entRoleService;
+    @Dependencies(entRoleMenuService) private entRoleMenuService: entRoleMenuService;
 
     @Emit("refreshList")
     refreshList() {
