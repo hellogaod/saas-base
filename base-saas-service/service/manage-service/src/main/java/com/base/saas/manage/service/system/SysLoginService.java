@@ -1,5 +1,6 @@
 package com.base.saas.manage.service.system;
 
+import com.base.saas.manage.domain.entity.enterprise.EntModule;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntMenu;
 import com.base.saas.manage.domain.entity.system.SysUser;
@@ -22,7 +23,7 @@ public interface SysLoginService {
     //登录
     ReturnMap<SysUser> login(String account, String password) throws Exception;
 
-    ReturnMap<List<EntMenu>> getMenuList(String userId) throws Exception;
+    List<EntModule> getModuleList(String userId) throws Exception;
 
     ReturnMap updateUserPwd(String account, String oldPwd, String newPwd) throws Exception;
 

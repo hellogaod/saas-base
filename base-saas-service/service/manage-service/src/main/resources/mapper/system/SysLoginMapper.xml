@@ -81,12 +81,12 @@
     </update>
 
     <select id="getPermissions" resultMap="MenuResultMap" parameterType="java.lang.String">
-        select
+
         SELECT m.menu_id,m.icon,m.menu_name,m.parent_id,IFNULL(m.url,'') url
         from sys_user u
         INNER JOIN ent_role r on r.role_id=u.role_id
         INNER JOIN ent_role_menu rm on u.role_id=rm.role_id
-        INNER JOIN sys_menu_fixed m on m.id=rm.menu_id
+        INNER JOIN sys_menu_fixed m on m.menu_id=rm.menu_id
         where u.user_id=#{userId} and r.`status`=1 and m.`status`=1
         ORDER BY m.sequence ASC
     </select>

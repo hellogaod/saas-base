@@ -76,8 +76,6 @@ public class PostFilter extends ZuulFilter {
     @Override
     public Object run() {
         RequestContext context = RequestContext.getCurrentContext();
-        HttpServletRequest request = context.getRequest();
-        UserContextUtil.setHttpServletRequest(request);
 
         //处理日志信息
         Map sysWebLog = new HashMap<>();

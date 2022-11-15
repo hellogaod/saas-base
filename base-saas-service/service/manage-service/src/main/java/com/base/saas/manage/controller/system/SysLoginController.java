@@ -1,5 +1,6 @@
 package com.base.saas.manage.controller.system;
 
+import com.base.saas.manage.domain.entity.enterprise.EntModule;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.model.UserLoginRequest;
 import com.base.saas.manage.domain.entity.enterprise.EntMenu;
@@ -113,7 +114,7 @@ public class SysLoginController {
             userInfo.setRealName(returnMap.getT().getRealName());
             userInfo.setUserId(returnMap.getT().getUserId());
             userInfo.setUserType(1);
-            
+
             //查询用户角色
             Map<String, Object> roleInfo = null;
             try {
@@ -157,13 +158,12 @@ public class SysLoginController {
     @ApiOperation(value = "加载系统菜单", notes = "加载系统菜单")
     public ResponseEntity index(HttpServletRequest request) {
 
-        HttpSession session = request.getSession();
-        UserInfo userInfo = UserContextUtil.getUserInfo(session.getId());
+        UserInfo userInfo = UserContextUtil.getUserInfo();
         String userId = userInfo.getUserId();
 
-        ReturnMap<List<EntMenu>> returnMap;
+        List<EntModule> entModules = null;
         try {
-            returnMap = loginService.getMenuList(userId);
+            entModules = loginService.getModuleList(userId);
 
             //更新用户最后一次登录ip地址
             String ip = IPUtil.getIpAddr(request);
@@ -174,7 +174,7 @@ public class SysLoginController {
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
-        return ResponseEntity.ok().headers(HeaderUtil.createToken(session.getId())).body(returnMap.getT());
+        return ResponseEntity.ok().body(entModules);
     }
 
 
@@ -192,6 +192,7 @@ public class SysLoginController {
             subject.logout();
         }
 
+        //退出删除redis存储：用户信息，ip地址信息
         HttpSession session = request.getSession();
         if (UserContextUtil.getUserInfo(session.getId()) != null) {
             RedisUtil.del(RedisKeyConstants.LOGIN_PREFIX + UserContextUtil.getUserInfo().getAccount());

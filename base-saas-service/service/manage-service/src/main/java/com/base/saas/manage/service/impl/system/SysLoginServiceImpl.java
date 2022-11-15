@@ -1,6 +1,7 @@
 package com.base.saas.manage.service.impl.system;
 
 
+import com.base.saas.manage.domain.entity.enterprise.EntModule;
 import com.base.saas.manage.mapper.system.SysLoginMapper;
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntMenu;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Title :
@@ -80,24 +83,55 @@ public class SysLoginServiceImpl implements SysLoginService {
     }
 
     @Override
-    public ReturnMap<List<EntMenu>> getMenuList(String userId) throws Exception {
-
-        ReturnMap returnMap = new ReturnMap<List<EntMenu>>(1);
+    public List<EntModule> getModuleList(String userId) throws Exception {
 
         List<EntMenu> menus = sysLoginMapper.getPermissions(userId);
 
-        //一级菜单筛选
-        List<EntMenu> menuList = new ArrayList<>();
-        //筛选一级菜单：一级菜单下的子菜单一个都塞入submenu中，表示全部显示
-        menus.stream()
-                .filter(item -> "#".equals(item.getParentId()))
-                .forEach(item -> {
+        //菜单呈现树形结构
+        List<EntMenu> menuList = getTree(menus);
 
-                    menuList.add(item);
-                });
+        EntModule entModule = new EntModule();
+        entModule.setMenuList(menuList);
 
-        returnMap.setT(menuList);
-        return returnMap;
+        List<EntModule> entModules = new ArrayList<>();
+        entModules.add(entModule);
+
+        return entModules;
+    }
+
+    // 获取组织架构的树形结构
+    private List<EntMenu> getTree(List<EntMenu> list) {
+        List<EntMenu> tree = list.stream().
+                filter(item -> "#".equals(item.getParentId()))
+                .peek(
+                        item -> {
+                            List<EntMenu> childrens = getChildrens(item, list);
+                            item.setSubMenus(childrens);
+                        }
+                )
+                .collect(Collectors.toList());
+
+        return tree;
+    }
+
+
+    private List<EntMenu> getChildrens(EntMenu root, List<EntMenu> list) {
+
+        List<EntMenu> lists = list.stream()
+                .filter(item ->
+                        //筛选出下一层元素节点
+                        Objects.equals(item.getParentId(), root.getMenuId())
+                )
+                .map(item ->
+                {
+                    //递归set子节点
+                    List<EntMenu> childrens = this.getChildrens(item, list);
+                    item.setSubMenus(childrens);
+                    return item;
+                })
+                .collect(Collectors.toList());
+
+        return lists;
     }
 
     @Override

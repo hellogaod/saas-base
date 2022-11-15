@@ -4,6 +4,7 @@ import com.base.saas.AppConstant;
 import com.base.saas.util.redis.RedisUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 /**
  * 用户信息存取:通过key:sessionId，value：userInfo存储在redis中
@@ -12,24 +13,42 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class UserContextUtil {
 
-    private static HttpServletRequest httpServletRequest = null;
+    private static ThreadLocal<HashMap<String, Object>> threadLocal = new ThreadLocal<HashMap<String, Object>>() {
+        @Override
+        protected HashMap<String, Object> initialValue() {
+            return new HashMap();
+        }
+    };
 
     //传递当前Request对象
-    public static void setHttpServletRequest(HttpServletRequest request) {
-        httpServletRequest = request;
+    public static void setHttpServletRequest(HttpServletRequest httpServletRequest) {
+        threadLocal.get().put("httpServletRequest", httpServletRequest);
     }
 
+    private static ThreadLocal<HashMap<String, Object>> getThreadLocal() {
+        return threadLocal;
+    }
+
+    public static HttpServletRequest getHttpServletRequest() {
+        return (HttpServletRequest) threadLocal.get().get("httpServletRequest");
+    }
 
     //通过header获取sessionId
     public static String getUserTokenId() {
-        if (httpServletRequest != null)
-            return httpServletRequest.getHeader("X-UserToken");
+        if (getHttpServletRequest() != null)
+            return getHttpServletRequest().getHeader("X-UserToken");
         return null;
+    }
+
+    //通过header获取sessionId
+    public static String getUserTokenId(HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("X-UserToken");
+        return token;
     }
 
     //通过request获取sessionid作为key，再在redis中获取userInfo
     public static UserInfo getUserInfo() {
-        if (httpServletRequest == null)
+        if (getHttpServletRequest() == null)
             return null;
         return RedisUtil.get(AppConstant.APP_USER_INFO + getUserTokenId());
     }

@@ -1,7 +1,6 @@
 package com.base.saas;
 
 import com.base.saas.gateway.filter.AccessFilter;
-import com.base.saas.gateway.filter.CheckCorsFilter;
 import com.base.saas.gateway.filter.PostFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -68,7 +67,7 @@ public class BaseZuulServerApplication {
         corsConfig.addAllowedMethod("DELETE");
         corsConfig.addAllowedMethod("PATCH");
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfig);
-        return new CheckCorsFilter(urlBasedCorsConfigurationSource);
+        return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 
     //Spring提供了内置的multipart支持来处理Web应用程序文件上传

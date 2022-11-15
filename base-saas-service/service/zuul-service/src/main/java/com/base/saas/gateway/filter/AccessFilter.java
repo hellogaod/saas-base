@@ -54,9 +54,11 @@ public class AccessFilter extends ZuulFilter {
     // 然后通过ctx.setResponseStatusCode(401)设置了其返回的错误码
     @SneakyThrows
     public Object run() {
+
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         HttpServletResponse response = ctx.getResponse();
+
         log.debug(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
         //1.如果不是管理端后台api，不需要下面的验证
@@ -74,8 +76,6 @@ public class AccessFilter extends ZuulFilter {
             return null;
         }
 
-        //管理端除了登录接口，其他必须确保用户信息存在
-        UserContextUtil.setHttpServletRequest(request);
         UserInfo userInfo = UserContextUtil.getUserInfo();
 
         System.out.println(request.getRequestURI() + ": " + UserContextUtil.getUserTokenId());
