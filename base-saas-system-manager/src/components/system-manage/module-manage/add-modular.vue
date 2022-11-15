@@ -1,18 +1,18 @@
 <template>
-  <section class="component add-role">
+  <section class="component add-modular">
     <el-form :model="addModel" :rules="rules" ref="add-form" label-width="90px">
-      <el-form-item label="角色名称" prop="roleName">
-        <el-input v-model="addModel.roleName" :maxlength="20"></el-input>
+      <el-form-item label="模块名称" prop="sysName">
+        <el-input v-model="addModel.sysName" :maxlength="20"></el-input>
       </el-form-item>
       <el-form-item label="状态" align="left" prop="status">
-        <el-radio-group v-model="addModel.status">
-          <el-radio :label=1>启用</el-radio>
-          <el-radio :label=0>停用</el-radio>
-        </el-radio-group>
+        <el-select v-model="addModel.status">
+          <el-option label="启用" :value=1></el-option>
+          <el-option label="停用" :value=0></el-option>
+        </el-select>
       </el-form-item>
-      <el-form-item label="描述" prop="remark">
+      <el-form-item label="备注" prop="remark">
         <el-col :span="18">
-          <el-input type="textarea" v-model="addModel.remark" :rows="3" :maxlength="50"></el-input>
+          <el-input type="textarea" v-model="addModel.remark" :rows="3" :maxlength="500"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label-width="0px">
@@ -29,14 +29,14 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
+  import {SysModuleService} from "~/server/services/system-manage-services/sys-module.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({
     components: {}
   })
-  export default class AddRole extends Vue {
-    @Dependencies(entRoleService) private entRoleService: entRoleService;
+  export default class AddModule extends Vue {
+    @Dependencies(SysModuleService) private moduleService: SysModuleService;
 
     @Emit("refreshList")
     refreshList() {
@@ -47,17 +47,12 @@
     }
 
     private addModel: any = {
-      roleName: "",
+      sysName: "",
       status: 1,
       remark: ""
     };
     private rules: any = {
-      roleName: [{required: true, message: "请输入角色名称", trigger: "blur"}],
-      remark: [{
-        message: '请输入数字字母汉字组合',
-        trigger: 'blur',
-        pattern: /^[A-Za-z0-9\u4e00-\u9fa5,\.，。！!  ]+$/
-      }]
+      sysName: [{required: true, message: "请输入模块名称", trigger: "blur"}],
     };
 
     reset() {
@@ -69,13 +64,12 @@
       let addForm: any = this.$refs["add-form"];
       addForm.validate(valid => {
         if (!valid) return false;
-        this.sysRoleService.addRole(this.addModel).subscribe(
+        this.moduleService.saveSysModule(this.addModel).subscribe(
           data => {
             this.$message.success("新增成功!");
             this.refreshList();
             this.close();
-          },
-          ({msg}) => {
+          }, ({msg}) => {
             this.$message.error(msg);
           }
         );
@@ -88,4 +82,5 @@
 </script>
 
 <style lang="less" scoped>
+
 </style>

@@ -47,7 +47,7 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {webOrganizationService} from "~/server/services/enterprise-manage-services/organization.service";
+  import {webOrganizationService} from "~/server/services/enterprise-manage-services/ent-organization.service";
   import {Emit, Watch} from "vue-property-decorator";
 
   @Component({

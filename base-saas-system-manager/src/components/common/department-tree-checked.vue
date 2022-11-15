@@ -10,7 +10,7 @@
           <el-button @click="chooseTreeCancel">取消</el-button>
           <el-button @click="chooseTreeCommit">确定</el-button>
         </el-row>
-      </el-col> 
+      </el-col>
     </div>
   </section>
 </template>
@@ -21,8 +21,8 @@ import Component from "vue-class-component";
 import DataForm from "~/components/common/data-form.vue";
 import DataBox from "~/components/common/data-box.vue";
 import { Dependencies } from "~/core/decorator";
-import { webOrganizationService } from "~/server/services/enterprise-manage-services/organization.service";
-import { sysUserPermissionService } from "~/server/services/enterprise-manage-services/sysUserDataPermission.service";
+import { webOrganizationService } from "~/server/services/enterprise-manage-services/ent-organization.service";
+import { sysUserPermissionService } from "~/server/services/enterprise-manage-services/ent-user-menu-desensite.service";
 import { Prop, Emit, Watch } from "vue-property-decorator";
 import {DataTransferUtil} from "~/utils/datatransfer.util";
 

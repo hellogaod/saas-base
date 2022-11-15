@@ -165,7 +165,7 @@ export class NetService {
         if (res.status != 200) {
           let err: any = {}
           let msg = decodeURIComponent(res.headers['saas-error-message'])
-          if (msg === undefined) {
+          if (msg === undefined || msg === 'undefined') {
             msg = "服务端异常,请稍后重试."
           }
           err.msg = msg;

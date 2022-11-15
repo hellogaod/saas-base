@@ -64,14 +64,14 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {OtherService} from "~/server/services/system-manage-services/other.service";
+  import {SysOtherService} from "~/server/services/system-manage-services/sys-other.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({
     components: {}
   })
   export default class AddOther extends Vue {
-    @Dependencies(OtherService) private otherService: OtherService;
+    @Dependencies(SysOtherService) private otherService: SysOtherService;
 
     @Emit("refreshList")
     refreshList() {

@@ -23,8 +23,8 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  import {entLoginService} from "~/server/services/enterprise-manage-services/entLogin.service";
-  import {LoginService} from "~/server/services/system-manage-services/sysLogin.service";
+  import {entLoginService} from "~/server/services/enterprise-manage-services/ent-login.service";
+  import {LoginService} from "~/server/services/system-manage-services/sys-login.service";
   import {Emit} from "vue-property-decorator";
   import {Form} from "element-ui";
   // import md5 from "md5";

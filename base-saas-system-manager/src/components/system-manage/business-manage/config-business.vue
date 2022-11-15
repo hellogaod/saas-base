@@ -30,15 +30,15 @@
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
   // import { State, Getter } from "vuex-class";
-  import {OtherService} from "~/server/services/system-manage-services/other.service";
-  import {EnterpiseService} from "~/server/services/system-manage-services/enterprise.service";
+  import {SysOtherService} from "~/server/services/system-manage-services/sys-other.service";
+  import {EnterpiseService} from "~/server/services/system-manage-services/sys-enterprise.service";
   import {Emit} from "vue-property-decorator";
 
   @Component({
     components: {}
   })
   export default class ConfigBusiness extends Vue {
-    @Dependencies(OtherService) private otherService: OtherService;
+    @Dependencies(SysOtherService) private otherService: SysOtherService;
     @Dependencies(EnterpiseService) private enterpiseService: EnterpiseService;
 
     @Emit("refreshList")
