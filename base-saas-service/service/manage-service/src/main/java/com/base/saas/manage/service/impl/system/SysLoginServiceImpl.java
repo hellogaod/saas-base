@@ -56,6 +56,7 @@ public class SysLoginServiceImpl implements SysLoginService {
                     case 1:
                         sysLoginMapper.clearErrCount(user.getUserId());
                         returnMap.setCode(1);
+                        returnMap.setT(user);
                         returnMap.setMsg("message.system.operation.success");
                         break;
                     case 2:

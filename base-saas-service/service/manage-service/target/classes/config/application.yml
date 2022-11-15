@@ -6,6 +6,9 @@ spring:
   application:
     #服务名称
     name: saas-manage-service
+    messages:
+      encoding: UTF-8
+      basename: i18n/messages #相对路径 开头请勿添加斜杠
   profiles:
     #配置开发环境
     active: dev

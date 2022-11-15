@@ -95,9 +95,7 @@ public class AccessFilter extends ZuulFilter {
             log.debug("Invalid user login information");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
-            response.addHeader("x-saas-server-error", "error.system.server.exception");
-            response.addHeader("x-saas-server-alert", URLEncoder.encode("token失效，请重新登录", "UTF-8"));
-            response.addHeader("x-saas-access-token-expired", "accessFilterToken");
+            response.addHeader("saas-error-message", URLEncoder.encode("token失效，请重新登录", "UTF-8"));
             return null;
         }
         return null;

@@ -20,6 +20,7 @@ import java.util.Locale;
 public class LocaleMessage {
 
     private static MessageSource messageSource;
+
     @Autowired
     public void setMessageSource(MessageSource messageSource){
         this.messageSource=messageSource;
