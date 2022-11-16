@@ -203,7 +203,7 @@
       let addForm: any = this.$refs["add-form"];
       addForm.validate(valid => {
         if (!valid) return false;
-        this.sysUserService.addUser(this.addParams).subscribe(
+        this.entUserService.addUser(this.addParams).subscribe(
           data => {
             this.$message.success("新增成功!");
             this.refreshList();

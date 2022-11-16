@@ -138,7 +138,7 @@
       this.systemLogModel.startTime = this.systemLogModel.promotionTime[0];
       this.systemLogModel.endTime = this.systemLogModel.promotionTime[1];
       this.systemLogModel.operateType = 1
-      this.WeblogService.getLogList(this.systemLogModel, this.pageUtil,).subscribe(data => {
+      this.EntLogService.getLogList(this.systemLogModel, this.pageUtil,).subscribe(data => {
         this.systemLogDataSet = data.list
       }, ({msg}) => {
         this.$message.error(msg);

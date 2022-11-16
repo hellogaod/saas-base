@@ -112,7 +112,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.sysRoleService.updateStatus({status: '1', roleId: scope.row.roleId}).subscribe(data => {
+        this.entRoleService.updateStatus({status: '1', roleId: scope.row.roleId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -135,7 +135,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.sysRoleService.updateStatus({status: '0', roleId: scope.row.roleId}).subscribe(data => {
+        this.entRoleService.updateStatus({status: '0', roleId: scope.row.roleId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'
@@ -154,7 +154,7 @@
     }
 
     refreshData() {
-      this.sysRoleService.getRoleList(this.roleModel, this.pageUtil).subscribe(data => {
+      this.entRoleService.getRoleList(this.roleModel, this.pageUtil).subscribe(data => {
         this.roleDataSet = data.list
       }, ({msg}) => {
         this.$message.error(msg);

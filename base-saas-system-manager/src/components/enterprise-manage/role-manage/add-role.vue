@@ -69,7 +69,7 @@
       let addForm: any = this.$refs["add-form"];
       addForm.validate(valid => {
         if (!valid) return false;
-        this.sysRoleService.addRole(this.addModel).subscribe(
+        this.entRoleService.addRole(this.addModel).subscribe(
           data => {
             this.$message.success("新增成功!");
             this.refreshList();

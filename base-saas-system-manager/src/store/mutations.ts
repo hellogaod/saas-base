@@ -34,12 +34,13 @@ export default {
   },
 
   /**
-   * 更新菜单
+   * 更新菜单，当前选中模块下的所有菜单
    * @param state
    * @param rescource
    */
   updateUserMenuResource(state, rescource) {
-    state.menuResource = rescource
+
+    state.selectedMenus = rescource
   },
 
   /**
@@ -63,17 +64,19 @@ export default {
    * @param state
    * @param data
    */
-  updateUsermoduleListResource(state, data) {
-    state.updateUsermoduleListResource = data
+  updateUsermoduleListResource(state, module) {
+    state.modules = module
   },
+
   /**
    * 更新模块选中
    * @param state
    * @param data
    */
   module(state, data) {
-    state.module = data
+    state.selectedModule = data
   },
+
   /**
    * 更新初始化状态
    * @param state

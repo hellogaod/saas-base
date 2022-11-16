@@ -1,7 +1,7 @@
 /*
 *manage 系统管理者登录 service
 */
-import {managerService} from '~/server/controller'
+import {managerService,commonService} from '~/server/controller'
 import {NetService} from '~/utils/net.service'
 import {Inject, Debounce} from "~/core/decorator";
 import {Service} from "~/server/service"
@@ -18,7 +18,7 @@ export class LoginService extends Service {
    */
   captchaApi() {
     return this.netService.send({
-      server: managerService.sysValidateController.captchaApi,
+      server: commonService.commonValidateController.captchaApi,
       data: {},
       loading: true
     })

@@ -178,7 +178,7 @@
     }
 
     getRoleAll(obj) {
-      this.sysRoleService.getRole(obj.userId).subscribe(
+      this.entRoleService.getRole(obj.userId).subscribe(
         data => {
           this.roleOptions = data.roleAllList
           if (data.userRoleId) {
@@ -202,7 +202,7 @@
     }
 
     getMenuListByRoleId(roleId) {
-      this.sysRoleMenuService.getMenuListByRoleId({
+      this.entRoleMenuService.getMenuListByRoleId({
         roleId: roleId,
         sysCode: this.$store.state.module.sysCode
       }).subscribe(
@@ -303,7 +303,7 @@
         userId: this.userId,
         roleId: this.roleId
       };
-      this.sysUserService.updateUser(data).subscribe(data => {
+      this.entUserService.updateUser(data).subscribe(data => {
         this.$message.success("保存成功!");
         this.refreshList();
         this.close();

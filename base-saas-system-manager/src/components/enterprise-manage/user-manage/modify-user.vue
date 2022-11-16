@@ -180,7 +180,7 @@
     }
 
     refresh(obj) {
-      this.sysUserService.getUserById(obj.userId).subscribe(
+      this.entUserService.getUserById(obj.userId).subscribe(
         data => {
           this.modifyParams.account = data.account
           this.modifyParams.companyCode = data.companyCode
@@ -210,7 +210,7 @@
       let modifyForm: any = this.$refs["modify-form"];
       modifyForm.validate(valid => {
         if (!valid) return false;
-        this.sysUserService.updateUser(this.modifyParams).subscribe(
+        this.entUserService.updateUser(this.modifyParams).subscribe(
           data => {
             this.$message.success("保存成功!");
             this.refreshList();

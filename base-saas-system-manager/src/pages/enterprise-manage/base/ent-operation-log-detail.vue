@@ -39,7 +39,7 @@
 
     refresh(obj) {
       let id = obj.id;
-      this.WeblogService.getErrorLogById(id).subscribe(data => {
+      this.EntLogService.getErrorLogById(id).subscribe(data => {
         this.data = data
         if (!data) {
           this.data = "<p style='text-align:center'>暂无内容</p>"

@@ -22,36 +22,24 @@
     @Dependencies(entMenuService) private entMenuService: entMenuService;
     @Action("updateUserLoginData") updateUserLoginData;
     @Action("updateModuleData") updateModuleData;
-    @State updateUsermoduleListResource;
+    @State modules;
     private data: any = {
       activeIndex: '0'
     };
-    private module: any = [];
+    private moduleList: any = [];
 
     /**
      * 获取头部模块
      */
     get moduleListResource() {
-      let menus: any = this.updateUsermoduleListResource
-      this.module = menus;
-      return menus;
+      let modules: any = this.modules
+      this.moduleList = modules;
+      return modules;
     }
 
     handleSelect(key, keyPath) {
-      let data = this.module[key[0]]
+      let data = this.moduleList[key[0]]
       this.updateModuleData({data});
-      this.getModueList(this.module[key[0]].sysCode)
-    }
-
-    getModueList(entModuleCode) {
-      this.entMenuService.getEntMenuByCode(entModuleCode).subscribe(
-        data => {
-          this.updateUserLoginData({data});
-          this.$router.push('/dashboard/admin')
-        }, ({msg}) => {
-          this.$message.error(msg);
-        }
-      );
     }
   }
 </script>

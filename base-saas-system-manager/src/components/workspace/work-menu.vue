@@ -28,7 +28,7 @@
     }
   })
   export default class WorkMenu extends Vue {
-    @State menuResource;
+    @State selectedMenus;
     @State("menuCollapse") _menuCollapse;
     @Mutation updateMenuCollapse;
     @workspaceModule.Action updateTabs;
@@ -47,7 +47,8 @@
      * 18 - 二级菜单
      */
     get menuList() {
-      let menus = this.menuResource
+      let menus = this.selectedMenus
+      console.log("菜单信息:" + JSON.stringify(menus));
       return menus;
     }
 

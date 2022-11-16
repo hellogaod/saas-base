@@ -146,10 +146,8 @@
               this.updateUserLoginData({token, userInfo});
               this.authService.getMenu({userId: userInfo.userId})
                 .subscribe(
-                  ({
-                     null: any, data
-                   }) => {
-                    this.updateUserLoginData({null: any, userInfo, data});
+                  (data) => {
+                    this.updateUserLoginData({module: data});
                     this.$router.push("/sys-manage/business");
                     sessionStorage.setItem("loginType", "manage");
                   })

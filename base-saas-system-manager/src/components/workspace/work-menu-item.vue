@@ -6,16 +6,16 @@
         <el-col class="submenu-icon" :span="iconSpan">
           <span :class="data.icon"></span>
         </el-col>
-        <el-col class="submenu-title" v-show="!menuCollapse" :span="18">{{data.name}}</el-col>
+        <el-col class="submenu-title" v-show="!menuCollapse" :span="18">{{data.menuName}}</el-col>
       </el-row>
-      <template v-if="data.subMenu">
-        <el-menu-item class="menu-item" v-show="!menuCollapse" v-for="item in data.subMenu" :key="item.menuId"
+      <template v-if="data.subMenus">
+        <el-menu-item class="menu-item" v-show="!menuCollapse" v-for="item in data.subMenus" :key="item.menuId"
                       :index="item.url">
           <el-row>
             <el-col class="menu-icon" :span="6">
               <span :class="item.icon"></span>
             </el-col>
-            <el-col class="menu-title" :span="18">{{item.name}}</el-col>
+            <el-col class="menu-title" :span="18">{{item.menuName}}</el-col>
           </el-row>
         </el-menu-item>
       </template>

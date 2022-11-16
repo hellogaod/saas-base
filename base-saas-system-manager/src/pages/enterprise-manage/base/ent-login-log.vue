@@ -87,7 +87,7 @@
 
     refreshData() {
       this.systemLogModel.operateType = 0
-      this.WeblogService.getLogList(this.systemLogModel, this.pageUtil).subscribe(data => {
+      this.EntLogService.getLogList(this.systemLogModel, this.pageUtil).subscribe(data => {
         this.systemLogDataSet = data.list
       }, ({msg}) => {
         this.$message.error(msg);

@@ -70,7 +70,7 @@
     }
 
     refresh(obj) {
-      this.sysRoleService.getRoleById(obj.roleId).subscribe(
+      this.entRoleService.getRoleById(obj.roleId).subscribe(
         data => {
           this.modifyModel = data
         }, ({msg}) => {
@@ -84,7 +84,7 @@
       modifyForm.validate(valid => {
         if (!valid) return false;
         this.modifyModel.resources = null;
-        this.sysRoleService.updateRole(this.modifyModel).subscribe(
+        this.entRoleService.updateRole(this.modifyModel).subscribe(
           data => {
             this.$message.success("修改成功!");
             this.refreshList();

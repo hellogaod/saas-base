@@ -1,12 +1,13 @@
 /*
 *systemweb 企业管理者登录 service
 */
-import {systemwebService} from '~/server/controller'
+import {systemwebService,commonService} from '~/server/controller'
 import {NetService} from '~/utils/net.service'
 import {Inject, Debounce} from "~/core/decorator";
 import {Service} from "~/server/service"
 
 import md5 from "md5"
+import commonValidateController from "~/server/controller/common-controller/validate-code.controller";
 
 export class entLoginService extends Service {
 
@@ -33,7 +34,7 @@ export class entLoginService extends Service {
    */
   captchaApi() {
     return this.netService.send({
-      server: systemwebService.entValidateController.captchaApi,
+      server: commonService.commonValidateController.captchaApi,
       data: {},
       loading: true
     })

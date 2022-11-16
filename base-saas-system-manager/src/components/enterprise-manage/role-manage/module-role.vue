@@ -90,7 +90,7 @@
     refresh(obj) {
       this.checkedData = [];
       this.roleId = obj.roleId;
-      this.sysRoleMenuService.getMenuByRoleId({
+      this.entRoleMenuService.getMenuByRoleId({
         roleId: obj.roleId,
         sysCode: this.$store.state.module.sysCode
       }).subscribe(
@@ -191,7 +191,7 @@
     }
 
     saveRoleMenu() {
-      this.sysRoleMenuService.addRoleMenu(this.roleMenu).subscribe(
+      this.entRoleMenuService.addRoleMenu(this.roleMenu).subscribe(
         data => {
           this.$message.success("保存成功!");
           this.refreshList();

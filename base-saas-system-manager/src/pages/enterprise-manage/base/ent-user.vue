@@ -133,7 +133,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.sysUserService.updateStatus({status: '1', userId: scope.row.userId}).subscribe(data => {
+        this.entUserService.updateStatus({status: '1', userId: scope.row.userId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -156,7 +156,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.sysUserService.updateStatus({status: '0', userId: scope.row.userId}).subscribe(data => {
+        this.entUserService.updateStatus({status: '0', userId: scope.row.userId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'
@@ -178,7 +178,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.sysUserService.resetPassword(scope.row.userId).subscribe(data => {
+        this.entUserService.resetPassword(scope.row.userId).subscribe(data => {
           this.$message({
             type: 'success',
             message: '重置成功!'
@@ -193,7 +193,7 @@
     }
 
     refreshData() {
-      this.sysUserService.getUserList(this.userModel, this.pageUtil).subscribe(
+      this.entUserService.getUserList(this.userModel, this.pageUtil).subscribe(
         data => {
           this.userDataSet = data.list;
         },
