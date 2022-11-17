@@ -20,18 +20,19 @@
         select
         <include refid="Base_Column_List"/>
 
-        from sys_other_config where 1=1
-        <if test="null!=status and -1!=status">
-            and status = #{status}
-        </if>
-        <if test="null!=type and -1!=type">
-            and type=#{type}
-        </if>
-        <if test="null!=otherName and ''!=otherName">
-            and other_name like CONCAT('%',#{otherName},'%' )
-        </if>
-
-        order by if(isnull(update_time),create_time,update_time) desc
+        from sys_other_config
+        <where>
+            <if test="null!=status and -1!=status">
+                and status = #{status}
+            </if>
+            <if test="null!=type and -1!=type">
+                and type=#{type}
+            </if>
+            <if test="null!=otherName and ''!=otherName">
+                and other_name like CONCAT('%',#{otherName},'%' )
+            </if>
+        </where>
+        order by update_time desc
     </select>
 
 

@@ -25,7 +25,7 @@ public interface SysOtherConfigService {
      *
      * @return
      */
-    List<SysOtherConfig> getOtherConfigList(int status, int type, String otherName) throws Exception;
+    List<SysOtherConfig> getOtherConfigList(Integer status, Integer type, String otherName) throws Exception;
 
     /**
      * 保存参数配置

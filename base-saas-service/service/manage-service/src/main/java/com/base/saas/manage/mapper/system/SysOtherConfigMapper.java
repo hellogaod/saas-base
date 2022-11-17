@@ -3,13 +3,14 @@ package com.base.saas.manage.mapper.system;
 import com.base.saas.manage.domain.entity.system.SysOtherConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.dao.DataAccessException;
 
 import java.util.List;
 
 @Mapper
 public interface SysOtherConfigMapper {
     // 查询所有三方详情列表
-    List<SysOtherConfig> findList(@Param("status") int status, @Param("type") int type, @Param("otherName") String otherName);
+    List<SysOtherConfig> findList(@Param("status") Integer status, @Param("type") Integer type, @Param("otherName") String otherName);
 
     //插入一条三方详情
     int insertSelective(SysOtherConfig record);

@@ -6,6 +6,7 @@
         <result column="other_id" property="otherId" jdbcType="VARCHAR"/>
         <result column="sortting" property="sortting" jdbcType="INTEGER"/>
         <result column="para_code" property="paraCode" jdbcType="VARCHAR"/>
+        <result column="para_value" property="paraValue" jdbcType="VARCHAR"/>
         <result column="para_name" property="paraName" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="SMALLINT"/>
@@ -15,7 +16,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, other_id, sortting, para_code, para_name, remark, status, create_user, create_time, 
+    id, other_id, sortting, para_code, para_name,para_value, remark, status, create_user, create_time,
     update_user, update_time
   </sql>
 
@@ -32,7 +33,7 @@
         <if test="null!=paraName and ''!=paraName">
             and para_name =#{paraName}
         </if>
-        order by sortting asc
+        order by sortting,update_time asc
     </select>
 
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysOtherColumnsConf">
@@ -116,6 +117,7 @@
         sortting,
         para_code,
         para_name,
+        para_value,
         remark,
         status,
         create_user,
@@ -131,6 +133,7 @@
             #{detail.sortting},
             #{detail.paraCode},
             #{detail.paraName},
+            #{detail.paraValue},
             #{detail.remark},
             #{detail.status},
             #{detail.createUser},
@@ -147,7 +150,7 @@
         and id not in
         <foreach item="item" index="index" collection="detailList" open="("
                  separator="," close=")">
-            #{item.confId}
+            #{item.id}
         </foreach>
     </update>
 
@@ -176,6 +179,15 @@
                     </if>
                 </foreach>
             </trim>
+
+            <trim prefix="para_value =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.paraValue!=null">
+                        when id=#{i.id} then #{i.paraValue}
+                    </if>
+                </foreach>
+            </trim>
+
             <trim prefix="remark =case" suffix="end,">
                 <foreach collection="list" item="i" index="index">
                     <if test="i.remark!=null">
