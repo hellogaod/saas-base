@@ -14,6 +14,8 @@ public class SysOtherColumnsConf {
 
     private String paraName;
 
+    private String paraValue;
+
     private String remark;
 
     private int status;
@@ -32,6 +34,14 @@ public class SysOtherColumnsConf {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getParaValue() {
+        return paraValue;
+    }
+
+    public void setParaValue(String paraValue) {
+        this.paraValue = paraValue;
     }
 
     public String getOtherId() {

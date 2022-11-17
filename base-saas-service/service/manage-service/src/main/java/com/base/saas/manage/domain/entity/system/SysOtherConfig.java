@@ -11,6 +11,8 @@ public class SysOtherConfig implements Serializable {
 
     private String otherName;
 
+    private String otherValue;
+
     private String createUser;
 
     private Date createTime;
@@ -31,6 +33,14 @@ public class SysOtherConfig implements Serializable {
 
     public boolean isChecked() {
         return isChecked;
+    }
+
+    public String getOtherValue() {
+        return otherValue;
+    }
+
+    public void setOtherValue(String otherValue) {
+        this.otherValue = otherValue;
     }
 
     public void setChecked(boolean checked) {

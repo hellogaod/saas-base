@@ -37,9 +37,12 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
 
 
     @Override
-    public List<SysOtherConfig> getOtherConfigList(int status, int type, String otherName) throws Exception {
+    public List<SysOtherConfig> getOtherConfigList(Integer status, Integer type, String otherName) throws Exception {
 
-        return otherConfigMapper.findList(status, type, otherName);
+        List<SysOtherConfig> findList = otherConfigMapper.findList(status, type, otherName);
+
+
+        return findList;
     }
 
     /**
@@ -52,8 +55,10 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
     @Transactional
     public ReturnMap saveOtherConfig(SysOtherConfig sysOtherConfig) throws Exception {
         ReturnMap respMap = new ReturnMap(0);
+
         //判断otherName是否重复
-        List<SysOtherConfig> sysOtherConfigs = otherConfigMapper.findList(-1, -1, sysOtherConfig.getOtherName());
+        List<SysOtherConfig> sysOtherConfigs =  otherConfigMapper.findList(-1, -1, sysOtherConfig.getOtherName());
+
         if (sysOtherConfigs != null && sysOtherConfigs.size() > 0) {
             respMap.setMsg("message.otherConfig.paraName.existed");
             return respMap;
@@ -62,7 +67,8 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
         //判断基础配置仅为一条
         if (sysOtherConfig.getType() == 0) {
             //判断基础配置是否已存在
-            List<SysOtherConfig> list = otherConfigMapper.findList(-1, 0, null);
+            List<SysOtherConfig> list =  otherConfigMapper.findList(-1, 0, null);
+
             if (list != null && list.size() > 0) {
                 respMap.setMsg("message.otherConfig.baseConfig.isOnlyOne");
                 return respMap;
@@ -76,18 +82,34 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
             return respMap;
         }
 
-        //判断当前集合中是否有重复paraCode
+        //判断当前集合中是否有重复paraCode或paraName
         List<SysOtherColumnsConf> details = new ArrayList<>();
         boolean b = false;
+        boolean c = false;
         for (SysOtherColumnsConf sysOtherColumnsConf : detailList) {
-            b = details.stream().anyMatch(u -> String.valueOf(u.getParaCode()).equals(String.valueOf(sysOtherColumnsConf.getParaCode())));
+            b = details.stream()
+                    .anyMatch(
+                            u -> String.valueOf(u.getParaCode()).equals(String.valueOf(sysOtherColumnsConf.getParaCode()))
+                    );
+
+            c = details.stream()
+                    .anyMatch(
+                            u ->  String.valueOf(u.getParaName()).equals(String.valueOf(sysOtherColumnsConf.getParaName()))
+                    );
             if (b) {
+                break;
+            }
+            if (c) {
                 break;
             }
             details.add(sysOtherColumnsConf);
         }
         if (b) {
             respMap.setMsg("message.otherConfig.paraCode.not.repeat");
+            return respMap;
+        }
+        if (c) {
+            respMap.setMsg("message.otherConfig.paraName.existed");
             return respMap;
         }
 
@@ -117,6 +139,8 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
                 SysOtherColumnsConf columnsConf = detailList.get(i);
                 columnsConf.setId(CreateIDUtil.getId());
                 columnsConf.setCreateTime(now);
+                columnsConf.setUpdateTime(now);
+                columnsConf.setUpdateUser(userInfo.getAccount());
                 columnsConf.setCreateUser(userInfo.getAccount());
                 columnsConf.setStatus((short) 1);
                 columnsConf.setOtherId(id);
@@ -284,6 +308,7 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
                     if (StringUtil.isNotEmpty(detail.getId()) && c.getId().equals(detail.getId())) {
                         c.setParaCode(detail.getParaCode());
                         c.setParaName(detail.getParaName());
+                        c.setParaValue(detail.getParaValue());
                         c.setUpdateUser(updateUser);
                         c.setUpdateTime(now);
                         c.setRemark(detail.getRemark());
@@ -306,6 +331,7 @@ public class SysOtherConfigServiceImpl implements SysOtherConfigService {
                     conf.setId(CreateIDUtil.getId());
                     conf.setOtherId(sysOtherConfig.getOtherId());
                     conf.setParaName(detail.getParaName());
+                    conf.setParaValue(detail.getParaValue());
                     conf.setParaCode(detail.getParaCode());
                     conf.setSortting(detail.getSortting());
                     conf.setRemark(detail.getRemark());

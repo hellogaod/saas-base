@@ -13,10 +13,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -24,7 +24,7 @@ import java.util.List;
 @Api(tags = "系统参数配置")
 public class SysOtherController {
 
-    @Autowired
+    @Resource
     private SysOtherConfigService sysOtherConfigService;
 
     /**
@@ -47,8 +47,8 @@ public class SysOtherController {
     public ResponseEntity getOtherList(@RequestParam(value = "pageSize") Integer pageSize,
                                        @RequestParam(value = "pageIndex") Integer pageIndex,
                                        @RequestParam(value = "otherName", required = false) String otherName,
-                                       @RequestParam(value = "status", required = false) Short status,
-                                       @RequestParam(value = "type", required = false) Short type) {
+                                       @RequestParam(value = "status", required = false) Integer status,
+                                       @RequestParam(value = "type", required = false) Integer type) {
         PageHelper.startPage(pageIndex, pageSize, true);
 
         try {
