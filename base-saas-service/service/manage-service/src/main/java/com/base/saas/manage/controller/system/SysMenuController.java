@@ -30,9 +30,9 @@ public class SysMenuController {
     @ApiOperation(value = "获取菜单列表详情", httpMethod = "GET", notes = "获取菜单列表详情")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "moduleId", value = "菜单所属模块id", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "parentId", value = "通过父菜单id获取其下的子菜单", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "parentId", value = "通过父菜单id获取其下的子菜单", dataType = "String", paramType = "query"),
     })
-    public ResponseEntity getAllMenuList(@RequestParam String moduleId, @RequestParam String parentId) {
+    public ResponseEntity getAllMenuList(@RequestParam String moduleId, @RequestParam(required = false) String parentId) {
 
         try {
             List<SysMenu> list = sysModuleDetailService.getAllMenuList(moduleId, parentId);

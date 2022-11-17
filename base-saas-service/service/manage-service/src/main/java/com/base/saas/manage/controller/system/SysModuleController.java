@@ -65,9 +65,9 @@ public class SysModuleController {
             @ApiImplicitParam(name = "modulId", value = "主键", dataType = "String", paramType = "query", required = true),
     })
     @GetMapping("/getModuleInfo")
-    public ResponseEntity getModuleInfo(@RequestParam(value = "modulId") String modulId) {
+    public ResponseEntity getModuleInfo(@RequestParam(value = "moduleId") String moduleId) {
         try {
-            SysModule sysModule = sysModuleService.getModuleInfo(modulId);
+            SysModule sysModule = sysModuleService.getModuleInfo(moduleId);
             return ResponseEntity.ok().body(sysModule);
         } catch (Exception e) {
             String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
@@ -80,8 +80,7 @@ public class SysModuleController {
     @ApiOperation(value = "保存系统模块", httpMethod = "POST", notes = "保存系统模块")
     @PostMapping("/saveSysModule")
     public ResponseEntity saveSysModule(@RequestBody SysModule sysModule) {
-        UserInfo userInfo = UserContextUtil.getUserInfo();
-        sysModule.setCreateUser(userInfo.getAccount());
+
         String localeTipMsg = null;
         try {
             ReturnMap returnMap = sysModuleService.saveSysModule(sysModule);

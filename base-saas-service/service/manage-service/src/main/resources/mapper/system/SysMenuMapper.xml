@@ -35,7 +35,7 @@
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="menu_id != null">
+            <if test="menuId != null">
                 menu_id,
             </if>
             <if test="menuName != null">
@@ -83,7 +83,7 @@
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="menu_id != null">
+            <if test="menuId != null">
                 #{menuId,jdbcType=VARCHAR},
             </if>
             <if test="menuName != null">
