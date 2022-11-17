@@ -7,6 +7,8 @@ import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.system.SysModule;
 import com.base.saas.manage.domain.entity.system.SysMenu;
 import com.base.saas.manage.service.system.SysModuleService;
+import com.base.saas.userinfo.UserContextUtil;
+import com.base.saas.userinfo.UserInfo;
 import com.base.saas.util.CreateIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,7 @@ public class SysModuleServiceImpl implements SysModuleService {
     @Override
     @Transactional
     public ReturnMap saveSysModule(SysModule module) throws Exception {
+
         ReturnMap respMap = new ReturnMap(0);
         //判断moduleName是否存在重复
         List<SysModule> modules = sysModuleMapper.findList(-1, module.getModuleName());
@@ -46,15 +49,23 @@ public class SysModuleServiceImpl implements SysModuleService {
             respMap.setMsg("message.module.existed");
             return respMap;
         }
+
+
         //校验通过保存
+        UserInfo userInfo = UserContextUtil.getUserInfo();
+
         Date now = new Date();
         module.setCreateTime(now);
         String moduleId = CreateIDUtil.getId();
         module.setModuleId(moduleId);
+        module.setCreateUser(userInfo.getAccount());
+        module.setUpdateUser(userInfo.getAccount());
+        module.setUpdateTime(now);
 
-        //添加系统模块的时候,,默认给每个模块加一个系统管理的菜单
+        //添加系统模块的时候,默认给每个模块加一个系统管理的菜单
         SysMenu sysMenu = new SysMenu();
-        sysMenu.setModuleId(CreateIDUtil.getId());
+        sysMenu.setMenuId(CreateIDUtil.getId());
+        sysMenu.setModuleId(moduleId);
         sysMenu.setMenuName("系统管理");
         sysMenu.setUrl("");
         sysMenu.setSequence(1);
@@ -62,7 +73,7 @@ public class SysModuleServiceImpl implements SysModuleService {
         sysMenu.setParentId("#");
         sysMenu.setCreateUser(module.getCreateUser());
         sysMenu.setCreateTime(now);
-        sysMenu.setUpdateUser(module.getCreateUser());
+        sysMenu.setUpdateUser(module.getUpdateUser());
         sysMenu.setUpdateTime(now);
         sysMenu.setStatus((short) 1);
         sysMenu.setModuleId(moduleId);
