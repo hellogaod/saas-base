@@ -1,12 +1,10 @@
 /*
 *manage 系统模块管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manage' //本地
-// const SERVICE = 'system-manage' //測試
 const CONTROLLER = 'sysModule'
 /*
 * 前端服务名称
@@ -16,7 +14,7 @@ export default {
    * 查询已启用的模块列表
    */
   getEffectiveModule: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getEffectiveModule',
     type: requestType.Get
@@ -25,7 +23,7 @@ export default {
    * 根据主键查询模块信息
    */
   getModuleInfo: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getModuleInfo',
     type: requestType.Get
@@ -34,7 +32,7 @@ export default {
    * 查询模块列表
    */
   getModuleList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getModuleList',
     type: requestType.Get
@@ -43,7 +41,7 @@ export default {
    * 根据模块主键查询模块相关的菜单
    */
   getModuleMenuListBySysCode: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getModuleMenuListBySysCode',
     type: requestType.Get
@@ -52,7 +50,7 @@ export default {
    * 保存系统模块
    */
   saveSysModule: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'saveSysModule',
     type: requestType.Post
@@ -61,16 +59,16 @@ export default {
    * 修改系统状态
    */
   updateStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'updateStatus',
+    action: 'updateSysModuleStatus',
     type: requestType.Post
   },
   /**
    * 修改系统模块
    */
   updateSysModule: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateSysModule',
     type: requestType.Post

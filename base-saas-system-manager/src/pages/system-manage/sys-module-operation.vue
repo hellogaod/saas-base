@@ -201,8 +201,8 @@
 
     refreshData() {
       this.tree = this.$refs.tree as any;
-      let sysCode = this.$route.params.sysCode;
-      this.moduledetailService.getAllMenuTree(sysCode).subscribe(
+      let moduleId = this.$route.params.moduleId;
+      this.moduledetailService.getAllMenuTree(moduleId, "").subscribe(
         data => {
           this.separateData(data);
           if (this.nodeData.id) {

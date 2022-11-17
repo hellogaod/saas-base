@@ -11,7 +11,7 @@ export default [
     component: systemModular,
   },
   {
-    path: '/sys-manage/modular-permission/:sysCode',
+    path: '/sys-manage/modular-permission/:moduleId',
     name: 'modularPermission',
     component: modularPermission
   },

@@ -1,59 +1,58 @@
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manage' //本地
 // const SERVICE = 'system-manage' //測試
-const CONTROLLER = 'sysModuleDetail'
+const CONTROLLER = 'sysMenu'
 
 export default {
   /**
    * 查询所有资源
    */
   getAllMenuTree: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getAllMenuTree',
+    action: 'getAllMenuList',
     type: requestType.Get
   },
   getAllMenuDetailList:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getAllMenuDetailList',
     type: requestType.Get
   },
   getOneMenu:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getOneMenu',
     type: requestType.Get
   },
   addMenu:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'addMenu',
     type: requestType.Post
   },
   updateMenuStatus:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateMenuStatus',
     type: requestType.Post
   },
   getMenuById:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getMenuById',
     type: requestType.Get
   },
   editMenu:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'editMenu',
     type: requestType.Post
   },
   checkMenuChildStatus:{
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'checkMenuChildStatus',
     type: requestType.Get

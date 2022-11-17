@@ -1,8 +1,8 @@
 <template>
   <section class="component add-modular">
     <el-form :model="addModel" :rules="rules" ref="add-form" label-width="90px">
-      <el-form-item label="模块名称" prop="sysName">
-        <el-input v-model="addModel.sysName" :maxlength="20"></el-input>
+      <el-form-item label="模块名称" prop="moduleName">
+        <el-input v-model="addModel.moduleName" :maxlength="20"></el-input>
       </el-form-item>
       <el-form-item label="状态" align="left" prop="status">
         <el-select v-model="addModel.status">
@@ -47,12 +47,12 @@
     }
 
     private addModel: any = {
-      sysName: "",
+      moduleName: "",
       status: 1,
       remark: ""
     };
     private rules: any = {
-      sysName: [{required: true, message: "请输入模块名称", trigger: "blur"}],
+      moduleName: [{required: true, message: "请输入模块名称", trigger: "blur"}],
     };
 
     reset() {

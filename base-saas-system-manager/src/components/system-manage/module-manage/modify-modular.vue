@@ -1,8 +1,8 @@
 <template>
   <section class="component modify-modular">
     <el-form :model="editModel" :rules="rules" ref="add-form" label-width="90px">
-      <el-form-item label="模块名称" prop="sysName">
-        <el-input v-model="editModel.sysName" :maxlength="20"></el-input>
+      <el-form-item label="模块名称" prop="moduleName">
+        <el-input v-model="editModel.moduleName" :maxlength="20"></el-input>
       </el-form-item>
       <!-- <el-form-item label="状态" align="left" prop="status">
         <el-select v-model="editModel.status">
@@ -47,12 +47,12 @@
     }
 
     private editModel: any = {
-      sysName: "",
+      moduleName: "",
       status: 0,
       remark: ""
     };
     private rules: any = {
-      sysName: [{required: true, message: "请输入模块名称", trigger: "blur"}]
+      moduleName: [{required: true, message: "请输入模块名称", trigger: "blur"}]
     };
 
     reset() {
@@ -61,7 +61,8 @@
     }
 
     refresh(obj) {
-      this.moduleService.getModuleInfo(obj.sysCode).subscribe(
+      console.log("moduleId："+ obj.moduleId)
+      this.moduleService.getModuleInfo(obj.moduleId).subscribe(
         data => {
           this.editModel = data
         }, ({msg}) => {

@@ -15,10 +15,10 @@ export class SysModuleOperationService extends Service {
    * 查询已启用的模块列表
    */
   @Debounce()
-  getAllMenuTree(sysCode) {
+  getAllMenuTree(moduleId, parentId) {
     return this.netService.send({
       server: managerService.moduleDetailController.getAllMenuTree,
-      data: {sysCode},
+      data: {moduleId: moduleId, parentId: parentId},
       loading: true
     })
   }

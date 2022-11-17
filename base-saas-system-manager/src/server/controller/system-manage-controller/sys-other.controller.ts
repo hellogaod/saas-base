@@ -5,7 +5,6 @@ import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-// const SERVICE = 'system-manage' //測試
 const CONTROLLER = 'sysOther'
 /*
 * 前端服务名称

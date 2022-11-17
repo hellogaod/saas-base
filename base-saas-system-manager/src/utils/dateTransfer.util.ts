@@ -3,7 +3,7 @@ export class DateTransferUtil {
 
   /**
    * 日期时间格式化
-   * @param date 
+   * @param date
    * @param fmt 默认值为长日期格式
    */
   static dateTimeFormat(date, fmt = "yyyy-MM-dd hh:mm:ss"): string {
@@ -22,9 +22,9 @@ export class DateTransferUtil {
     }
 
     // 如果是时间戳则转化为时间
-    if (typeof date === 'number') {
+    // if (typeof date === 'number') {
       date = new Date(date)
-    }
+    // }
 
     let o = {
       'M+': date.getMonth() + 1, // 月份

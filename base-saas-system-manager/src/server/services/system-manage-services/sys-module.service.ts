@@ -25,10 +25,10 @@ export class SysModuleService extends Service {
 
   /*根据主键查询模块信息
    */
-  getModuleInfo(sysCode) {
+  getModuleInfo(moduleId) {
     return this.netService.send({
       server: managerService.moduleController.getModuleInfo,
-      data: {sysCode},
+      data: {moduleId},
       loading: true
     })
   }

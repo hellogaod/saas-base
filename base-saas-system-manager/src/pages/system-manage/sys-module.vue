@@ -4,8 +4,8 @@
     <section class="page system-modular">
       <data-form :model="modularModel" @onSearch="refreshData">
         <template slot="default-input">
-          <el-form-item label="模块名称" prop="sysName">
-            <el-input v-model="modularModel.sysName"></el-input>
+          <el-form-item label="模块名称" prop="moduleName">
+            <el-input v-model="modularModel.moduleName"></el-input>
           </el-form-item>
         </template>
         <template slot="default-button">
@@ -15,7 +15,7 @@
       <data-box :data="modulDataSet" :page="pageUtil" @onPageChange="refreshData">
         <template slot="columns">
           <!--数据列区域-->
-          <el-table-column prop="sysName" label="模块名称" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
+          <el-table-column prop="moduleName" label="模块名称" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
           </el-table-column>
           <el-table-column prop="status" label="状态" :min-width="$helper.getColumnWidth(2)">
             <template slot-scope="scope">
@@ -36,7 +36,7 @@
               <el-button type="text" @click="enableClick(scope)" v-if="scope.row.status === 0">启用</el-button>
               <el-button type="text" @click="disableClick(scope)" v-if="scope.row.status === 1">停用</el-button>
               <el-button type="text"
-                         @click="goToPage('/sys-manage/modular-permission',scope.row.sysCode),modulObj = scope.row">业务功能
+                         @click="goToPage('/sys-manage/modular-permission',scope.row.moduleId)">业务功能
               </el-button>
             </template>
           </el-table-column>
@@ -85,13 +85,12 @@
     @Dependencies(PageUtil) private pageUtil: PageUtil;
 
     private modularModel: any = {
-      sysName: '',
-      status: '',
+      moduleName: '',
+      status: -1,
       updateTime: ''
     };
     private modulDataSet = null;
     private modulObj: any = {};
-    private name: any = {};
     private dialog: any = {
       add: false,
       modify: false,
@@ -119,7 +118,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduleService.updateStatus({status: '1', sysCode: scope.row.sysCode}).subscribe(data => {
+        this.moduleService.updateStatus({status: '1', moduleId: scope.row.moduleId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -142,7 +141,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduleService.updateStatus({status: '0', sysCode: scope.row.sysCode}).subscribe(data => {
+        this.moduleService.updateStatus({status: '0', moduleId: scope.row.moduleId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'
@@ -156,8 +155,8 @@
       })
     }
 
-    goToPage(path, obj) {
-      this.$router.push('/sys-manage/modular-permission/' + obj);
+    goToPage(path, moduleId) {
+      this.$router.push('/sys-manage/modular-permission/' + moduleId);
     }
   }
 </script>
