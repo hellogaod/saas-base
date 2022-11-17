@@ -26,10 +26,10 @@ export class SysOtherService extends Service {
   /**
    * 查询参数配置
    */
-  getOtherConfigInfo(id) {
+  getOtherConfigInfo(otherId) {
     return this.netService.send({
       server: managerService.otherController.getOtherConfigInfo,
-      data: {id},
+      data: {otherId},
       loading: true
     })
   }
@@ -98,7 +98,7 @@ export class SysOtherService extends Service {
       server: managerService.otherController.updateStatus,
       data: {
         status: status,
-        id: id
+        otherId: id
       },
       loading: true
     })

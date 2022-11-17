@@ -1,11 +1,10 @@
 /*
 *manage 系统参数配置controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manage' //本地
 // const SERVICE = 'system-manage' //測試
 const CONTROLLER = 'sysOther'
 /*
@@ -16,7 +15,7 @@ export default {
    * 查询企业三方关联列表
    */
   getCompanyConfigList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getCompanyConfigList',
     type: requestType.Get
@@ -25,7 +24,7 @@ export default {
    * 查询参数配置
    */
   getOtherConfigInfo: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getOtherConfigInfo',
     type: requestType.Get
@@ -34,7 +33,7 @@ export default {
    * 查询启用的三方列表
    */
   getOtherConfigList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getOtherConfigList',
     type: requestType.Get
@@ -43,7 +42,7 @@ export default {
    * 查询配置列表
    */
   getOtherList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getOtherList',
     type: requestType.Get
@@ -52,7 +51,7 @@ export default {
    * 保存参数配置
    */
   saveOtherConfig: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'saveOtherConfig',
     type: requestType.Post
@@ -61,7 +60,7 @@ export default {
    * 修改配置
    */
   updateOther: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateOther',
     type: requestType.Post
@@ -70,7 +69,7 @@ export default {
    * 修改参数配置
    */
   updateOtherConfig: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateOtherConfig',
     type: requestType.Post
@@ -79,7 +78,7 @@ export default {
    * 修改状态
    */
   updateStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateStatus',
     type: requestType.Post

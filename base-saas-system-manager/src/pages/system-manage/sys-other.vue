@@ -107,7 +107,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.otherService.updateStatus({status: '1', id: scope.row.id}).subscribe(data => {
+        this.otherService.updateStatus({status: '1', id: scope.row.otherId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -130,7 +130,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.otherService.updateStatus({status: '0', id: scope.row.id}).subscribe(data => {
+        this.otherService.updateStatus({status: '0', id: scope.row.otherId}).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'

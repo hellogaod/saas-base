@@ -37,7 +37,13 @@
               <el-input v-model="item.sortting" :maxlength="6"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="7">
+          <el-col :span="10">
+            <el-form-item label="参数值" align="left" :prop="'detailList.' + index + '.paraValue'"
+                          :rules="addRules.paraValue">
+              <el-input v-model="item.paraValue" :maxlength="200"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
             <el-form-item label="备注" align="left" :prop="'detailList.' + index + '.remark'" :rules="addRules.remark">
               <el-input v-model="item.remark" :maxlength="20"></el-input>
             </el-form-item>
@@ -89,6 +95,7 @@
         confId: '',
         paraCode: '',
         paraName: '',
+        paraValue: '',
         sortting: '',
         remark: ''
       }]
@@ -102,6 +109,7 @@
         {message: '请输入汉字字母数字组合', trigger: 'blur', pattern: /^[A-Za-z0-9\u4e00-\u9fa5  _-]+$/}],
       paraName: [{required: true, message: "请输入参数名称", trigger: "blur"},
         {message: '请输入汉字字母数字组合', trigger: 'blur', pattern: /^[A-Za-z0-9\u4e00-\u9fa5  _-]+$/}],
+      paraValue: [{required: true, message: "请输入参数值", trigger: "blur"}],
       sortting: [{message: '请输大于0的数字', trigger: 'blur', pattern: /^[1-9]+$/}],
       remark: [{
         message: '请输入数字字母汉字组合',
@@ -116,8 +124,8 @@
     }
 
     refresh(obj) {
-      this.modifyModel.otherId = obj.id
-      this.otherService.getOtherConfigInfo(obj.id).subscribe(
+      this.modifyModel.otherId = obj.otherId
+      this.otherService.getOtherConfigInfo(obj.otherId).subscribe(
         data => {
           this.modifyModel = data
         }, ({msg}) => {
@@ -150,6 +158,7 @@
         confId: '',
         paraCode: '',
         paraName: '',
+        paraValue: '',
         sortting: '',
         remark: ''
       })

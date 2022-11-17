@@ -50,12 +50,12 @@ const router = new Router({
 router.beforeEach(async (to, from, next) => {
 
   // 如果访问企业管理端登录页，那么清楚当前企业登录数据
-  if (to.path === "/" || to.path === "/ent-manager") {
+  if (to.path === "/" || to.path === "/ent-manage" || to.path === "/sys-manage") {
     await store.dispatch("clearUserLoginData")
   }
 
   //用户登录过期，跳转到企业管理端登录页面
-  if (store.state.tokenExpire && to.path !== "/" && to.path !== "/ent-manager" && to.path !== "/sys-manage") {
+  if (store.state.tokenExpire && to.path !== "/" && to.path !== "/ent-manage" && to.path !== "/sys-manage") {
     // 重置用户过期状态
     store.commit('updateTokenExpire', false)
     Message.info("用户登录过期,请重新登录")
