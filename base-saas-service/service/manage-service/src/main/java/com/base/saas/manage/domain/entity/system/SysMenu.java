@@ -2,6 +2,7 @@ package com.base.saas.manage.domain.entity.system;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 //系统menu实体类
 public class SysMenu implements Serializable {
@@ -24,6 +25,9 @@ public class SysMenu implements Serializable {
 
     //父级菜单id
     private String parentId;
+
+    //父级菜单名称
+    private String parentName;
 
     //创建人
     private String createUser;
@@ -55,6 +59,39 @@ public class SysMenu implements Serializable {
     //父级菜单url
     private String parentUrl;
 
+    private List<SysMenu> children;
+
+    public String getParentStatus() {
+        return parentStatus;
+    }
+
+    public void setParentStatus(String parentStatus) {
+        this.parentStatus = parentStatus;
+    }
+
+    public String getParentUrl() {
+        return parentUrl;
+    }
+
+    public void setParentUrl(String parentUrl) {
+        this.parentUrl = parentUrl;
+    }
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
+    }
 //    private String moduelName;//所属模块名称
 //    private Short moduelStatus;//所属模块状态 0：停用, 1：启用
 

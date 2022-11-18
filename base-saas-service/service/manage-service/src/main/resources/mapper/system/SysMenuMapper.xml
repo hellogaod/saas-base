@@ -8,6 +8,7 @@
         <result column="sequence" property="sequence" jdbcType="INTEGER"/>
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
@@ -27,9 +28,23 @@
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
-        <include refid="Base_Column_List"/>
-        from sys_menu
-        where menu_id = #{menuId,jdbcType=VARCHAR}
+        c.menu_id,
+        c.menu_name,
+        c.url,
+        c.sequence,
+        c.icon,
+        c.parent_id,
+        c.create_user,
+        c.create_time,
+        c.update_user,
+        c.update_time,
+        c.status,
+        c.desensitize_status,
+        c.module_id,
+        c.remark,
+        f.menu_name as parent_name
+        from sys_menu c left join sys_menu f on c.parent_id = f.menu_id
+        where c.menu_id = #{menuId,jdbcType=VARCHAR}
     </select>
 
     <insert id="insertSelective" parameterType="com.base.saas.manage.domain.entity.system.SysMenu">
@@ -183,22 +198,37 @@
 
     <select id="getSysMenuList" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from sys_menu
-        where 1=1
-        <trim suffixOverrides=",">
-            <if test="moduleId != null and moduleId != ''">
-                and module_id= #{moduleId}
-            </if>
+        c.menu_id,
+        c.menu_name,
+        c.url,
+        c.sequence,
+        c.icon,
+        c.parent_id,
+        c.create_user,
+        c.create_time,
+        c.update_user,
+        c.update_time,
+        c.status,
+        c.desensitize_status,
+        c.module_id,
+        c.remark,
+        f.menu_name as parent_name
+        from sys_menu c left join sys_menu f on c.parent_id = f.menu_id
+        <where>
+            <trim suffixOverrides=",">
+                <if test="moduleId != null and moduleId != ''">
+                    and c.module_id= #{moduleId}
+                </if>
 
-            <if test="status != -1">
-                and status = #{status,jdbcType=SMALLINT}
-            </if>
-            <if test="parentId != null and parentId != ''">
-                and parent_id = #{parentId}
-            </if>
-        </trim>
-        order by sequence
+                <if test="status != -1">
+                    and c.status = #{status,jdbcType=SMALLINT}
+                </if>
+                <if test="parentId != null and parentId != ''">
+                    and c.parent_id = #{parentId}
+                </if>
+            </trim>
+        </where>
+        order by c.sequence,c.update_time
     </select>
 
     <select id="getAllMenuTreeByModuleId" resultMap="BaseResultMap">
@@ -228,7 +258,10 @@
         select
         count(menu_id)
         from sys_menu
-        where module_id =#{moduleId}  and url = #{url,jdbcType=VARCHAR}
+        where module_id =#{moduleId} and url = #{url,jdbcType=VARCHAR}
+        <if test="menuId != null and menuId != ''">
+            and menu_id != #{menuId,jdbcType=VARCHAR}
+        </if>
 
         order by sequence
     </select>

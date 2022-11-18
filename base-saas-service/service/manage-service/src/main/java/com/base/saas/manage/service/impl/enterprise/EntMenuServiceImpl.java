@@ -234,7 +234,7 @@ public class EntMenuServiceImpl implements EntMenuService {
     }
 
     @Override
-    public List<EntMenu> getSubMenuList(String parentId, String sysCode) throws Exception {
-        return entMenuMapper.getSubMenuList(parentId, sysCode);
+    public List<EntMenu> getSubMenuList(String parentId, String moduleId) throws Exception {
+        return entMenuMapper.getSubMenuList(parentId, moduleId);
     }
 }

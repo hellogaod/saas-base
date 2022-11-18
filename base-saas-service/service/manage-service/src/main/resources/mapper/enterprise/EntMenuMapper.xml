@@ -207,9 +207,29 @@
         m.create_time ASC
     </select>
 
+    <select id="getMenuAndSubMenuCount" parameterType="java.lang.String" resultType="int">
+        SELECT
+        count(*)
+        from ent_menu
+        <where>
+            <if test="menuId!=null and menuId!=''">
+                and (parent_id = #{menuId} or menu_id =#{menuId})
+            </if>
+
+        </where>
+    </select>
+
     <select id="getSubMenuList" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        from ent_menu where parent_id = #{parentId} and sys_code = #{sysCode} and status = 1
+        from ent_menu
+        <where>
+            <if test="parentId!=null and parentId!=''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="moduleId!=null and moduleId!=''">
+                and module_id != #{moduleId}
+            </if>
+        </where>
     </select>
 </mapper>
