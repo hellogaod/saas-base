@@ -67,7 +67,7 @@ public class SysMenuController {
             @ApiImplicitParam(name = "parentId", value = "获取子级菜单", dataType = "String", paramType = "query", required = false)
     })
     @GetMapping("/getAllMenuTree")
-    public ResponseEntity getAllMenuTree(@RequestParam String moduleId, @RequestParam String parentId) {
+    public ResponseEntity getAllMenuTree(@RequestParam String moduleId, @RequestParam(required = false) String parentId) {
         try {
             List<SysMenu> list = sysModuleDetailService.getAllMenuTree(moduleId, parentId);
             return ResponseEntity.ok().body(list);

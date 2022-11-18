@@ -42,5 +42,7 @@ public interface EntMenuMapper {
 
     Map getMenuDetail(Map map);
 
-    List<EntMenu> getSubMenuList(@Param("parentId") String parentId, @Param("sysCode") String sysCode);
+    int getMenuAndSubMenuCount(@Param("menuId") String menuId);
+
+    List<EntMenu> getSubMenuList(@Param("parentId") String parentId, @Param("moduleId") String moduleId);
 }

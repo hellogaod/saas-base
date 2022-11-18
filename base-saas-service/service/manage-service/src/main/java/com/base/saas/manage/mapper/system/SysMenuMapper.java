@@ -25,7 +25,7 @@ public interface SysMenuMapper {
     List<SysMenu> getAllMenuTreeByModuleId(@Param("moduleId") String moduleId, @Param("parentId") String parentId);
 
     //当前menu路径是否已经存在于数据库当前模块下的菜单集合中
-    int selectCountByMenuUrl(@Param("moduleId") String moduleId, @Param("url") String url);
+    int selectCountByMenuUrl(@Param("moduleId") String moduleId,@Param("menuId") String menuId, @Param("url") String url);
 
     //启用或暂停：本身及其下面的子菜单全部启动或暂停
     int updateSysMenuStatus(@Param("menuId") String menuId, @Param("updateUser") String updateUser, @Param("status") int status);
