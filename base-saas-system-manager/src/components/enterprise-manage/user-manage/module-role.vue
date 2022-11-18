@@ -97,7 +97,6 @@
   import {entUserService} from "~/server/services/enterprise-manage-services/ent-user.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
   import {Getter, State} from "vuex-class";
-  import {DataTransferUtil} from "~/utils/datatransfer.util";
   import DepartmentTree from "~/components/common/department-tree-checked.vue"; // 新增用户
   @Component({
     components: {
@@ -249,7 +248,6 @@
             menuId: v.menuId
           };
         });
-        this.treeResource = DataTransferUtil.generateTreeData(tmpTreeResource);
       }
     }
 

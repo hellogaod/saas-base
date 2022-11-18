@@ -23,7 +23,6 @@ import DataBox from "~/components/common/data-box.vue";
 import { Dependencies } from "~/core/decorator";
 import { webOrganizationService } from "~/server/services/enterprise-manage-services/ent-organization.service";
 import { Prop, Emit, Watch } from "vue-property-decorator";
-import {DataTransferUtil} from "~/utils/datatransfer.util";
 
 @Component({
   components: {
@@ -103,7 +102,6 @@ export default class ModulePermission extends Vue {
         type: v.orgType
       };
     });
-    this.treeResource = DataTransferUtil.generateTreeData(tmpTreeResource);
   }
   /**
    * 取消操作

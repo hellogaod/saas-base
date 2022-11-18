@@ -26,7 +26,6 @@
   import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
   import {entRoleMenuService} from "~/server/services/enterprise-manage-services/ent-role-menu.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
-  import {DataTransferUtil} from "~/utils/datatransfer.util";
 
   @Component({
     components: {
@@ -139,7 +138,6 @@
           entMenuId: v.entMenuId
         };
       });
-      this.treeResource = DataTransferUtil.generateTreeData(tmpTreeResource);
     }
 
     /**

@@ -8,13 +8,14 @@
         <el-col class="module">
           <el-row class="title">模块</el-row>
           <div class="module-tree">
+
             <el-tree align="left" :data="treeResource" :expand-on-click-node="false" highlight-current
-                     :default-expanded-keys="[0]" node-key="id" ref="tree" @current-change="onCurrentNodeChange">
+                     :default-expanded-keys="[0]" node-key="menuId" ref="tree" @current-change="onCurrentNodeChange">
             <span class="custom-tree-node treeSpan" slot-scope="{ node }">
                 <span class="icon">
                     <i :class="node.data.icon"></i>
                 </span>
-                <span class="nodeLabel">{{ node.data.label }}</span>
+                <span class="nodeLabel">{{ node.data.menuName }}</span>
                 <el-button type="text" size="mini" title='编辑节点' v-if="node.data.status==1"
                            @click="dialog.editMenu = true">
                     <i class="el-icon-edit-outline"></i>
@@ -24,7 +25,7 @@
                     <i class="el-icon-plus"></i>
                 </el-button>
                 <el-button type="text" size="mini" title='添加子级菜单'
-                           v-if="node.data.status==1&&node.data.menuType!=3&&node.data.menuType!=2"
+                           v-if="node.data.status==1 && node.data.parentId =='#'"
                            @click="dialog.subMenu = true">
                     <i class="el-icon-circle-plus-outline"></i>
                 </el-button>
@@ -36,23 +37,18 @@
                 </el-button>
             </span>
             </el-tree>
+
           </div>
         </el-col>
         <el-col style="width:350px;flex-grow:1">
-          <el-row class="title">对应模块功能</el-row>
+          <el-row class="title">对应菜单子模块信息</el-row>
           <data-box :data="dataSet" ref="table" height="400">
             <template slot="columns">
               <el-table-column prop="menuName" label="菜单名称" :min-width="$helper.getColumnWidth(4)" align="center">
               </el-table-column>
               <el-table-column prop="parentName" label="上级菜单" :min-width="$helper.getColumnWidth(3)" align="center">
               </el-table-column>
-              <el-table-column prop="menuType" label="菜单类型" :min-width="$helper.getColumnWidth(3)" align="center">
-                <template slot-scope="scope">
-                  <span v-if="scope.row.menuType === 1">菜单</span>
-                  <span v-if="scope.row.menuType === 2">按钮</span>
-                  <span v-if="scope.row.menuType === 3">组件</span>
-                </template>
-              </el-table-column>
+
               <el-table-column prop="desensitizeStatus" label="数据脱敏" :min-width="$helper.getColumnWidth(3)"
                                align="center">
                 <template slot-scope="scope">
@@ -60,12 +56,7 @@
                   <span v-if="scope.row.desensitizeStatus === 1">是</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="authStatus" label="权限分配" :min-width="$helper.getColumnWidth(3)" align="center">
-                <template slot-scope="scope">
-                  <span v-if="scope.row.authStatus === 0">否</span>
-                  <span v-if="scope.row.authStatus === 1">是</span>
-                </template>
-              </el-table-column>
+
               <el-table-column prop="status" label="状态" :min-width="$helper.getColumnWidth(3)" align="center">
                 <template slot-scope="scope">
                   <span v-if="scope.row.status === 0">停用</span>
@@ -112,10 +103,9 @@
   import Component from "vue-class-component";
   import DataForm from "~/components/common/data-form.vue";
   import DataBox from "~/components/common/data-box.vue";
-  import {SysModuleOperationService} from "~/server/services/system-manage-services/sys-module-operation.service";
+  import {SysMenuService} from "~/server/services/system-manage-services/sys-menu.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
   import {Auth, Layout, Dependencies} from "~/core/decorator";
-  import {DataTransferUtil} from "~/utils/datatransfer.util";
   import addMenu from "~/components/system-manage/module-operation/add-menu.vue";
   import subMenu from "~/components/system-manage/module-operation/sub-menu.vue";
   import editMenu from "~/components/system-manage/module-operation/edit-menu.vue";
@@ -131,8 +121,8 @@
   })
   @Layout("workspace")
   export default class ModulePermission extends Vue {
-    @Dependencies(SysModuleOperationService)
-    private moduledetailService: SysModuleOperationService;
+    @Dependencies(SysMenuService)
+    private moduledetailService: SysMenuService;
 
     @Emit("refreshList")
     refreshList() {
@@ -142,8 +132,6 @@
     close() {
     }
 
-    // 表格所有资源
-    private tableResource: Array<any> = [];
     // 树所有资源
     private treeResource: Array<any> = [];
     // 当前选中的node的数据
@@ -168,8 +156,7 @@
      * 当前选中节点改变的时候
      */
     private onCurrentNodeChange(node) {
-      this.nodeData.id = node.id;
-      // this.pidData= node.pid
+      this.nodeData.menuId = node.menuId;
       this.pidData = node
       this.getTable();
     }
@@ -178,9 +165,8 @@
      * 当前选中节点改变的时候，，获取表格数据
      */
     private getTable() {
-      console.log(this.$route)
       this.moduledetailService.getAllMenuDetailList({
-        id: this.nodeData.id, sysCode: this.$route.params.sysCode
+        parentId: this.nodeData.menuId, moduleId: this.$route.params.moduleId
       }).subscribe(
         data => {
           this.dataSet = data;
@@ -190,7 +176,6 @@
         }
       );
     }
-
 
     /**
      * 组件创建之后就开始获取全部资源数据
@@ -204,33 +189,12 @@
       let moduleId = this.$route.params.moduleId;
       this.moduledetailService.getAllMenuTree(moduleId, "").subscribe(
         data => {
-          this.separateData(data);
-          if (this.nodeData.id) {
-            this.getTable()
-          }
+          this.treeResource = data;
         },
         ({msg}) => {
           this.$message.error(msg);
         }
       );
-    }
-
-    /**
-     * 分离数据 菜单数据 控件资源
-     */
-    private separateData(data: Array<any>) {
-      // 提取菜单资源
-      let tmpTreeResource = data.map(v => {
-        return {
-          label: v.menuName,
-          pid: v.parentId,
-          id: v.id,
-          menuType: v.menuType,
-          icon: v.icon,
-          status: v.status
-        };
-      });
-      this.treeResource = DataTransferUtil.generateTreeData(tmpTreeResource);
     }
 
     returnToPage(path) {
@@ -246,7 +210,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduledetailService.updateMenuStatus({status: "1", id: this.pidData.id}).subscribe(data => {
+        this.moduledetailService.updateMenuStatus(this.pidData.menuId, 1).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -268,7 +232,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduledetailService.updateMenuStatus({status: "0", id: this.pidData.id}).subscribe(data => {
+        this.moduledetailService.updateMenuStatus(this.pidData.menuId, 0).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'

@@ -36,7 +36,7 @@
               <el-button type="text" @click="enableClick(scope)" v-if="scope.row.status === 0">启用</el-button>
               <el-button type="text" @click="disableClick(scope)" v-if="scope.row.status === 1">停用</el-button>
               <el-button type="text"
-                         @click="goToPage('/sys-manage/modular-permission',scope.row.moduleId)">业务功能
+                         @click="goToPage('/sys-manage/sys-menu',scope.row.moduleId)">业务功能
               </el-button>
             </template>
           </el-table-column>
@@ -156,7 +156,7 @@
     }
 
     goToPage(path, moduleId) {
-      this.$router.push('/sys-manage/modular-permission/' + moduleId);
+      this.$router.push('/sys-manage/sys-menu/' + moduleId);
     }
   }
 </script>

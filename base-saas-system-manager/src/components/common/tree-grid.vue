@@ -49,7 +49,6 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Emit, Prop, Watch} from "vue-property-decorator";
-  import {DataTransferUtil} from "~/utils/datatransfer.util";
 
   @Component({
     components: {}
@@ -127,7 +126,8 @@
 
     // computed
     get datas() {
-      var a = DataTransferUtil.treeToArray(this.dataSource, null, null, this.defaultExpandAll);
+      var a = null
+      // var a = DataTransferUtil.treeToArray(this.dataSource, null, null, this.defaultExpandAll);
       this.data = a
       return a
     }

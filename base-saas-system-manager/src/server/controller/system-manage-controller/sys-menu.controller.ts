@@ -12,21 +12,16 @@ export default {
   getAllMenuTree: {
     service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getAllMenuList',
+    action: 'getAllMenuTree',
     type: requestType.Get
   },
   getAllMenuDetailList:{
     service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getAllMenuDetailList',
+    action: 'getAllMenuList',
     type: requestType.Get
   },
-  getOneMenu:{
-    service: managerServiceName,
-    controller: CONTROLLER,
-    action: 'getOneMenu',
-    type: requestType.Get
-  },
+
   addMenu:{
     service: managerServiceName,
     controller: CONTROLLER,
@@ -50,12 +45,6 @@ export default {
     controller: CONTROLLER,
     action: 'editMenu',
     type: requestType.Post
-  },
-  checkMenuChildStatus:{
-    service: managerServiceName,
-    controller: CONTROLLER,
-    action: 'checkMenuChildStatus',
-    type: requestType.Get
   },
 }
 

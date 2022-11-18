@@ -6,7 +6,7 @@ import {NetService} from '~/utils/net.service'
 import {Inject, Debounce} from "~/core/decorator";
 import {Service} from "~/server/service"
 
-export class SysModuleOperationService extends Service {
+export class SysMenuService extends Service {
 
   @Inject(NetService)
   private netService: NetService
@@ -32,18 +32,6 @@ export class SysModuleOperationService extends Service {
     })
   }
 
-  //获取一级菜单
-  getOneMenu(flag, data) {
-    return this.netService.send({
-      server: managerService.moduleDetailController.getOneMenu,
-      data: {
-        flag: flag,
-        sysCode: data
-      },
-      loading: true
-    })
-  }
-
   //添加菜单
   addMenu(data) {
     return this.netService.send({
@@ -54,19 +42,19 @@ export class SysModuleOperationService extends Service {
   }
 
   //更改状态
-  updateMenuStatus(data) {
+  updateMenuStatus(menuId,status) {
     return this.netService.send({
       server: managerService.moduleDetailController.updateMenuStatus,
-      data: data,
+      data: {menuId,status},
       loading: true
     })
   }
 
 //编辑获取信息
-  getMenuById(id) {
+  getMenuById(menuId) {
     return this.netService.send({
       server: managerService.moduleDetailController.getMenuById,
-      data: {id},
+      data: {menuId},
       loading: true
     })
   }
@@ -75,14 +63,6 @@ export class SysModuleOperationService extends Service {
   editMenu(data) {
     return this.netService.send({
       server: managerService.moduleDetailController.editMenu,
-      data: data,
-      loading: true
-    })
-  }
-
-  checkMenuChildStatus(data) {
-    return this.netService.send({
-      server: managerService.moduleDetailController.checkMenuChildStatus,
       data: data,
       loading: true
     })

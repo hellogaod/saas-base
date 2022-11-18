@@ -2885,15 +2885,15 @@
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
   import {Emit, Prop} from "vue-property-decorator";
-  import {SysModuleOperationService} from "~/server/services/system-manage-services/sys-module-operation.service";
+  import {SysMenuService} from "~/server/services/system-manage-services/sys-menu.service";
 
   @Component({
     components: {}
   })
 
   export default class AddModule extends Vue {
-    @Dependencies(SysModuleOperationService)
-    private moduledetailService: SysModuleOperationService;
+    @Dependencies(SysMenuService)
+    private moduledetailService: SysMenuService;
 
     @Emit("iconRefresh")
     iconRefresh(param) {

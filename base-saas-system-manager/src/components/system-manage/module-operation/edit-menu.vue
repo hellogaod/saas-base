@@ -1,39 +1,25 @@
 <template>
   <section class="component edit-menu moduleAdd">
-    <el-form :model="editModel" :rules="rules" ref="add-form" label-width="90px">
-      <el-form-item label="父级菜单:" align="left" prop="parentName" v-show="parentMenu">
-        <el-select class="inpurClass" v-model="editModel.parentId" @change="changeParentName">
-          <el-option v-for="(item,index) in editModel.options" :key="index" :label="item.menuName" :value="item.id">
-            {{item.menuName}}
-          </el-option>
-        </el-select>
+    <el-form :model="editModel" :rules="rules" ref="edit-form" label-width="90px">
+      <el-form-item label="父级菜单:" align="left" prop="parentName" v-show="editModel.parentName">
+        <el-input v-model="editModel.parentName" readonly></el-input>
       </el-form-item>
-      <el-form-item label="菜单类型:" align="left" prop="menuType">
-        <el-select class="inpurClass" ref="menuType" v-model="editModel.menuType" disabled>
-          <el-option label="菜单" :value=1></el-option>
-          <el-option label="按钮" :value=2></el-option>
-        </el-select>
-      </el-form-item>
+
       <el-form-item label="菜单名称" prop="menuName">
         <el-input v-model="editModel.menuName" :maxlength="10"></el-input>
       </el-form-item>
-      <el-form-item label="数据脱敏:" align="left" prop="desensitizeStatus" v-if="editModel.menuType !==2" v-show="show">
+      <el-form-item label="数据脱敏:" align="left" prop="desensitizeStatus" v-if="editModel.parentName" v-show="editModel.parentName">
         <el-select v-model="editModel.desensitizeStatus">
           <el-option label="是" :value=1></el-option>
           <el-option label="否" :value=0></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="权限分配:" align="left" prop="authStatus" v-show="show" v-if="editModel.menuType !==2">
-        <el-select v-model="editModel.authStatus">
-          <el-option label="是" :value=1></el-option>
-          <el-option label="否" :value=0></el-option>
-        </el-select>
-      </el-form-item>
+
       <el-form-item label="菜单序列" prop="sequence">
         <el-input v-model="editModel.sequence" name="sequence" oninput="if(value.length>3)value=value.slice(0,3)"
                   onkeyup="this.value=this.value.replace(/\s+/g,'')" type="number" min="1"></el-input>
       </el-form-item>
-      <el-form-item label="菜单URL" prop="url" v-show="show">
+      <el-form-item label="菜单URL" prop="url" v-if="editModel.parentName" v-show="editModel.parentName">
         <el-input v-model="editModel.url" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="150"></el-input>
       </el-form-item>
       <el-form-item style="margin-top: 15px;position:relative" label="菜单图标:" prop="icon">
@@ -67,7 +53,7 @@
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
   import {Emit, Prop} from "vue-property-decorator";
-  import {SysModuleOperationService} from "~/server/services/system-manage-services/sys-module-operation.service";
+  import {SysMenuService} from "~/server/services/system-manage-services/sys-menu.service";
   import iconDialog from "~/components/system-manage/module-operation/icon-dialog.vue";
 
   @Component({
@@ -76,8 +62,8 @@
     }
   })
   export default class AddModule extends Vue {
-    @Dependencies(SysModuleOperationService)
-    private moduledetailService: SysModuleOperationService;
+    @Dependencies(SysMenuService)
+    private moduledetailService: SysMenuService;
 
     @Emit("refreshList")
     refreshList() {
@@ -90,44 +76,33 @@
     private dialog: any = {
       iconDialog: false
     };
-    private show: boolean = true;
-    private flag: any = {};
-    private parentMenu: boolean = false;
     private editModel: any = {
       menuName: "",
       menuType: "",
       desensitizeStatus: "0",
-      authStatus: "0",
       sequence: "",
       url: "",
       remark: "",
       parentId: "",
       id: '',
       parentName: '',
-      sysCode: "",
+      moduleId: "",
       status: 1,
       icon: "",
-      options: [{
-        parentName: ''
-      }]
+
     };
     private rules: any = {
-      id: [
-        {required: false, message: "请选择一项", trigger: "blur"}
-      ],
+
       menuName: [
         {required: true, message: "请输入模块名称", trigger: "blur"}
       ],
-      menuType: [{required: true, message: "请选择一项", trigger: "blur"}],
       desensitizeStatus: [
-        {required: true, message: "请选择一项", trigger: "blur"}
+        {required: true, message: "请选择是否脱敏", trigger: "blur"}
       ],
-      authStatus: [
-        {required: true, message: "请选择一项", trigger: "blur"}
-      ],
-      sequence: [{required: true, message: "请选择一项", trigger: "blur"}],
+
+      sequence: [{required: true, message: "请输入序列", trigger: "blur"}],
       url: [
-        {required: true, message: "不能为空", trigger: "blur"},
+        {required: true, message: "url菜单路径不能为空", trigger: "blur"},
         {
           message: "请输入除汉字的字符",
           trigger: "blur",
@@ -137,81 +112,18 @@
     };
 
     reset() {
-      let addForm: any = this.$refs["add-form"];
+      let addForm: any = this.$refs["edit-form"];
       addForm.resetFields();
     }
 
-    //菜单类型切换
-    // changeMenu(obj) {
-    //     if (obj === 1) {
-    //         this.show = false;
-    //         this.editModel.desensitizeStatus = "0";
-    //         this.editModel.authStatus = "0";
-    //         this.rules.url[0].required = false;
-    //     } else {
-    //         this.rules.url[0].required = true;
-    //         this.show = true;
-    //         this.editModel.desensitizeStatus = "";
-    //         this.editModel.authStatus = "";
-    //     }
-    // }
-    //父菜单
-    changeParentName(obj) {
-      this.editModel.parentId = obj;
-      for (var i = 0; i < this.editModel.options.length; i++) {
-        if (this.editModel.options[i].id === this.editModel.parentId) {
-          this.editModel.parentName = this.editModel.options[i].menuName
-        }
-      }
-    }
-
     refresh(obj) {
-      this.editModel.sysCode = this.$route.params.sysCode;
-      if (obj.pid == "#") {
-        this.parentMenu = false;
-        this.show = false;
-        this.flag = 1
-        this.rules.url[0].required = false;
-      } else {
-        this.parentMenu = true;
-        this.show = true;
-        this.rules.url[0].required = true;
-        if (obj.menuType == 2) {
-          this.flag = 2
-        } else {
-          this.flag = 1
-        }
-      }
-      //获取一级菜单
-      this.moduledetailService.getMenuById(obj.id).subscribe(
+      this.editModel.moduleId = this.$route.params.moduleId;
+
+      //获取菜单详情
+      this.moduledetailService.getMenuById(obj.menuId).subscribe(
         data => {
-          this.editModel.menuName = data.menuName;
-          this.editModel.menuType = data.menuType;
-          this.editModel.desensitizeStatus = data.desensitizeStatus;
-          this.editModel.authStatus = data.authStatus;
-          this.editModel.sequence = data.sequence;
-          this.editModel.remark = data.remark;
-          this.editModel.parentId = data.parentId;
-          this.editModel.id = data.id;
-          this.editModel.parentName = data.parentName;
-          this.editModel.sysCode = data.sysCode;
-          this.editModel.status = data.status;
-          this.editModel.icon = data.icon;
-          this.editModel.url = data.url;
-          //获取父级级菜单
-          this.moduledetailService.getOneMenu(this.flag, this.editModel.sysCode).subscribe(
-            data => {
-              this.editModel.options = data;
-              for (var i = 0; i < this.editModel.options.length; i++) {
-                if (this.editModel.options[i].id === this.editModel.parentId) {
-                  this.editModel.parentId = this.editModel.options[i].id
-                }
-              }
-            },
-            ({msg}) => {
-              this.$message.error(msg);
-            }
-          );
+          this.editModel = data;
+
         },
         ({msg}) => {
           this.$message.error(msg);
@@ -219,9 +131,9 @@
       );
     }
 
-    //新增
+    //编辑
     commit() {
-      let addForm: any = this.$refs["add-form"];
+      let addForm: any = this.$refs["edit-form"];
       addForm.validate(valid => {
         if (!valid) return false;
         this.moduledetailService.editMenu(this.editModel).subscribe(
