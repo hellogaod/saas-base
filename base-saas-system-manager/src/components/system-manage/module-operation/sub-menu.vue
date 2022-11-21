@@ -65,6 +65,9 @@
     @Dependencies(SysMenuService)
     private moduledetailService: SysMenuService;
 
+    @Emit("refreshList")
+    refreshList() {
+    }
     @Emit("close")
     close() {
     }
@@ -127,6 +130,7 @@
         this.moduledetailService.addMenu(this.subModel).subscribe(
           data => {
             this.$message.success("新增成功!");
+            this.refreshList();
             this.close();
           },
           ({msg}) => {

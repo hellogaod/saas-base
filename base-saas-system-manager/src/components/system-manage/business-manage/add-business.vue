@@ -16,7 +16,13 @@
       <el-form-item label="企业邮箱" prop="email">
         <el-input v-model="addModel.email" :maxlength="20"></el-input>
       </el-form-item>
-      <el-form-item label="企业微信号" prop="wechatNo">
+      <el-form-item label="超管账号" prop="adminAccount">
+        <el-input v-model="addModel.adminAccount" :maxlength="20"></el-input>
+      </el-form-item>
+      <el-form-item label="超管密码" prop="adminPassword">
+        <el-input v-model="addModel.adminPassword" :maxlength="20"></el-input>
+      </el-form-item>
+      <el-form-item label="微信号" prop="wechatNo">
         <el-input v-model="addModel.wechatNo" :maxlength="20"></el-input>
       </el-form-item>
       <el-form-item label="状态" align="left" prop="status">
@@ -26,9 +32,8 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="系统名称" prop="remark">
-        <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-        <el-checkbox-group v-model="addModel.moduleList">
-          <el-checkbox v-for="item in effectiveModule" :key="item.sysCode" :label="item.sysCode">{{item.sysName}}
+        <el-checkbox-group v-model="addModel.moduleIds">
+          <el-checkbox v-for="item in effectiveModule" :key="item.moduleId" :label="item.moduleId">{{item.moduleName}}
           </el-checkbox>
         </el-checkbox-group>
       </el-form-item>
@@ -71,9 +76,11 @@
       tel: "",
       companyManager: "",
       email: "",
+      adminAccount:'',
+      adminPassword:'',
       wechatNo: "",
       status: 1,
-      moduleList: []
+      moduleIds: []
     };
     private rules: any = {
       companyName: [{required: true, message: "请输入企业名称", trigger: "blur"}, {
@@ -101,7 +108,10 @@
         trigger: "blur",
         pattern: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
       }],
-      wechatNo: [{required: true, message: "请输入企业微信号", trigger: "blur"}]
+      adminAccount: [{required: true, message: "请输入超级管理员账号", trigger: "blur"}],
+      adminPassword: [{required: true, message: "请输入超级管理员密码", trigger: "blur"}],
+      wechatNo: [{required: true, message: "请输入企业微信号", trigger: "blur"}],
+
     };
     private checkAll: boolean = false;
     private isIndeterminate: boolean = true;
@@ -110,14 +120,14 @@
     reset() {
       let addForm: any = this.$refs["add-form"];
       addForm.resetFields();
-      this.addModel.moduleList = []
+      this.addModel.moduleIds = []
     }
 
     commit() {
       let addForm: any = this.$refs["add-form"];
       addForm.validate(valid => {
         if (!valid) return false;
-        if (this.addModel.moduleList.length === 0) {
+        if (this.addModel.moduleIds.length === 0) {
           this.$message.error('请选择系统名称');
           return false;
         }
@@ -143,16 +153,6 @@
       );
     }
 
-    handleCheckAllChange(val) {
-      this.addModel.moduleList = val ? this.effectiveModule : [];
-      this.isIndeterminate = false;
-    }
-
-    handleChecked(value) {
-      let checkedCount = value.length;
-      this.checkAll = checkedCount === this.effectiveModule.length;
-      this.isIndeterminate = checkedCount > 0 && checkedCount < this.effectiveModule.length;
-    }
   }
 </script>
 

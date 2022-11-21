@@ -26,9 +26,8 @@
         </el-radio-group>
       </el-form-item> -->
       <el-form-item label="系统名称" prop="remark">
-        <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-        <el-checkbox-group v-model="modifyModel.moduleList">
-          <el-checkbox v-for="item in effectiveModule" :key="item.sysCode" :label="item.sysCode">{{item.sysName}}
+        <el-checkbox-group v-model="modifyModel.moduleIds">
+          <el-checkbox v-for="item in effectiveModule" :key="item.moduleId" :label="item.moduleId">{{item.moduleName}}
           </el-checkbox>
         </el-checkbox-group>
       </el-form-item>
@@ -73,7 +72,7 @@
       email: "",
       wechatNo: "",
       status: 1,
-      moduleList: [],
+      moduleIds: [],
       companyCode: ''
     };
     private rules: any = {
@@ -111,7 +110,7 @@
     reset() {
       let modifyForm: any = this.$refs["modify-form"];
       modifyForm.resetFields();
-      this.modifyModel.moduleList = []
+      this.modifyModel.moduleIds = []
     }
 
     refresh(obj) {
@@ -124,19 +123,19 @@
       );
       this.enterpiseService.getEnterpriseByCompanyCode(obj.companyCode).subscribe(
         data => {
-          this.modifyModel.companyName = data.sysEnterprise.companyName
-          this.modifyModel.shortName = data.sysEnterprise.shortName
-          this.modifyModel.tel = data.sysEnterprise.tel
-          this.modifyModel.companyManager = data.sysEnterprise.companyManager
-          this.modifyModel.email = data.sysEnterprise.email
-          this.modifyModel.wechatNo = data.sysEnterprise.wechatNo
-          this.modifyModel.status = data.sysEnterprise.status
-          this.modifyModel.companyCode = data.sysEnterprise.companyCode
+          this.modifyModel.companyName = data.companyName
+          this.modifyModel.shortName = data.shortName
+          this.modifyModel.tel = data.tel
+          this.modifyModel.companyManager = data.companyManager
+          this.modifyModel.email = data.email
+          this.modifyModel.wechatNo = data.wechatNo
+          this.modifyModel.status = data.status
+          this.modifyModel.companyCode = data.companyCode
           let arr: any = [];
-          for (var i = 0; i < data.moduleList.length; i++) {
-            arr.push(data.moduleList[i].sysModuleCode)
+          for (var i = 0; i < data.moduleIds.length; i++) {
+            arr.push(data.moduleIds[i])
           }
-          this.modifyModel.moduleList = arr
+          this.modifyModel.moduleIds = arr
         }, ({msg}) => {
           this.$message.error(msg)
         }
@@ -147,7 +146,7 @@
       let modifyForm: any = this.$refs["modify-form"];
       modifyForm.validate(valid => {
         if (!valid) return false;
-        if (this.modifyModel.moduleList.length === 0) {
+        if (this.modifyModel.moduleIds.length === 0) {
           this.$message.error('请选择系统名称');
           return false;
         }
@@ -167,16 +166,6 @@
 
     }
 
-    handleCheckAllChange(val) {
-      this.modifyModel.moduleList = val ? this.effectiveModule : [];
-      this.isIndeterminate = false;
-    }
-
-    handleChecked(value) {
-      let checkedCount = value.length;
-      this.checkAll = checkedCount === this.effectiveModule.length;
-      this.isIndeterminate = checkedCount > 0 && checkedCount < this.effectiveModule.length;
-    }
   }
 </script>
 

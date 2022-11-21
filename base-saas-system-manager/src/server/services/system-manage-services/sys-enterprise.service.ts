@@ -52,9 +52,7 @@ export class EnterpiseService extends Service {
   updateCompanyOtherConf(data) {
     return this.netService.send({
       server: managerService.enterpriseController.updateCompanyOtherConf,
-      data: {
-        data: data
-      },
+      data: data,
       loading: true
     })
   }
@@ -80,6 +78,18 @@ export class EnterpiseService extends Service {
     return this.netService.send({
       server: managerService.enterpriseController.updateSysEnterprise,
       data: data,
+      loading: true
+    })
+  }
+
+  /**
+   * 查询企业三方关联列表
+   */
+  @Debounce()
+  getCompanyConfigList(companyCode) {
+    return this.netService.send({
+      server: managerService.enterpriseController.getCompanyConfigList,
+      data: {companyCode},
       loading: true
     })
   }

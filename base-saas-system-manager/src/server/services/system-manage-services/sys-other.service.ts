@@ -11,17 +11,6 @@ export class SysOtherService extends Service {
   @Inject(NetService)
   private netService: NetService
 
-  /**
-   * 查询企业三方关联列表
-   */
-  @Debounce()
-  getCompanyConfigList(companyCode) {
-    return this.netService.send({
-      server: managerService.otherController.getCompanyConfigList,
-      data: {companyCode},
-      loading: true
-    })
-  }
 
   /**
    * 查询参数配置

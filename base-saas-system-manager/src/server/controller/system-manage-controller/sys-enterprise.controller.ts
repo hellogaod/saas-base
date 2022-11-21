@@ -1,12 +1,10 @@
 /*
 *manage 系统企业信息管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName +'manage' //本地
-//const SERVICE = 'system-manage' //測試
 const CONTROLLER = 'sysEnterprise'
 /*
 * 前端服务名称
@@ -16,7 +14,7 @@ export default {
    * 添加企业信息
    */
   addSysEnterprise: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'addSysEnterprise',
     type: requestType.Post
@@ -25,7 +23,7 @@ export default {
    * 根据企业编码查询企业信息
    */
   getEnterpriseByCompanyCode: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getEnterpriseByCompanyCode',
     type: requestType.Get
@@ -34,7 +32,7 @@ export default {
    * 获取企业列表
    */
   getSysEnterpriseList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getSysEnterpriseList',
     type: requestType.Get
@@ -43,7 +41,7 @@ export default {
    * 修改企业关联三方列表
    */
   updateCompanyOtherConf: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateCompanyOtherConf',
     type: requestType.Post
@@ -52,7 +50,7 @@ export default {
    * 修改状态
    */
   updateStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateStatus',
     type: requestType.Post
@@ -61,9 +59,18 @@ export default {
    * 修改企业信息
    */
   updateSysEnterprise: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateSysEnterprise',
     type: requestType.Post
-  }
+  },
+  /**
+   * 查询企业三方关联列表
+   */
+  getCompanyConfigList: {
+    service: managerServiceName,
+    controller: CONTROLLER,
+    action: 'getCompanyConfigList',
+    type: requestType.Get
+  },
 }

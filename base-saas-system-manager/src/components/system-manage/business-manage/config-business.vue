@@ -3,14 +3,14 @@
     <el-form :model="configModel" ref="config-form" label-width="90px">
       <el-form-item label="三方配置:">
         <el-checkbox-group v-model="configModel.otherList">
-          <el-checkbox v-for="item in configModel.ConfigList" :key="item.id" :label="item.id" v-if="item.type===1">
+          <el-checkbox v-for="item in configModel.ConfigList" :key="item.otherId" :label="item.otherId" v-if="item.type===1">
             {{item.otherName}}
           </el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="系统配置:">
         <el-checkbox-group v-model="configModel.otherList">
-          <el-checkbox v-for="item in configModel.ConfigList" :key="item.id" :label="item.id" v-if="item.type===0">
+          <el-checkbox v-for="item in configModel.ConfigList" :key="item.otherId" :label="item.otherId" v-if="item.type===0">
             {{item.otherName}}
           </el-checkbox>
         </el-checkbox-group>
@@ -29,8 +29,6 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Dependencies} from "~/core/decorator";
-  // import { State, Getter } from "vuex-class";
-  import {SysOtherService} from "~/server/services/system-manage-services/sys-other.service";
   import {EnterpiseService} from "~/server/services/system-manage-services/sys-enterprise.service";
   import {Emit} from "vue-property-decorator";
 
@@ -38,7 +36,6 @@
     components: {}
   })
   export default class ConfigBusiness extends Vue {
-    @Dependencies(SysOtherService) private otherService: SysOtherService;
     @Dependencies(EnterpiseService) private enterpiseService: EnterpiseService;
 
     @Emit("refreshList")
@@ -62,16 +59,17 @@
 
     refresh(obj) {
       this.configModel.companyCode = obj.companyCode;
-      this.otherService.getCompanyConfigList(obj.companyCode).subscribe(
+      this.enterpiseService.getCompanyConfigList(obj.companyCode).subscribe(
         data => {
           this.configModel.ConfigList = data
           let arr: any = [];
           for (var i = 0; i < data.length; i++) {
             if (data[i].checked) {
-              arr.push(data[i].id)
+              arr.push(data[i].otherId)
             }
           }
           this.configModel.otherList = arr
+          
         }, ({msg}) => {
           this.$message.error(msg);
         }
@@ -82,9 +80,9 @@
       let otherList: any = []
       this.configModel.ConfigList.forEach(c => {
         this.configModel.otherList.forEach(o => {
-          if (o === c.id) {
+          if (o === c.otherId) {
             otherList.push({
-              id: c.id,
+              otherId: c.otherId,
               name: c.otherName
             })
           }

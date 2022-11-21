@@ -10,15 +10,7 @@ const CONTROLLER = 'sysOther'
 * 前端服务名称
 */
 export default {
-  /**
-   * 查询企业三方关联列表
-   */
-  getCompanyConfigList: {
-    service: managerServiceName,
-    controller: CONTROLLER,
-    action: 'getCompanyConfigList',
-    type: requestType.Get
-  },
+
   /**
    * 查询参数配置
    */
