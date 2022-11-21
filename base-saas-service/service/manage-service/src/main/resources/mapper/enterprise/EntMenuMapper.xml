@@ -33,18 +33,22 @@
         id,
         menu_id,
         module_id,
+        parent_id,
         create_time,
         create_user,
-        remark,
+        update_time,
+        update_user,
         company_code)
         VALUES
         <foreach collection="list" item="detail" separator=",">
             (#{detail.id,jdbcType=VARCHAR},
             #{detail.menuId,jdbcType=VARCHAR},
             #{detail.moduleId,jdbcType=VARCHAR},
+            #{detail.parentId,jdbcType=VARCHAR},
             #{detail.createTime,jdbcType=TIMESTAMP},
-            #{detail.create_user,jdbcType=VARCHAR},
-            #{detail.remark,jdbcType=LONGVARCHAR},
+            #{detail.createUser,jdbcType=VARCHAR},
+            #{detail.updateTime,jdbcType=TIMESTAMP},
+            #{detail.updateUser,jdbcType=VARCHAR},
             #{detail.companyCode,jdbcType=VARCHAR})
         </foreach>
 

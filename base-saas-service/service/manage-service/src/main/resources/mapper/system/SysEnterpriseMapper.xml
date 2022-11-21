@@ -196,7 +196,7 @@
         </where>
     </select>
 
-    <update id="updateStatus" parameterType="java.lang.String">
+    <update id="updateStatus">
     update sys_enterprise set status = #{status} where company_code = #{companyCode}
   </update>
 </mapper>

@@ -195,6 +195,7 @@ public class SysEnterpriseServiceImpl implements SysEnterpriseService {
                     //批量插入企业角色菜单信息
                     entRoleMenuMapper.addEntRoleMenuList(entRoleMenuList);
 
+                    returnMap.setCode(1);
                     returnMap.setMsg("message.system.operation.success");
                 }
             } else {

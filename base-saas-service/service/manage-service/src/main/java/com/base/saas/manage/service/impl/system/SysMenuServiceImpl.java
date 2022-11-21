@@ -107,7 +107,8 @@ public class SysMenuServiceImpl implements SysMenuService {
             returnMap.setMsg("message.system.sql.error");
             return returnMap;
         }
-
+        returnMap.setCode(1);
+        returnMap.setMsg("message.system.save.success");
         return returnMap;
     }
 
