@@ -69,7 +69,6 @@
             }
           }
           this.configModel.otherList = arr
-          
         }, ({msg}) => {
           this.$message.error(msg);
         }
