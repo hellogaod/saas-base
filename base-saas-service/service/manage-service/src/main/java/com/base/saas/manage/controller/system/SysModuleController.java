@@ -32,6 +32,21 @@ public class SysModuleController {
     @Resource
     private SysModuleService sysModuleService;
 
+    @ApiOperation(value = "获取启动的模块列表", httpMethod = "GET", notes = "获取启动的模块列表")
+    @GetMapping("/getEffectiveModule")
+    public ResponseEntity getEffectiveModule() {
+
+        try {
+            List<SysModule> moduleList = sysModuleService.getSysModuleList(1, null);
+            return ResponseEntity.ok().body(moduleList);
+        } catch (Exception e) {
+            String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
+            LoggerCommon.info(this.getClass(), "查询模块列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+            return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
+        }
+
+    }
+
     @ApiOperation(value = "查询模块列表", httpMethod = "GET", notes = "查询模块列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageSize", value = "分页大小", dataType = "int", paramType = "query", required = true),

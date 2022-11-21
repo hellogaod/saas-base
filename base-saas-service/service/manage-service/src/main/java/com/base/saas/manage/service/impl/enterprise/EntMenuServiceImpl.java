@@ -106,12 +106,11 @@ public class EntMenuServiceImpl implements EntMenuService {
                                     entMenu.setId(CreateIDUtil.getId());
                                     //companyCode
                                     entMenu.setCompanyCode(companyCode);
-
+                                    entMenu.setParentId(sysMenu.getParentId());
                                     entMenu.setCreateUser(userInfo.getAccount());
                                     entMenu.setCreateTime(now);
                                     entMenu.setUpdateUser(userInfo.getAccount());
                                     entMenu.setUpdateTime(now);
-
                                     entMenu.setModuleId(moduleId);
                                     entMenu.setMenuId(sysMenu.getMenuId());
 

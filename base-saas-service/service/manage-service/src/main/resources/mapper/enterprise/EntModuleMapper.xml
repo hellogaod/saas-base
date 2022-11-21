@@ -39,10 +39,10 @@
     </select>
 
 
-    <select id="getModuleIdsByCompanyCode" parameterType="string" resultMap="BaseResultMap">
+    <select id="getModuleIdsByCompanyCode" parameterType="string" resultType="string">
         SELECT module_id
         from ent_module
-        where  e.company_code = #{companyCode}
+        where  company_code = #{companyCode}
     </select>
 
 
@@ -54,7 +54,7 @@
         update_user,
         update_time,
         company_code,
-        module_id,
+        module_id
         )
         VALUES
         <foreach collection="list" item="detail" separator=",">
@@ -64,7 +64,7 @@
             #{detail.updateUser,jdbcType=VARCHAR},
             #{detail.updateTime,jdbcType=TIMESTAMP},
             #{detail.companyCode,jdbcType=VARCHAR},
-            #{detail.moduleId,jdbcType=VARCHAR},
+            #{detail.moduleId,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
