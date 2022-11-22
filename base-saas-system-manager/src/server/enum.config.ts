@@ -2,6 +2,8 @@
 export const servicePreName = "saas-"
 
 export const managerServiceName = servicePreName + 'manage-service'
+export const commonServiceName = servicePreName + 'common-service'
+
 
 /**
  * 请求类型

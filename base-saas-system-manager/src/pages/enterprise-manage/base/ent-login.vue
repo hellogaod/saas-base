@@ -100,8 +100,8 @@
       code: {required: true, message: "验证码不能为空", trigger: "blur"}
     };
     private loginModel: any = {
-      companyCode: 'XFJR201809130002',
-      userName: "admin",
+      companyCode: 'JXSG20221121c85d',
+      userName: "adminGQ",
       password: "123456",
       code: '',
       key: ''
@@ -173,25 +173,18 @@
           .doLoginRsa(params)
           .subscribe(
             ({token, userInfo}) => {
-
-              if (token === undefined) {
-                this.$message.error("请检查用户名、密码或验证码");
-                return;
-              }
+              console.log("userInfo:" + JSON.stringify(userInfo))
 
               this.updateUserLoginData({token, userInfo});
-              this.authService.index().subscribe(({
-                                                    null: any, menuList, moduleList, allBtnIds
-                                                  }) => {
-                let data: any = {
-                  menuList: menuList,
-                  moduleList: moduleList,
-                  allBtnIds: allBtnIds
-                }
-                this.updateUserLoginData({null: any, userInfo, data});
-                sessionStorage.setItem("loginType", "sys");
-                this.$router.push("/ent-manage/user");
-              })
+              this.authService.index()
+                .subscribe((data) => {
+
+                  this.updateUserLoginData({module: data});
+
+                  //表示当前是系统端登录
+                  sessionStorage.setItem("loginType", "sys");
+                  this.$router.push("/ent-manage/user");
+                })
             },
             ({msg}) => {
               this.$message.error(msg);

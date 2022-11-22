@@ -48,7 +48,6 @@
      */
     get menuList() {
       let menus = this.selectedMenus
-      console.log("菜单信息:" + JSON.stringify(menus));
       return menus;
     }
 

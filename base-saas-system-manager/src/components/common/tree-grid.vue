@@ -27,28 +27,13 @@
         </el-button>
       </template>
     </el-table-column>
-    <!-- <el-table-column label="操作" v-if="treeType === 'normal'" width="260">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          type="primary"
-          @click="handleModify(scope.row)">
-          修改
-        </el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleStatus(scope.row.orgId, scope.row.status)">
-         {{scope.row.status == '1' ? '停用' : '启用'}}
-        </el-button>
-      </template>
-    </el-table-column> -->
   </el-table>
 </template>
 <script lang="ts">
   import Vue from "vue";
   import Component from "vue-class-component";
   import {Emit, Prop, Watch} from "vue-property-decorator";
+  import { DataTransfer } from "~/utils/dataTransfer.util";
 
   @Component({
     components: {}
@@ -126,8 +111,7 @@
 
     // computed
     get datas() {
-      var a = null
-      // var a = DataTransferUtil.treeToArray(this.dataSource, null, null, this.defaultExpandAll);
+      var a = DataTransfer.treeToArray(this.dataSource, null, null, this.defaultExpandAll);
       this.data = a
       return a
     }

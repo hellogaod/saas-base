@@ -152,7 +152,8 @@
     @Dependencies(PageUtil) private pageDetailService: PageUtil;
     private dictModel: any = {
       itemName: '',
-      itemCode: ''
+      itemCode: '',
+      status: -1,
     };
     private dictDetailModel: any = {
       itemCode: ''

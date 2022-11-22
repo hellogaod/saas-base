@@ -30,7 +30,7 @@
     private editorText: any = "";
     private height: any = "400px";
 
-//提交公司配置
+  //提交公司配置
     commit() {
       console.log(this.editorText)
       this.companyProfile.saveCompanyProfile(this.editorText).subscribe(

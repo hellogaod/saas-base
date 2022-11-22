@@ -82,7 +82,10 @@
       {
         text: '操作',
         dataIndex: 'operation',
-
+        btns: [
+          {text: '修改', type: 'primary'},
+          {text: '停用', type: 'danger', toggle: true}
+        ]
       }
     ]
 

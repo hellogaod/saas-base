@@ -1,12 +1,11 @@
 /*
 *systemweb 字典管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName + 'system-web'
-const CONTROLLER = 'dict'
+const CONTROLLER = 'entDict'
 /*
 * 前端服务名称
 */
@@ -15,16 +14,16 @@ export default {
    * 查询大类数据列表
    */
   getDictItemList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getDictItemList',
+    action: 'getDictList',
     type: requestType.Get
   },
   /**
    * 根据id查询字典明细
    */
   getDictDetailById: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getDictDetailById',
     type: requestType.Get
@@ -33,7 +32,7 @@ export default {
    * 查询明细数据列表
    */
   getDictDetailList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getDictDetailList',
     type: requestType.Get
@@ -42,16 +41,16 @@ export default {
    * 根据id获取字典大类信息
    */
   getDictItemById: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getDictItemById',
+    action: 'getDictById',
     type: requestType.Get
   },
   /**
    * 保存字典明细
    */
   saveDictDetail: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'saveDictDetail',
     type: requestType.Post
@@ -60,16 +59,16 @@ export default {
    * 保存字典大类
    */
   saveDictItem: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'saveDictItem',
+    action: 'saveDict',
     type: requestType.Post
   },
   /**
    * 修改字典明细
    */
   updateDictDetail: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateDictDetail',
     type: requestType.Post
@@ -78,7 +77,7 @@ export default {
    * 修改字典明细状态
    */
   updateDictDetailStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateDictDetailStatus',
     type: requestType.Post
@@ -87,18 +86,18 @@ export default {
    * 修改字典大类
    */
   updateDictItem: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'updateDictItem',
+    action: 'updateDict',
     type: requestType.Post
   },
   /**
    * 修改字典大类状态
    */
   updateDictItemStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'updateDictItemStatus',
+    action: 'updateDictStatus',
     type: requestType.Post
   },
   /**
@@ -107,7 +106,7 @@ export default {
    * 根据字典编码查询字典明细
    */
   getDictDetailByItemCode: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getDictDetailByItemCode',
     type: requestType.Get
@@ -117,7 +116,7 @@ export default {
    * 根据字典编码查询字典明细（多个code）
    */
   getDicDetailByItemList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getDicDetailByItemList',
     type: requestType.Get

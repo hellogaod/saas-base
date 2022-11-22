@@ -1,12 +1,11 @@
 /*
 *systemweb 公司简介配置controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName + 'system-web'
-const CONTROLLER = 'companyProfile'
+const CONTROLLER = 'entProfile'
 /*
 * 前端服务名称
 */
@@ -15,18 +14,18 @@ export default {
    * 保存
    */
   saveCompanyProfile: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'saveCompanyProfile',
+    action: 'saveEntProfile',
     type: requestType.Post
   },
   /**
    * 获取
    */
   getCompanyProfile: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
-    action: 'getCompanyProfile',
+    action: 'getEntProfile',
     type: requestType.Get
   },
 

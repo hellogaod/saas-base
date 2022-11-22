@@ -10,7 +10,7 @@
     </quill-editor>
 
     <!-- 文件上传input 将它隐藏-->
-    <el-upload class="upload-demo" :action="uploadUrl" :before-upload='beforeUpload' :data="uploadData"
+    <el-upload class="upload-demo" :action="uploadUrl" :before-upload='beforeUpload'
                :on-success='uploadSuccess' :headers="headers"
                ref="upload" style="display:none">
       <el-button size="small" type="primary" id="imgInput" v-loading.fullscreen.lock="fullscreenLoading"
@@ -27,7 +27,6 @@
   import {NetService} from "~/utils/net.service";
   import {commonService} from "~/server/controller";
   import AppConfig from "~/config/app.config";
-  import hljs from 'highlight.js';
   import {State} from "vuex-class";
 
   @Component({
@@ -73,8 +72,6 @@
       }
     }
 
-    private uploadData: any = {}
-    private photoUrl: any = ''         // 上传图片地址
     private uploadType: any = ''    // 上传的文件类型（图片、视频）
     private fullscreenLoading: any = false
     private addRange: any = new Array()
@@ -112,23 +109,19 @@
     }
 
     // 图片上传成功回调   插入到编辑器中
-    uploadSuccess(res, file) {
+    uploadSuccess(filePath, file) {
       this.fullscreenLoading = false;
       let vm = this;
       let quill = (this.$refs.myTextEditor as any).quill;
-      // console.log("上传成功回调地址：" + JSON.stringify(res));
+      // console.log("上传成功回调地址：" + filePath);
 
-      if (res != undefined && res.responseBody != undefined && res.responseBody.fileList.length > 0 && res.responseBody.fileList[0].Name) {  // 将文件上传后的URL地址插入到编辑器文本中
-        let value = res.responseBody.fileList[0].Name;
         // 获取光标所在位置
         let selection = quill.getSelection(true).index;
-        // 插入图片  res.info为服务器返回的图片地址
-        quill.insertEmbed(selection ? selection : 0, 'image', value)
+        // 插入图片
+        quill.insertEmbed(selection ? selection : 0, 'image', filePath)
         // 调整光标到最后
         // quill.setSelection(length + 1)
-      } else {
-        (<any>this).$message.error(`${vm.uploadType}插入失败`)
-      }
+
       (this.$refs['upload'] as any).clearFiles()    // 插入成功后清除input的内容
     }
 
