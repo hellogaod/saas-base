@@ -48,7 +48,7 @@ public class EntDictItemConfigServiceImpl implements EntDictItemConfigService {
         entDictItemConfig.setUpdateTime(now);
 
         int row = dictItemConfigMapper.updateByPrimaryKeySelective(entDictItemConfig);
-        if (row < 1) {
+        if (row >= 1) {
             map.setCode(1);
             map.setMsg("message.system.operation.success");
         } else {

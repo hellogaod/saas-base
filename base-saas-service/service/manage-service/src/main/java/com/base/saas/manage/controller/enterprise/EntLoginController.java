@@ -9,7 +9,6 @@ import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntModule;
 import com.base.saas.manage.domain.entity.enterprise.EntUser;
 import com.base.saas.manage.domain.model.EntUserLoginRequest;
-import com.base.saas.manage.domain.model.EntUserLoginResponse;
 import com.base.saas.manage.domain.model.KeyScriptRequest;
 import com.base.saas.util.ExceptionStackUtils;
 import com.base.saas.userinfo.UserContextUtil;
@@ -111,12 +110,9 @@ public class EntLoginController {
 
             String sessionId = request.getSession().getId();
 
-            EntUserLoginResponse response = new EntUserLoginResponse();
-            response.setToken(sessionId);
-            response.setUserInfo(userInfo);
-            LocaleMessage.setLocale(response.getToken());
+            LocaleMessage.setLocale(sessionId);
             RedisUtil.set(RedisKeyConstants.LOGIN_PREFIX + companyCode + "-" + username, loginIp, Integer.parseInt(sessionTimeout));
-            return ResponseEntity.ok().headers(HeaderUtil.createToken(sessionId)).body(response);
+            return ResponseEntity.ok().headers(HeaderUtil.createToken(sessionId)).body(userInfo);
         }
     }
 

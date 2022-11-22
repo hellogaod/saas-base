@@ -34,8 +34,7 @@ public class EntOrganizationController {
     @GetMapping("/getOrgList")
     @ApiOperation(value = "组织机构数据列表", notes = "组织机构数据列表")
     public ResponseEntity getOrgList() {
-        Map map = new HashMap();
-        map.put("companyCode", UserContextUtil.getUserInfo().getCompanyCode());
+
         try {
             List<EntOrganization> orgList = organizationService.getOrgList(UserContextUtil.getUserInfo().getCompanyCode(), null, null, null, -1, -1);
             return ResponseEntity.ok().body(orgList);

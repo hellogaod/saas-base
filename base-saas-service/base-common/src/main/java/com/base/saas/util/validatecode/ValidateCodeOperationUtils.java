@@ -32,7 +32,7 @@ public class ValidateCodeOperationUtils {
     public static boolean check(RedisUtil redisUtil, String key, String code) {
         // 校验验证码，从redis中获取
         Object redisValue = redisUtil.get(getRedisKey(key));
-        if (redisValue == null && !redisValue.equals(code.toLowerCase())) {
+        if (redisValue == null || !redisValue.equals(code.toLowerCase())) {
 
             return false;
         }
