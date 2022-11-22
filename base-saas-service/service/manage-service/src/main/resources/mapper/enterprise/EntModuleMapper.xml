@@ -29,7 +29,7 @@
         e.create_time,
         e.update_user,
         e.update_time,
-        e.remark,
+        s.remark,
         s.status,
         e.company_code
         from ent_module e ,sys_module s
