@@ -50,9 +50,9 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Set<String> permissions = Sets.newHashSet(UserContextUtil.getUserInfo().getPermissionList());
+//        Set<String> permissions = Sets.newHashSet(UserContextUtil.getUserInfo().getPermissionList());
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(permissions);
+//        info.setStringPermissions(permissions);
         return info;
     }
 

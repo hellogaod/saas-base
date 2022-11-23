@@ -179,7 +179,7 @@ public class PostFilter extends ZuulFilter {
             sysWebLog.put("companyCode", userInfo.getCompanyCode());
         }
 
-        if (userInfo == null && jsonObject.getString("companyCode") != null){
+        if (userInfo == null && jsonObject != null && jsonObject.getString("companyCode") != null) {
             sysWebLog.put("loginAccount", jsonObject.getString("realName"));
             sysWebLog.put("createBy", jsonObject.getString("account"));
             sysWebLog.put("companyCode", jsonObject.getString("companyCode"));

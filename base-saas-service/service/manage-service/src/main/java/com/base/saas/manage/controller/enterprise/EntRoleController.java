@@ -84,17 +84,17 @@ public class EntRoleController {
     @PostMapping("/updateStatus")
     @ApiOperation(value = "角色启用停用", notes = "角色启用停用")
     public ResponseEntity updateStatus(@RequestBody EntRole data) {
-        String logmsg = LocaleMessage.get("message.system.request.param.exception");
+        String logmsg ;
 
         if (null == data || StringUtil.isEmpty(data.getRoleId())) {
+            logmsg = LocaleMessage.get("message.system.request.param.exception");
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
 
         try {
             ReturnMap map = roleService.updateState(data);
             boolean flag = map.getCode() == 1;
-            String msg = LocaleMessage.get(map.getMsg());
-            logmsg = LocaleMessage.get(msg);
+             logmsg = LocaleMessage.get(map.getMsg());
             if (flag) {
                 return ResponseEntity.ok().body(null);
             } else {

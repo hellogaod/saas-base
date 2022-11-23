@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Title :
@@ -38,18 +36,7 @@ public class UserInfo implements Serializable {
     private int userType;
 
     /**
-     * 用户拥有权限的菜单列表
-     */
-    private List<String> permissionList;
-
-    /**
-     * 用户拥有权限的菜单列表的数据权限，数据查看范围和是否脱敏展示
-     */
-    private Map<String, Map<String, String>> dataPermission;
-
-    /**
      * 登录令牌
      */
-    private String token;
-
+//    private String token;
 }
