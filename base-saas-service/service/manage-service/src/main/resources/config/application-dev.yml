@@ -16,7 +16,7 @@ spring:
     host: 127.0.0.1
     port: 6379
     expireTime: 3600
-    password: GAO2651qiang
+    password: 123456
 
   #nacos服务地址
   cloud:

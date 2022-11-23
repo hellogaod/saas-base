@@ -1,14 +1,12 @@
 package com.base.saas.gateway.filter;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.base.saas.AppConstant;
 import com.base.saas.userinfo.UserContextUtil;
 
 import com.base.saas.userinfo.UserInfo;
+import com.netflix.util.Pair;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +20,8 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -77,63 +75,79 @@ public class PostFilter extends ZuulFilter {
     public Object run() {
         RequestContext context = RequestContext.getCurrentContext();
 
-        //处理日志信息
-        Map sysWebLog = new HashMap<>();
         try {
             //1.处理具体请求结果返回值
             // 获取返回值内容，加以处理
             InputStream stream = context.getResponseDataStream();
             String body = StreamUtils.copyToString(stream, Charset.forName("UTF-8")).replaceAll("(\\r\\n|\\r|\\n|\\n\\r)", "").trim();
-            if (!"".equals(body) && body != null) {
+
+            JSONObject jsonObject = null;
+            final String[] errorMessage = {null};
+
+            if (!"".equals(body) && body != null) {//表示当前请求接口成功
+
+                //表示获取的是集合
                 if (body.substring(0, 1).equals("[")) {
-                    //[{},{}]
-                    JSONArray arr = JSONObject.parseArray(body);
-                    context.setResponseBody(body);
+
                 } else {
-                    JSONObject jsonObject = JSONObject.parseObject(body);
-                    if (jsonObject == null) {
-                        context.setResponseBody(null);
-                    } else {
-                        context.setResponseBody(JSONObject.toJSONString(jsonObject, SerializerFeature.WriteMapNullValue));
-                    }
-                    //2.创建日志对象并初始化
-                    sysWebLog = createLogAddInitData(context, sysWebLog, jsonObject);
-                    //调用新增日志服务
-                    HttpHeaders requestHeaders = new HttpHeaders();
-                    requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-                    HttpEntity<Map> requestEntity = new HttpEntity<Map>(sysWebLog, requestHeaders);
+                    jsonObject = JSONObject.parseObject(body);
 
-                    ResponseEntity entity = restTemplate.postForEntity("http://" + AppConstant.MANAGE_ADDLOG_API, requestEntity, Object.class);
 
-                    if (jsonObject.containsKey("responseBody")) {
-                        Object obj = jsonObject.get("responseBody");
-                        if (obj == null) {
-                            context.setResponseBody(null);
-                        } else {
-                            context.setResponseBody(JSONObject.toJSONString(obj, SerializerFeature.WriteMapNullValue));
-                        }
-
-                    } else {
-                        context.setResponseBody(body);
-
-                    }
                 }
 
-            } else {
-                context.setResponseBody(body);
+            } else {//表示当前请求接口失败
+                List<Pair<String, String>> responseHeader = context.getZuulResponseHeaders();
+
+                responseHeader.stream()
+                        .filter(item -> item.first().equals("saas-error-message"))
+                        .map(item -> item.second())
+                        .forEach(item ->
+                                {
+                                    try {
+                                        errorMessage[0] = URLDecoder.decode(item, "utf-8");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                        );
+
             }
+
+            //处理日志信息
+            Map sysWebLog = new HashMap<>();
+            //1.创建日志对象并初始化
+            sysWebLog = createLogAddInitData(context, sysWebLog, jsonObject, errorMessage[0]);
+            //调用新增日志服务
+            HttpHeaders requestHeaders = new HttpHeaders();
+            requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Map> requestEntity = new HttpEntity<Map>(sysWebLog, requestHeaders);
+
+            ResponseEntity entity = restTemplate.postForEntity("http://" + AppConstant.MANAGE_ADDLOG_API, requestEntity, Object.class);
+
+            //因为被消费了，所以这里需要重新赋值，否则接口返回body为空
+            context.setResponseBody(body);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         return null;
     }
 
-    private Map createLogAddInitData(RequestContext context, Map sysWebLog, JSONObject jsonObject) throws Exception {
+    /**
+     * 如果errorMessage为空，表示成功；否则表示失败
+     *
+     * @param context
+     * @param sysWebLog
+     * @param jsonObject
+     * @param errorMessage
+     * @return
+     * @throws Exception
+     */
+    private Map createLogAddInitData(RequestContext context, Map sysWebLog, JSONObject jsonObject, String errorMessage) throws Exception {
         HttpServletRequest request = context.getRequest();
+
         if (StringUtils.contains(request.getRequestURL().toString(), AppConstant.MANAGE_LOGIN_API_CONTAIN)) {
             //记录登录日志
             sysWebLog.put("operateType", "0");
@@ -145,8 +159,8 @@ public class PostFilter extends ZuulFilter {
         sysWebLog.put("terminalType", "0");
         sysWebLog.put("operateIp", request.getLocalAddr());
 
-        String method = request.getMethod();
-        if ("POST".equals(method)) {
+        String methodType = request.getMethod();
+        if ("POST".equals(methodType)) {
             InputStream in = request.getInputStream();
             String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
             sysWebLog.put("methodArgs", body);
@@ -156,52 +170,45 @@ public class PostFilter extends ZuulFilter {
         }
         sysWebLog.put("method", request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")));
 
-        Object userInfoObject = jsonObject.get("userInfo");
-        UserInfo userInfo = null;
-        if (userInfoObject == null) {
-            String sessionId = jsonObject.get("sessionId") == null ? null : jsonObject.get("sessionId").toString();
-            if (sessionId != null) {
-                userInfo = UserContextUtil.getUserInfo();
-            }
-        } else {
-            userInfo = JSONObject.toJavaObject(JSON.parseObject(jsonObject.get("userInfo").toString()), UserInfo.class);
-        }
+        String token = request.getHeader("X-UserToken");
+        UserInfo userInfo = UserContextUtil.getUserInfo(token);
+
         if (userInfo != null) {
-            sysWebLog.put("loginAccount",userInfo.getAccount());
-            sysWebLog.put("createBy",userInfo.getAccount());
-            sysWebLog.put("companyCode",userInfo.getCompanyCode());
-            sysWebLog.put("companyName",userInfo.getCompanyName());
+            sysWebLog.put("loginAccount", userInfo.getRealName());
+            sysWebLog.put("createBy", userInfo.getAccount());
+            sysWebLog.put("companyCode", userInfo.getCompanyCode());
+        }
+
+        if (userInfo == null && jsonObject.getString("companyCode") != null){
+            sysWebLog.put("loginAccount", jsonObject.getString("realName"));
+            sysWebLog.put("createBy", jsonObject.getString("account"));
+            sysWebLog.put("companyCode", jsonObject.getString("companyCode"));
         }
         int statusCode = 400;
-        if (jsonObject.containsKey("statusCode")) {
-            statusCode = jsonObject.getInteger("statusCode");
+        if (errorMessage == null) {
+            statusCode = 200;
         }
-        sysWebLog.put("statusCode",statusCode + "");
+        sysWebLog.put("statusCode", statusCode + "");
 
         if (statusCode == 200) {
             //请求成功
-            sysWebLog.put("status","0");
+            sysWebLog.put("status", "0");
+            sysWebLog.put("messages", "成功");
         } else {
-            sysWebLog.put("status","1");
-            //设置异常信息
-            sysWebLog.put("exceptionCode",jsonObject.get("exceptionCode") == null ? null : jsonObject.get("exceptionCode").toString());
-            sysWebLog.put("exceptionDescription",jsonObject.get("exceptionDescription") == null ? null : jsonObject.get("exceptionDescription").toString());
+            sysWebLog.put("status", "1");
+            sysWebLog.put("messages", "失败：" + errorMessage);
 
-            String exceptionStackMsg = jsonObject.get("exceptionStackMsg") == null ? null : jsonObject.get("exceptionStackMsg").toString();
-            if (exceptionStackMsg != null && !"".equals(exceptionStackMsg) && exceptionStackMsg.length() > 4000) {
-                exceptionStackMsg = exceptionStackMsg.substring(0, 3999);
-                sysWebLog.put("exceptionStackMsg",exceptionStackMsg);
+            try {
+                //设置异常信息
+                sysWebLog.put("exceptionCode", jsonObject.get("exceptionCode") == null ? null : jsonObject.get("exceptionCode").toString());
+                sysWebLog.put("exceptionDescription", jsonObject.get("exceptionDescription") == null ? null : jsonObject.get("exceptionDescription").toString());
 
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
         }
-        List<com.netflix.util.Pair<String, String>> listPair = context.getZuulResponseHeaders();
-        for (com.netflix.util.Pair<String, String> info : listPair) {
-            if (info.first().equals("saas-error-message")) {
-                String message = URLDecoder.decode(info.second(), "UTF-8");
-                sysWebLog.put("messages",message);
-                break;
-            }
-        }
+
         return sysWebLog;
     }
 

@@ -46,7 +46,6 @@ public class EntLogController {
             sysWebLog.setLoginAccount((String) map.get("loginAccount"));
             sysWebLog.setCreateBy((String) map.get("createBy"));
             sysWebLog.setCompanyCode((String) map.get("companyCode"));
-            sysWebLog.setCompanyName((String) map.get("companyName"));
             sysWebLog.setStatusCode((String) map.get("statusCode"));
             sysWebLog.setStatus((String) map.get("status"));
             sysWebLog.setExceptionCode((String) map.get("exceptionCode"));
