@@ -4,7 +4,6 @@ const UserManage = () => import('~/pages/enterprise-manage/base/ent-user.vue')//
 const enterpriseCompany = () => import('~/pages/enterprise-manage/base/ent-profile.vue')//公司简介
 const dictManage = () => import('~/pages/enterprise-manage/base/ent-dict-manage.vue')//字典管理
 const organizationManage = () => import('~/pages/enterprise-manage/base/ent-organization.vue')// 组织架构管理
-const systemParams = () => import('~/pages/enterprise-manage/base/ent-params.vue')// 系统参数配置
 
 const sysLoginLog = () => import('~/pages/enterprise-manage/base/ent-login-log.vue')//登录日志
 const systemOperationLog = () => import('~/pages/enterprise-manage/base/ent-operation-log.vue')//操作日志
@@ -37,11 +36,7 @@ export default [
     name: 'organizationManage',
     component: organizationManage
   },
-  {
-    path: '/ent-manage/params',
-    name: 'systemParams',
-    component: systemParams
-  },
+
   {
     path: '/ent-manage/login-log',
     name: 'sysLoginLog',

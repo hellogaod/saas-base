@@ -1,12 +1,11 @@
 /*
 *systemweb 日志管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName + 'system-web'
-const CONTROLLER = 'webLog'
+const CONTROLLER = 'entLog'
 /*
 * 前端服务名称
 */
@@ -15,7 +14,7 @@ export default {
    * 登录日志列表
    */
   getLogList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getLogList',
     type: requestType.Get
@@ -24,7 +23,7 @@ export default {
    * 登录日志查看
    */
   getErrorLogById: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getErrorLogById',
     type: requestType.Get

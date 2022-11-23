@@ -47,7 +47,7 @@
         </el-table-column>
         <el-table-column prop="operateTime" label="登录时间" :min-width="$helper.getColumnWidth(2)" show-overflow-tooltip>
           <template slot-scope="scope">
-            <span>{{scope.row.operateTime|dateFormat}}</span>
+            <span>{{$dateutils.dateTimeFormat(scope.row.operateTime)}}</span>
           </template>
         </el-table-column>
       </template>

@@ -50,13 +50,15 @@
           <el-table-column prop="exceptionDescription" label="异常描述" :min-width="$helper.getColumnWidth(2)"
                            show-overflow-tooltip>
           </el-table-column>
-          <el-table-column label="异常详情" prop="status" :min-width="$helper.getColumnWidth(2)" show-overflow-tooltip>
-            <template slot-scope="scope">
-              <el-button v-if="scope.row.status === '1'" type="text" @click="dialog.detalis = true,logObj = scope.row">
-                查看
-              </el-button>
-            </template>
-          </el-table-column>
+
+          <!--<el-table-column label="异常详情" prop="status" :min-width="$helper.getColumnWidth(2)" show-overflow-tooltip>-->
+            <!--<template slot-scope="scope">-->
+              <!--<el-button v-if="scope.row.status === '1'" type="text" @click="dialog.detalis = true,logObj = scope.row">-->
+                <!--查看-->
+              <!--</el-button>-->
+            <!--</template>-->
+          <!--</el-table-column>-->
+
           <el-table-column prop="terminalType" label="终端" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
             <template slot-scope="scope">
               <span v-if="scope.row.terminalType === '0'">PC端</span>
@@ -74,7 +76,7 @@
           </el-table-column>
           <el-table-column prop="operateTime" label="登录时间" :min-width="$helper.getColumnWidth(2)" show-overflow-tooltip>
             <template slot-scope="scope">
-              <span>{{scope.row.operateTime|dateFormat}}</span>
+              <span>{{$dateutils.dateTimeFormat(scope.row.operateTime)}}</span>
             </template>
           </el-table-column>
         </template>
