@@ -24,18 +24,6 @@ export class webOrganizationService extends Service {
   }
 
   /**
-   * 用户管理数据权限中获取组织架构的菜单树
-   */
-  @Debounce()
-  getOrgByOrgId(orgId, userId, menuId) {
-    return this.netService.send({
-      server: systemwebService.entOrganizationController.getOrgByOrgId,
-      data: {orgId, userId, menuId},
-      loading: true
-    })
-  }
-
-  /**
    * 添加
    */
   @Debounce()

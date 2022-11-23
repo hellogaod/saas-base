@@ -89,12 +89,11 @@
     refresh(obj) {
       this.checkedData = [];
       this.roleId = obj.roleId;
-      this.entRoleMenuService.getMenuByRoleId({
-        roleId: obj.roleId,
-        sysCode: this.$store.state.module.sysCode
+      this.entRoleMenuService.getMenuListByRoleId({
+        roleId: obj.roleId
       }).subscribe(
         data => {
-          this.menuList = data.filter(x => [1].includes(x.menuType));
+          this.menuList = data[0].menuList
           this.separateData(data);
         }, ({msg}) => {
           this.$message.error(msg);

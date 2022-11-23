@@ -1,12 +1,11 @@
 /*
 *systemweb 角色管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName + 'system-web'
-const CONTROLLER = 'role'
+const CONTROLLER = 'entRole'
 /*
 * 前端服务名称
 */
@@ -15,7 +14,7 @@ export default {
    * 添加角色
    */
   addRole: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'addRole',
     type: requestType.Post
@@ -24,7 +23,7 @@ export default {
    * 角色分配，获取角色
    */
   getRole: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getRole',
     type: requestType.Get
@@ -33,7 +32,7 @@ export default {
    * 查询单个角色
    */
   getRoleById: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getRoleById',
     type: requestType.Get
@@ -42,7 +41,7 @@ export default {
    * 获取角色列表
    */
   getRoleList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getRoleList',
     type: requestType.Get
@@ -51,7 +50,7 @@ export default {
    * 修改角色信息
    */
   updateRole: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateRole',
     type: requestType.Post
@@ -60,7 +59,7 @@ export default {
    * 角色启用停用
    */
   updateStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateStatus',
     type: requestType.Post

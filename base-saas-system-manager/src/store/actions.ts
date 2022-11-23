@@ -32,7 +32,7 @@ export default {
       commit('updateUsermoduleListResource', module);
 
       //当前默认选中第一个模块
-      commit('module', module[0])
+      commit('selectedModule', module[0])
 
       // 当前默认第一个模块下的所有菜单
       commit('updateUserMenuResource', module[0].menuList);
@@ -42,7 +42,10 @@ export default {
    * 更新用户选中模块数据
    */
   updateModuleData({state, commit, dispatch}, {data}) {
-    commit('module', data);
+    commit('selectedModule', data);
+
+    //当前默认选中第一个模块
+    commit('updateUserMenuResource', data.menuList);
   },
   /**
    * 清除登录数据

@@ -139,20 +139,6 @@
           return;
         }
 
-        // let verifyForm: any = this.$refs['verify-code']
-
-        // 校验验证码
-        // if (verifyForm.getVerifyValue().trim() === '') {
-        //   this.$message.error('请输入验证码')
-        //   verifyForm.reset()
-        //   return
-        // }
-        // if (!verifyForm.validate()) {
-        //   this.$message.error('验证码错误')
-        //   verifyForm.reset()
-        //   return
-        // }
-
         if (this.remember) {
           StorageUtil.setItem('remember', this.loginModel)
         } else {
@@ -173,7 +159,6 @@
           .doLoginRsa(params)
           .subscribe(
             ({token, userInfo}) => {
-              console.log("userInfo:" + JSON.stringify(userInfo))
 
               this.updateUserLoginData({token, userInfo});
               this.authService.index()

@@ -20,15 +20,6 @@ export default {
     type: requestType.Get
   },
   /**
-   * 用户管理数据权限中获取组织架构的菜单树
-   */
-  getOrgByOrgId: {
-    service: managerServiceName,
-    controller: CONTROLLER,
-    action: 'getOrgByOrgId',
-    type: requestType.Get
-  },
-  /**
    * 保存
    */
   saveOrg: {

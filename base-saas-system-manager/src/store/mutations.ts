@@ -41,6 +41,7 @@ export default {
   updateUserMenuResource(state, rescource) {
 
     state.selectedMenus = rescource
+
   },
 
   /**
@@ -65,6 +66,7 @@ export default {
    * @param data
    */
   updateUsermoduleListResource(state, module) {
+
     state.modules = module
   },
 
@@ -73,7 +75,7 @@ export default {
    * @param state
    * @param data
    */
-  module(state, data) {
+  selectedModule(state, data) {
     state.selectedModule = data
   },
 

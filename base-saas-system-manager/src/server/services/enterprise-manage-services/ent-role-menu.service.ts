@@ -42,10 +42,10 @@ export class entRoleMenuService extends Service {
    * 获取菜单-用户管理（角色分配）
    */
   @Debounce()
-  getMenuListByRoleId({roleId, sysCode}) {
+  getMenuListByRoleId({roleId}) {
     return this.netService.send({
       server: systemwebService.entRoleMenuController.getMenuListByRoleId,
-      data: {roleId, sysCode},
+      data: {roleId},
       loading: true
     })
   }

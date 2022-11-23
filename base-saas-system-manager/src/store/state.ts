@@ -17,16 +17,9 @@ export default {
   userData: '',
   // 公司编号
   companyCode: '',
+
   //公司名称
   // companyName: '',
-
-  // 菜单资源
-  menuResource: [],
-
-  //模块资源-
-  updateUsermoduleListResource: [],
-  //模块资源-选中的
-  module: [],
 
   //当前所有的模块
   modules:[],

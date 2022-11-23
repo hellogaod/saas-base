@@ -2,7 +2,7 @@
 <template>
   <section class="component work-header-menu">
     <el-menu :default-active="data.activeIndex" class="el-menu" mode="horizontal" @select="handleSelect">
-      <el-menu-item :index="String(index)" v-for="(item,index) in moduleListResource" :key="index">{{item.sysName}}
+      <el-menu-item :index="String(index)" v-for="(item,index) in moduleListResource" :key="index">{{item.moduleName}}
       </el-menu-item>
     </el-menu>
   </section>
@@ -33,13 +33,15 @@
      */
     get moduleListResource() {
       let modules: any = this.modules
+
       this.moduleList = modules;
       return modules;
     }
 
     handleSelect(key, keyPath) {
       let data = this.moduleList[key[0]]
-      this.updateModuleData({data});
+
+      this.updateModuleData({data})
     }
   }
 </script>

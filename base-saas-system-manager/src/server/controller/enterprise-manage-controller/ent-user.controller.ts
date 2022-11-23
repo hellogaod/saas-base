@@ -1,12 +1,11 @@
 /*
 *systemweb 用户管理controller
 */
-import {requestType, servicePreName} from '~/server/enum.config'
+import {requestType, managerServiceName} from '~/server/enum.config'
 /*
 * 后台服务名称
 */
-const SERVICE = servicePreName + 'system-web'
-const CONTROLLER = 'user'
+const CONTROLLER = 'entUser'
 /*
 * 前端服务名称
 */
@@ -15,7 +14,7 @@ export default {
    * 添加用户
    */
   addUser: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'addUser',
     type: requestType.Post
@@ -24,7 +23,7 @@ export default {
    * 查询单个用户
    */
   getUserById: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getUserById',
     type: requestType.Get
@@ -33,7 +32,7 @@ export default {
    * 获取用户列表
    */
   getUserList: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'getUserList',
     type: requestType.Get
@@ -42,7 +41,7 @@ export default {
    * 重置密码
    */
   resetPassword: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'resetPassword',
     type: requestType.Post
@@ -51,7 +50,7 @@ export default {
    * 用户启用停用
    */
   updateStatus: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateStatus',
     type: requestType.Post
@@ -60,7 +59,7 @@ export default {
    * 修改用户信息
    */
   updateUser: {
-    service: SERVICE,
+    service: managerServiceName,
     controller: CONTROLLER,
     action: 'updateUser',
     type: requestType.Post
