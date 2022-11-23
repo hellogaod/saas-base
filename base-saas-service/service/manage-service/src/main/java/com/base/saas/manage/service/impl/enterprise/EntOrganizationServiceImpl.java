@@ -118,6 +118,10 @@ public class EntOrganizationServiceImpl implements EntOrganizationService {
 
     @Override
     public EntOrganization getOrgById(String orgId) throws Exception {
+        if (StringUtil.isEmpty(orgId)){
+            UserInfo userInfo = UserContextUtil.getUserInfo();
+            orgId = userInfo.getOrgId();
+        }
         return organizationMapper.findById(orgId);
     }
 

@@ -67,7 +67,7 @@
         s.sequence,
         s.icon,
         s.parent_id,
-        s.company_code,
+        e.company_code,
         s.create_user,
         s.create_time,
         s.update_user,
