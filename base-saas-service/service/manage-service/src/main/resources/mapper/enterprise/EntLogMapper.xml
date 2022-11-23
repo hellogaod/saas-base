@@ -7,7 +7,6 @@
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="login_account" property="loginAccount" jdbcType="VARCHAR"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
-        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
         <result column="method" property="method" jdbcType="VARCHAR"/>
         <result column="method_desc" property="methodDesc" jdbcType="VARCHAR"/>
         <result column="method_args" property="methodArgs" jdbcType="VARCHAR"/>
@@ -28,7 +27,7 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, login_account, company_code, company_name, method, method_desc, method_args, operate_time,
+    id, login_account, company_code,  method, method_desc, method_args, operate_time,
     operate_ip, operate_type, terminal_type,status,status_code,messages,is_delete,exception_code,exception_description,exception_stack_msg,
     create_time,create_by,update_time,update_by
   </sql>
@@ -40,7 +39,6 @@
         id,
         login_account,
         company_code,
-        company_name,
         method,
         method_desc,
         method_args,
@@ -60,7 +58,6 @@
         #{id,jdbcType=VARCHAR},
         #{loginAccount,jdbcType=VARCHAR},
         #{companyCode,jdbcType=VARCHAR},
-        #{companyName,jdbcType=VARCHAR},
         #{method,jdbcType=VARCHAR},
         #{methodDesc,jdbcType=VARCHAR},
         #{methodArgs,jdbcType=VARCHAR},

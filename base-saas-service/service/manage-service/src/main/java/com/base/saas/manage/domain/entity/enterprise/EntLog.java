@@ -14,7 +14,6 @@ public class EntLog implements Serializable {
     private String id;
     private String loginAccount;//登录账号
     private String companyCode;//公司编码
-    private String companyName;
     private String method;//方法名
     private String methodDesc;//方法描述
     private String methodArgs;//方法参数
@@ -60,14 +59,6 @@ public class EntLog implements Serializable {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public String getMethod() {
