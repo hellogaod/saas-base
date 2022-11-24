@@ -36,4 +36,7 @@ public interface EntUserMapper {
     //修改查询账号是否已存在
     List<String> getUserByUpdate(EntUser user);
 
+    //当前企业下是否相同realName的账号
+    List<String> checkHasOtherInfo(EntUser user);
+
 }
