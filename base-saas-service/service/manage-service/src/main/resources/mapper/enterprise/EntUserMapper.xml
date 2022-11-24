@@ -15,6 +15,7 @@
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="tel" property="tel" jdbcType="VARCHAR"/>
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="SMALLINT"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
@@ -202,18 +203,22 @@
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
-        <include refid="Base_Column_List"/>
-        from ent_user
-        where 1=1
-        <if test="userId != null">
-            and user_id = #{userId,jdbcType=VARCHAR}
-        </if>
-        <if test="companyCode != null">
-            and company_code = #{companyCode,jdbcType=VARCHAR}
-        </if>
-        <if test="account != null">
-            and account = #{account,jdbcType=VARCHAR}
-        </if>
+        u.user_id, u.company_code, u.org_id, u.employee_no, u.account, u.password, u.real_name, u.sex, u.email,
+        u.tel, u.qq, u.status, u.remark, u.role_id, u.lock_time, u.latest_time, u.latest_ip, u.error_count,
+        u.create_user, u.create_time, u.update_user, u.update_time,o.org_name
+
+        from ent_user u left join ent_organization o on o.org_id = u.org_id
+        <where>
+            <if test="userId != null">
+                and u.user_id = #{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="companyCode != null">
+                and u.company_code = #{companyCode,jdbcType=VARCHAR}
+            </if>
+            <if test="account != null">
+                and u.account = #{account,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser">
@@ -287,8 +292,19 @@
     </update>
 
 
-    <select id="getUserByUpdate" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser" resultType="String">
+    <select id="getUserByUpdate" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser"
+            resultType="String">
 
-    select user_id from ent_user where account = #{account} and company_code = #{companyCode} and user_id != #{userId}
+    select user_id
+    from ent_user
+    where account = #{account} and company_code = #{companyCode} and user_id != #{userId}
+  </select>
+
+    <select id="checkHasOtherInfo" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser"
+            resultType="String">
+
+    select user_id
+    from ent_user
+    where real_name =  #{realName}  and company_code = #{companyCode} and user_id != #{userId}
   </select>
 </mapper>

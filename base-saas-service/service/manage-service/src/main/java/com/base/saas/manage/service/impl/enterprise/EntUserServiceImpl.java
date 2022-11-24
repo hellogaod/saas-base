@@ -55,7 +55,7 @@ public class EntUserServiceImpl implements EntUserService {
 
         String account = user.getAccount();
         //查询账户是否已存在
-        EntUser model = userMapper.selectByPrimaryKey(null, account, user.getCompanyCode());
+        EntUser model = userMapper.selectByPrimaryKey(null, user.getCompanyCode(), account);
         if (model != null) {
             map.setMsg("message.user.account.existed");
             return map;
@@ -126,7 +126,7 @@ public class EntUserServiceImpl implements EntUserService {
 
     @Override
     public EntUser getUserById(String userId) {
-        return userMapper.selectByPrimaryKey(userId,null,null);
+        return userMapper.selectByPrimaryKey(userId, null, null);
     }
 
     @Override
@@ -138,7 +138,8 @@ public class EntUserServiceImpl implements EntUserService {
             return map;
         }
 
-        if (user.getRealName().equals("超级管理员")) {
+        List list0 = userMapper.checkHasOtherInfo(user);
+        if (user.getRealName().equals("超级管理员") && list0 != null && list0.size() > 0) {
             map.setMsg("message.realname.use.administrator.error");
             return map;
         }

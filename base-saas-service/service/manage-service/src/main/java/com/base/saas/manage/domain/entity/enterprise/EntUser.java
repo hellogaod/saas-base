@@ -18,6 +18,8 @@ public class EntUser implements Serializable {
     //组织编号
     private String orgId;
 
+    private String orgName;//所在组织名称
+
     private int orgStatus;//组织架构状态
 
     //员工编号
@@ -80,6 +82,14 @@ public class EntUser implements Serializable {
 
     //修改时间
     private Date updateTime;
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
 
     public String getCompanyName() {
         return companyName;
