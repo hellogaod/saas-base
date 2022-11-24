@@ -59,8 +59,8 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="员工编号" prop="employeeId">
-            <el-input v-model="modifyParams.employeeId" size="small" :maxlength="25"></el-input>
+          <el-form-item label="员工编号" prop="employeeNo">
+            <el-input v-model="modifyParams.employeeNo" size="small" :maxlength="25"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -117,7 +117,7 @@
       email: '',
       orgName: '',
       orgId: '',
-      employeeId: '',
+      employeeNo: '',
       remark: '',
       status: 1,
       qq: '',
@@ -160,7 +160,7 @@
         {type: "email", message: "请输入正确的邮箱", trigger: "blur"},
       ],
       orgName: {required: true, message: "请选择组织架构",},
-      employeeId: [
+      employeeNo: [
         {
           message: "请输入数字和字母",
           trigger: "blur",
@@ -182,6 +182,7 @@
     refresh(obj) {
       this.entUserService.getUserById(obj.userId).subscribe(
         data => {
+          console.log("修改用户信息：" + JSON.stringify(data))
           this.modifyParams.account = data.account
           this.modifyParams.companyCode = data.companyCode
           this.modifyParams.realName = data.realName
@@ -190,7 +191,7 @@
           this.modifyParams.email = data.email
           this.modifyParams.orgName = data.orgName
           this.modifyParams.orgId = data.orgId
-          this.modifyParams.employeeId = data.employeeId
+          this.modifyParams.employeeNo = data.employeeNo
           this.modifyParams.remark = data.remark
           this.modifyParams.account = data.account
           this.modifyParams.status = data.status
@@ -232,8 +233,8 @@
     }
 
     getDepartment(param) {
-      this.modifyParams.orgName = param.label
-      this.modifyParams.orgId = param.id
+      this.modifyParams.orgName = param.orgName
+      this.modifyParams.orgId = param.orgId
     }
   }
 </script>

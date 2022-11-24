@@ -43,8 +43,8 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="组织架构" prop="department">
-            <el-input v-model="addParams.department" size="small" :maxlength="25" :readonly="true"
+          <el-form-item label="组织架构" prop="orgName">
+            <el-input v-model="addParams.orgName" size="small" :maxlength="25" :readonly="true"
                       @click.native="showDepartmentTree()"></el-input>
           </el-form-item>
         </el-col>
@@ -64,8 +64,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="员工编号" prop="employeeId">
-            <el-input v-model="addParams.employeeId" size="small" :maxlength="25"></el-input>
+          <el-form-item label="员工编号" prop="employeeNo">
+            <el-input v-model="addParams.employeeNo" size="small" :maxlength="25"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -121,9 +121,9 @@
       sex: 0,
       tel: '',
       email: '',
-      department: '',
+      orgName: '',
       orgId: '',
-      employeeId: '',
+      employeeNo: '',
       remark: '',
       treeShow: false,
       status: 1,
@@ -172,8 +172,8 @@
       email: [
         {type: "email", message: "请输入正确的邮箱", trigger: "blur"},
       ],
-      department: {required: true, message: "请选择组织架构",},
-      employeeId: [
+      orgName: {required: true, message: "请选择组织架构",},
+      employeeNo: [
         {
           message: "请输入数字和字母",
           trigger: "blur",
@@ -222,8 +222,8 @@
 
 
     getDepartment(param) {
-      this.addParams.department = param.label
-      this.addParams.orgId = param.id
+      this.addParams.orgName = param.orgName
+      this.addParams.orgId = param.orgId
     }
   }
 </script>
