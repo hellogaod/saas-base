@@ -11,6 +11,9 @@ const systemManageLogin = () => import('~/pages/system-manage/sys-login.vue')//�
 const enterpriseManageLogin = () => import('~/pages/enterprise-manage/base/ent-login.vue')//企业管理端登录
 const NotFound = () => import('~/pages/not-found.vue')//页面丢失
 
+const dashboard = () => import('~/pages/dashboard/admin.vue')//系统管理台登录
+
+
 Vue.use(Router)
 
 // 生成路由配置
@@ -20,6 +23,12 @@ const routes = [
     name: 'enterpriseLogin',
     component: enterpriseManageLogin
   },
+  {
+    path: '/dashboard',//默认进入企业管理端
+    name: 'dashboard',
+    component: dashboard
+  },
+
   {
     path: '/sys-manage',//系统管理端路径
     name: 'systemLogin',

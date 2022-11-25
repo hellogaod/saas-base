@@ -23,6 +23,15 @@ export class SysMenuService extends Service {
     })
   }
 
+  @Debounce()
+  getChildrenMenuByParentId(userId, parentId) {
+    return this.netService.send({
+      server: managerService.moduleDetailController.getChildrenMenuByParentId,
+      data: {userId: userId, parentId: parentId},
+      loading: true
+    })
+  }
+
   //表格数据
   getAllMenuDetailList(data) {
     return this.netService.send({

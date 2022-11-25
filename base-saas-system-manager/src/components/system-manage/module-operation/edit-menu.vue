@@ -79,7 +79,7 @@
     private editModel: any = {
       menuName: "",
       menuType: "",
-      desensitizeStatus: "0",
+      desensitizeStatus: 0,
       sequence: "",
       url: "",
       remark: "",

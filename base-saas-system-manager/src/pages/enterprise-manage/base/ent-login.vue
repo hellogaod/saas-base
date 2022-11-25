@@ -75,7 +75,7 @@
   import SvgIcon from "~/components/common/svg-icon.vue"
   import AppConfig from "~/config/app.config"
   import {Dependencies} from "~/core/decorator";
-  import {Action} from "vuex-class";
+  import {Action, State} from "vuex-class";
   import {StorageUtil} from '~/utils/storage.util';
   import {entLoginService} from "~/server/services/enterprise-manage-services/ent-login.service";
   import {ValidateCode} from '~/server/services/common-service/validate-code'
@@ -92,6 +92,7 @@
     @Dependencies(ValidateCode) private comValidateService: ValidateCode;
 
     @Action("updateUserLoginData") updateUserLoginData;
+    @State selectedMenus;
 
     private loginRule: any = {
       companyCode: {required: true, message: "企业编码不能为空", trigger: "blur"},
@@ -159,7 +160,8 @@
           .doLoginRsa(params)
           .subscribe(
             ({token, userInfo}) => {
-
+              console.log("token:" + token)
+              console.log("userInfo:" + JSON.stringify(userInfo))
               this.updateUserLoginData({token, userInfo});
               this.authService.index()
                 .subscribe((data) => {
@@ -168,8 +170,14 @@
 
                   //表示当前是系统端登录
                   sessionStorage.setItem("loginType", "sys");
-                  this.$router.push("/ent-manage/user");
-                })
+
+
+                  this.$router.push("/dashboard");
+                },
+                  ({msg}) => {
+                    this.$message.error(msg);
+                    this.getCaptcha();
+                  })
             },
             ({msg}) => {
               this.$message.error(msg);

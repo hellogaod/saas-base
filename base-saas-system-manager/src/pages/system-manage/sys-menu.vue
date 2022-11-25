@@ -122,7 +122,7 @@
   @Layout("workspace")
   export default class ModulePermission extends Vue {
     @Dependencies(SysMenuService)
-    private moduledetailService: SysMenuService;
+    private sysMenuService: SysMenuService;
 
     @Emit("refreshList")
     refreshList() {
@@ -165,7 +165,7 @@
      * 当前选中节点改变的时候，，获取表格数据
      */
     private getTable() {
-      this.moduledetailService.getAllMenuDetailList({
+      this.sysMenuService.getAllMenuDetailList({
         parentId: this.nodeData.menuId, moduleId: this.$route.params.moduleId
       }).subscribe(
         data => {
@@ -187,7 +187,7 @@
     refreshData() {
       this.tree = this.$refs.tree as any;
       let moduleId = this.$route.params.moduleId;
-      this.moduledetailService.getAllMenuTree(moduleId, "").subscribe(
+      this.sysMenuService.getAllMenuTree(moduleId, "").subscribe(
         data => {
           this.treeResource = data;
         },
@@ -210,7 +210,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduledetailService.updateMenuStatus(this.pidData.menuId, 1).subscribe(data => {
+        this.sysMenuService.updateMenuStatus(this.pidData.menuId, 1).subscribe(data => {
           this.$message({
             type: 'success',
             message: '启用成功!'
@@ -232,7 +232,7 @@
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.moduledetailService.updateMenuStatus(this.pidData.menuId, 0).subscribe(data => {
+        this.sysMenuService.updateMenuStatus(this.pidData.menuId, 0).subscribe(data => {
           this.$message({
             type: 'success',
             message: '停用成功!'

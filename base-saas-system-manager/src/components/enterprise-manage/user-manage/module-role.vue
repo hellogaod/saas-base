@@ -3,7 +3,7 @@
     <el-form :model="moduleRole" ref="add-form" label-width="100px" align="left">
       <el-row>
         <el-col :span="12">
-          <label for="">角色：</label>
+          <label>角色：</label>
           <el-select v-model="roleId" placeholder="请选择" @change="selectRole()">
             <el-option
               v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId">
@@ -19,10 +19,18 @@
     </el-form>
     <div style="display:flex">
       <el-col class="module">
-        <el-row class="title">菜单模块</el-row>
+        <el-row class="title">所属模块</el-row>
+        <el-row class="title">
+          <el-select v-model="selectedModuleId" placeholder="请选择" @change="selecModule">
+            <el-option
+              v-for="item in moduleList" :key="item.moduleId" :label="item.moduleName" :value="item.moduleId">
+            </el-option>
+          </el-select>
+        </el-row>
+        <el-row class="title">模块所属菜单</el-row>
         <div class="module-tree">
-          <el-tree align="left" :data="treeResource" highlight-current :default-expanded-keys="[0]" node-key="id"
-                   ref="tree" @current-change="onCurrentNodeChange" @check="onCheck"></el-tree>
+          <el-tree align="left" :data="treeResource" highlight-current :default-expanded-keys="[0]" node-key="menuId"
+                   ref="tree" :props="defaultProps" @current-change="onCurrentNodeChange" @check="onCheck"></el-tree>
         </div>
       </el-col>
       <el-col class="moduleBox">
@@ -34,13 +42,7 @@
             <el-table-column prop="parentName" label="上级菜单" :min-width="$helper.getColumnWidth(4)"
                              show-overflow-tooltip>
             </el-table-column>
-            <el-table-column prop="menuType" label="菜单类型" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
-              <template slot-scope="scope">
-                <span v-if="scope.row.menuType === 1">菜单</span>
-                <span v-if="scope.row.menuType === 2">按钮</span>
-                <span v-if="scope.row.menuType === 3">组件</span>
-              </template>
-            </el-table-column>
+
             <el-table-column prop="status" label="状态" :min-width="$helper.getColumnWidth(2)">
               <template slot-scope="scope">
                 <span v-if="scope.row.status === 1">启用</span>
@@ -52,16 +54,14 @@
                 <span>{{$dateutils.dateTimeFormat(scope.row.createTime)}}</span>
               </template>
             </el-table-column>
+
             <el-table-column label="操作" :min-width="$helper.getColumnWidth(5)">
               <template slot-scope="scope">
-                <el-button type="text" v-if="scope.row.desensite === 0"
-                           @click="addDataPermission(scope.row,1)">取消脱敏
+                <el-button type="text" v-if="scope.row.desensitizeStatus === 1 && scope.row.isDesensite === 1"
+                           @click="addDataPermission(scope.row,0)">取消脱敏
                 </el-button>
-                <el-button type="text" v-if="scope.row.desensite === 1"
-                           @click="addDataPermission(scope.row,0)">脱敏
-                </el-button>
-                <el-button type="text" @click="showTree(scope.row)"
-                           v-if="scope.row.authStatus === 1">数据权限
+                <el-button type="text" v-if="scope.row.desensitizeStatus === 1 && scope.row.isDesensite != 1"
+                           @click="addDataPermission(scope.row,1)">脱敏
                 </el-button>
               </template>
             </el-table-column>
@@ -92,24 +92,23 @@
   import {PageUtil} from "~/utils/page.util";
   import {entRoleMenuService} from "~/server/services/enterprise-manage-services/ent-role-menu.service";
   import {entRoleService} from "~/server/services/enterprise-manage-services/ent-role.service";
-  import {entMenuService} from "~/server/services/enterprise-manage-services/ent-menu.service";
   import {sysUserPermissionService} from "~/server/services/enterprise-manage-services/ent-user-menu-desensite.service";
   import {entUserService} from "~/server/services/enterprise-manage-services/ent-user.service";
   import {Prop, Emit, Watch} from "vue-property-decorator";
   import {Getter, State} from "vuex-class";
-  import DepartmentTree from "~/components/common/department-tree-checked.vue"; // 新增用户
+  import {SysMenuService} from "~/server/services/system-manage-services/sys-menu.service"; // 新增用户
   @Component({
     components: {
       DataForm,
       DataBox,
-      DepartmentTree
     }
   })
   export default class ModulePermission extends Vue {
     @Dependencies(PageUtil) private pageUtil: PageUtil;
     @Dependencies(entRoleMenuService) private entRoleMenuService: entRoleMenuService;
     @Dependencies(entRoleService) private entRoleService: entRoleService;
-    @Dependencies(entMenuService) private entMenuService: entMenuService;
+    @Dependencies(SysMenuService)
+    private sysMenuService: SysMenuService;
     @Dependencies(sysUserPermissionService) private sysUserPermissionService: sysUserPermissionService;
     @Dependencies(entUserService) private entUserService: entUserService;
 
@@ -132,6 +131,17 @@
     private roleOptions: any = [];
     // 表格所有资源
     private tableResource: Array<any> = [];
+
+    private defaultProps: any = {
+      children: 'subMenus',
+      label: 'menuName'
+    }
+
+    //当前企业下所有的模块信息
+    private moduleList: Array<any> = [];
+    //当前被选中的模块id
+    private selectedModuleId: any = "";
+
     // 树所有资源
     private treeResource: Array<any> = [];
     // 当前选中的node的数据
@@ -179,9 +189,9 @@
     getRoleAll(obj) {
       this.entRoleService.getRole(obj.userId).subscribe(
         data => {
-          this.roleOptions = data.roleAllList
-          if (data.userRoleId) {
-            this.roleId = data.userRoleId;
+          this.roleOptions = data.roleList
+          if (data.roleId) {
+            this.roleId = data.roleId;
           } else {
             this.roleOptions.unshift({
               roleId: '',
@@ -189,6 +199,7 @@
             })
             this.roleId = "";
           }
+
           this.selectRole()
         }, ({msg}) => {
           this.$message.error(msg);
@@ -197,16 +208,30 @@
     }
 
     selectRole() {
-      this.getMenuListByRoleId(this.roleId)
+      this.getMenuListByRoleId()
     }
 
-    getMenuListByRoleId(roleId) {
+    selecModule(value) {
+     let num:number = this.moduleList.findIndex(item => {
+       return item.moduleId == value
+      })
+      this.treeResource = this.moduleList[num].menuList
+    }
+
+    getMenuListByRoleId() {
+
+      if (this.roleId === undefined || this.roleId === '')
+        return
+
       this.entRoleMenuService.getMenuListByRoleId({
-        roleId: roleId,
-        sysCode: this.$store.state.module.sysCode
+        roleId: this.roleId
       }).subscribe(
         data => {
-          this.separateData(data);
+          this.moduleList = data;
+          if (this.moduleList.length > 0) {
+            this.selectedModuleId = this.moduleList[0].moduleId;
+            this.treeResource = this.moduleList[0].menuList
+          }
         }, ({msg}) => {
           this.$message.error(msg);
         }
@@ -232,52 +257,27 @@
       this.tree = this.$refs.tree as any;
     }
 
-    /**
-     * 分离数据 菜单数据 控件资源
-     */
-    private separateData(data: Array<any>) {
-      if (data) {
-        // 提取菜单资源
-        let tmpTreeResource = data.filter(x => [1, 2, 3].includes(x.menuType)).map(v => {
-          return {
-            label: v.menuName,
-            pid: v.parentId,
-            id: v.menuId,
-            type: v.menuType,
-            entMenuId: v.entMenuId,
-            menuId: v.menuId
-          };
-        });
-      }
-    }
-
     // 获取右侧菜单数据
     refreshData(nodeData) {
-      let data: any = {
-        parentId: nodeData.pid === "#" ? "" : nodeData.pid,
-        entMenuId: nodeData.entMenuId,
-        menuId: nodeData.menuId,
-        userId: this.userId,
-        sysCode: this.$store.state.module.sysCode,
-        roleId: this.roleId
-      }
-      this.entMenuService.getMenuDetail(data).subscribe(data => {
-        this.menuDataSet = data
-      }, ({msg}) => {
-        this.$message.error(msg);
-      })
+
+      this.sysMenuService.getChildrenMenuByParentId(this.userId, nodeData.menuId).subscribe(
+        data => {
+          this.menuDataSet = data;
+        },
+        ({msg}) => {
+          this.$message.error(msg);
+        }
+      );
+
     }
 
     // 脱敏
     addDataPermission(scope, type) {
       let data: any = {
-        "roleId": this.roleId,//角色id
+        // "roleId": this.roleId,//角色id
         "userId": this.userId, //用户id
-        "menuId": scope.id,//菜单 id
-        "orgPath": "",//组织树ids
+        "menuId": scope.menuId,//菜单 id
         "isDesensite": type ? type : 0, //1是0否
-        "type": 2,//1-更新数据权限，2-更新脱敏
-        "sysCode": this.$store.state.module.sysCode
       }
       this.sysUserPermissionService.addDataPermission(data).subscribe(data => {
         this.$message.success("操作成功!");

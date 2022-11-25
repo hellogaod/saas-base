@@ -15,6 +15,13 @@ export default {
     action: 'getAllMenuTree',
     type: requestType.Get
   },
+
+  getChildrenMenuByParentId: {
+    service: managerServiceName,
+    controller: CONTROLLER,
+    action: 'getChildrenMenuByParentId',
+    type: requestType.Get
+  },
   getAllMenuDetailList:{
     service: managerServiceName,
     controller: CONTROLLER,

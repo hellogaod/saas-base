@@ -110,8 +110,7 @@
     reset() {
       let addForm: any = this.$refs["add-form"];
       addForm.resetFields();
-      this.subModel.desensitizeStatus = "0";
-      this.subModel.authStatus = "0";
+      this.subModel.desensitizeStatus = 0;
     }
 
     refresh(obj) {
