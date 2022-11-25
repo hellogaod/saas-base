@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface EntMenuMapper {
@@ -25,22 +24,8 @@ public interface EntMenuMapper {
     //删除企业菜单信息
     int deleteEntMenuByCompanyCode(String companyCode);
 
-    /**
-     * 获取所有有效的菜单url
-     *
-     * @return
-     */
-    List<Map<String, String>> getAllMenuUrl();
-
-    //修改企业菜单信息
-    int updateEntMenuByEntMenu(EntMenu menu);
-
-    List<Map> getEntMenuByEntCode(@Param("userId") String userId, @Param("entModuleCode") String entModuleCode, @Param("companyCode") String companyCode);
-
-    //获取全部菜单树
-    List<Map> getAllMenuTree(@Param("sysCode") String sysCode);
-
-    Map getMenuDetail(Map map);
+    //根据menuId查询菜单详情
+    EntMenu selectByPrimaryKey(String menuId);
 
     int getMenuAndSubMenuCount(@Param("menuId") String menuId);
 

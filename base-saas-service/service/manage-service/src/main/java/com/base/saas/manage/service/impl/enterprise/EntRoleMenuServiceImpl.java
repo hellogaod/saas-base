@@ -53,21 +53,11 @@ public class EntRoleMenuServiceImpl implements EntRoleMenuService {
                     //2. 当前模块下的所有菜单信息
                     List<EntMenu> entMenus = entMenuMapper.getMenusByModuleId(entModule.getModuleId());
 
-
                     //3. 当前角色拥有哪些菜单信息,将这些菜单设置为选中状态
-                    List<String> entMenuIds = roleMenuMapper.selectMenuIdsByRoleId(roleId);
-                    entMenus.stream()
-                            .forEach(entMenu -> {
-                                if (entMenuIds.contains(entMenu.getMenuId())) {
-                                    entMenu.setChecked(true);
-                                }
-                            });
+                    List<String> checkedMenuIds = roleMenuMapper.selectMenuIdsByRoleId(roleId);
+                    entModule.setCheckedMenuIds(checkedMenuIds);
 
-
-                    //4. 将菜单设置成树形结构，并且判断半选中状态：
-                    // (1)如果父级中的所有子级都选中，那么当前父级也处于选中状态
-                    // (2)如果父级中有些子级选中，有些子级未选中，那么当前父级处于半选中状态
-                    // (3)如果父级中的所有子级都没有选中个，那么当前父级处于未选中状态
+                    //4. 将菜单设置成树形结构
                     entModule.setMenuList(getTree(entMenus));
                 });
 
@@ -82,7 +72,7 @@ public class EntRoleMenuServiceImpl implements EntRoleMenuService {
                 .peek(
                         item -> {
                             List<EntMenu> childrens = getChildrens(item, list);
-                            setCheckedStatus(item, childrens);
+                            setChildren(item, childrens);
                         }
                 )
                 .collect(Collectors.toList());
@@ -90,15 +80,9 @@ public class EntRoleMenuServiceImpl implements EntRoleMenuService {
         return tree;
     }
 
-    private void setCheckedStatus(EntMenu item, List<EntMenu> childrens) {
+    private void setChildren(EntMenu item, List<EntMenu> childrens) {
         List<Boolean> checkeds = childrens.stream().map(entMenu -> entMenu.isChecked()).collect(Collectors.toList());
-        if (checkeds.size() > 0) {
-            if (checkeds.size() == childrens.size()) {
-                item.setChecked(true);
-            } else {
-                item.setHalfChecked(true);
-            }
-        }
+
         item.setSubMenus(childrens);
     }
 
@@ -113,7 +97,7 @@ public class EntRoleMenuServiceImpl implements EntRoleMenuService {
                 {
                     //递归set子节点
                     List<EntMenu> childrens = this.getChildrens(item, list);
-                    setCheckedStatus(item, childrens);
+                    setChildren(item, childrens);
                     return item;
                 })
                 .collect(Collectors.toList());

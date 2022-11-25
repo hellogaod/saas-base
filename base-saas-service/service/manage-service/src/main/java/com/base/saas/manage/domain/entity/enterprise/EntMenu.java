@@ -57,22 +57,12 @@ public class EntMenu implements Serializable {
 
     private boolean isChecked;//当前菜单是否被选中
 
-    private boolean isHalfChecked;//是否半选中，当前菜单的子菜单没有全部选中情况下，该字段为true
-
     public boolean isChecked() {
         return isChecked;
     }
 
     public void setChecked(boolean checked) {
         isChecked = checked;
-    }
-
-    public boolean isHalfChecked() {
-        return isHalfChecked;
-    }
-
-    public void setHalfChecked(boolean halfChecked) {
-        isHalfChecked = halfChecked;
     }
 
     //当前菜单的子菜单

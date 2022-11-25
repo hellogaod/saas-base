@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/userDatePermission")
+@RequestMapping("/api/entUserDatePermission")
 
 @Api(tags = "数据权限管理")
 public class EntUserMenuDesensiteController {
@@ -43,9 +43,9 @@ public class EntUserMenuDesensiteController {
         }
     }
 
-    @PostMapping("/opertionDesensite")
+    @PostMapping("/operationDesensite")
     @ApiOperation(value = "添加或修改数据权限", notes = "添加数据权限")
-    public ResponseEntity opertionDesensite(@RequestBody EntUserMenuDesensite data) {
+    public ResponseEntity operationDesensite(@RequestBody EntUserMenuDesensite data) {
 
         String logmsg = null;
         try {

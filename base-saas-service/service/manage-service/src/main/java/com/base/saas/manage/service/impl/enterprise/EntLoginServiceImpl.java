@@ -1,5 +1,6 @@
 package com.base.saas.manage.service.impl.enterprise;
 
+import com.base.saas.manage.mapper.enterprise.EntMenuMapper;
 import com.base.saas.manage.mapper.enterprise.EntModuleMapper;
 import com.base.saas.manage.mapper.enterprise.EntLoginMapper;
 
@@ -29,6 +30,9 @@ public class EntLoginServiceImpl implements EntLoginService {
 
     @Autowired
     private EntModuleMapper entModuleMapper;
+
+    @Autowired
+    private EntMenuMapper menuMapper;
 
     @Value("${loginErrorLimit}")
     private String loginErrorLimit;
@@ -109,8 +113,26 @@ public class EntLoginServiceImpl implements EntLoginService {
                 if (module != null) {
 
                     List<EntMenu> list = loginMapper.getUserPermissions(userId, companyCode, module.getModuleId());
+                    //如果当前节点的父节点不是#（即不是一级菜单，那么还需要找出当前节点的父级节点）
+                    List<EntMenu> allList = new ArrayList<>();
+                    allList.addAll(list);
+
+                    List<String> menuIds = list.stream().map(item -> item.getMenuId()).collect(Collectors.toList());
+                    list.stream()
+                            .filter(item ->
+                                    item.getParentId() != null
+                                            && !item.getParentId().equals("#")
+                                            && !menuIds.contains(item.getParentId())
+                            )
+                            .map(item -> item.getParentId())
+                            .forEach(menuId -> {
+                                EntMenu entMenu = menuMapper.selectByPrimaryKey(menuId);
+                                if (entMenu != null)
+                                    allList.add(entMenu);
+                            });
+
                     //菜单呈现树形结构
-                    List<EntMenu> menuList = getTree(list);
+                    List<EntMenu> menuList = getTree(allList);
 
                     module.setMenuList(menuList);
                 }
@@ -119,7 +141,9 @@ public class EntLoginServiceImpl implements EntLoginService {
 
         }
 
-        return moduleList;
+        return moduleList.stream()
+                .filter(item -> item.getMenuList() != null && item.getMenuList().size() > 0)
+                .collect(Collectors.toList());
     }
 
     // 获取组织架构的树形结构

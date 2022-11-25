@@ -11,6 +11,9 @@ public class SysMenu implements Serializable {
     //主键id
     private String menuId;
 
+    //当前用户是否支持脱敏
+    private Integer isDesensite;
+
     //菜单名称
     private String menuName;
 
@@ -55,6 +58,14 @@ public class SysMenu implements Serializable {
 
     //父级状态   0：停用, 1：启用
     private String parentStatus;
+
+    public Integer getIsDesensite() {
+        return isDesensite;
+    }
+
+    public void setIsDesensite(Integer isDesensite) {
+        this.isDesensite = isDesensite;
+    }
 
     //父级菜单url
     private String parentUrl;

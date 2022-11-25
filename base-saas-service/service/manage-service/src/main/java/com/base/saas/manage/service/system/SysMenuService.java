@@ -29,9 +29,14 @@ public interface SysMenuService {
     //添加系统菜单
     ReturnMap addMenu(SysMenu moduleDetail) throws Exception;
 
+    List<SysMenu> getAllMenuByParentId(String moduleId, String parentId);
+
+    //根据parentId获取当前菜单下的子菜单，并且根据userid判断当前用户对当前菜单是否可脱敏
+    List<SysMenu> getChildrenMenuByParentId(String userId, String parentId);
+
     //修改系统菜单信息
     ReturnMap editMenu(SysMenu moduleDetail) throws Exception;
 
     //修改系统菜单状态
-    ReturnMap updateMenuStatus(String menuId,int status) throws Exception;
+    ReturnMap updateMenuStatus(String menuId, int status) throws Exception;
 }

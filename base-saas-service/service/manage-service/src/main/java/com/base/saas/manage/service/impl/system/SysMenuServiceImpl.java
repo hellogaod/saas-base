@@ -44,6 +44,18 @@ public class SysMenuServiceImpl implements SysMenuService {
         return getTree(sysMenus);
     }
 
+    @Override
+    public List<SysMenu> getAllMenuByParentId(String moduleId, String parentId) {
+        List<SysMenu> sysMenus = sysMenuMapper.getAllMenuTreeByModuleId(moduleId, parentId);
+        return sysMenus;
+    }
+
+    @Override
+    public List<SysMenu> getChildrenMenuByParentId(String userId, String parentId) {
+        List<SysMenu> sysMenus = sysMenuMapper.getChildrenMenuByParentId(userId, parentId);
+        return sysMenus;
+    }
+
     // 获取组织架构的树形结构
     private List<SysMenu> getTree(List<SysMenu> list) {
         List<SysMenu> tree = list.stream().

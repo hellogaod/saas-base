@@ -139,7 +139,8 @@ public class EntUserServiceImpl implements EntUserService {
         }
 
         List list0 = userMapper.checkHasOtherInfo(user);
-        if (user.getRealName().equals("超级管理员") && list0 != null && list0.size() > 0) {
+        String realName = user.getRealName();
+        if (realName != null && realName.equals("超级管理员") && list0 != null && list0.size() > 0) {
             map.setMsg("message.realname.use.administrator.error");
             return map;
         }

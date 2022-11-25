@@ -90,9 +90,10 @@ public class EntLoginController {
         }
 
         if (returnMap.getCode() == 0) {
-
+            localeTipMsg = LocaleMessage.get(returnMap.getMsg());
             LoggerCommon.info(this.getClass(), "企业用户登录失败：" + localeTipMsg);
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
+
         } else {//登录成功
             EntUser entUser = returnMap.getT();
 
@@ -136,6 +137,14 @@ public class EntLoginController {
 
             return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
         }
+
+        //当前角色未分配菜单
+        if (entModules == null || entModules.size() == 0){
+            String logmsg = LocaleMessage.get("message.user.role.hasnot.menu");
+            LoggerCommon.info(this.getClass(), "企业用户登录失败：" + logmsg);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
+        }
+
         return ResponseEntity.ok().body(entModules);
     }
 

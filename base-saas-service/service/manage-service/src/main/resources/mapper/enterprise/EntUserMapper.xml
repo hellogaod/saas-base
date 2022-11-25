@@ -300,6 +300,14 @@
     where account = #{account} and company_code = #{companyCode} and user_id != #{userId}
   </select>
 
+    <select id="getRoleIdByUserId" parameterType="string"
+            resultType="String">
+
+    select role_id
+    from ent_user
+    where user_id = #{userId}
+  </select>
+
     <select id="checkHasOtherInfo" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUser"
             resultType="String">
 

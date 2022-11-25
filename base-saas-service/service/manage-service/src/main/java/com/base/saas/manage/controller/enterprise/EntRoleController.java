@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/entRole")
@@ -49,6 +50,25 @@ public class EntRoleController {
             List<EntRole> list = roleService.getRoleList(-1, roleName, UserContextUtil.getUserInfo().getCompanyCode());
             PageInfo pageInfo = new PageInfo(list);
             return ResponseEntity.ok().body(pageInfo);
+        } catch (Exception e) {
+            String logmsg = LocaleMessage.get("message.query.errorMessage");
+
+            LoggerCommon.info(this.getClass(), "获取角色列表异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+
+            return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(logmsg)).body(null);
+        }
+    }
+
+    @GetMapping("/getRole")
+    @ApiOperation(value = "获取当前用户下全部角色列表", notes = "获取当前用户下全部角色列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id", dataType = "String", paramType = "query", required = true),
+    })
+    public ResponseEntity getRoleList( @RequestParam(value = "userId") String userId) {
+
+        try {
+            Map map = roleService.getUserRoleInfo(userId);
+            return ResponseEntity.ok().body(map);
         } catch (Exception e) {
             String logmsg = LocaleMessage.get("message.query.errorMessage");
 

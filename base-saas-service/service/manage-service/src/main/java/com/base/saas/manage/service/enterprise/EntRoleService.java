@@ -7,6 +7,7 @@ import com.base.saas.manage.domain.entity.enterprise.EntRole;
 
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Title :
@@ -18,6 +19,7 @@ public interface EntRoleService {
 
     List<EntRole> getRoleList(int status, String roleName, String companyCode) throws Exception;
 
+    Map<String,Object> getUserRoleInfo(String userId);
 
     //添加角色
     ReturnMap addRole(EntRole role) throws Exception;
