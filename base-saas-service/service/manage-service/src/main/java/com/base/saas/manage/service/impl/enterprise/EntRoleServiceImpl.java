@@ -4,6 +4,7 @@ package com.base.saas.manage.service.impl.enterprise;
 
 import com.base.saas.manage.domain.model.ReturnMap;
 import com.base.saas.manage.domain.entity.enterprise.EntRole;
+import com.base.saas.manage.mapper.enterprise.EntUserMapper;
 import com.base.saas.manage.service.enterprise.EntRoleService;
 import com.base.saas.userinfo.UserContextUtil;
 import com.base.saas.userinfo.UserInfo;
@@ -14,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Title :
@@ -26,10 +29,28 @@ public class EntRoleServiceImpl implements EntRoleService {
     @Autowired
     private EntRoleMapper roleMapper;
 
+    @Autowired
+    private EntUserMapper userMapper;
+
     @Override
     public List<EntRole> getRoleList(int status, String roleName, String companyCode) throws Exception {
         List<EntRole> list = roleMapper.getRoleList(status, roleName, companyCode);
         return list;
+    }
+
+    @Override
+    public Map<String, Object> getUserRoleInfo(String userId) {
+        Map<String, Object> userRole = new HashMap<>();
+
+        String roleId = userMapper.getRoleIdByUserId(userId);
+        UserInfo userInfo = UserContextUtil.getUserInfo();
+        List<EntRole> entRoles = roleMapper.getRoleList(-1,null,userInfo.getCompanyCode());
+
+        userRole.put("roleId",roleId);
+        userRole.put("userId",userId);
+        userRole.put("roleList",entRoles);
+
+        return userRole;
     }
 
     @Override

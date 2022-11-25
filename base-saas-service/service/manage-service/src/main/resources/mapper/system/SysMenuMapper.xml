@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.base.saas.manage.domain.entity.system.SysMenu">
         <id column="menu_id" property="menuId" jdbcType="VARCHAR"/>
         <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="is_desensite" property="isDesensite" jdbcType="INTEGER"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="sequence" property="sequence" jdbcType="INTEGER"/>
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
@@ -237,6 +238,8 @@
         t1.parent_id ,
         t1.menu_name ,
         t1.status,
+        t1.create_time,
+        t2.menu_name as parent_name,
         t1.url,
         t1.icon,
         t1.desensitize_status ,
@@ -245,12 +248,37 @@
         from sys_menu t1 left join sys_menu t2 on t1.parent_id = t2.menu_id
         where
         t1.module_id = #{moduleId}
-        <trim suffixOverrides=",">
 
+        <if test="parentId != null and parentId != ''">
+            and t1.parent_id = #{parentId}
+        </if>
+        order by t1.sequence
+    </select>
+
+    <select id="getChildrenMenuByParentId" resultMap="BaseResultMap">
+        select
+        t1.menu_id ,
+        t1.parent_id ,
+        t1.menu_name ,
+        t1.status,
+        t1.create_time,
+        t2.menu_name as parent_name,
+        t1.url,
+        t1.icon,
+        t1.desensitize_status ,
+        d.is_desensite,
+        t2.status as parent_status,
+        t2.url as parent_url
+        from sys_menu t1
+        left join sys_menu t2 on t1.parent_id = t2.menu_id
+        left join ent_user_menu_desensite d on d.menu_id = t1.menu_id and d.user_id = #{userId}
+        <where>
             <if test="parentId != null and parentId != ''">
-                and parent_id = #{parentId}
+                t1.parent_id = #{parentId}
             </if>
-        </trim>
+        </where>
+
+
         order by t1.sequence
     </select>
 

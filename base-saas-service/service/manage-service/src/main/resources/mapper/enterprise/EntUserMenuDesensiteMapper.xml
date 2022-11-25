@@ -33,9 +33,7 @@
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="orgId != null">
-                org_id,
-            </if>
+
             <if test="menuId != null">
                 menu_id,
             </if>
@@ -51,9 +49,7 @@
             <if test="updateTime != null">
                 update_time,
             </if>
-            <if test="orgPath != null">
-                org_path,
-            </if>
+
             <if test="isDesensite != null">
                 is_desensite,
             </if>
@@ -68,9 +64,7 @@
             <if test="userId != null">
                 #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="orgId != null">
-                #{orgId,jdbcType=VARCHAR},
-            </if>
+
             <if test="menuId != null">
                 #{menuId,jdbcType=VARCHAR},
             </if>
@@ -86,9 +80,7 @@
             <if test="updateTime != null">
                 #{updateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="orgPath != null">
-                #{orgPath,jdbcType=LONGVARCHAR},
-            </if>
+
             <if test="isDesensite != null">
                 #{isDesensite,jdbcType=SMALLINT},
             </if>
@@ -106,9 +98,7 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="orgId != null">
-                org_id = #{orgId,jdbcType=VARCHAR},
-            </if>
+
             <if test="menuId != null">
                 menu_id = #{menuId,jdbcType=VARCHAR},
             </if>
@@ -124,9 +114,7 @@
             <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="orgPath != null and orgPath != ''">
-                org_path = #{orgPath,jdbcType=LONGVARCHAR},
-            </if>
+
             <if test="isDesensite != null">
                 is_desensite = #{isDesensite,jdbcType=SMALLINT},
             </if>
@@ -136,7 +124,6 @@
 
 
     <select id="getIdByUserIdAndMenuId" parameterType="com.base.saas.manage.domain.entity.enterprise.EntUserMenuDesensite"
-
             resultType="java.lang.String">
     SELECT
 	  id

@@ -78,6 +78,23 @@ public class SysMenuController {
         }
     }
 
+    @ApiOperation(value = "获取当前菜单子集合", httpMethod = "GET", notes = "获取当前菜单子集合")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "parentId", value = "获取子级菜单", dataType = "String", paramType = "query", required = false)
+    })
+    @GetMapping("/getChildrenMenuByParentId")
+    public ResponseEntity getChildrenMenuByParentId(@RequestParam String userId, @RequestParam String parentId) {
+        try {
+            List<SysMenu> list = sysModuleDetailService.getChildrenMenuByParentId(userId, parentId);
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e) {
+            String localeTipMsg = LocaleMessage.get("message.query.errorMessage");
+            LoggerCommon.info(this.getClass(), "获取菜单树的集合异常：" + ExceptionStackUtils.collectExceptionStackMsg(e));
+            return ResponseEntity.badRequest().headers(HeaderUtil.createErrorMsg(localeTipMsg)).body(null);
+        }
+    }
+
     /**
      * 增加菜单
      *

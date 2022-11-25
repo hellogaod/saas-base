@@ -39,6 +39,17 @@ public class EntModule implements Serializable {
     //当前模块下配置的菜单信息
     private List<EntMenu> menuList;
 
+    //当前模块下被选中的菜单信息
+    private List<String> checkedMenuIds;
+
+    public List<String> getCheckedMenuIds() {
+        return checkedMenuIds;
+    }
+
+    public void setCheckedMenuIds(List<String> checkedMenuIds) {
+        this.checkedMenuIds = checkedMenuIds;
+    }
+
     public List<EntMenu> getMenuList() {
         return menuList;
     }

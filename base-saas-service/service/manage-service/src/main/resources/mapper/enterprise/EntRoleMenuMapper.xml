@@ -38,7 +38,7 @@
         </foreach>
     </insert>
 
-    <select id="selectMenuIdsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectMenuIdsByRoleId" resultType="string" parameterType="java.lang.String">
         select
         menu_id
         from ent_role_menu

@@ -24,6 +24,9 @@ public interface SysMenuMapper {
     //根据moduleId模块id获取全部菜单树
     List<SysMenu> getAllMenuTreeByModuleId(@Param("moduleId") String moduleId, @Param("parentId") String parentId);
 
+    //根据parentId获取当前菜单下的子菜单，并且根据userid判断当前用户对当前菜单是否可脱敏
+    List<SysMenu> getChildrenMenuByParentId(@Param("userId") String userId, @Param("parentId") String parentId);
+
     //当前menu路径是否已经存在于数据库当前模块下的菜单集合中
     int selectCountByMenuUrl(@Param("moduleId") String moduleId,@Param("menuId") String menuId, @Param("url") String url);
 

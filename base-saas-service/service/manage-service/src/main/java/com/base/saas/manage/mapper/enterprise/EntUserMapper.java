@@ -31,10 +31,13 @@ public interface EntUserMapper {
     int updateByPrimaryKeySelective(EntUser record);
 
     //根据用户id(或企业编号和账户)获取用户信息
-    EntUser selectByPrimaryKey(@Param("userId")String userId, @Param("companyCode") String companyCode, @Param("account") String account);
+    EntUser selectByPrimaryKey(@Param("userId") String userId, @Param("companyCode") String companyCode, @Param("account") String account);
 
     //修改查询账号是否已存在
     List<String> getUserByUpdate(EntUser user);
+
+    //通过userId获取roleId
+    String getRoleIdByUserId(String userId);
 
     //当前企业下是否相同realName的账号
     List<String> checkHasOtherInfo(EntUser user);

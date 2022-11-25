@@ -107,6 +107,7 @@ public class EntUserMenuDesensiteServiceImpl implements EntMenuDesensiteService 
         Date now = new Date();
         userDataPermisson.setUpdateUser(userInfo.getAccount());
         userDataPermisson.setUpdateTime(now);
+        userDataPermisson.setCompanyCode(userInfo.getCompanyCode());
 
         String id = userDataPermissionMapper.getIdByUserIdAndMenuId(userDataPermisson);
 
@@ -124,7 +125,7 @@ public class EntUserMenuDesensiteServiceImpl implements EntMenuDesensiteService 
                 map.setMsg("message.system.operation.fail");
             }
         } else {//修改
-
+            userDataPermisson.setId(id);
             int n = userDataPermissionMapper.updateByPrimaryKeySelective(userDataPermisson);
             if (n > 0) {
                 map.setCode(1);
