@@ -200,7 +200,7 @@
     height: 65px;
     line-height: 65px;
     width: 100%;
-    background-image: url("../../assets/images/common/logo.png") !important;
+    /*background-image: url("../../assets/images/common/logo.png") !important;*/
     background-position: 30px center;
     background-repeat: no-repeat;
     background-size: auto 50px;

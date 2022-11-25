@@ -11,7 +11,7 @@ package.json中
         "build": "node build/build.js"
       },
 
-# base-saas-system-manager
+# base-saas-manage
 
 ## Project setup
 ```

@@ -2,7 +2,7 @@
 <template>
   <div class="component work-header row between-span middle-span">
     <div class="row start-span middle-span logo-container">
-      <img src="@/assets/images/common/logo.png"/>
+      <!--<img src="@/assets/images/common/logo.png"/>-->
     </div>
     <div class="middleMenu">
       <work-header-menu></work-header-menu>
